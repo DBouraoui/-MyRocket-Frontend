@@ -1,7 +1,7 @@
 <section class="w-full bg-gray-900 px-4 shadow-lg">
   <main class="container mx-auto h-16 flex items-center justify-between">
     <!-- Logo -->
-    <div class="flex items-center">
+    <div class="flex items-center cursor-pointer">
       <img src="logo.webp" width="140" height="150">
     </div>
 
@@ -21,7 +21,7 @@
           <div class="relative group">
             <!-- Déclencheur du menu -->
             <div class="flex items-center space-x-2 text-gray-300 hover:text-white cursor-pointer py-4"
-            (click)="op.toggle($event)" #menuTrigger
+            (click)="op.toggle($event)"
             >
               <i class="pi {{item.icon}} text-sm"></i>
               <a [routerLink]="[item.link]" routerLinkActive="text-white font-medium" class="text-sm">
@@ -32,7 +32,7 @@
 
             <!-- Menu dépliant moderne -->
             <p-overlayPanel #op [showTransitionOptions]="'200ms'" [hideTransitionOptions]="'150ms'"
-                            [style]="{width: '680px'}" styleClass="border-none shadow-xl rounded-xl overflow-hidden p-0">
+                            [style]="{width: '980px'}" styleClass="border-none shadow-xl rounded-xl overflow-hidden ml-20">
               <ng-template pTemplate>
                 <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-4">
                   <h3 class="text-white text-lg font-semibold mb-4 border-b border-gray-700 pb-2">{{item.title}}</h3>
@@ -81,7 +81,7 @@
 
     <!-- Menu burger pour mobile -->
     <div class="lg:hidden">
-      <button (click)="toggleMobileMenu()" class="text-white focus:outline-none">
+      <button (click)="toggleMobileMenu()" class="text-white focus:outline-none cursor-pointer">
         <i class="pi pi-bars text-xl"></i>
       </button>
     </div>
@@ -91,7 +91,7 @@
   <div *ngIf="mobileMenuOpen" class="lg:hidden bg-gray-800 overflow-hidden transition-all duration-300">
     @for (item of navbarItem; track $index) {
       <div class="px-4">
-        <div (click)="toggleSubmenu(item)" class="flex items-center justify-between py-3 text-gray-300 border-b border-gray-700">
+        <div (click)="toggleSubmenu(item)" class="flex items-center justify-between py-3 text-gray-300 border-b border-gray-700 cursor-pointer">
           <div class="flex items-center space-x-2">
             <i class="pi {{item.icon}}"></i>
             <a [routerLink]="[item.link]" routerLinkActive="text-white font-medium" class="text-sm">{{item.title}}</a>
@@ -103,7 +103,7 @@
 
         <!-- Sous-menu mobile -->
         @if (item.subContent) {
-          <div *ngIf="item.isOpen" class="bg-gradient-to-br from-gray-900 to-gray-800 p-3 overflow-hidden">
+          <div *ngIf="item.isOpen" class="bg-gradient-to-br from-gray-900 to-gray-800 p-3 overflow-hidden cursor-pointer">
             <h3 class="text-white text-sm font-semibold mb-3 border-b border-gray-700 pb-2">{{item.title}}</h3>
             <div class="grid grid-cols-1 gap-3">
               @for (subItem of item.subContent; track $index) {

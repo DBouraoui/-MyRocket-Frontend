@@ -1,5 +1,10 @@
 @import "tailwindcss";
 @import "primeicons/primeicons.css";
+
+@theme {
+  --color-signacore: #00A877;
+}
+
 body {
   background: #d6dce5;
 }

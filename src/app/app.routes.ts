@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AnonymousComponent } from './layout/anonymous/anonymous.component';
-import { HomeComponent } from './anonymous/pages/home/home.component';
+import {HomeComponent} from './anonymous/pages/home/home.component';
 
 export const routes: Routes = [
   {
