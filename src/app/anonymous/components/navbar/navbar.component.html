@@ -31,7 +31,7 @@
             </div>
 
             <!-- Menu dépliant moderne -->
-            <p-overlayPanel #op [showTransitionOptions]="'200ms'" [hideTransitionOptions]="'150ms'"
+            <p-popover #op [showTransitionOptions]="'200ms'" [hideTransitionOptions]="'150ms'"
                             [style]="{width: '980px'}" styleClass="border-none shadow-xl rounded-xl overflow-hidden ml-20">
               <ng-template pTemplate>
                 <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-4">
@@ -68,7 +68,7 @@
                   </div>
                 </div>
               </ng-template>
-            </p-overlayPanel>
+            </p-popover>
           </div>
         }
       }
@@ -76,7 +76,7 @@
 
     <!-- Bouton Connexion -->
     <div class="hidden lg:block">
-      <p-button label="Connexion" styleClass="p-button-sm" variant="outlined"></p-button>
+      <p-button label="Connexion à mon panel" styleClass="p-button-sm" variant="outlined" routerLink="login"></p-button>
     </div>
 
     <!-- Menu burger pour mobile -->
@@ -140,7 +140,7 @@
 
     <!-- Bouton connexion mobile -->
     <div class="px-4 py-3 mt-2">
-      <p-button label="Connexion" styleClass="p-button-sm w-full" variant="outlined" severity="primary"></p-button>
+      <p-button label="Connexion" styleClass="p-button-sm w-full" variant="outlined" severity="primary" routerLink="login"></p-button>
     </div>
   </div>
 </section>

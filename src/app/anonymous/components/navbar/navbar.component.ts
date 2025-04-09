@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterLinkActive} from '@angular/router';
 import { NavbarItems } from '../../../types/Navbar';
 import {Button} from 'primeng/button';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {Popover} from 'primeng/popover';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule, RouterModule, Button, OverlayPanelModule],
+  imports: [CommonModule, Button, OverlayPanelModule, Popover, RouterLinkActive, RouterLink],
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
@@ -15,17 +16,17 @@ export class NavbarComponent {
   navbarItem: NavbarItems[] = [
     {
       title: 'Accueil',
-      link: '/',
+      link: '/home',
       icon: 'pi-home',
     },
     {
       title: 'Contact',
-      link: '/contact',
+      link: 'contact',
       icon: 'pi-envelope',
     },
     {
       title: 'Prestation',
-      link: '/prestation',
+      link: 'prestation',
       icon: 'pi-briefcase',
       subContent: [
         {
@@ -69,7 +70,6 @@ export class NavbarComponent {
 
   toggleMobileMenu(): void {
     this.mobileMenuOpen = !this.mobileMenuOpen;
-
     if (!this.mobileMenuOpen) {
       this.navbarItem.forEach((item) => {
         if (item.subContent) {
