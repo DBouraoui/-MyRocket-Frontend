@@ -27,7 +27,6 @@ export class NavbarComponent {
     },
     {
       title: 'Prestation',
-      link: 'prestation',
       icon: 'pi-briefcase',
       subContent: [
         {

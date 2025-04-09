@@ -910,11 +910,11 @@
 
         <!-- Description Field -->
         <div class="relative">
+          <p class="text-gray-400 text-sm mt-1">Décrivez-nous votre projet en détail</p>
           <p-iftalabel>
             <textarea pInputTextarea id="description" formControlName="description"
                       rows="4" class="w-full bg-white/10 border-white/20 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30 resize-none" ></textarea>
           </p-iftalabel>
-          <p class="text-gray-400 text-sm mt-1">Décrivez-nous votre projet en détail</p>
           @if (formGroup.get('description')?.invalid && (formGroup.get('description')?.dirty || formGroup.get('description')?.touched)) {
             <small class="text-red-400 mt-1 block">
               @if (formGroup.get('description')?.errors?.['required']) {
@@ -939,8 +939,8 @@
 
         <!-- Terms and Conditions -->
         <div class="mt-6 flex items-center gap-3">
-          <p-checkbox formControlName="cgv" [binary]="true" />
-          <label class="text-sm">J'accepte les conditions générales d'utilisation</label>
+          <p-checkbox formControlName="cgv" inputId="cgv" [binary]="true" />
+          <label class="text-sm" for="cgv">J'accepte les conditions générales d'utilisation</label>
         </div>
         @if (formGroup.get('cgv')?.invalid && (formGroup.get('cgv')?.dirty || formGroup.get('cgv')?.touched)) {
           <small class="text-red-400 mt-1 block">

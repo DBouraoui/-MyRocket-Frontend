@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { AnonymousComponent } from './layout/anonymous/anonymous.component';
 import {HomeComponent} from './anonymous/pages/home/home.component';
 import {LoginComponent} from './anonymous/pages/login/login.component';
-import {DashboardComponent} from './user/dashboard/dashboard.component';
+import {DashboardComponent} from './user/pages/dashboard/dashboard.component';
 import {UserComponent} from './layout/user/user.component';
 import {ErrorComponent} from './anonymous/pages/error/error.component';
 

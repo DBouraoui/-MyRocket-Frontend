@@ -1,6 +1,6 @@
 export interface NavbarItems {
   title: string;
-  link: string;
+  link?: string;
   icon: string;
   isOpen?: boolean;
   subContent?: SubContent[];
