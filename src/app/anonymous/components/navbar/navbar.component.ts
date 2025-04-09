@@ -5,10 +5,11 @@ import { NavbarItems } from '../../../types/Navbar';
 import {Button} from 'primeng/button';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {Popover} from 'primeng/popover';
+import {Overlay} from 'primeng/overlay';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule, Button, OverlayPanelModule, Popover, RouterLinkActive, RouterLink],
+  imports: [CommonModule, Button, OverlayPanelModule, Popover, RouterLinkActive, RouterLink, Overlay],
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
