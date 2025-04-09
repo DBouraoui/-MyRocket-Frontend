@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
     private messageService: MessageService,
     private http: HttpClient
   ) {}
-
+  imagePreviewUrl: string | null = null;
   formGroup!: FormGroup;
   isLoading: boolean = false;
   stateOptions: any[] = [
@@ -103,6 +103,13 @@ export class HomeComponent implements OnInit {
       const file = $event.files[0];
 
       this.formGroup.get('pictures')?.setValue(file);
+
+      // Créer la prévisualisation
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imagePreviewUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
 
       console.log('File uploaded:', file.name);
     }

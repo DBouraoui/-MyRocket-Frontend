@@ -937,7 +937,18 @@
           </div>
         </div>
 
-        <!-- Terms and Conditions -->
+        <!-- Prévisualisation simple avec Tailwind -->
+        @if (imagePreviewUrl) {
+          <div class="mt-4">
+            <div class="w-full max-w-xs mx-auto shadow-lg rounded-lg overflow-hidden bg-gray-100">
+              <div class="w-full h-48">
+                <img [src]="imagePreviewUrl" alt="Aperçu" class="w-full h-full object-cover">
+              </div>
+            </div>
+          </div>
+        }
+
+          <!-- Terms and Conditions -->
         <div class="mt-6 flex items-center gap-3">
           <p-checkbox formControlName="cgv" inputId="cgv" [binary]="true" />
           <label class="text-sm" for="cgv">J'accepte les conditions générales d'utilisation</label>
