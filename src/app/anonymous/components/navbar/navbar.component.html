@@ -12,12 +12,12 @@
         @if (!item.subContent) {
           <div class="flex items-center space-x-1 text-gray-300 hover:text-white cursor-pointer py-4">
             <i class="pi {{item.icon}} text-sm"></i>
-            @if (item.link) {
+            @if (item.link !== undefined ) {
               <a [routerLink]="[item.link]" routerLinkActive="text-white font-medium" class="text-sm transition duration-200">
                 {{item.title}}
               </a>
             } @else {
-              <p  class="text-sm transition duration-200">
+              <p class="text-sm transition duration-200">
                 {{item.title}}
               </p>
             }
@@ -31,9 +31,9 @@
             (click)="op.toggle($event)"
             >
               <i class="pi {{item.icon}} text-sm"></i>
-              <a [routerLink]="[item.link]" routerLinkActive="text-white font-medium" class="text-sm">
+              <p routerLinkActive="text-white font-medium" class="text-sm">
                 {{item.title}}
-              </a>
+              </p>
               <i class="pi pi-chevron-down text-xs transition-transform duration-300 group-hover:rotate-180"></i>
             </div>
 

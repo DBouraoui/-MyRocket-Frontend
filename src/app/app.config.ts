@@ -6,14 +6,15 @@ import Aura from '@primeng/themes/aura';
 
 import { routes } from './app.routes';
 import {MessageService} from 'primeng/api';
-import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {provideHttpClient, withInterceptors, withInterceptorsFromDi} from '@angular/common/http';
+import {tokenInterceptor} from './interceptors/token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptorsFromDi(), withInterceptors([tokenInterceptor])),
     MessageService,
     providePrimeNG({
       theme: {

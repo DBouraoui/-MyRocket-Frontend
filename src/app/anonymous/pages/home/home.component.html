@@ -939,10 +939,11 @@
 
         <!-- Prévisualisation simple avec Tailwind -->
         @if (imagePreviewUrl) {
+              <h4 class="text-center text-signacore ">Prévisualisation de l'image</h4>
           <div class="mt-4">
             <div class="w-full max-w-xs mx-auto shadow-lg rounded-lg overflow-hidden bg-gray-100">
               <div class="w-full h-48">
-                <img [src]="imagePreviewUrl" alt="Aperçu" class="w-full h-full object-cover">
+                <img [src]="imagePreviewUrl" alt="Aperçu" class="w-full h-full object-contain">
               </div>
             </div>
           </div>

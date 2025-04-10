@@ -1,0 +1,31 @@
+<div class="space-y-4">
+  <div class="flex gap-2">
+    <span class="p-input-icon-left w-full">
+      <input type="text" pInputText placeholder="Rechercher un utilisateur"
+             [(ngModel)]="searchInput"
+             (ngModelChange)="filterUsers()"
+             class="w-full bg-slate-800 border-slate-700 text-white" />
+    </span>
+    <p-button icon="pi pi-filter" styleClass="p-button-outlined"></p-button>
+  </div>
+
+  <div class="bg-slate-800 rounded-lg p-4 h-44 overflow-auto">
+    <!-- Afficher un message si aucun résultat -->
+    <p *ngIf="filteredUsers.length === 0" class="text-center text-gray-200 italic">
+      Aucun utilisateur trouvé
+    </p>
+
+    <!-- Liste des utilisateurs filtrés -->
+    <div *ngFor="let user of filteredUsers" class="p-2 mb-2 border border-slate-700 rounded">
+      <div class="flex justify-between items-center">
+        <div>
+          <span class="font-bold">{{ user.firstname }} {{ user.lastname }}</span>
+          <p class="text-sm text-slate-400">{{ user.email }}</p>
+        </div>
+        <div>
+          <p-tag *ngIf="user.companyName" [value]="user.companyName" severity="info"></p-tag>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

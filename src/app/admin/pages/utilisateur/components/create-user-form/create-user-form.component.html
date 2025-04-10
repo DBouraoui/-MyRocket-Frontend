@@ -1,0 +1,153 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmite()" class="space-y-6">
+  <!-- Type d'utilisateur -->
+  <div class="mb-6">
+    <label class="block text-sm font-medium text-indigo-300 mb-2">Type de compte</label>
+    <div class="flex justify-center">
+      <p-selectbutton [options]="userOptions" formControlName="isCompany"
+                      optionLabel="label" optionValue="value"
+                      styleClass="shadow-md"
+                      aria-labelledby="basic"></p-selectbutton>
+    </div>
+  </div>
+
+  <!-- Champs conditionnels basés sur le type de compte -->
+  <div class="bg-slate-800 p-5 rounded-lg border border-slate-700 shadow-md">
+    @if (formGroup.get('isCompany')?.value) {
+      <!-- Formulaire entreprise -->
+      <h3 class="text-lg font-medium text-indigo-300 mb-4 flex items-center">
+        <span class="pi pi-building mr-2 text-indigo-400"></span>
+        Information entreprise
+      </h3>
+      <div class="space-y-4">
+        <div class="flex flex-col">
+          <p-iftalabel class="w-full">
+            <input pInputText id="companyName" formControlName="companyName" class="w-full bg-slate-700 text-white border-slate-600" />
+            <label for="companyName">Nom de la société</label>
+          </p-iftalabel>
+        </div>
+      </div>
+    } @else {
+      <!-- Formulaire particulier -->
+      <h3 class="text-lg font-medium text-indigo-300 mb-4 flex items-center">
+        <span class="pi pi-user mr-2 text-indigo-400"></span>
+        Information personnelle
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex flex-col">
+          <p-iftalabel class="w-full">
+            <input pInputText id="firstname" formControlName="firstname" class="w-full bg-slate-700 text-white border-slate-600" />
+            <label for="firstname">Prénom</label>
+          </p-iftalabel>
+        </div>
+
+        <div class="flex flex-col">
+          <p-iftalabel class="w-full">
+            <input pInputText id="lastname" formControlName="lastname" class="w-full bg-slate-700 text-white border-slate-600" />
+            <label for="lastname">Nom</label>
+          </p-iftalabel>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Layout en deux colonnes pour les coordonnées et sécurité -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Coordonnées -->
+    <div class="bg-slate-800 p-5 rounded-lg border border-slate-700 shadow-md">
+      <h3 class="text-lg font-medium text-indigo-300 mb-4 flex items-center">
+        <span class="pi pi-at mr-2 text-indigo-400"></span>
+        Coordonnées
+      </h3>
+
+      <div class="space-y-4">
+        <div class="flex flex-col">
+          <p-iftalabel class="w-full">
+            <input pInputText id="email" formControlName="email" class="w-full bg-slate-700 text-white border-slate-600" />
+            <label for="email">Email</label>
+          </p-iftalabel>
+        </div>
+
+        <div class="flex flex-col">
+          <p-iftalabel class="w-full">
+            <input pInputText id="phone" formControlName="phone" class="w-full bg-slate-700 text-white border-slate-600" />
+            <label for="phone">Numéro de téléphone</label>
+          </p-iftalabel>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sécurité -->
+    <div class="bg-slate-800 p-5 rounded-lg border border-slate-700 shadow-md">
+      <h3 class="text-lg font-medium text-indigo-300 mb-4 flex items-center">
+        <span class="pi pi-lock mr-2 text-indigo-400"></span>
+        Sécurité
+      </h3>
+
+      <div class="space-y-4">
+        <div class="flex flex-col">
+          <p-iftalabel class="w-full">
+            <p-password inputId="password"
+                        promptLabel="Force du mot de passe"
+                        toggleMask="true"
+                        strongLabel="Fort"
+                        weakLabel="Faible"
+                        mediumLabel="Moyen"
+                        formControlName="password"
+                        [style]="{'width':'100%'}"
+                        [inputStyle]="{'width':'100%', 'background-color':'rgb(51, 65, 85)', 'color':'white', 'border-color':'rgb(71, 85, 105)'}" />
+            <label for="password">Mot de passe</label>
+          </p-iftalabel>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Adresse -->
+  <div class="bg-slate-800 p-5 rounded-lg border border-slate-700 shadow-md">
+    <h3 class="text-lg font-medium text-indigo-300 mb-4 flex items-center">
+      <span class="pi pi-map-marker mr-2 text-indigo-400"></span>
+      Adresse
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="flex flex-col">
+        <p-iftalabel class="w-full">
+          <input pInputText id="address" formControlName="address" class="w-full bg-slate-700 text-white border-slate-600" />
+          <label for="address">Adresse</label>
+        </p-iftalabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-iftalabel class="w-full">
+          <input pInputText id="city" formControlName="city" class="w-full bg-slate-700 text-white border-slate-600" />
+          <label for="city">Ville</label>
+        </p-iftalabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-iftalabel class="w-full">
+          <input pInputText id="postCode" formControlName="postCode" class="w-full bg-slate-700 text-white border-slate-600" />
+          <label for="postCode">Code Postal</label>
+        </p-iftalabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-iftalabel class="w-full">
+          <input pInputText id="country" formControlName="country" class="w-full bg-slate-700 text-white border-slate-600" />
+          <label for="country">Pays</label>
+        </p-iftalabel>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton de soumission -->
+  <div class="flex justify-end pt-2">
+    <p-button
+      label="Enregistrer l'utilisateur"
+      severity="info"
+      type="submit"
+      [loading]="isLoading"
+      styleClass="p-button-lg shadow-lg"
+    />
+  </div>
+</form>

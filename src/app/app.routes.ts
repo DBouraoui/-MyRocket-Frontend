@@ -5,6 +5,10 @@ import {LoginComponent} from './anonymous/pages/login/login.component';
 import {DashboardComponent} from './user/pages/dashboard/dashboard.component';
 import {UserComponent} from './layout/user/user.component';
 import {ErrorComponent} from './anonymous/pages/error/error.component';
+import {AdminComponent} from './layout/admin/admin.component';
+import {DashboardAdminComponent} from './admin/pages/dashboard/dashboard.component';
+import {UtilisateurComponent} from './admin/pages/utilisateur/utilisateur.component';
+import {dashboardUsersResolver} from './resolvers/dashboard-users.resolver';
 
 export const routes: Routes = [
   {
@@ -36,6 +40,23 @@ export const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent,
         title: 'Pannel d\'administration',
+      }
+    ]
+  },
+  {
+    path: 'administration',
+    component: AdminComponent,
+    children:[
+      {
+        path: 'dashboard',
+        component: DashboardAdminComponent,
+        title: 'Pannel d\'administration',
+      },
+      {
+        path: 'utilisateurs',
+        component: UtilisateurComponent,
+        resolve: {users: dashboardUsersResolver},
+        title: 'Gestion des utilisateurs',
       }
     ]
   },

@@ -8,6 +8,8 @@ import { ButtonDirective} from 'primeng/button';
 import {HttpClient} from '@angular/common/http';
 import {MessageService} from 'primeng/api';
 import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
+import {LoginResponse} from '../../../types/HttpResponse';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginRequest!: Subscription;
   isLoading = false;
 
-  constructor(private http :HttpClient, private messageService: MessageService) {
+  constructor(private http :HttpClient, private messageService: MessageService, private router : Router) {
   }
 
   ngOnInit() {
@@ -53,17 +55,17 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: this.formData.get('password')?.value,
     }
 
-     this.loginRequest = this.http.post('http://localhost:8000/api/login_check', credentials).subscribe({
-      next: (response) => {
+     this.loginRequest = this.http.post<LoginResponse>('http://localhost:8000/api/login_check', credentials).subscribe({
+      next: (response: LoginResponse) => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Connexion réussie',
-          detail: 'Vous allez être redirigé...'
+          summary: 'Connexion réussie !'
         });
         this.isLoading = false;
-
+        localStorage.setItem('statement',response.token);
+        this.router.navigate(['/utilisateur/dashboard']);
       },
-      error: (error) => {
+      error: (error:any) => {
         console.error('Erreur de connexion:', error);
 
         let errorMessage = 'Si l\'erreur persiste, veuillez contacter le support';

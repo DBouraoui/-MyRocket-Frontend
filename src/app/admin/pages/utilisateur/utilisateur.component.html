@@ -1,0 +1,106 @@
+<!-- Page d'administration des utilisateurs en Bento Design -->
+<div class="min-h-screen bg-slate-950 p-6">
+  <h1 class="text-3xl font-bold text-white mb-8">
+    Administration des Utilisateurs
+  </h1>
+
+  <!-- Layout Bento -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- Métriques utilisateurs - Carré de gauche haut -->
+    <app-dashboard-admin-users-metrics [users]="users"></app-dashboard-admin-users-metrics>
+
+    <!-- Recherche utilisateurs - Carré du milieu haut -->
+    <div class="bg-slate-900 rounded-xl shadow-lg overflow-hidden p-5 border border-slate-800">
+      <h2 class="text-xl font-bold text-indigo-400 mb-4 flex items-center">
+        <span class="pi pi-search mr-2"></span>
+        Recherche Utilisateurs
+      </h2>
+
+      <app-dashboard-admin-users-search [users]="users"></app-dashboard-admin-users-search>
+    </div>
+
+    <!-- Suppression utilisateurs - Carré de droite haut -->
+    <div class="bg-slate-900 rounded-xl shadow-lg overflow-hidden p-5 border border-slate-800">
+      <h2 class="text-xl font-bold text-indigo-400 mb-4 flex items-center">
+        <span class="pi pi-trash mr-2"></span>
+        Gestion Utilisateurs
+      </h2>
+
+      <div class="space-y-4">
+        <div class="bg-slate-800 rounded-lg p-4">
+          <h3 class="font-medium text-white mb-2">Utilisateurs à modérer</h3>
+          <ul class="space-y-2">
+            <li class="flex items-center justify-between p-2 bg-slate-700 rounded">
+              <div class="flex items-center">
+                <span class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold text-sm mr-2">JD</span>
+                <span>John Doe</span>
+              </div>
+              <div class="flex gap-1">
+                <button class="p-1 text-green-400 hover:bg-slate-600 rounded"><i class="pi pi-check"></i></button>
+                <button class="p-1 text-red-400 hover:bg-slate-600 rounded"><i class="pi pi-times"></i></button>
+              </div>
+            </li>
+            <li class="flex items-center justify-between p-2 bg-slate-700 rounded">
+              <div class="flex items-center">
+                <span class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold text-sm mr-2">AC</span>
+                <span>Acme Corp</span>
+              </div>
+              <div class="flex gap-1">
+                <button class="p-1 text-green-400 hover:bg-slate-600 rounded"><i class="pi pi-check"></i></button>
+                <button class="p-1 text-red-400 hover:bg-slate-600 rounded"><i class="pi pi-times"></i></button>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-red-900/30 rounded-lg p-4 border border-red-800/50">
+          <h3 class="font-medium text-white mb-2 flex items-center">
+            <i class="pi pi-exclamation-triangle text-red-400 mr-2"></i>
+            Zone Dangereuse
+          </h3>
+          <p class="text-sm text-slate-300 mb-3">
+            La suppression d'un utilisateur est irréversible.
+          </p>
+          <p-button label="Supprimer des utilisateurs"
+                    icon="pi pi-trash"
+                    severity="danger"
+                    styleClass="p-button-sm w-full"></p-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulaire d'ajout d'utilisateur - Occupe 2 colonnes -->
+    <div class="lg:col-span-2 bg-slate-900 rounded-xl shadow-lg overflow-hidden border border-slate-800">
+      <div class="p-5 border-b border-slate-800 bg-slate-800/50">
+        <h2 class="text-xl font-bold text-indigo-400 flex items-center">
+          <span class="pi pi-user-plus mr-2"></span>
+          Ajout d'Utilisateur
+        </h2>
+      </div>
+
+      <!-- Formulaire existant -->
+      <div class="p-5">
+       <app-create-user-form></app-create-user-form>
+      </div>
+    </div>
+
+    <!-- Module vide - Pour contenu futur -->
+    <div class="bg-slate-900 rounded-xl shadow-lg overflow-hidden p-5 border border-slate-800 flex flex-col items-center justify-center min-h-40">
+      <div class="text-center p-6">
+        <div class="w-16 h-16 bg-indigo-900/50 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="pi pi-plus text-indigo-400 text-2xl"></i>
+        </div>
+        <h3 class="text-lg font-medium text-white mb-2">Module Additionnel</h3>
+        <p class="text-slate-400 text-sm mb-4">
+          Espace disponible pour une fonctionnalité supplémentaire
+        </p>
+        <p-button label="Configurer"
+                  icon="pi pi-cog"
+                  severity="secondary"
+                  styleClass="p-button-outlined p-button-sm"></p-button>
+      </div>
+    </div>
+
+  </div>
+</div>
