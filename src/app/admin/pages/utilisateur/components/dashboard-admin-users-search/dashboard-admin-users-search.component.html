@@ -6,16 +6,13 @@
              (ngModelChange)="filterUsers()"
              class="w-full bg-slate-800 border-slate-700 text-white" />
     </span>
-    <p-button icon="pi pi-filter" styleClass="p-button-outlined"></p-button>
   </div>
 
   <div class="bg-slate-800 rounded-lg p-4 h-44 overflow-auto">
-    <!-- Afficher un message si aucun résultat -->
     <p *ngIf="filteredUsers.length === 0" class="text-center text-gray-200 italic">
       Aucun utilisateur trouvé
     </p>
 
-    <!-- Liste des utilisateurs filtrés -->
     <div *ngFor="let user of filteredUsers" class="p-2 mb-2 border border-slate-700 rounded">
       <div class="flex justify-between items-center">
         <div>
@@ -24,8 +21,91 @@
         </div>
         <div>
           <p-tag *ngIf="user.companyName" [value]="user.companyName" severity="info"></p-tag>
+          <p-button icon="pi pi-eye"
+                    severity="secondary"
+                    styleClass="p-button-rounded p-button-text"
+                    pTooltip="Voir"
+                    (click)="openUserDetails(user)"></p-button>
         </div>
       </div>
     </div>
+
+    <p-drawer [(visible)]="visible" [showCloseIcon]="true" header="Modification utilisateur" [style]="{width: '30em'}">
+      <!-- Contenu directement dans le p-drawer, pas besoin de ng-template -->
+      <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" class="p-4 space-y-4">
+        <div class="mb-3">
+          <p-floatLabel>
+            <input id="firstname" pInputText formControlName="firstname" />
+            <label for="firstname">Prénom</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="mb-3">
+          <p-floatLabel>
+            <input id="lastname" pInputText formControlName="lastname" />
+            <label for="lastname">Nom</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="mb-3">
+          <p-floatLabel>
+            <input id="companyName" pInputText formControlName="companyName" />
+            <label for="companyName">Société</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="mb-3">
+          <p-floatLabel>
+            <input id="email" pInputText formControlName="email" />
+            <label for="email">Email</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="mb-3">
+          <p-floatLabel>
+            <input id="phone" pInputText formControlName="phone" />
+            <label for="phone">N° tél</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="mb-3">
+          <p-floatLabel>
+            <input id="address" pInputText formControlName="address" />
+            <label for="address">Adresse</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="mb-3">
+          <p-floatLabel>
+            <input id="postCode" pInputText formControlName="postCode" />
+            <label for="postCode">Code Postal</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="mb-3">
+          <p-floatLabel>
+            <input id="city" pInputText formControlName="city" />
+            <label for="city">Ville</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="mb-3">
+          <p-floatLabel>
+            <input id="country" pInputText formControlName="country" />
+            <label for="country">Pays</label>
+          </p-floatLabel>
+        </div>
+
+        <div class="flex justify-end mt-4">
+          <p-button
+            label="Modifier l'utilisateur"
+            type="submit"
+            severity="primary"
+            [loading]="isLoading"
+            [disabled]="formGroup.invalid"
+          ></p-button>
+        </div>
+      </form>
+    </p-drawer>
   </div>
 </div>
