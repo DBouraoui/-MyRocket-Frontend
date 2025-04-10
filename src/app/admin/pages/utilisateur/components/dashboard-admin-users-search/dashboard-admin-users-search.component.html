@@ -1,111 +1,171 @@
 <div class="space-y-4">
+  <!-- Barre de recherche améliorée -->
   <div class="flex gap-2">
     <span class="p-input-icon-left w-full">
+      <i class="pi pi-search"></i>
       <input type="text" pInputText placeholder="Rechercher un utilisateur"
              [(ngModel)]="searchInput"
              (ngModelChange)="filterUsers()"
-             class="w-full bg-slate-800 border-slate-700 text-white" />
+             class="w-full bg-slate-800 border-slate-700 text-white rounded-lg p-3" />
     </span>
   </div>
 
-  <div class="bg-slate-800 rounded-lg p-4 h-44 overflow-auto">
-    <p *ngIf="filteredUsers.length === 0" class="text-center text-gray-200 italic">
+  <!-- Liste des utilisateurs avec hauteur augmentée -->
+  <div class="bg-slate-800 rounded-lg p-4 h-80 overflow-auto">
+    <p *ngIf="filteredUsers.length === 0" class="text-center text-gray-200 italic py-4">
       Aucun utilisateur trouvé
     </p>
 
-    <div *ngFor="let user of filteredUsers" class="p-2 mb-2 border border-slate-700 rounded">
-      <div class="flex justify-between items-center">
+    <div *ngFor="let user of filteredUsers"
+         class="p-3 mb-3 border border-slate-700 rounded-lg hover:bg-slate-700 transition-colors">
+      <div class="flex justify-between items-center cursor-pointer" (click)="openUserDetails(user)">
         <div>
-          <span class="font-bold">{{ user.firstname }} {{ user.lastname }}</span>
-          <p class="text-sm text-slate-400">{{ user.email }}</p>
+          <div class="flex items-center gap-2">
+            <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-sm font-medium">
+              {{ user.firstname?.charAt(0) }}{{ user.lastname?.charAt(0) }}
+            </span>
+            <span class="font-bold text-white">{{ user.firstname }} {{ user.lastname }}</span>
+          </div>
+          <p class="text-sm text-slate-400 mt-1">{{ user.email }}</p>
         </div>
-        <div>
+        <div class="flex items-center gap-2">
           <p-tag *ngIf="user.companyName" [value]="user.companyName" severity="info"></p-tag>
           <p-button icon="pi pi-eye"
                     severity="secondary"
                     styleClass="p-button-rounded p-button-text"
-                    pTooltip="Voir"
+                    pTooltip="Voir les détails"
                     (click)="openUserDetails(user)"></p-button>
         </div>
       </div>
     </div>
+  </div>
 
-    <p-drawer [(visible)]="visible" [showCloseIcon]="true" header="Modification utilisateur" [style]="{width: '30em'}">
-      <!-- Contenu directement dans le p-drawer, pas besoin de ng-template -->
-      <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" class="p-4 space-y-4">
+  <!-- Drawer amélioré et élargi -->
+  <p-drawer [(visible)]="visible"
+            [showCloseIcon]="true"
+            header="Détails de l'utilisateur"
+            [style]="{width: '40em'}"
+            [baseZIndex]="10000">
+    <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" class="p-4 space-y-5">
+      <!-- En-tête du formulaire -->
+      <div class="flex flex-col items-center pb-4 mb-4 border-b border-slate-200">
+        <div class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl font-bold mb-2">
+          {{ formGroup.get('firstname')?.value?.charAt(0) || '' }}{{ formGroup.get('lastname')?.value?.charAt(0) || '' }}
+        </div>
+        <h3 class="text-lg font-bold">{{ formGroup.get('firstname')?.value }} {{ formGroup.get('lastname')?.value }}</h3>
+        <p class="text-sm text-slate-500">{{ formGroup.get('email')?.value }}</p>
+      </div>
+
+      <!-- Organisation en colonnes pour les champs -->
+      <div class="grid grid-cols-2 gap-4">
+        <!-- Informations personnelles -->
+        <div class="col-span-2">
+          <h4 class="text-md font-semibold mb-2 text-blue-600">Informations personnelles</h4>
+        </div>
+
         <div class="mb-3">
           <p-floatLabel>
-            <input id="firstname" pInputText formControlName="firstname" />
+            <input id="firstname" pInputText formControlName="firstname" class="w-full" />
             <label for="firstname">Prénom</label>
           </p-floatLabel>
         </div>
 
         <div class="mb-3">
           <p-floatLabel>
-            <input id="lastname" pInputText formControlName="lastname" />
+            <input id="lastname" pInputText formControlName="lastname" class="w-full" />
             <label for="lastname">Nom</label>
           </p-floatLabel>
         </div>
 
         <div class="mb-3">
           <p-floatLabel>
-            <input id="companyName" pInputText formControlName="companyName" />
-            <label for="companyName">Société</label>
-          </p-floatLabel>
-        </div>
-
-        <div class="mb-3">
-          <p-floatLabel>
-            <input id="email" pInputText formControlName="email" />
+            <input id="email" pInputText formControlName="email" class="w-full" />
             <label for="email">Email</label>
           </p-floatLabel>
         </div>
 
         <div class="mb-3">
           <p-floatLabel>
-            <input id="phone" pInputText formControlName="phone" />
+            <input id="phone" pInputText formControlName="phone" class="w-full" />
             <label for="phone">N° tél</label>
           </p-floatLabel>
         </div>
 
-        <div class="mb-3">
+        <!-- Informations professionnelles -->
+        <div class="col-span-2 mt-2">
+          <h4 class="text-md font-semibold mb-2 text-blue-600">Informations professionnelles</h4>
+        </div>
+
+        <div class="mb-3 col-span-2">
           <p-floatLabel>
-            <input id="address" pInputText formControlName="address" />
+            <input id="companyName" pInputText formControlName="companyName" class="w-full" />
+            <label for="companyName">Société</label>
+          </p-floatLabel>
+        </div>
+
+        <!-- Adresse -->
+        <div class="col-span-2 mt-2">
+          <h4 class="text-md font-semibold mb-2 text-blue-600">Adresse</h4>
+        </div>
+
+        <div class="mb-3 col-span-2">
+          <p-floatLabel>
+            <input id="address" pInputText formControlName="address" class="w-full" />
             <label for="address">Adresse</label>
           </p-floatLabel>
         </div>
 
         <div class="mb-3">
           <p-floatLabel>
-            <input id="postCode" pInputText formControlName="postCode" />
+            <input id="postCode" pInputText formControlName="postCode" class="w-full" />
             <label for="postCode">Code Postal</label>
           </p-floatLabel>
         </div>
 
         <div class="mb-3">
           <p-floatLabel>
-            <input id="city" pInputText formControlName="city" />
+            <input id="city" pInputText formControlName="city" class="w-full" />
             <label for="city">Ville</label>
           </p-floatLabel>
         </div>
 
-        <div class="mb-3">
+        <div class="mb-3 col-span-2">
           <p-floatLabel>
-            <input id="country" pInputText formControlName="country" />
+            <input id="country" pInputText formControlName="country" class="w-full" />
             <label for="country">Pays</label>
           </p-floatLabel>
         </div>
+      </div>
 
-        <div class="flex justify-end mt-4">
+      <!-- Actions du formulaire -->
+      <div class="flex justify-between mt-6 pt-4 border-t border-slate-200">
+        <p-button
+          label="Supprimer"
+          icon="pi pi-trash"
+          (click)="deleteCurrentUser()"
+          severity="danger"
+          styleClass="p-button-outlined"
+        ></p-button>
+
+        <div class="flex gap-2">
           <p-button
-            label="Modifier l'utilisateur"
+            label="Annuler"
+            icon="pi pi-times"
+            (click)="visible = false"
+            severity="secondary"
+            styleClass="p-button-outlined"
+          ></p-button>
+
+          <p-button
+            label="Enregistrer"
+            icon="pi pi-check"
             type="submit"
             severity="primary"
             [loading]="isLoading"
             [disabled]="formGroup.invalid"
           ></p-button>
         </div>
-      </form>
-    </p-drawer>
-  </div>
+      </div>
+    </form>
+  </p-drawer>
 </div>

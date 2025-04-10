@@ -130,6 +130,7 @@ export class HomeComponent implements OnInit {
     }
 
     const formData = new FormData();
+    const normalizedTags = this.normalizeTags(this.formGroup.get('tags')?.value);
 
     formData.append('firstname', this.formGroup.get('firstname')?.value);
     formData.append('lastname', this.formGroup.get('lastname')?.value);
@@ -137,7 +138,7 @@ export class HomeComponent implements OnInit {
     formData.append('email', this.formGroup.get('email')?.value);
     formData.append('title', this.formGroup.get('title')?.value);
     formData.append('description', this.formGroup.get('description')?.value);
-    formData.append('tags', this.formGroup.get('tags')?.value);
+    formData.append('tags', JSON.stringify(normalizedTags));
 
     if (this.formGroup.get('pictures')?.value) {
       formData.append('pictures', this.formGroup.get('pictures')?.value);

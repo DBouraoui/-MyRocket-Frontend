@@ -1,6 +1,93 @@
-<h2>Page d'enregistrement d'un projets</h2>
+<section class="bg-gray-900 min-h-screen p-6 md:p-10">
+  <!-- Conteneur principal de type Bento -->
+  <div class="max-w-7xl mx-auto">
+    <!-- En-tête avec titre et description -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-slate-200">Gestion des projects</h1>
+    </div>
 
+    <!-- Grille Bento -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Carte principale (grande) - Formulaire de création -->
+      <div class="lg:col-span-2 bg-gray-800 rounded-xl shadow-xl overflow-hidden border border-gray-700">
+        <div class="p-6">
+          <div class="flex items-center mb-4">
+            <div class="h-10 w-10 rounded-lg bg-blue-600 flex items-center justify-center mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
+            </div>
+            <h2 class="text-xl font-bold text-slate-200">Nouveau projet</h2>
+          </div>
+          <app-dashboard-admin-projects-form-create></app-dashboard-admin-projects-form-create>
+        </div>
+      </div>
 
-<form action="">
+      <!-- Cartes secondaires (colonne de droite) -->
+      <div class="lg:col-span-1 space-y-6">
+        <!-- Statistiques -->
+        <div class="bg-gray-800 rounded-xl shadow-xl p-6 border border-gray-700">
+          <h3 class="text-lg font-semibold text-slate-200 mb-4">Statistiques</h3>
+          <div class="space-y-4">
+            <div class="flex justify-between items-center">
+              <span class="text-slate-400">Projets totaux</span>
+              <span class="text-slate-200 font-medium">24</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-400">Projets actifs</span>
+              <span class="text-slate-200 font-medium">18</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-slate-400">En attente</span>
+              <span class="text-slate-200 font-medium">6</span>
+            </div>
+          </div>
+        </div>
 
-</form>
+        <!-- Activité récente -->
+        <div class="bg-gray-800 rounded-xl shadow-xl p-6 border border-gray-700">
+          <h3 class="text-lg font-semibold text-slate-200 mb-4">Activité récente</h3>
+          <div class="space-y-4">
+            <div class="border-l-2 border-blue-600 pl-4 py-1">
+              <p class="text-slate-200 text-sm">Projet "Marketing Digital" créé</p>
+              <p class="text-slate-500 text-xs">Il y a 2 heures</p>
+            </div>
+            <div class="border-l-2 border-green-600 pl-4 py-1">
+              <p class="text-slate-200 text-sm">Projet "App Mobile" mis à jour</p>
+              <p class="text-slate-500 text-xs">Hier</p>
+            </div>
+            <div class="border-l-2 border-yellow-600 pl-4 py-1">
+              <p class="text-slate-200 text-sm">Projet "Site Web" en attente</p>
+              <p class="text-slate-500 text-xs">Il y a 2 jours</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ressources -->
+        <div class="bg-gray-800 rounded-xl shadow-xl p-6 border border-gray-700">
+          <h3 class="text-lg font-semibold text-slate-200 mb-4">Ressources</h3>
+          <div class="space-y-2">
+            <a href="#" class="flex items-center p-2 hover:bg-gray-700 rounded-lg transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <span class="text-slate-300">Documentation</span>
+            </a>
+            <a href="#" class="flex items-center p-2 hover:bg-gray-700 rounded-lg transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span class="text-slate-300">Support</span>
+            </a>
+            <a href="#" class="flex items-center p-2 hover:bg-gray-700 rounded-lg transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span class="text-slate-300">Calendrier</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

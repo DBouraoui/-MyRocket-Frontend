@@ -132,4 +132,25 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
     }
   }
 
+  deleteCurrentUser() {
+
+    this.http.delete(`http://localhost:8000/api/user/${this.selectedUser.uuid}`).subscribe({
+      next: (resp)=>{
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Utilisateur supprimer',
+        });
+        this.isLoading = false;
+      },
+      error: (err)=>{
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erreur utilisateur non supprimer',
+        });
+        this.isLoading = false;
+        console.log(err)
+      }
+    })
+  }
+
 }

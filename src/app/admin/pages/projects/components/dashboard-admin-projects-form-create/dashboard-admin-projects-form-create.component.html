@@ -1,0 +1,96 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="bg-gray-900 text-gray-100 p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
+
+  <div class="mb-6">
+    <h2 class="text-2xl font-bold text-slate-200 mb-6 border-b border-gray-700 pb-2">Nouveau formulaire</h2>
+  </div>
+
+  <div class="mb-5">
+    <p-iftalabel class="w-full">
+      <input pInputText id="title" autocomplete="off" formControlName="title" class="bg-gray-800 text-white border-gray-700 w-full p-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+      <label for="title" class="text-slate-300">Titre</label>
+    </p-iftalabel>
+  </div>
+
+  <div class="mb-5">
+    <p-iftalabel class="w-full">
+      <textarea pTextarea  formControlName="description" id="description" class="resize-y w-full" ></textarea>
+      <label for="description" class="text-slate-300">Description</label>
+    </p-iftalabel>
+  </div>
+
+  <section [formGroup]="formGroup" class="mb-6 p-4 bg-gray-800 rounded-lg">
+    <h3 class="text-lg font-medium text-slate-300 mb-4">Gestion des URLs</h3>
+
+    <div class="mb-4">
+      <p-multiSelect [options]="typeURl" formControlName="typeUrl" optionLabel="name"
+                     placeholder="Sélectionner un type d'url" [maxSelectedLabels]="1"
+                     styleClass="w-full bg-gray-800 text-white border-gray-700"></p-multiSelect>
+    </div>
+
+    <div class="mb-4">
+      <p-floatLabel class="w-full">
+        <input pInputText id="link" autocomplete="off" formControlName="link" class="bg-gray-800 text-white border-gray-700 w-full p-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+        <label for="link" class="text-slate-300">Link</label>
+      </p-floatLabel>
+    </div>
+
+    <p-button
+      label='Ajouter URL'
+      (onClick)="addUrl()"
+      [disabled]="!formGroup.get('typeUrl')?.value || !formGroup.get('link')?.value"
+      styleClass="p-button-rounded p-button-outlined p-button-secondary"
+    />
+
+    <div class="mt-6 bg-gray-800 rounded-lg p-4">
+      <p class="font-bold text-slate-300 mb-3 border-b border-gray-700 pb-2">Toutes les URLs enregistrées</p>
+      <div *ngFor="let item of allUrlValidate" class="p-3 border-b border-gray-700 hover:bg-gray-700 transition-colors duration-200">
+        <p class="text-slate-300"><span class="text-slate-400 font-medium">Type:</span> {{item.type}}</p>
+        <p class="text-slate-300 break-all"><span class="text-slate-400 font-medium">URL:</span> {{item.link}}</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="mb-6">
+    <p-multiSelect [options]="tags" formControlName="tags" optionLabel="name"
+                   placeholder="Selectionner un tags" [maxSelectedLabels]="3"
+                   styleClass="w-full bg-gray-800 text-white border-gray-700"></p-multiSelect>
+  </div>
+
+  <div class="card flex justify-center">
+    <p-fileupload mode="basic"   chooseIcon="pi pi-upload"  accept="image/*" maxFileSize="5000000"  [auto]="true" chooseLabel="Télécharger des photos" (onSelect)="handleSelect($event)" />
+  </div>
+
+
+  <!-- Prévisualisation simple des images -->
+
+  <!-- HTML pour la prévisualisation -->
+  <div class="mt-6 bg-gray-800 rounded-xl p-6 border border-gray-700">
+    <h3 class="text-xl font-bold text-slate-200 mb-4">Aperçu des images</h3>
+
+    <!-- Grille de prévisualisation -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div *ngFor="let previewUrl of previewUrls" class="aspect-square overflow-hidden rounded-lg border border-gray-700 bg-gray-900">
+        <!-- Image avec Data URL -->
+        <img
+          [src]="previewUrl"
+          alt="Aperçu image"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+
+    <!-- Message quand aucune image n'est sélectionnée -->
+    <div *ngIf="previewUrls.length === 0" class="text-center py-8 border border-dashed border-gray-700 rounded-lg">
+      <p class="text-gray-500">Aucune image sélectionnée</p>
+    </div>
+  </div>
+
+  <div class="flex justify-end mt-8 w-full">
+    <p-button
+      label="Créer le project"
+      type="submit"
+      styleClass="p-button-rounded p-button-lg p-button-primary"
+      class="w-full"
+    />
+  </div>
+</form>
