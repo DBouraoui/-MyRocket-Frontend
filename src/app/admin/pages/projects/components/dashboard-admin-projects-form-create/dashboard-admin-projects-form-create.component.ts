@@ -9,7 +9,8 @@ import {NgForOf, NgIf} from '@angular/common';
 import {FloatLabel} from 'primeng/floatlabel';
 import {FileSelectEvent, FileUpload} from 'primeng/fileupload';
 import {Textarea} from 'primeng/textarea';
-import {Observable} from 'rxjs';
+import {MessageService} from 'primeng/api';
+import {AdminProjectsService} from '../../../../../services/admin-projects.service';
 
 type tags ={
   name: string,
@@ -37,7 +38,9 @@ interface UrlItem {
   templateUrl: './dashboard-admin-projects-form-create.component.html',
 })
 export class DashboardAdminProjectsFormCreateComponent implements OnInit {
+  adminProjectsService = inject(AdminProjectsService);
   formGroup!: FormGroup;
+  messageService: MessageService = inject(MessageService);
   http = inject(HttpClient);
   allUrlValidate: UrlItem[] = [];
   allPictures : File[] = [];
@@ -88,10 +91,18 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
     // Envoi au backend
     this.http.post<any>(`http://localhost:8000/api/project`, formData).subscribe({
       next:(resp) => {
-        console.log(resp);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Project créer avec succes',
+        })
+        this.formGroup.reset();
+        this.adminProjectsService.refreshProjects().subscribe();
       },
       error:(err)  => {
-        console.log(err)
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erreur d\'envoi du formulaire'
+        })
       }
     });
   }

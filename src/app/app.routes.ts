@@ -10,6 +10,7 @@ import {DashboardAdminComponent} from './admin/pages/dashboard/dashboard.compone
 import {UtilisateurComponent} from './admin/pages/utilisateur/utilisateur.component';
 import {dashboardUsersResolver} from './resolvers/dashboard-users.resolver';
 import {ProjectsComponent} from './admin/pages/projects/projects.component';
+import {dashboardAdminProjectResolver} from './resolvers/dashboard-admin-project.resolver';
 
 export const routes: Routes = [
   {
@@ -62,6 +63,7 @@ export const routes: Routes = [
       {
         path: 'projects',
         component: ProjectsComponent,
+        resolve: {projects: dashboardAdminProjectResolver},
         title: 'Gestion des projects',
       }
     ]
