@@ -8,7 +8,7 @@ import {ErrorComponent} from './anonymous/pages/error/error.component';
 import {AdminComponent} from './layout/admin/admin.component';
 import {DashboardAdminComponent} from './admin/pages/dashboard/dashboard.component';
 import {UtilisateurComponent} from './admin/pages/utilisateur/utilisateur.component';
-import {dashboardUsersResolver} from './resolvers/dashboard-users.resolver';
+import {dashboardAdminUsersResolver} from './resolvers/dashboard-admin-users.resolver';
 import {ProjectsComponent} from './admin/pages/projects/projects.component';
 import {dashboardAdminProjectResolver} from './resolvers/dashboard-admin-project.resolver';
 
@@ -57,7 +57,7 @@ export const routes: Routes = [
       {
         path: 'utilisateurs',
         component: UtilisateurComponent,
-        resolve: {users: dashboardUsersResolver},
+        resolve: {users: dashboardAdminUsersResolver},
         title: 'Gestion des utilisateurs',
       },
       {

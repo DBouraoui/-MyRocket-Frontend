@@ -1,12 +1,12 @@
 import {Injectable, signal, WritableSignal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
-import {getUsersAdminResponse, Token, User} from '../types/User';
+import {User} from '../types/User';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DashboardService {
+export class AdminUsersService {
 
   users :WritableSignal<User[]> = signal([]);
 

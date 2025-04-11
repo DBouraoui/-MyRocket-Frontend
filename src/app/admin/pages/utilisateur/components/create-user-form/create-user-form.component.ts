@@ -5,12 +5,10 @@ import {InputText} from "primeng/inputtext";
 import {Password} from "primeng/password";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {SelectButton} from "primeng/selectbutton";
-import {User} from '../../../../../types/User';
 import {Subscription} from 'rxjs';
 import {MessageService} from 'primeng/api';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute} from '@angular/router';
-import {DashboardService} from '../../../../../services/dashboard.service';
+import {AdminUsersService} from '../../../../../services/admin-users.service';
 
 @Component({
   selector: 'app-create-user-form',
@@ -25,7 +23,7 @@ import {DashboardService} from '../../../../../services/dashboard.service';
   templateUrl: './create-user-form.component.html',
 })
 export class CreateUserFormComponent implements OnInit, OnDestroy {
-  adminUsersService = inject(DashboardService);
+  adminUsersService = inject(AdminUsersService);
   formGroup!:FormGroup;
   isLoading = false;
   formSending! : Subscription;
@@ -42,8 +40,7 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
 
 
   constructor(private messageService:MessageService,
-              private http : HttpClient,
-              private activatedRoute: ActivatedRoute
+              private http : HttpClient
   ) {
   }
 

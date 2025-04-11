@@ -11,7 +11,7 @@ import {FloatLabel} from 'primeng/floatlabel';
 import {MessageService} from 'primeng/api';
 import {HttpClient} from '@angular/common/http';
 import {Subscription} from 'rxjs';
-import {DashboardService} from '../../../../../services/dashboard.service';
+import {AdminUsersService} from '../../../../../services/admin-users.service';
 
 @Component({
   selector: 'app-dashboard-admin-users-search',
@@ -29,7 +29,7 @@ import {DashboardService} from '../../../../../services/dashboard.service';
   templateUrl: './dashboard-admin-users-search.component.html',
 })
 export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
-  adminUsersService = inject(DashboardService);
+  adminUsersService = inject(AdminUsersService);
   searchInput = "";
   filteredUsers: User[] = [];
   visible :boolean = false;
@@ -38,7 +38,7 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
   isLoading:boolean = false;
   formSending!: Subscription;
 
-  constructor(private messageService: MessageService, private http: HttpClient, private dashboardService : DashboardService) {
+  constructor(private messageService: MessageService, private http: HttpClient, private dashboardService : AdminUsersService) {
   }
 
   ngOnInit() {

@@ -4,12 +4,11 @@ import { RouterLink, RouterLinkActive} from '@angular/router';
 import { NavbarItems } from '../../../types/Navbar';
 import {Button} from 'primeng/button';
 import {OverlayPanelModule} from 'primeng/overlaypanel';
-import {Popover} from 'primeng/popover';
-import {Overlay} from 'primeng/overlay';
+
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule, Button, OverlayPanelModule, Popover, RouterLinkActive, RouterLink, Overlay],
+  imports: [CommonModule, Button, OverlayPanelModule, RouterLinkActive, RouterLink],
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
