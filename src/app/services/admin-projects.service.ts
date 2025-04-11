@@ -1,22 +1,7 @@
 import {Injectable, signal, WritableSignal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
-
-type Pictures = {
-  filename: string;
-  url:string;
-}
-
-export type Project = {
-  uuid: string;
-  title: string;
-  description: string;
-  tags: string[];
-  link: string[];
-  createdAt: string;
-  updatedAt: string;
-  picture: Pictures[];
-}
+import {Project} from '../types/Project';
 
 @Injectable({
   providedIn: 'root'

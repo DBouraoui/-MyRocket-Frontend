@@ -11,6 +11,8 @@ import {UtilisateurComponent} from './admin/pages/utilisateur/utilisateur.compon
 import {dashboardAdminUsersResolver} from './resolvers/dashboard-admin-users.resolver';
 import {ProjectsComponent} from './admin/pages/projects/projects.component';
 import {dashboardAdminProjectResolver} from './resolvers/dashboard-admin-project.resolver';
+import {ContactComponent} from './admin/pages/contact/contact.component';
+import {dashboardAdminContactResolver} from './resolvers/dashboard-admin-contact.resolver';
 
 export const routes: Routes = [
   {
@@ -65,6 +67,12 @@ export const routes: Routes = [
         component: ProjectsComponent,
         resolve: {projects: dashboardAdminProjectResolver},
         title: 'Gestion des projects',
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
+        resolve: {contact: dashboardAdminContactResolver},
+        title: 'Gestion des contacts',
       }
     ]
   },

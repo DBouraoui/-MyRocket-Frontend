@@ -1,7 +1,8 @@
 import { ResolveFn } from '@angular/router';
 import {inject} from '@angular/core';
-import {AdminProjectsService, Project} from '../services/admin-projects.service';
+import {AdminProjectsService} from '../services/admin-projects.service';
 import {Observable, tap} from 'rxjs';
+import {Project} from '../types/Project';
 
 export const dashboardAdminProjectResolver: ResolveFn<Observable<Project[]> > = (route, state) => {
   const projectsService = inject(AdminProjectsService);
