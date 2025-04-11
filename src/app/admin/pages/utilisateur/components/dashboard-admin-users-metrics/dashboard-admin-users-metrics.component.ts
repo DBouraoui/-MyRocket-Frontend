@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {User} from '../../../../../types/User';
+import {Component, inject, Input} from '@angular/core';
+import {DashboardService} from '../../../../../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard-admin-users-metrics',
@@ -7,13 +7,13 @@ import {User} from '../../../../../types/User';
   templateUrl: './dashboard-admin-users-metrics.component.html',
 })
 export class DashboardAdminUsersMetricsComponent {
-  @Input() users: User[] = [];
+  adminUsersService = inject(DashboardService);
 
   countCompany() {
-    return this.users.filter(user => user.companyName != null).length;
+    return this.adminUsersService.users().filter(user => user.companyName != null).length;
   }
 
   countParticulier() {
-    return this.users.filter(user => user.companyName == null).length;
+    return this.adminUsersService.users().filter(user => user.companyName == null).length;
   }
 }

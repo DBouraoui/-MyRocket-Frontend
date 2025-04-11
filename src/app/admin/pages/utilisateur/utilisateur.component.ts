@@ -1,8 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Button} from 'primeng/button';
 import {ReactiveFormsModule} from '@angular/forms';
-import {User} from '../../../types/User';
-import {ActivatedRoute} from '@angular/router';
 import {CreateUserFormComponent} from './components/create-user-form/create-user-form.component';
 import {
   DashboardAdminUsersMetricsComponent
@@ -23,16 +21,6 @@ import {
   ],
   templateUrl: './utilisateur.component.html',
 })
-export class UtilisateurComponent implements OnInit{
-  users: User[] = [];
+export class UtilisateurComponent {
 
-
-  constructor(private activatedRoute: ActivatedRoute) {
-  }
-
-  ngOnInit(): void {
-    this.activatedRoute.data.subscribe(data => {
-      this.users = data['users'];
-    })
-  }
 }

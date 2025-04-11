@@ -15,7 +15,6 @@ export class ProjectsComponent {
   adminProjectsService = inject(AdminProjectsService);
 
   constructor() {
-    console.log(this.adminProjectsService.projects())
   }
 
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {Button} from 'primeng/button';
 import {InputText} from 'primeng/inputtext';
 import {User} from '../../../../../types/User';
@@ -29,7 +29,7 @@ import {DashboardService} from '../../../../../services/dashboard.service';
   templateUrl: './dashboard-admin-users-search.component.html',
 })
 export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
-  @Input() users: User[] = [];
+  adminUsersService = inject(DashboardService);
   searchInput = "";
   filteredUsers: User[] = [];
   visible :boolean = false;
@@ -87,6 +87,7 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
           summary: 'Utilisateur modifier',
         });
         this.isLoading = false;
+        this.adminUsersService.refreshUsers().subscribe();
       },
       error: (err)=>{
         this.messageService.add({
@@ -122,7 +123,7 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
 
   filterUsers() {
     if (this.searchInput != "") {
-      this.filteredUsers = this.users.filter(user =>
+      this.filteredUsers = this.adminUsersService.users().filter(user =>
         user.email.toLowerCase().includes(this.searchInput.toLowerCase()) ||
         (user.firstname?.toLowerCase().includes(this.searchInput.toLowerCase())) ||
         (user.lastname?.toLowerCase().includes(this.searchInput.toLowerCase()))
@@ -141,6 +142,7 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
           summary: 'Utilisateur supprimer',
         });
         this.isLoading = false;
+        this.adminUsersService.refreshUsers().subscribe();
       },
       error: (err)=>{
         this.messageService.add({

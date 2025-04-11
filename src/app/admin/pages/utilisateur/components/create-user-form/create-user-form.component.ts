@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
 import {Button} from "primeng/button";
 import {IftaLabel} from "primeng/iftalabel";
 import {InputText} from "primeng/inputtext";
@@ -10,6 +10,7 @@ import {Subscription} from 'rxjs';
 import {MessageService} from 'primeng/api';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
+import {DashboardService} from '../../../../../services/dashboard.service';
 
 @Component({
   selector: 'app-create-user-form',
@@ -24,6 +25,7 @@ import {ActivatedRoute} from '@angular/router';
   templateUrl: './create-user-form.component.html',
 })
 export class CreateUserFormComponent implements OnInit, OnDestroy {
+  adminUsersService = inject(DashboardService);
   formGroup!:FormGroup;
   isLoading = false;
   formSending! : Subscription;
@@ -111,6 +113,7 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
           summary: 'Utilisateur créer',
         });
         this.isLoading = false;
+        this.adminUsersService.refreshUsers().subscribe();
       },
       error: (err)=>{
         this.messageService.add({
