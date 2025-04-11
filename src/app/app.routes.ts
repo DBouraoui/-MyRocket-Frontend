@@ -54,6 +54,7 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardAdminComponent,
+        resolve: {users: dashboardAdminUsersResolver,contact: dashboardAdminContactResolver, projects: dashboardAdminProjectResolver},
         title: 'Pannel d\'administration',
       },
       {

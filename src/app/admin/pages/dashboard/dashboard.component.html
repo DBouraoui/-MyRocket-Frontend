@@ -1,0 +1,31 @@
+<div class="bg-gray-900 mx-auto p-4 min-h-dvh">
+  <h1 class="text-2xl font-bold mb-6">Dashboard administrateur</h1>
+
+  <!-- Bento Grid Layout -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+    <!-- Boîte 1: Plus longue et large (span 3 colonnes) -->
+    <div class="md:col-span-2 bg-slate-800 rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg">
+      <h2 class="text-xl font-semibold mb-4">Metrics Utilisateur</h2>
+        <app-dashboard-admin-users-metrics></app-dashboard-admin-users-metrics>
+    </div>
+
+    <div class="md:col-span-2 bg-slate-800 rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg">
+      <h2 class="text-xl font-semibold mb-4">Recherche un utilisateur</h2>
+     <app-dashboard-admin-users-search></app-dashboard-admin-users-search>
+    </div>
+
+
+    <div class="md:col-span-4 bg-slate-800 rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg">
+      <h2 class="text-xl font-semibold mb-4">Voir mes contacts</h2>
+      <app-create-user-form></app-create-user-form>
+    </div>
+
+
+    <!-- Boîte 2: Petite (span 1 colonne) -->
+    <div class="md:col-span-4 bg-slate-800 rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg">
+      <h2 class="text-xl font-semibold mb-4">Voir mes contacts</h2>
+      <app-contact></app-contact>
+    </div>
+  </div>
+</div>
