@@ -6,9 +6,6 @@ import {
 import {
   DashboardAdminUsersSearchComponent
 } from '../utilisateur/components/dashboard-admin-users-search/dashboard-admin-users-search.component';
-import {
-  DashboardAdminProjectsFormCreateComponent
-} from '../projects/components/dashboard-admin-projects-form-create/dashboard-admin-projects-form-create.component';
 import {CreateUserFormComponent} from '../utilisateur/components/create-user-form/create-user-form.component';
 
 @Component({

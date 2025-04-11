@@ -48,11 +48,28 @@
         <div class="bg-gray-800 rounded-xl shadow-xl p-6 border border-gray-700">
           <h3 class="text-lg font-semibold text-slate-200 mb-4">Activité récente</h3>
           <div class="space-y-4">
-            @for (project of adminProjectsService.projects(); track project.uuid) {
-              <div class="border-l-2 border-blue-600 pl-4 py-1">
-                <p class="text-slate-200 text-sm">{{project.title}}</p>
-                <p class="text-slate-500 text-xs">Date de création {{project.createdAt}}</p>
-                <p class="text-slate-500 text-xs">Dernière modification {{project.updatedAt}}</p>
+            @for (project of adminProjectsService.projects().slice(0, 5).reverse(); track project.uuid) {
+              <div class="border-l-4 border-blue-500 pl-4 py-3 mb-3 bg-slate-800 rounded-r-lg hover:bg-slate-700 transition-all duration-300 shadow-md hover:shadow-lg hover:translate-x-1">
+                <div class="flex justify-between items-start">
+                  <p class="text-slate-100 font-medium text-base">{{project.title}}</p>
+                  <span class="bg-blue-500 text-xs text-white px-2 py-1 rounded-full">Projet</span>
+                </div>
+
+                <div class="mt-2 flex items-center gap-4 text-xs">
+                  <div class="flex items-center text-slate-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span>Créé le {{project.createdAt | date:'dd/MM/yyyy'}}</span>
+                  </div>
+
+                  <div class="flex items-center text-slate-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span>Modifié le {{project.updatedAt | date:'dd/MM/yyyy'}}</span>
+                  </div>
+                </div>
               </div>
             }
           </div>

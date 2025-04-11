@@ -905,14 +905,14 @@
           <label class="block text-sm font-medium mb-2">Catégories</label>
           <p-multiSelect [options]="tags" formControlName="tags" optionLabel="name"
                          placeholder="Sélectionnez les catégories" [maxSelectedLabels]="3"
-                         styleClass="w-full bg-white/10 border-white/20 text-white" />
+                         styleClass="w-full bg-white/10 border-white/20 text-white"></p-multiSelect>
         </div>
 
         <!-- Description Field -->
         <div class="relative">
           <p class="text-gray-400 text-sm mt-1">Décrivez-nous votre projet en détail</p>
           <p-iftalabel>
-            <textarea pInputTextarea id="description" formControlName="description"
+            <textarea pTextarea id="description" formControlName="description"
                       rows="4" class="w-full bg-white/10 border-white/20 focus:border-indigo-500 focus:ring focus:ring-indigo-500/30 resize-none" ></textarea>
           </p-iftalabel>
           @if (formGroup.get('description')?.invalid && (formGroup.get('description')?.dirty || formGroup.get('description')?.touched)) {

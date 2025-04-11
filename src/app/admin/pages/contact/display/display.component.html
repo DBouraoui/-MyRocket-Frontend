@@ -7,49 +7,57 @@
 
     <!-- Liste des contacts -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      @for (contact of adminContactService.contacts(); track contact.uuid) {
-        <p-card styleClass="bg-gray-800 shadow-lg border-none h-full">
-          <div>
-            <!-- Informations du contact -->
-            <h3 class="text-xl font-semibold text-white mb-2">{{contact.title}}</h3>
+      @if (adminContactService.contacts().length === 0) {
+        <div class="col-span-1 md:col-span-2 lg:col-span-3 bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700 text-center">
+          <i class="pi pi-inbox text-5xl text-indigo-400 mb-4"></i>
+          <h3 class="text-xl font-semibold text-white mb-2">Aucun contact disponible</h3>
+          <p class="text-gray-400">Aucun contact n'a été trouvé.</p>
+        </div>
+      } @else {
+        @for (contact of adminContactService.contacts(); track contact.uuid) {
+          <p-card styleClass="bg-gray-800 shadow-lg border-none h-full">
+            <div>
+              <!-- Informations du contact -->
+              <h3 class="text-xl font-semibold text-white mb-2">{{contact.title}}</h3>
 
-            <p class="text-gray-300 mb-3 flex items-center">
-              <i class="pi pi-envelope mr-2 text-indigo-400"></i>
-              {{contact.email}}
-            </p>
+              <p class="text-gray-300 mb-3 flex items-center">
+                <i class="pi pi-envelope mr-2 text-indigo-400"></i>
+                {{contact.email}}
+              </p>
 
-            <p class="text-gray-400 text-sm mb-3 flex items-center">
-              <i class="pi pi-calendar mr-2 text-indigo-400"></i>
-              Créé le {{contact.createdAt | date:'dd/MM/yyyy'}}
-            </p>
+              <p class="text-gray-400 text-sm mb-3 flex items-center">
+                <i class="pi pi-calendar mr-2 text-indigo-400"></i>
+                Créé le {{contact.createdAt | date:'dd/MM/yyyy'}}
+              </p>
 
-            <!-- Tags -->
-            <div class="flex flex-wrap gap-2 mb-4">
-              @for (tag of contact.tags; track tag) {
-                <p-tag value="{{tag}}" styleClass="bg-slate-700 text-indigo-300"></p-tag>
-              }
-            </div>
-
-            <!-- Images si présentes -->
-            @if (contact.pictures && contact.pictures.length > 0) {
-              <div class="grid grid-cols-2 gap-2 mb-4">
-                @for (picture of contact.pictures; track picture.filename) {
-                  <img src="{{picture.url}}" alt="{{picture.filename}}" class="w-full h-auto rounded-md">
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                @for (tag of contact.tags; track tag) {
+                  <p-tag value="{{tag}}" styleClass="bg-slate-700 text-indigo-300"></p-tag>
                 }
               </div>
-            }
 
-            <!-- Boutons d'action -->
-            <div class="flex justify-between mt-3">
-              <p-button
-                label="Voir plus"
-                icon="pi pi-eye"
-                styleClass="p-button-outlined p-button-sm"
-                (click)="showDetail(contact)"
-              ></p-button>
+              <!-- Images si présentes -->
+              @if (contact.pictures && contact.pictures.length > 0) {
+                <div class="grid grid-cols-2 gap-2 mb-4">
+                  @for (picture of contact.pictures; track picture.filename) {
+                    <img src="{{picture.url}}" alt="{{picture.filename}}" class="w-full h-auto rounded-md">
+                  }
+                </div>
+              }
+
+              <!-- Boutons d'action -->
+              <div class="flex justify-between mt-3">
+                <p-button
+                  label="Voir plus"
+                  icon="pi pi-eye"
+                  styleClass="p-button-outlined p-button-sm"
+                  (click)="showDetail(contact)"
+                ></p-button>
+              </div>
             </div>
-          </div>
-        </p-card>
+          </p-card>
+        }
       }
     </div>
   </div>

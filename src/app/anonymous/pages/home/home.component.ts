@@ -10,6 +10,7 @@ import {IftaLabel} from 'primeng/iftalabel';
 import {Checkbox} from 'primeng/checkbox';
 import {MultiSelect} from 'primeng/multiselect';
 import {FileUpload, FileUploadHandlerEvent} from 'primeng/fileupload';
+import {Textarea} from 'primeng/textarea';
 
 interface Tag {
   name: string;
@@ -29,7 +30,8 @@ interface Tag {
     Checkbox,
     MultiSelect,
     FileUpload,
-    FileUpload
+    FileUpload,
+    Textarea
   ],
   templateUrl: './home.component.html',
 })
@@ -153,6 +155,7 @@ export class HomeComponent implements OnInit {
         });
         this.formGroup.reset();
         this.formGroup.get('isCompany')?.setValue(false);
+        this.imagePreviewUrl = null;
       },
       error: (err)=>{
         console.log(err);

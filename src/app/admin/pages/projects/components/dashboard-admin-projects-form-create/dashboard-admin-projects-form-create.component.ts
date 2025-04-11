@@ -38,6 +38,7 @@ interface UrlItem {
   templateUrl: './dashboard-admin-projects-form-create.component.html',
 })
 export class DashboardAdminProjectsFormCreateComponent implements OnInit {
+  isLoading :boolean = false;
   adminProjectsService = inject(AdminProjectsService);
   formGroup!: FormGroup;
   messageService: MessageService = inject(MessageService);
@@ -75,6 +76,7 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
+    this.isLoading = true;
 
     formData.append('title', this.formGroup.get('title')?.value);
     formData.append('description', this.formGroup.get('description')?.value);
@@ -88,7 +90,6 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
       }
     }
 
-    // Envoi au backend
     this.http.post<any>(`http://localhost:8000/api/project`, formData).subscribe({
       next:(resp) => {
         this.messageService.add({
@@ -97,12 +98,14 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
         })
         this.formGroup.reset();
         this.adminProjectsService.refreshProjects().subscribe();
+        this.isLoading = false;
       },
       error:(err)  => {
         this.messageService.add({
           severity: 'error',
           summary: 'Erreur d\'envoi du formulaire'
         })
+        this.isLoading = false;
       }
     });
   }
