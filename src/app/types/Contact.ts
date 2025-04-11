@@ -11,6 +11,7 @@ export type Contact = {
   email: string;
   title: string;
   description: string;
+  createdAt: string;
   tags: string[];
   pictures: ContactImage[];
 }

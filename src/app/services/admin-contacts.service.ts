@@ -20,6 +20,14 @@ export class AdminContactsService {
     });
   }
 
+  deleteContact(contact: Contact): Observable<Contact> {
+   return this.http.delete<Contact>('http://localhost:8000/api/contact', {
+      params: {
+        uuid: contact.uuid
+      }
+    })
+  }
+
   refreshContacts() {
     return this.fetchContacts().pipe(
       tap(response => {
