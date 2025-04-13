@@ -1,0 +1,188 @@
+<section class="py-16 bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 text-white overflow-hidden">
+  <div class="container mx-auto px-4 max-w-4xl">
+    <!-- Titre et intro intégrés directement dans la section sans carte -->
+    <h2 class="text-4xl font-bold mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-purple-300">Contactez-nous</h2>
+    <p class="text-gray-300 mb-10 text-center max-w-2xl mx-auto">Parlez-nous de votre projet et nous vous répondrons rapidement</p>
+
+    <!-- Formulaire sans carte distincte -->
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="space-y-8">
+      <!-- Type Selection -->
+      <div class="mb-6">
+        <div class="flex justify-center">
+          <p-selectButton [options]="stateOptions" formControlName="isCompany" optionLabel="label"
+                          optionValue="value" aria-labelledby="basic"></p-selectButton>
+        </div>
+      </div>
+
+      <!-- Conditional Fields -->
+      <div>
+        @if (formGroup.get('isCompany')?.value) {
+          <div class="relative p-4 rounded-lg bg-indigo-900/30 backdrop-blur-sm border-l-4 border-indigo-500">
+            <p-iftalabel>
+              <input pInputText id="companyName" formControlName="companyName" autocomplete="off"
+                     class="w-full bg-transparent border-b border-indigo-400/50 focus:border-indigo-400 focus:ring-0 px-0" />
+              <label for="companyName">Nom de la société</label>
+            </p-iftalabel>
+            @if (formGroup.get('companyName')?.invalid && (formGroup.get('companyName')?.dirty || formGroup.get('companyName')?.touched)) {
+              <small class="text-red-400 mt-1 block">
+                @if (formGroup.get('companyName')?.errors?.['required']) {
+                  Le nom de la société est requis
+                }
+                @if (formGroup.get('companyName')?.errors?.['maxlength']) {
+                  Le nom de la société ne doit pas dépasser {{ formGroup.get('companyName')?.errors?.['maxlength'].requiredLength }} caractères
+                }
+              </small>
+            }
+          </div>
+        } @else {
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="relative p-4 rounded-lg bg-indigo-900/30 backdrop-blur-sm border-l-4 border-indigo-500">
+              <p-iftalabel>
+                <input pInputText id="firstname" formControlName="firstname" autocomplete="off"
+                       class="w-full bg-transparent border-b border-indigo-400/50 focus:border-indigo-400 focus:ring-0 px-0" />
+                <label for="firstname">Prénom</label>
+              </p-iftalabel>
+              @if (formGroup.get('firstname')?.invalid && (formGroup.get('firstname')?.dirty || formGroup.get('firstname')?.touched)) {
+                <small class="text-red-400 mt-1 block">
+                  @if (formGroup.get('firstname')?.errors?.['required']) {
+                    Le prénom est requis
+                  }
+                  @if (formGroup.get('firstname')?.errors?.['maxlength']) {
+                    Le prénom ne doit pas dépasser {{ formGroup.get('firstname')?.errors?.['maxlength'].requiredLength }} caractères
+                  }
+                </small>
+              }
+            </div>
+            <div class="relative p-4 rounded-lg bg-indigo-900/30 backdrop-blur-sm border-l-4 border-indigo-500">
+              <p-iftalabel>
+                <input pInputText id="lastname" formControlName="lastname" autocomplete="off"
+                       class="w-full bg-transparent border-b border-indigo-400/50 focus:border-indigo-400 focus:ring-0 px-0" />
+                <label for="lastname">Nom</label>
+              </p-iftalabel>
+              @if (formGroup.get('lastname')?.invalid && (formGroup.get('lastname')?.dirty || formGroup.get('lastname')?.touched)) {
+                <small class="text-red-400 mt-1 block">
+                  @if (formGroup.get('lastname')?.errors?.['required']) {
+                    Le nom est requis
+                  }
+                  @if (formGroup.get('lastname')?.errors?.['maxlength']) {
+                    Le nom ne doit pas dépasser {{ formGroup.get('lastname')?.errors?.['maxlength'].requiredLength }} caractères
+                  }
+                </small>
+              }
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Email Field -->
+      <div class="relative p-4 rounded-lg bg-indigo-900/30 backdrop-blur-sm border-l-4 border-indigo-500">
+        <p-iftalabel>
+          <input pInputText id="email" formControlName="email" autocomplete="off"
+                 class="w-full bg-transparent border-b border-indigo-400/50 focus:border-indigo-400 focus:ring-0 px-0" />
+          <label for="email">Email</label>
+        </p-iftalabel>
+        @if (formGroup.get('email')?.invalid && (formGroup.get('email')?.dirty || formGroup.get('email')?.touched)) {
+          <small class="text-red-400 mt-1 block">
+            @if (formGroup.get('email')?.errors?.['required']) {
+              L'email est requis
+            }
+            @if (formGroup.get('email')?.errors?.['maxlength']) {
+              L'email ne doit pas dépasser {{ formGroup.get('email')?.errors?.['maxlength'].requiredLength }} caractères
+            }
+          </small>
+        }
+      </div>
+
+      <!-- Title Field -->
+      <div class="relative p-4 rounded-lg bg-indigo-900/30 backdrop-blur-sm border-l-4 border-indigo-500">
+        <p-iftalabel>
+          <input pInputText id="title" formControlName="title" autocomplete="off"
+                 class="w-full bg-transparent border-b border-indigo-400/50 focus:border-indigo-400 focus:ring-0 px-0" />
+          <label for="title">Titre du projet</label>
+        </p-iftalabel>
+        @if (formGroup.get('title')?.invalid && (formGroup.get('title')?.dirty || formGroup.get('title')?.touched)) {
+          <small class="text-red-400 mt-1 block">
+            @if (formGroup.get('title')?.errors?.['required']) {
+              Le titre est requis
+            }
+            @if (formGroup.get('title')?.errors?.['maxlength']) {
+              Le titre ne doit pas dépasser {{ formGroup.get('title')?.errors?.['maxlength'].requiredLength }} caractères
+            }
+          </small>
+        }
+      </div>
+
+      <!-- Tags Selection -->
+      <div class="relative p-4 rounded-lg bg-indigo-900/30 backdrop-blur-sm border-l-4 border-indigo-500">
+        <label class="block text-sm font-medium mb-2">Catégories</label>
+        <p-multiSelect [options]="tags" formControlName="tags" optionLabel="name"
+                       placeholder="Sélectionnez les catégories" [maxSelectedLabels]="3"
+                       styleClass="w-full bg-transparent border-indigo-400/50 text-white"></p-multiSelect>
+      </div>
+
+      <!-- Description Field -->
+      <div class="relative p-4 rounded-lg bg-indigo-900/30 backdrop-blur-sm border-l-4 border-indigo-500">
+        <p class="text-gray-300 text-sm mb-2">Décrivez-nous votre projet en détail</p>
+        <p-iftalabel>
+          <textarea pTextarea id="description" formControlName="description"
+                    rows="4" class="w-full bg-transparent border-indigo-400/50 focus:border-indigo-400 focus:ring-0 resize-none" ></textarea>
+        </p-iftalabel>
+        @if (formGroup.get('description')?.invalid && (formGroup.get('description')?.dirty || formGroup.get('description')?.touched)) {
+          <small class="text-red-400 mt-1 block">
+            @if (formGroup.get('description')?.errors?.['required']) {
+              La description est requise
+            }
+            @if (formGroup.get('description')?.errors?.['maxlength']) {
+              La description ne doit pas dépasser {{ formGroup.get('description')?.errors?.['maxlength'].requiredLength }} caractères
+            }
+          </small>
+        }
+      </div>
+
+      <!-- File Upload -->
+      <div class="p-4 rounded-lg bg-indigo-900/30 backdrop-blur-sm border-l-4 border-indigo-500">
+        <label class="block text-sm font-medium mb-3">Joindre une image <span class="text-xs text-gray-300">(1 maximum)</span></label>
+        <div class="flex justify-center border border-dashed border-indigo-400/50 rounded-lg p-6 bg-indigo-500/5 hover:bg-indigo-500/10 transition-colors">
+          <p-fileupload #fu mode="basic" name="file" (onSelect)="customUpload($event)"
+                        previewWidth="100" chooseLabel="Choisir une image" chooseIcon="pi pi-upload"
+                        accept="image/*" maxFileSize="5000000" />
+        </div>
+      </div>
+
+      <!-- Prévisualisation simple avec Tailwind -->
+      @if (imagePreviewUrl) {
+        <div class="p-4 rounded-lg bg-indigo-900/30 backdrop-blur-sm border-l-4 border-indigo-500">
+          <h4 class="text-center text-indigo-300 mb-3">Prévisualisation de l'image</h4>
+          <div class="w-full mx-auto overflow-hidden rounded-lg bg-black/20">
+            <div class="w-full h-48">
+              <img [src]="imagePreviewUrl" alt="Aperçu" class="w-full h-full object-contain">
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- Terms and Conditions -->
+      <div class="p-4 rounded-lg bg-indigo-900/30 backdrop-blur-sm">
+        <div class="flex items-center gap-3">
+          <p-checkbox formControlName="cgv" inputId="cgv"  [binary]="true" />
+          <label class="text-sm" for="cgv">J'accepte les conditions générales d'utilisation</label>
+        </div>
+        @if (formGroup.get('cgv')?.invalid && (formGroup.get('cgv')?.dirty || formGroup.get('cgv')?.touched)) {
+          <small class="text-red-400 mt-1 block">
+            @if (formGroup.get('cgv')?.errors?.['required']) {
+              Vous devez accepter les CGV pour continuer
+            }
+          </small>
+        }
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center pt-4">
+        <p-button label="Envoyer ma demande"
+                  [disabled]="!formGroup.get('cgv')?.value"
+                  type="submit"
+                  styleClass="w-full md:w-auto px-8 py-3 font-semibold bg-gradient-to-r from-indigo-600 to-purple-700 hover:from-indigo-500 hover:to-purple-600 shadow-lg border-0 rounded-lg" />
+      </div>
+    </form>
+  </div>
+</section>

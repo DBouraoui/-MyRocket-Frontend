@@ -1,5 +1,5 @@
 import {Component, inject, Input} from '@angular/core';
-import {AdminUsersService} from '../../../../../services/admin-users.service';
+import {AdminUsersService} from '../../../../../services/admin/admin-users.service';
 
 @Component({
   selector: 'app-dashboard-admin-users-metrics',

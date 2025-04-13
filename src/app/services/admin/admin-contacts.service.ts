@@ -1,7 +1,8 @@
 import {Injectable, signal, WritableSignal} from '@angular/core';
-import {Contact, ContactsResponse} from '../types/Contact';
+import {Contact, ContactsResponse} from '../../types/Contact';
 import {HttpClient} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
+import {environment} from '../../../../environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AdminContactsService {
   constructor(private http: HttpClient) {}
 
   fetchContacts(): Observable<ContactsResponse> {
-    return this.http.get<ContactsResponse>('http://localhost:8000/api/contact', {
+    return this.http.get<ContactsResponse>(`${environment.SERVER_URL}/api/contact`, {
       params: {
         all: true,
         withImageUrls: true
@@ -21,7 +22,7 @@ export class AdminContactsService {
   }
 
   deleteContact(contact: Contact): Observable<Contact> {
-   return this.http.delete<Contact>('http://localhost:8000/api/contact', {
+   return this.http.delete<Contact>(`${environment.SERVER_URL}/api/contact`, {
       params: {
         uuid: contact.uuid
       }

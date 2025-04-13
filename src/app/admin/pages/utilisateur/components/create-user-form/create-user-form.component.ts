@@ -8,7 +8,8 @@ import {SelectButton} from "primeng/selectbutton";
 import {Subscription} from 'rxjs';
 import {MessageService} from 'primeng/api';
 import {HttpClient} from '@angular/common/http';
-import {AdminUsersService} from '../../../../../services/admin-users.service';
+import {AdminUsersService} from '../../../../../services/admin/admin-users.service';
+import {environment} from '../../../../../../../environment';
 
 @Component({
   selector: 'app-create-user-form',
@@ -103,7 +104,7 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
       password: this.formGroup.get('password')?.value,
     }
 
-    this.http.post('http://localhost:8000/api/user/register', payload).subscribe({
+    this.http.post(`${environment.SERVER_URL}/api/user/register`, payload).subscribe({
       next: (resp)=>{
         this.messageService.add({
           severity: 'success',

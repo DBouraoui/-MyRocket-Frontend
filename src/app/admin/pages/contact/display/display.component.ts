@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {AdminContactsService} from '../../../../services/admin-contacts.service';
+import {AdminContactsService} from '../../../../services/admin/admin-contacts.service';
 import {Button} from 'primeng/button';
 import {GalleriaModule} from 'primeng/galleria';
 import {Contact} from '../../../../types/Contact';

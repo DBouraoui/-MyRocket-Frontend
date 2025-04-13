@@ -10,6 +10,7 @@ import {MessageService} from 'primeng/api';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {LoginResponse} from '../../../types/HttpResponse';
+import {environment} from '../../../../../environment';
 
 @Component({
   selector: 'app-login',
@@ -55,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: this.formData.get('password')?.value,
     }
 
-     this.loginRequest = this.http.post<LoginResponse>('http://localhost:8000/api/login_check', credentials).subscribe({
+     this.loginRequest = this.http.post<LoginResponse>(`${environment.SERVER_URL}/api/login_check`, credentials).subscribe({
       next: (response: LoginResponse) => {
         this.messageService.add({
           severity: 'success',

@@ -11,7 +11,8 @@ import {FloatLabel} from 'primeng/floatlabel';
 import {MessageService} from 'primeng/api';
 import {HttpClient} from '@angular/common/http';
 import {Subscription} from 'rxjs';
-import {AdminUsersService} from '../../../../../services/admin-users.service';
+import {AdminUsersService} from '../../../../../services/admin/admin-users.service';
+import {environment} from '../../../../../../../environment';
 
 @Component({
   selector: 'app-dashboard-admin-users-search',
@@ -80,7 +81,7 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
       country: this.formGroup.get('country')?.value,
     }
 
-   this.formSending = this.http.put('http://localhost:8000/api/user', payload).subscribe({
+   this.formSending = this.http.put(`${environment.SERVER_URL}/api/user`, payload).subscribe({
       next: (resp)=>{
         this.messageService.add({
           severity: 'success',

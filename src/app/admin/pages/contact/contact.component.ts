@@ -1,5 +1,4 @@
-import {Component, inject} from '@angular/core';
-import {AdminContactsService} from '../../../services/admin-contacts.service';
+import {Component} from '@angular/core';
 import {DisplayComponent} from './display/display.component';
 
 @Component({

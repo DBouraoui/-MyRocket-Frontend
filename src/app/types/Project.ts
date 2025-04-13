@@ -3,13 +3,18 @@ type Pictures = {
   url:string;
 }
 
+type Link = {
+  url: string;
+  type: string;
+}
+
 export type Project = {
   uuid: string;
   title: string;
   description: string;
   tags: string[];
-  link: string[];
+  link: Link[];
   createdAt: string;
   updatedAt: string;
-  picture: Pictures[];
+  pictures: Pictures[];
 }

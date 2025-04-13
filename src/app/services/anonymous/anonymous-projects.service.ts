@@ -1,18 +1,19 @@
 import {Injectable, signal, WritableSignal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
-import {Project} from '../types/Project';
+import {Project} from '../../types/Project';
+import {environment} from '../../../../environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminProjectsService {
+export class AnonymousProjectsService {
   projects: WritableSignal<Project[]> = signal([]);
 
   constructor(private http: HttpClient) {}
 
   fetchProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>('http://localhost:8000/api/project', {
+    return this.http.get<Project[]>(`${environment.SERVER_URL}/api/project`, {
       params: {
         all: true,
       }

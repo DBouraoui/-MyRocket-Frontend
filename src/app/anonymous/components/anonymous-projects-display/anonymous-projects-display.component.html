@@ -1,0 +1,127 @@
+<section class="py-20 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-950">
+  <div class="container mx-auto px-4">
+    <!-- Titre de section avec style sombre -->
+    <div class="text-center mb-16 max-w-2xl mx-auto">
+      <div class="inline-block mb-3 px-4 py-1 bg-indigo-900/60 text-indigo-300 rounded-full text-sm font-medium">Nos créations</div>
+      <h2 class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-blue-400 to-purple-400 mb-4">Projets Récents</h2>
+      <p class="text-slate-400 text-lg">Découvrez notre savoir-faire à travers une sélection de nos réalisations les plus innovantes.</p>
+    </div>
+
+    <!-- Grille de projets avec design sombre -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      @for (project of projectsService.projects().slice(0,3); track project.uuid) {
+        <div class="bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl border border-slate-700">
+          <!-- Carousel simplifié -->
+          @if (project.pictures && project.pictures.length > 0) {
+            <div class="relative">
+              <p-carousel [value]="project.pictures" [numVisible]="1" [numScroll]="1" [circular]="true"
+                          [showIndicators]="true" [showNavigators]="true">
+                <ng-template let-picture pTemplate="item">
+                  <div class="relative h-60 overflow-hidden">
+                    <img [src]="picture.url" [alt]="project.title" class="w-full h-full object-cover">
+
+                    <!-- Overlay subtil -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
+                  </div>
+                </ng-template>
+              </p-carousel>
+
+              <!-- Tags flottants -->
+              @if (project.tags && project.tags.length) {
+                <div class="absolute bottom-4 left-4 z-10 flex flex-wrap gap-2 max-w-[85%]">
+                  @for (tag of project.tags; track $index) {
+                    <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-slate-800/90 backdrop-blur-sm text-indigo-300 shadow-sm border border-indigo-800/30">
+                      {{tag}}
+                    </span>
+                  }
+                </div>
+              }
+            </div>
+          } @else {
+            <div class="w-full h-60 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
+              <i class="pi pi-folder-open text-slate-500 text-5xl"></i>
+            </div>
+          }
+
+          <!-- Contenu du projet avec design sombre -->
+          <div class="p-7">
+            <!-- En-tête avec date -->
+            <div class="flex justify-between items-start mb-3">
+              <h3 class="text-xl font-bold text-slate-200 leading-tight">{{project.title}}</h3>
+              @if (project.createdAt) {
+                <span class="text-xs font-medium text-slate-400 whitespace-nowrap">
+                  {{project.createdAt}}
+                </span>
+              }
+            </div>
+
+            <!-- Description -->
+            @if (project.description) {
+              <div class="mb-6">
+                <p class="text-slate-400 text-sm line-clamp-2">
+                  {{project.description}}
+                </p>
+              </div>
+            }
+
+            <!-- Liens du projet en style badge -->
+            @if (project.link && project.link.length) {
+              <div class="flex flex-wrap gap-2 mb-6">
+                @for (link of project.link; track $index) {
+                  <a [href]="link.url" target="_blank"
+                     class="inline-flex items-center gap-1.5 text-xs font-medium py-1.5 px-3 rounded-lg
+                           text-slate-300 border border-slate-600 hover:bg-slate-700">
+                    @if (link.type === 'Github') {
+                      <i class="pi pi-github text-gray-300"></i>
+                    } @else if (link.type === 'Gitlab') {
+                      <i class="pi pi-gitlab text-amber-400"></i>
+                    } @else if (link.type === 'Bitbucket') {
+                      <i class="pi pi-bitbucket text-blue-400"></i>
+                    } @else if (link.type === 'Google') {
+                      <i class="pi pi-google text-red-400"></i>
+                    } @else {
+                      <i class="pi pi-link text-indigo-400"></i>
+                    }
+                    {{link.type}}
+                  </a>
+                }
+              </div>
+            }
+
+            <!-- Pied de carte avec actions -->
+            <div class="flex justify-between items-center pt-4 border-t border-slate-700">
+              <p-button
+                label="Détails"
+                icon="pi pi-arrow-right"
+                iconPos="right"
+                [routerLink]="['/projects', project.uuid]"
+                styleClass="p-button-text p-button-sm text-indigo-300">
+              </p-button>
+
+              <!-- Date de mise à jour avec icône -->
+              @if (project.updatedAt) {
+                <div class="flex items-center gap-1 text-xs text-slate-400">
+                  <i class="pi pi-calendar-plus text-slate-500"></i>
+                  {{project.updatedAt}}
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Bouton d'action principal -->
+    <div class="text-center mt-16">
+      <p-button
+        label="Explorer tous nos projets"
+        icon="pi pi-compass"
+        iconPos="right"
+        routerLink="/projects"
+        severity="info"
+        size="large"
+        styleClass="rounded-full px-8 py-3 font-medium shadow-lg bg-gradient-to-r from-indigo-600 to-blue-700 border-0">
+      </p-button>
+    </div>
+  </div>
+</section>

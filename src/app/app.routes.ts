@@ -8,11 +8,12 @@ import {ErrorComponent} from './anonymous/pages/error/error.component';
 import {AdminComponent} from './layout/admin/admin.component';
 import {DashboardAdminComponent} from './admin/pages/dashboard/dashboard.component';
 import {UtilisateurComponent} from './admin/pages/utilisateur/utilisateur.component';
-import {dashboardAdminUsersResolver} from './resolvers/dashboard-admin-users.resolver';
+import {dashboardAdminUsersResolver} from './resolvers/admin/dashboard-admin-users.resolver';
 import {ProjectsComponent} from './admin/pages/projects/projects.component';
-import {dashboardAdminProjectResolver} from './resolvers/dashboard-admin-project.resolver';
+import {dashboardAdminProjectResolver} from './resolvers/admin/dashboard-admin-project.resolver';
 import {ContactComponent} from './admin/pages/contact/contact.component';
-import {dashboardAdminContactResolver} from './resolvers/dashboard-admin-contact.resolver';
+import {dashboardAdminContactResolver} from './resolvers/admin/dashboard-admin-contact.resolver';
+import {anonymousProjectsResolver} from './resolvers/anonymous/anonymous-projects.resolver';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,7 @@ export const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
+        resolve: {projects: anonymousProjectsResolver},
         title: 'MyRocket',
       },
       {

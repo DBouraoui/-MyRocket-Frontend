@@ -1,7 +1,8 @@
 import {Injectable, signal, WritableSignal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable, tap} from 'rxjs';
-import {User} from '../types/User';
+import {User} from '../../types/User';
+import {environment} from '../../../../environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AdminUsersService {
   ) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>('http://localhost:8000/api/user', {
+    return this.http.get<User[]>(`${environment.SERVER_URL}/api/user`, {
       params: {
         all: true
       }

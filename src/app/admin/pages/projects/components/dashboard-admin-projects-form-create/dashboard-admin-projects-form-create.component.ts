@@ -10,7 +10,8 @@ import {FloatLabel} from 'primeng/floatlabel';
 import {FileSelectEvent, FileUpload} from 'primeng/fileupload';
 import {Textarea} from 'primeng/textarea';
 import {MessageService} from 'primeng/api';
-import {AdminProjectsService} from '../../../../../services/admin-projects.service';
+import {AdminProjectsService} from '../../../../../services/admin/admin-projects.service';
+import {environment} from '../../../../../../../environment';
 
 type tags ={
   name: string,
@@ -90,7 +91,7 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
       }
     }
 
-    this.http.post<any>(`http://localhost:8000/api/project`, formData).subscribe({
+    this.http.post<any>(`${environment.SERVER_URL}/api/project`, formData).subscribe({
       next:(resp) => {
         this.messageService.add({
           severity: 'success',
