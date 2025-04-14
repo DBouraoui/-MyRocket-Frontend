@@ -4,6 +4,9 @@ import {Button} from 'primeng/button';
 import {RouterLink} from '@angular/router';
 import {Carousel} from 'primeng/carousel';
 import {PrimeTemplate} from 'primeng/api';
+import {Drawer} from 'primeng/drawer';
+import {Project} from '../../../types/Project';
+import {Tooltip} from 'primeng/tooltip';
 
 @Component({
   selector: 'app-anonymous-projects-display',
@@ -11,14 +14,19 @@ import {PrimeTemplate} from 'primeng/api';
     Button,
     RouterLink,
     Carousel,
-    PrimeTemplate
+    PrimeTemplate,
+    Drawer,
+    Tooltip
   ],
   templateUrl: './anonymous-projects-display.component.html',
 })
 export class AnonymousProjectsDisplayComponent {
 projectsService = inject(AnonymousProjectsService);
+  projectDrawerVisible: boolean = false;
+  selectedProject: Project | null = null;
 
-constructor() {
-  console.log(this.projectsService.projects())
-}
+  openProjectDetails(project: Project): void {
+    this.selectedProject = project;
+    this.projectDrawerVisible = true;
+  }
 }

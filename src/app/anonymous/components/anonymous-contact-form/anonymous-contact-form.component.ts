@@ -8,9 +8,11 @@ import {MultiSelect} from 'primeng/multiselect';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {SelectButton} from 'primeng/selectbutton';
 import {Textarea} from 'primeng/textarea';
-import {MessageService} from 'primeng/api';
+import {MessageService, PrimeTemplate} from 'primeng/api';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../../environment';
+import {Drawer} from 'primeng/drawer';
+import {Tooltip} from 'primeng/tooltip';
 
 interface Tag {
   name: string;
@@ -28,7 +30,10 @@ interface Tag {
     MultiSelect,
     ReactiveFormsModule,
     SelectButton,
-    Textarea
+    Textarea,
+    Drawer,
+    Tooltip,
+    PrimeTemplate
   ],
   templateUrl: './anonymous-contact-form.component.html',
 })
@@ -38,6 +43,7 @@ export class AnonymousContactFormComponent {
     private messageService: MessageService,
     private http: HttpClient
   ) {}
+  visible :boolean = false;
   imagePreviewUrl: string | null = null;
   formGroup!: FormGroup;
   isLoading: boolean = false;
@@ -167,5 +173,19 @@ export class AnonymousContactFormComponent {
 
   normalizeTags(tags: Tag[]): string[] {
     return tags.map(tag => tag.name);
+  }
+
+  openTerms(): void {
+    this.visible = true;
+  }
+
+  downloadTerms(): void {
+    console.log('Téléchargement des CGU');
+  }
+
+  acceptTerms(): void {
+    // Cocher automatiquement la case à cocher dans le formulaire
+    this.formGroup.get('cgv')?.setValue(true);
+    this.visible = false;
   }
 }

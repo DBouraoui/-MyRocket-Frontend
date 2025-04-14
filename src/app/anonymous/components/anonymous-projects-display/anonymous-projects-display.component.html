@@ -3,7 +3,7 @@
     <!-- Titre de section avec style sombre -->
     <div class="text-center mb-16 max-w-2xl mx-auto">
       <div class="inline-block mb-3 px-4 py-1 bg-indigo-900/60 text-indigo-300 rounded-full text-sm font-medium">Nos créations</div>
-      <h2 class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-blue-400 to-purple-400 mb-4">Projets Récents</h2>
+      <h2 class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-blue-400 to-purple-400 mb-4">Derniers Projets</h2>
       <p class="text-slate-400 text-lg">Découvrez notre savoir-faire à travers une sélection de nos réalisations les plus innovantes.</p>
     </div>
 
@@ -94,7 +94,7 @@
                 label="Détails"
                 icon="pi pi-arrow-right"
                 iconPos="right"
-                [routerLink]="['/projects', project.uuid]"
+                (click)="openProjectDetails(project)"
                 styleClass="p-button-text p-button-sm text-indigo-300">
               </p-button>
 
@@ -110,18 +110,116 @@
         </div>
       }
     </div>
-
-    <!-- Bouton d'action principal -->
-    <div class="text-center mt-16">
-      <p-button
-        label="Explorer tous nos projets"
-        icon="pi pi-compass"
-        iconPos="right"
-        routerLink="/projects"
-        severity="info"
-        size="large"
-        styleClass="rounded-full px-8 py-3 font-medium shadow-lg bg-gradient-to-r from-indigo-600 to-blue-700 border-0">
-      </p-button>
-    </div>
   </div>
+
+  <!-- Project Details Drawer -->
+  <p-drawer [(visible)]="projectDrawerVisible" [position]="'right'" [modal]="true" [closeOnEscape]="true"
+           [style]="{width: '95%', maxWidth: '650px'}"
+            styleClass="project-drawer">
+
+    @if (selectedProject) {
+      <ng-template pTemplate="header">
+        <div class="flex justify-between items-center w-full px-6 py-4 bg-slate-800 border-b border-slate-700">
+          <h2 class="text-2xl font-bold text-indigo-300">{{selectedProject.title}}</h2>
+          <p-button icon="pi pi-times"
+                    [rounded]="true"
+                    [text]="true"
+                    severity="secondary"
+                    (click)="projectDrawerVisible = false">
+          </p-button>
+        </div>
+      </ng-template>
+
+      <div class="bg-slate-900 text-slate-300 h-full overflow-y-auto">
+        <!-- Image Gallery -->
+        @if (selectedProject.pictures && selectedProject.pictures.length > 0) {
+          <div class="mb-6">
+            <p-carousel [value]="selectedProject.pictures" [numVisible]="1" [numScroll]="1" [circular]="true"
+                        [showIndicators]="true" [showNavigators]="true" [autoplayInterval]="4000">
+              <ng-template let-picture pTemplate="item">
+                <div class="relative aspect-video overflow-hidden">
+                  <img [src]="picture.url" [alt]="selectedProject.title" class="w-full object-cover">
+                </div>
+              </ng-template>
+            </p-carousel>
+          </div>
+        }
+
+        <!-- Project Content -->
+        <div class="p-6 space-y-8">
+
+          <!-- Project Overview -->
+          <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700/50">
+            <div class="flex flex-wrap gap-2 mb-4">
+              @for (tag of selectedProject.tags; track $index) {
+                <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-indigo-900/30 text-indigo-300">
+                  {{tag}}
+                </span>
+              }
+            </div>
+
+            <h3 class="text-lg font-semibold text-slate-200 mb-3">À propos de ce projet</h3>
+            <p class="text-slate-400 leading-relaxed">
+              {{selectedProject.description}}
+            </p>
+
+            <div class="mt-4 grid grid-cols-2 gap-4 text-sm text-slate-400">
+              <div>
+                <span class="block text-indigo-300 font-medium mb-1">Date de création</span>
+                <span>{{selectedProject.createdAt}}</span>
+              </div>
+              <div>
+                <span class="block text-indigo-300 font-medium mb-1">Dernière mise à jour</span>
+                <span>{{selectedProject.updatedAt}}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Links -->
+          @if (selectedProject.link && selectedProject.link.length > 0) {
+            <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700/50">
+              <h3 class="text-lg font-semibold text-slate-200 mb-4">Liens externes</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                @for (link of selectedProject.link; track $index) {
+                  <a [href]="link.url" target="_blank"
+                     class="flex items-center gap-3 p-3 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 transition-colors">
+                    @if (link.type === 'Github') {
+                      <i class="pi pi-github text-2xl text-gray-300"></i>
+                    } @else if (link.type === 'Gitlab') {
+                      <i class="pi pi-gitlab text-2xl text-amber-400"></i>
+                    } @else if (link.type === 'Bitbucket') {
+                      <i class="pi pi-bitbucket text-2xl text-blue-400"></i>
+                    } @else if (link.type === 'Google') {
+                      <i class="pi pi-google text-2xl text-red-400"></i>
+                    } @else {
+                      <i class="pi pi-link text-2xl text-indigo-400"></i>
+                    }
+                    <div>
+                      <div class="font-medium text-slate-200">{{link.type}}</div>
+                      <div class="text-xs text-slate-400 truncate max-w-[180px]">{{link.url}}</div>
+                    </div>
+                  </a>
+                }
+              </div>
+            </div>
+          }
+
+          <!-- Images Gallery Grid -->
+          @if (selectedProject.pictures && selectedProject.pictures.length > 1) {
+            <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700/50">
+              <h3 class="text-lg font-semibold text-slate-200 mb-4">Gallerie d'images</h3>
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                @for (picture of selectedProject.pictures; track $index) {
+                  <div class="aspect-square rounded-lg overflow-hidden border border-slate-700 cursor-pointer hover:opacity-90 transition-opacity">
+                    <img [src]="picture.url" [alt]="selectedProject.title + ' image ' + $index" class="w-full h-full object-cover">
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+
+      </div>
+    }
+  </p-drawer>
 </section>

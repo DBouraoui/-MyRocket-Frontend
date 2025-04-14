@@ -11,10 +11,9 @@ import {UtilisateurComponent} from './admin/pages/utilisateur/utilisateur.compon
 import {dashboardAdminUsersResolver} from './resolvers/admin/dashboard-admin-users.resolver';
 import {ProjectsComponent} from './admin/pages/projects/projects.component';
 import {dashboardAdminProjectResolver} from './resolvers/admin/dashboard-admin-project.resolver';
-import {ContactComponent} from './admin/pages/contact/contact.component';
+import {ContactComponent} from './anonymous/pages/contact/contact.component';
 import {dashboardAdminContactResolver} from './resolvers/admin/dashboard-admin-contact.resolver';
 import {anonymousProjectsResolver} from './resolvers/anonymous/anonymous-projects.resolver';
-
 export const routes: Routes = [
   {
     path: '',
@@ -35,6 +34,11 @@ export const routes: Routes = [
         path: 'login',
         component: LoginComponent,
         title: 'Connexion utilisateur',
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
+        title: 'Nous contactés',
       },
     ],
   },

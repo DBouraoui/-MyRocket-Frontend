@@ -5,6 +5,7 @@ import {AnonymousContactFormComponent} from '../../components/anonymous-contact-
 import {
   AnonymousProjectsDisplayComponent
 } from '../../components/anonymous-projects-display/anonymous-projects-display.component';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ import {
     ReactiveFormsModule,
     AnonymousContactFormComponent,
     AnonymousProjectsDisplayComponent,
+    RouterLink,
   ],
   templateUrl: './home.component.html',
 })

@@ -13,6 +13,7 @@ export class AnonymousProjectsService {
   constructor(private http: HttpClient) {}
 
   fetchProjects(): Observable<Project[]> {
+    localStorage.removeItem('statement');
     return this.http.get<Project[]>(`${environment.SERVER_URL}/api/project`, {
       params: {
         all: true,

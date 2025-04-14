@@ -115,9 +115,16 @@
       <!-- Tags Selection -->
       <div class="relative p-4 rounded-lg bg-indigo-900/30 backdrop-blur-sm border-l-4 border-indigo-500">
         <label class="block text-sm font-medium mb-2">Catégories</label>
-        <p-multiSelect [options]="tags" formControlName="tags" optionLabel="name"
-                       placeholder="Sélectionnez les catégories" [maxSelectedLabels]="3"
-                       styleClass="w-full bg-transparent border-indigo-400/50 text-white"></p-multiSelect>
+        <p-multiSelect
+          [options]="tags"
+          formControlName="tags"
+          optionLabel="name"
+          placeholder="Sélectionnez les catégories"
+          [maxSelectedLabels]="3"
+          tabindex="4"
+          appendTo="body"
+          styleClass="w-full bg-transparent border-indigo-400/50 text-white">
+        </p-multiSelect>
       </div>
 
       <!-- Description Field -->
@@ -165,7 +172,7 @@
       <div class="p-4 rounded-lg bg-indigo-900/30 backdrop-blur-sm">
         <div class="flex items-center gap-3">
           <p-checkbox formControlName="cgv" inputId="cgv"  [binary]="true" />
-          <label class="text-sm" for="cgv">J'accepte les conditions générales d'utilisation</label>
+          <label class="text-sm" >J'accepte les <span class="text-signacore underline" (click)="visible = true">conditions générales d'utilisation</span></label>
         </div>
         @if (formGroup.get('cgv')?.invalid && (formGroup.get('cgv')?.dirty || formGroup.get('cgv')?.touched)) {
           <small class="text-red-400 mt-1 block">
@@ -185,4 +192,114 @@
       </div>
     </form>
   </div>
+
+  <!-- Dans ton template HTML -->
+  <p-drawer [(visible)]="visible" position="bottom" [modal]="true" blockScroll="true" [closeOnEscape]="true" [style]="{width: '100%', height: '80vh'}" styleClass="terms-drawer">
+    <ng-template pTemplate="header">
+      <div class="w-full px-6 py-4  flex justify-between items-center">
+        <h2 class="text-2xl font-bold text-slate-200">Conditions Générales d'Utilisation</h2>
+        <div class="flex gap-2 items-center">
+          <p-button icon="pi pi-file-pdf"
+                    [rounded]="true"
+                    [text]="true"
+                    severity="secondary"
+                    pTooltip="Télécharger en PDF"
+                    (click)="downloadTerms()">
+          </p-button>
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="p-6 bg-slate-800 text-slate-300 h-full overflow-y-auto">
+      <div class="mb-6">
+        <div class="flex items-center gap-2 mb-6">
+          <i class="pi pi-calendar text-indigo-300 text-xl"></i>
+          <p class="text-slate-400 text-sm">Dernière mise à jour : 13 avril 2025</p>
+        </div>
+
+        <div class="space-y-8 pr-2">
+          <!-- Section 1 - Introduction -->
+          <div>
+            <h3 class="text-xl font-semibold text-indigo-300 mb-4">1. Introduction</h3>
+            <p class="text-slate-300 leading-relaxed mb-3">
+              Bienvenue sur notre formulaire de contact. Les présentes Conditions Générales d'Utilisation régissent l'utilisation de notre formulaire de contact et définissent les conditions dans lesquelles nous traitons les informations que vous nous soumettez.
+            </p>
+            <p class="text-slate-300 leading-relaxed">
+              En utilisant notre formulaire de contact, vous acceptez d'être lié par les présentes conditions. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre formulaire de contact.
+            </p>
+          </div>
+
+          <!-- Section 2 - Collecte des données -->
+          <div>
+            <h3 class="text-xl font-semibold text-indigo-300 mb-4">2. Collecte des données</h3>
+            <p class="text-slate-300 leading-relaxed mb-3">
+              Lorsque vous utilisez notre formulaire de contact, nous collectons les informations suivantes:
+            </p>
+            <ul class="list-disc pl-6 space-y-2 text-slate-300">
+              <li>Votre nom et prénom ou nom de société</li>
+              <li>Votre adresse e-mail</li>
+              <li>Le contenu de votre message</li>
+              <li>Toute autre information que vous choisissez de nous fournir</li>
+            </ul>
+          </div>
+
+          <!-- Section 3 - Utilisation des données -->
+          <div>
+            <h3 class="text-xl font-semibold text-indigo-300 mb-4">3. Utilisation des données</h3>
+            <p class="text-slate-300 leading-relaxed mb-3">
+              Les informations que vous nous fournissez via notre formulaire de contact sont utilisées exclusivement aux fins suivantes:
+            </p>
+            <ul class="list-disc pl-6 space-y-2 text-slate-300">
+              <li>Répondre à votre demande ou question</li>
+              <li>Améliorer notre service client</li>
+              <li>Vous contacter si nécessaire concernant votre demande</li>
+            </ul>
+            <p class="text-slate-300 leading-relaxed mt-3">
+              Nous ne partagerons, ne vendrons, ni ne divulguerons vos informations personnelles à des tiers sans votre consentement explicite, sauf si la loi l'exige.
+            </p>
+          </div>
+
+          <!-- Section 4 - Protection des données -->
+          <div>
+            <h3 class="text-xl font-semibold text-indigo-300 mb-4">4. Protection des données</h3>
+            <p class="text-slate-300 leading-relaxed mb-3">
+              Nous prenons la protection de vos données personnelles très au sérieux. Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données contre tout accès, modification, divulgation ou destruction non autorisés.
+            </p>
+            <p class="text-slate-300 leading-relaxed">
+              Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification, de suppression et d'opposition à vos données personnelles. Pour exercer ces droits, veuillez nous contacter via notre formulaire de contact ou à l'adresse email indiquée dans la section "Contact".
+            </p>
+          </div>
+
+          <!-- Section 5 - Conservation des données -->
+          <div>
+            <h3 class="text-xl font-semibold text-indigo-300 mb-4">5. Conservation des données</h3>
+            <p class="text-slate-300 leading-relaxed">
+              Nous conservons vos données personnelles uniquement pendant la durée nécessaire aux fins pour lesquelles elles ont été collectées, ou pour se conformer aux exigences légales et réglementaires. En général, les informations soumises via notre formulaire de contact sont conservées pendant une période de 3 ans maximum à compter de notre dernière interaction.
+            </p>
+          </div>
+
+          <!-- Section 6 - Contact -->
+          <div>
+            <h3 class="text-xl font-semibold text-indigo-300 mb-4">6. Contact</h3>
+            <p class="text-slate-300 leading-relaxed">
+              Si vous avez des questions concernant ces Conditions Générales d'Utilisation ou notre traitement de vos données personnelles, n'hésitez pas à nous contacter à l'adresse email suivante: contact.com
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bouton d'acceptation -->
+      <div class="flex justify-center mt-8">
+        <p-button
+          label="J'accepte les conditions"
+          icon="pi pi-check"
+          [disabled]="formGroup.get('cgv')?.value"
+          [rounded]="true"
+          [raised]="true"
+          severity="contrast"
+          (click)="acceptTerms()">
+        </p-button>
+      </div>
+    </div>
+  </p-drawer>
 </section>
