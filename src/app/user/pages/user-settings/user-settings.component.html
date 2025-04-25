@@ -1,0 +1,54 @@
+<!-- Structure principale du Bento Grid -->
+<div class="bg-gray-900 p-6 min-h-screen">
+  <div class="max-w-7xl mx-auto">
+    <!-- Titre de la section -->
+    <h2 class="text-2xl font-bold text-gray-100 mb-6">Informations générale</h2>
+
+    <!-- Grille Bento -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-auto">
+
+      <!-- Carte 1 - Grande carte (span 2 colonnes, 2 rangées) -->
+      <div class="bg-gray-800 rounded-xl shadow-sm p-6 md:col-span-2 md:row-span-2 transition-all duration-300 hover:shadow-md hover:bg-gray-750 border border-gray-700">
+        <!-- Contenu de la carte 1 -->
+        <div class="h-full flex flex-col">
+          <h3 class="text-xl font-semibold text-gray-100 mb-3">Mes informations de facturation</h3>
+          <div class="flex-grow text-gray-300">
+            <app-user-form-settings></app-user-form-settings>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carte 2 - Taille standard -->
+      <div class="bg-gray-800 rounded-xl shadow-sm p-6 transition-all duration-300 hover:shadow-md hover:bg-gray-750 border border-gray-700">
+        <!-- Contenu de la carte 2 -->
+        <div class="h-full flex flex-col">
+          <h3 class="text-xl font-semibold text-gray-100 mb-3">Information complémentaire</h3>
+          <div class="flex-grow text-gray-300">
+            <app-user-informations-settings></app-user-informations-settings>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carte 3 - Taille standard -->
+      <div class="bg-gray-800 rounded-xl shadow-sm p-6 transition-all duration-300 hover:shadow-md hover:bg-gray-750 border border-gray-700">
+        <!-- Contenu de la carte 3 -->
+        <div class="h-full flex flex-col">
+          <h3 class="text-xl font-semibold text-gray-100 mb-3">Titre carte 3</h3>
+          <div class="flex-grow text-gray-300">
+            <!-- Insérez votre contenu ici -->
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-800 rounded-xl shadow-sm p-6 transition-all md:col-span-2 md:row-span-2  duration-300 hover:shadow-md hover:bg-gray-750 border border-gray-700">
+        <!-- Contenu de la carte 3 -->
+        <div class="h-full flex flex-col">
+          <h3 class="text-xl font-semibold text-gray-100 mb-3">Modification du mot de passe</h3>
+          <div class="flex-grow text-gray-300">
+            <app-user-form-password-settings></app-user-form-password-settings>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

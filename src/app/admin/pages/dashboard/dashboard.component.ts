@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ContactComponent} from '../contact/contact.component';
+import {AdminContactComponent} from '../contact/contact.component';
 import {
   DashboardAdminUsersMetricsComponent
 } from '../utilisateur/components/dashboard-admin-users-metrics/dashboard-admin-users-metrics.component';
@@ -11,10 +11,10 @@ import {CreateUserFormComponent} from '../utilisateur/components/create-user-for
 @Component({
   selector: 'app-dashboard-admin',
   imports: [
-    ContactComponent,
     DashboardAdminUsersMetricsComponent,
     DashboardAdminUsersSearchComponent,
-    CreateUserFormComponent
+    CreateUserFormComponent,
+    AdminContactComponent
   ],
   templateUrl: './dashboard.component.html',
 })

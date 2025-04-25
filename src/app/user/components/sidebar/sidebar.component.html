@@ -1,20 +1,18 @@
-<!-- HTML Template avec mapping dynamique -->
 <div class="card flex justify-start p-2 bg-gray-900">
   <p-drawer [(visible)]="visible" [style]="{width: '280px'}" position="left">
     <!-- En-tête sympa -->
-    <div class="p-4 bg-gray-900 text-white">
-      <h3 class="text-xl font-medium mb-1">Bonjour Admin! 👋</h3>
-      <p class="text-sm text-gray-300">Bon retour parmi nous!</p>
+    <div class="p-4  text-white border-b-white border-b">
+      <h3 class="text-xl font-medium mb-1">Hello !</h3>
+      <p class="text-sm text-gray-300">Bon retour parmi nous !</p>
     </div>
 
-    <!-- Menu dynamique basé sur navbarItem -->
     <div class="p-3">
       <ul class="space-y-2">
         @for (item of navbarItem; track item) {
           <li>
             <a [routerLink]="[item.link]" routerLinkActive="bg-indigo-50 text-indigo-600"
                class="flex items-center gap-3 p-2 rounded-md text-gray-200 hover:bg-gray-800 transition-colors">
-              <i class="pi {{item.icon}} text-indigo-600"></i>
+              <i class="pi {{item.icon}} text-signacore"></i>
               <span>{{item.title}}</span>
             </a>
           </li>
@@ -23,11 +21,13 @@
     </div>
 
     <!-- Petit footer -->
-    <div class="absolute bottom-0 left-0 right-0 p-3 border-t bg-gray-50">
-      <button class="w-full flex items-center justify-center gap-2 p-2 text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
+    <div class="absolute bottom-0 left-0 right-0 p-3 ">
+      <button
+        routerLink="/utilisateur/informations"
+        pButton class="w-full flex items-center justify-center gap-2 p-2 text-gray-600 hover:bg-gray-100 rounded-md transition-colors"
       >
-        <i class="pi pi-sign-out"></i>
-        <span>Déconnexion</span>
+        <i class="pi pi-user"></i>
+        <span>Mes informations</span>
       </button>
     </div>
   </p-drawer>

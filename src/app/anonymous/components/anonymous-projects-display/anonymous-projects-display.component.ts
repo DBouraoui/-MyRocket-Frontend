@@ -12,11 +12,9 @@ import {Tooltip} from 'primeng/tooltip';
   selector: 'app-anonymous-projects-display',
   imports: [
     Button,
-    RouterLink,
     Carousel,
     PrimeTemplate,
     Drawer,
-    Tooltip
   ],
   templateUrl: './anonymous-projects-display.component.html',
 })

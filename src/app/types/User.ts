@@ -10,6 +10,8 @@ export type User = {
   city: string;
   country: string;
   postCode: string;
+  createdAt: string;
+  updatedAt: string;
   role: string;
 }
 

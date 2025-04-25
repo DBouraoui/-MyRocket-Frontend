@@ -14,6 +14,18 @@ import {dashboardAdminProjectResolver} from './resolvers/admin/dashboard-admin-p
 import {ContactComponent} from './anonymous/pages/contact/contact.component';
 import {dashboardAdminContactResolver} from './resolvers/admin/dashboard-admin-contact.resolver';
 import {anonymousProjectsResolver} from './resolvers/anonymous/anonymous-projects.resolver';
+import {AdminContactComponent} from './admin/pages/contact/contact.component';
+import {UserSettingsComponent} from './user/pages/user-settings/user-settings.component';
+import {dashboardUserSettingsResolver} from './resolvers/user/dashboard-user-settings.resolver';
+import {authGuard} from './guards/auth.guard';
+import {UserWebsiteComponent} from './user/pages/user-website/user-website.component';
+import {
+  dashboardUserWebsitesInformationsResolver
+} from './resolvers/user/dashboard-user-websites-informations.resolver';
+import {dashboardUserWebsitesContractsResolver} from './resolvers/user/dashboard-user-websites-contracts.resolver';
+import {
+  dashboardUserWebsitesMaintenanceContractsResolver
+} from './resolvers/user/dashboard-user-websites-maintenance-contracts.resolver';
 export const routes: Routes = [
   {
     path: '',
@@ -50,6 +62,18 @@ export const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent,
         title: 'Pannel d\'administration',
+      },
+      {
+        path: 'informations',
+        resolve: {informations: dashboardUserSettingsResolver},
+        component: UserSettingsComponent,
+        title: 'Mes informations',
+      },
+      {
+        path: 'website',
+        component: UserWebsiteComponent,
+        resolve: {website: dashboardUserWebsitesInformationsResolver, contracts: dashboardUserWebsitesContractsResolver, mainteanceContracts: dashboardUserWebsitesMaintenanceContractsResolver},
+        title: 'Mes sites web',
       }
     ]
   },
@@ -77,14 +101,10 @@ export const routes: Routes = [
       },
       {
         path: 'contact',
-        component: ContactComponent,
+        component: AdminContactComponent,
         resolve: {contact: dashboardAdminContactResolver},
         title: 'Gestion des contacts',
       }
     ]
-  },
-  {
-    path: '**',
-    component: ErrorComponent,
   }
 ];

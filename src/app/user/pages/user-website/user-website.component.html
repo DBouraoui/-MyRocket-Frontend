@@ -1,0 +1,54 @@
+<!-- Structure principale du Bento Grid -->
+<div class="bg-gray-900 p-6 min-h-screen">
+  <div class="max-w-7xl mx-auto">
+    <!-- Titre de la section -->
+    <h2 class="text-2xl font-bold text-gray-100 mb-6">Mes sites et applications</h2>
+
+    <!-- Grille Bento -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-auto">
+
+      <!-- Rangée du haut - 3 boxes -->
+      <!-- Box 1 -->
+      <div class="bg-gray-800 rounded-xl shadow-sm p-6 transition-all duration-300 hover:shadow-md hover:bg-gray-750 border border-gray-700">
+        <div class="h-full flex flex-col">
+          <h3 class="text-xl font-semibold text-gray-100 mb-3">Sites / applications</h3>
+          <div class="flex-grow text-gray-300">
+            <app-user-websites-informations></app-user-websites-informations>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box 2 -->
+      <div class="bg-gray-800 rounded-xl shadow-sm p-6 transition-all duration-300 hover:shadow-md hover:bg-gray-750 border border-gray-700">
+        <div class="h-full flex flex-col">
+          <h3 class="text-xl font-semibold text-gray-100 mb-3">Contrats</h3>
+          <div class="flex-grow text-gray-300">
+            <app-user-websites-contracts-informations></app-user-websites-contracts-informations>
+          </div>
+        </div>
+      </div>
+
+      <!-- Box 3 -->
+      <div class="bg-gray-800 rounded-xl shadow-sm p-6 transition-all duration-300 hover:shadow-md hover:bg-gray-750 border border-gray-700">
+        <div class="h-full flex flex-col">
+          <h3 class="text-xl font-semibold text-gray-100 mb-3">Contrats de maintenances</h3>
+          <div class="flex-grow text-gray-300">
+            <app-user-websites-maintenance-contracts></app-user-websites-maintenance-contracts>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rangée du milieu - 1 box -->
+      <!-- Box 4 (plus grande, s'étend sur 3 colonnes) -->
+      <div class="bg-gray-800 rounded-xl shadow-sm p-6 md:col-span-3 transition-all duration-300 hover:shadow-md hover:bg-gray-750 border border-gray-700">
+        <div class="h-full flex flex-col">
+          <h3 class="text-xl font-semibold text-gray-100 mb-3">Box 4 (Milieu)</h3>
+          <div class="flex-grow text-gray-300">
+           Affichage des sites web
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

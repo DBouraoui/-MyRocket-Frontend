@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Button} from "primeng/button";
+import {Button, ButtonDirective} from "primeng/button";
 import {Drawer} from "primeng/drawer";
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {NavbarItems} from '../../../types/Navbar';
@@ -10,7 +10,8 @@ import {NavbarItems} from '../../../types/Navbar';
     Button,
     Drawer,
     RouterLinkActive,
-    RouterLink
+    RouterLink,
+    ButtonDirective
   ],
   templateUrl: './sidebar.component.html',
 })
@@ -18,24 +19,29 @@ export class SidebarComponent {
   visible : boolean = false
   navbarItem: NavbarItems[] = [
     {
-      title: 'Accueil',
-      link: '/administration/dashboard',
+      title: 'Mon tableau de bord',
+      link: '/utilisateur/dashboard',
       icon: 'pi-home',
     },
     {
-      title: 'Utilisateurs',
-      link: '/administration/utilisateurs',
-      icon: 'pi-user',
+      title: 'Mes sites web',
+      link: '/utilisateur/website',
+      icon: 'pi-globe',
     },
     {
-      title: 'MAJ projects',
-      link: '/administration/projects',
-      icon: 'pi-envelope',
+      title: 'Mes paiements',
+      link: '/utilisateur/projects',
+      icon: 'pi-credit-card',
     },
     {
-      title: 'Contact',
-      link: '/administration/contact',
-      icon: 'pi-envelope',
+      title: 'Support',
+      link: '/utilisateur/contact',
+      icon: 'pi-comments',
+    },
+    {
+      title: 'Demandes',
+      link: '/utilisateur/contact',
+      icon: 'pi-ticket',
     },
   ];
 }

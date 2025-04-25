@@ -1,0 +1,34 @@
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <!-- Total des sites -->
+  <div class=" rounded-lg p-4 flex items-center transition-transform duration-200 ">
+    <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+      <i class="pi pi-globe text-gray-700"></i>
+    </div>
+    <div class="flex flex-col">
+      <span class="text-sm text-gray-100">Contrat</span>
+      <span class="text-xl font-semibold text-signacore">{{countContract()}}</span>
+    </div>
+  </div>
+
+  <!-- Sites actifs -->
+  <div class=" rounded-lg p-4 flex items-center transition-transform duration-200 ">
+    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+      <i class="pi pi-check-circle text-green-700"></i>
+    </div>
+    <div class="flex flex-col">
+      <span class="text-sm text-gray-100">Coût moyen</span>
+      <span class="text-xl font-semibold text-signacore">{{calculatemiddleCostMonthly()}}</span>
+    </div>
+  </div>
+
+  <!-- Sites mutualisés -->
+  <div class=" rounded-lg p-4 flex items-center transition-transform duration-200  md:col-span-2 ">
+    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+      <i class="pi pi-users text-blue-700"></i>
+    </div>
+    <div class="flex flex-col">
+      <span class="text-sm text-gray-100">Date dernier contrat</span>
+      <span class="text-xl font-semibold text-signacore">{{getLastContract()}}</span>
+    </div>
+  </div>
+</div>

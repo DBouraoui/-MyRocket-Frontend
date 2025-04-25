@@ -1,0 +1,71 @@
+<!-- Carte d'informations utilisateur pour le Bento Grid -->
+<div class="h-full flex flex-col">
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-xl font-semibold text-gray-100">Récapitulatif</h3>
+    <span class="px-3 py-1 text-sm rounded-full"
+          [ngClass]="userSettingsService.user()?.companyName ? 'bg-blue-900 text-blue-100' : 'bg-green-900 text-green-100'">
+      {{ userSettingsService.user()?.companyName ? "Professionnel" : "Particulier" }}
+    </span>
+  </div>
+
+  <div class="flex-grow space-y-4 text-gray-300">
+    <!-- Type de compte -->
+    <div class="flex items-start">
+      <div class="mr-3 mt-1 text-indigo-400">
+        <i class="pi pi-id-card text-lg"></i>
+      </div>
+      <div>
+        <p class="text-gray-400 text-sm mb-1">Type de compte</p>
+        <p>{{ userSettingsService.user()?.companyName ? "Société: " + userSettingsService.user()?.companyName : "Particulier: " + userSettingsService.user()?.firstname + " " + userSettingsService.user()?.lastname }}</p>
+      </div>
+    </div>
+
+    <!-- Adresse de facturation -->
+    <div class="flex items-start">
+      <div class="mr-3 mt-1 text-indigo-400">
+        <i class="pi pi-map-marker text-lg"></i>
+      </div>
+      <div>
+        <p class="text-gray-400 text-sm mb-1">Adresse de facturation</p>
+        <div *ngIf="userSettingsService.user()?.address; else noAddress" >
+          <p>{{ userSettingsService.user()?.address }}</p>
+          <p>{{ userSettingsService.user()?.postCode }} {{ userSettingsService.user()?.city }}</p>
+          <p>{{ userSettingsService.user()?.country }}</p>
+        </div>
+        <ng-template #noAddress>
+          <p><span class="text-red-400">Aucune addresse enregistrée</span></p>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="flex items-start">
+      <div class="mr-3 mt-1 text-indigo-400">
+        <i class="pi pi-envelope text-lg"></i>
+      </div>
+      <div>
+        <p class="text-gray-400 text-sm mb-1">Contact</p>
+        <p>{{ userSettingsService.user()?.email}}</p>
+        <p *ngIf="userSettingsService.user()?.phone; else noPhone">
+          {{ userSettingsService.user()?.phone }}
+        </p>
+        <ng-template #noPhone>
+          <p><span class="text-red-400">Aucun numéro de téléphone</span></p>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- Informations supplémentaires - à compléter -->
+    <div class="flex items-start">
+      <div class="mr-3 mt-1 text-indigo-400">
+        <i class="pi pi-info-circle text-lg"></i>
+      </div>
+      <div class="gap-2 flex flex-col">
+        <p class="text-gray-400 text-sm mb-1">Informations supplémentaires</p>
+        <p>Client depuis: <span class="text-signacore">{{ userSettingsService.user()?.createdAt}}</span></p>
+        <p>Dernière modification: <span class="text-signacore">{{ userSettingsService.user()?.updatedAt}}</span></p>
+        <p>Statut du compte: <span class="text-green-400">Actif</span></p>
+      </div>
+    </div>
+  </div>
+</div>
