@@ -25,6 +25,8 @@ import { UserTransactionComponent } from './user/pages/user-transaction/user-tra
 import { dashboardUserTransactionResolver } from './resolvers/user/dashboard-user-transaction.resolver';
 import { authGuard } from './guards/auth.guard';
 import { adminGuard } from './guards/admin.guard';
+import { WebsiteComponent } from './admin/pages/website/website.component';
+import { dashboardAdminWebsiteResolver } from './resolvers/admin/dashboard-admin-website.resolver';
 export const routes: Routes = [
   {
     path: '',
@@ -129,6 +131,12 @@ export const routes: Routes = [
         component: AdminContactComponent,
         resolve: { contact: dashboardAdminContactResolver },
         title: 'Gestion des contacts',
+      },
+      {
+        path: 'website',
+        component: WebsiteComponent,
+        resolve: { users: dashboardAdminUsersResolver, website: dashboardAdminWebsiteResolver },
+        title: 'Gestion des sites web',
       },
     ],
   },

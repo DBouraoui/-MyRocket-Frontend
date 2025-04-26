@@ -33,5 +33,10 @@ export class SidebarAdminComponent {
       link: '/administration/contact',
       icon: 'pi-envelope',
     },
+    {
+      title: 'Sites web',
+      link: '/administration/website',
+      icon: 'pi-globe',
+    },
   ];
 }
