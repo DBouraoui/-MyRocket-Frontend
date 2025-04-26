@@ -15,6 +15,7 @@ import {
 import {
   UserWebsitesMaintenanceContractsComponent
 } from '../../components/user-websites-maintenance-contracts/user-websites-maintenance-contracts.component';
+import {UserWebsitesDisplayComponent} from '../../components/user-websites-display/user-websites-display.component';
 
 @Component({
   selector: 'app-user-website',
@@ -24,7 +25,8 @@ import {
     UserInformationsSettingsComponent,
     UserWebsitesInformationsComponent,
     UserWebsitesContractsInformationsComponent,
-    UserWebsitesMaintenanceContractsComponent
+    UserWebsitesMaintenanceContractsComponent,
+    UserWebsitesDisplayComponent
   ],
   templateUrl: './user-website.component.html',
 })

@@ -27,7 +27,7 @@ websiteService = inject(UserWebsitesService);
   }
 
   getLastContracts() {
-   return this.websiteService.maintenanceContract()[this.websiteService.maintenanceContract().length - 1];
+   return this.websiteService.maintenanceContract()[this.websiteService.maintenanceContract().length - 1].createdAt;
   }
 
 }

@@ -33,15 +33,15 @@ export class SidebarComponent {
       link: '/utilisateur/projects',
       icon: 'pi-credit-card',
     },
-    {
-      title: 'Support',
-      link: '/utilisateur/contact',
-      icon: 'pi-comments',
-    },
-    {
-      title: 'Demandes',
-      link: '/utilisateur/contact',
-      icon: 'pi-ticket',
-    },
+    // {
+    //   title: 'Support',
+    //   link: '/utilisateur/contact',
+    //   icon: 'pi-comments',
+    // },
+    // {
+    //   title: 'Demandes',
+    //   link: '/utilisateur/contact',
+    //   icon: 'pi-ticket',
+    // },
   ];
 }

@@ -9,10 +9,6 @@ import {UserWebsitesService} from '../../../services/user/user-websites.service'
 export class UserWebsitesContractsInformationsComponent {
 websites = inject(UserWebsitesService);
 
-constructor() {
-  console.log(this.websites.contract());
-}
-
   countContract():number {
     return this.websites.contract().length;
   }

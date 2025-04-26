@@ -11,6 +11,7 @@ export class UserWebsitesService {
   website: WritableSignal<Website[]> = signal([]);
   contract: WritableSignal<Contracts[]>  = signal([]);
   maintenanceContract :WritableSignal<MaintenanceContract[]> = signal([]);
+  allInformations : WritableSignal<Website[]> = signal([]);
 
   constructor(private http:HttpClient) { }
 
@@ -28,6 +29,10 @@ export class UserWebsitesService {
 
   fetchWebsitesMaintenanceContract():Observable<MaintenanceContract[]> {
     return this.http.get<MaintenanceContract[]>(`${environment.SERVER_URL}/api/maintenance/contract/me`);
+  }
+
+  fetchAllInformations() {
+    return this.http.get<Website[]>(`${environment.SERVER_URL}/api/website/contract/get/all`);
   }
 
   refreshWebsites():Observable<Website[]> {
@@ -49,6 +54,14 @@ export class UserWebsitesService {
     return this.fetchWebsitesMaintenanceContract().pipe(
       tap(contract => {
         this.maintenanceContract.set(contract);
+      })
+    )
+  }
+
+  refreshWebsiteAllInformations(): Observable<Website[]> {
+    return this.fetchAllInformations().pipe(
+      tap(informations => {
+        this.allInformations.set(informations);
       })
     )
   }

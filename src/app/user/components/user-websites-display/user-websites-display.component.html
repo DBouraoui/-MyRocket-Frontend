@@ -1,0 +1,222 @@
+<!-- websites.component.html -->
+<div class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-6 text-gray-800">Mes sites web</h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @for (website of websiteService.allInformations(); track website.uuid) {
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
+           (click)="openWebsiteDetails(website)">
+
+        <!-- En-tête de la carte avec statut -->
+        <div class="relative">
+          <!-- Iframe ou placeholder -->
+          <div class="w-full h-48 bg-gray-100 flex items-center justify-center">
+            <iframe *ngIf="isValidUrl(website.url)" [src]="getSafeUrl(website.url)" class="w-full h-full border-0" title="Aperçu du site"></iframe>
+            <div *ngIf="!isValidUrl(website.url)" class="flex flex-col items-center justify-center">
+              <i class="pi pi-globe text-4xl text-gray-300 mb-2"></i>
+              <span class="text-gray-400">Aperçu non disponible</span>
+            </div>
+          </div>
+
+          <!-- Badge de statut -->
+          <div class="absolute top-3 right-3">
+            <span class="px-3 py-1 text-xs font-medium rounded-full">
+              {{ website.status }}
+            </span>
+          </div>
+
+          <!-- Badge de type -->
+          <div class="absolute top-3 left-3">
+            <span  class="px-3 py-1 text-xs font-medium rounded-full">
+              {{ website.type }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Contenu de la carte -->
+        <div class="p-4">
+          <h2 class="text-xl font-semibold text-gray-800 mb-2 truncate">{{ website.title }}</h2>
+
+          <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ website.description }}</p>
+
+          <!-- Informations principales -->
+          <div class="flex flex-col gap-2 text-sm">
+            <div class="flex items-center text-gray-700">
+              <i class="pi pi-link mr-2 text-gray-500"></i>
+              <a [href]="website.url" target="_blank" class="text-blue-600 truncate hover:underline" (click)="$event.stopPropagation()">
+                {{ website.url }}
+              </a>
+            </div>
+
+            <div class="flex items-center text-gray-700">
+              <i class="pi pi-calendar mr-2 text-gray-500"></i>
+              <span>Créé le {{ website.createdAt }}</span>
+            </div>
+          </div>
+
+          <!-- Indicateurs de contrats -->
+          <div class="flex gap-2 mt-4">
+            <div *ngIf="website.contract" class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-md">
+              <i class="pi pi-file-contract mr-1"></i> Contrat
+            </div>
+            <div *ngIf="website.maintenanceContract" class="inline-flex items-center px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-md">
+              <i class="pi pi-wrench mr-1"></i> Maintenance
+            </div>
+          </div>
+
+          <!-- Footer avec bouton d'action -->
+          <div class="flex justify-end mt-4">
+            <button pButton
+                    icon="pi pi-external-link"
+                    label="Détails"
+                    class="p-button-sm p-button-outlined"
+                    (click)="openWebsiteDetails(website); $event.stopPropagation()"></button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<!-- Sidebar pour afficher les détails du site web sélectionné -->
+<p-drawer [(visible)]="sidebarVisible" position="right" [style]="{width:'40rem'}" [blockScroll]="true">
+  <ng-container *ngIf="selectedWebsite">
+    <div class="p-4">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold">{{ selectedWebsite.title }}</h2>
+        <p-tag [value]="selectedWebsite.status"></p-tag>
+      </div>
+
+      <!-- Onglets pour différentes sections -->
+      <p-tabView>
+        <!-- Informations générales -->
+        <p-tabPanel header="Informations">
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-col">
+              <span class="text-sm text-gray-200 underline">URL:</span>
+              <a [href]="selectedWebsite.url" target="_blank" class="text-blue-600 hover:underline">{{ selectedWebsite.url }}</a>
+            </div>
+
+            <div class="flex flex-col">
+              <span class="text-sm text-gray-200 underline">Description:</span>
+              <p class="text-slate-100">{{ selectedWebsite.description }}</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex flex-col">
+                <span class="text-sm text-gray-200 underline">Type:</span>
+                <span class="text-slate-100">{{ selectedWebsite.type }}</span>
+              </div>
+
+              <div class="flex flex-col">
+                <span class="text-sm text-gray-200 underline">Créé le:</span>
+                <span class="text-slate-100">{{ selectedWebsite.createdAt }}</span>
+              </div>
+
+              <div class="flex flex-col">
+                <span class="text-sm text-gray-200 underline">Mis à jour le:</span>
+                <span class="text-slate-100">{{ selectedWebsite.updatedAt }}</span>
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+
+        <!-- Contrat du site web -->
+        <p-tabPanel header="Contrat" [disabled]="!selectedWebsite.contract">
+          <div *ngIf="selectedWebsite.contract" class="flex flex-col gap-4">
+            <div class="bg-blue-50 p-4 rounded-lg">
+              <div class="flex items-center mb-2">
+                <i class="pi pi-file-contract text-blue-600 mr-2"></i>
+                <h3 class="text-lg font-semibold text-blue-800">{{ selectedWebsite.contract.prestation }}</h3>
+              </div>
+
+              <div class="flex justify-between mt-4">
+                <div class="bg-white rounded-lg p-3 shadow-sm flex flex-col items-center flex-1 mr-2">
+                  <span class="text-sm text-gray-500">Coût annuel</span>
+                  <span class="text-xl font-bold text-gray-800">{{ selectedWebsite.contract.annualCost }} €</span>
+                  <span class="text-xs text-gray-500">TVA {{ selectedWebsite.contract.tva }}%</span>
+                </div>
+
+                <div class="bg-white rounded-lg p-3 shadow-sm flex flex-col items-center flex-1">
+                  <span class="text-sm text-gray-500">Récurrence</span>
+                  <span class="text-lg font-semibold text-gray-800">{{ selectedWebsite.contract.reccurence }}</span>
+                </div>
+              </div>
+            </div>
+
+            <h4 class="font-medium text-gray-300 mt-2">Échéancier</h4>
+            <div class="grid grid-cols-3 gap-3">
+              <div class="p-3 bg-blue-50 rounded-lg">
+                <span class="text-xs text-blue-700 block">Premier paiement</span>
+                <span class="font-medium text-blue-800">{{ selectedWebsite.contract.firstPaymentAt }}</span>
+              </div>
+
+              <div class="p-3 bg-gray-50 rounded-lg">
+                <span class="text-xs text-gray-500 block">Dernier paiement</span>
+                <span class="font-medium text-black">{{ selectedWebsite.contract.lastPaymentAt }}</span>
+              </div>
+
+              <div class="p-3 bg-green-50 rounded-lg">
+                <span class="text-xs text-green-700 block">Prochain paiement</span>
+                <span class="font-medium text-green-800">{{ selectedWebsite.contract.nextPaymentAt }}</span>
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+
+        <!-- Contrat de maintenance -->
+        <p-tabPanel header="Maintenance" [disabled]="!selectedWebsite.maintenanceContract">
+          <div *ngIf="selectedWebsite.maintenanceContract" class="flex flex-col gap-4">
+            <div class="bg-purple-50 p-4 rounded-lg">
+              <div class="flex items-center mb-3">
+                <i class="pi pi-wrench text-purple-600 mr-2"></i>
+                <h3 class="text-lg font-semibold text-purple-800">Contrat de maintenance</h3>
+              </div>
+
+              <div class="flex justify-between mt-4">
+                <div class="bg-white rounded-lg p-3 shadow-sm flex flex-col items-center flex-1 mr-2">
+                  <span class="text-sm text-gray-500">Coût mensuel</span>
+                  <span class="text-xl font-bold text-gray-800">{{ selectedWebsite.maintenanceContract.monthlyCost }} €</span>
+                </div>
+
+                <div class="bg-white rounded-lg p-3 shadow-sm flex flex-col items-center flex-1">
+                  <span class="text-sm text-gray-500">Récurrence</span>
+                  <span class="text-lg font-semibold text-gray-800">{{ selectedWebsite.maintenanceContract.reccurence }}</span>
+                </div>
+              </div>
+            </div>
+
+            <h4 class="font-medium text-gray-300 mt-2">Échéances</h4>
+            <div class="grid grid-cols-2 gap-3 mb-2">
+              <div class="p-3 bg-gray-50 rounded-lg">
+                <span class="text-xs text-gray-600 block">Fin de contrat</span>
+                <span class="font-medium text-black">{{ selectedWebsite.maintenanceContract.endAt }}</span>
+              </div>
+
+              <div class="p-3 bg-green-50 rounded-lg">
+                <span class="text-xs text-green-700 block">Prochain paiement</span>
+                <span class="font-medium text-green-800">{{ selectedWebsite.maintenanceContract.nextPaymentAt }}</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div class="p-3 bg-gray-50 rounded-lg">
+                <span class="text-xs text-gray-600 block">Premier paiement</span>
+                <span class="font-medium text-black">{{ selectedWebsite.maintenanceContract.firstPaymentAt }}</span>
+              </div>
+
+              <div class="p-3 bg-gray-50 rounded-lg">
+                <span class="text-xs text-gray-600 block">Dernier paiement</span>
+                <span class="font-medium text-black">{{ selectedWebsite.maintenanceContract.lastPaymentAt }}</span>
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+
+      <div class="flex justify-end mt-6">
+        <button pButton icon="pi pi-times" label="Fermer" class="p-button-outlined" (click)="sidebarVisible = false"></button>
+      </div>
+    </div>
+  </ng-container>
+</p-drawer>

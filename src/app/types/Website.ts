@@ -7,6 +7,8 @@ export type Website = {
   type: string;
   createdAt: string;
   updatedAt: string;
+  contract?: Contracts;
+  maintenanceContract?: MaintenanceContract;
 }
 
 export type Contracts = {

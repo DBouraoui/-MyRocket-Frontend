@@ -26,6 +26,9 @@ import {dashboardUserWebsitesContractsResolver} from './resolvers/user/dashboard
 import {
   dashboardUserWebsitesMaintenanceContractsResolver
 } from './resolvers/user/dashboard-user-websites-maintenance-contracts.resolver';
+import {
+  dashboardUserWebsiteAllInformationsResolver
+} from './resolvers/user/dashboard-user-website-all-informations.resolver';
 export const routes: Routes = [
   {
     path: '',
@@ -72,7 +75,12 @@ export const routes: Routes = [
       {
         path: 'website',
         component: UserWebsiteComponent,
-        resolve: {website: dashboardUserWebsitesInformationsResolver, contracts: dashboardUserWebsitesContractsResolver, mainteanceContracts: dashboardUserWebsitesMaintenanceContractsResolver},
+        resolve: {
+          website: dashboardUserWebsitesInformationsResolver,
+          contracts: dashboardUserWebsitesContractsResolver,
+          mainteanceContracts: dashboardUserWebsitesMaintenanceContractsResolver,
+          allinformation : dashboardUserWebsiteAllInformationsResolver
+        },
         title: 'Mes sites web',
       }
     ]
