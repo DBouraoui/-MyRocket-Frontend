@@ -32,5 +32,12 @@ export class AdminWebsiteService {
     return this.http.post(`${environment.SERVER_URL}/api/website/contract`, payload);
   }
 
+  createWebsiteVps(payload : Object) {
+    return this.http.post(`${environment.SERVER_URL}/api/website/vps`,payload);
+  }
+
+  createWebsiteMutualised(payload : Object){
+    return this.http.post(`${environment.SERVER_URL}/api/website/mutualised`,payload);
+  }
 
 }

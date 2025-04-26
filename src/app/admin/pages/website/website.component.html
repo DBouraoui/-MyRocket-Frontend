@@ -1,2 +1,115 @@
-<app-admin-dashboard-website-create></app-admin-dashboard-website-create>
-<app-admin-dashboard-website-add-contract></app-admin-dashboard-website-add-contract>
+<div class="min-h-screen bg-gray-950 p-4 md:p-6 lg:p-8">
+  <h1 class="text-3xl font-bold text-white mb-8">Dashboard Administration</h1>
+
+  <!-- Conteneur principal bento -->
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+    <!-- Première boîte en haut -->
+    <div class="bg-gray-900 rounded-xl shadow-lg overflow-hidden border border-gray-800 transition-all duration-300 hover:shadow-xl hover:border-blue-900/50 lg:col-span-2">
+      <div class="p-5">
+        <h2 class="text-xl font-semibold text-white mb-4">Création de site</h2>
+        <app-admin-dashboard-website-create></app-admin-dashboard-website-create>
+      </div>
+    </div>
+
+    <!-- Deuxième boîte en haut -->
+    <div class="bg-gray-900 rounded-xl shadow-lg overflow-hidden border border-gray-800 transition-all duration-300 hover:shadow-xl hover:border-blue-900/50 lg:col-span-2">
+      <div class="p-5">
+        <h2 class="text-xl font-semibold text-white mb-4">Ajout de contrat</h2>
+        <app-admin-dashboard-website-add-contract></app-admin-dashboard-website-add-contract>
+      </div>
+    </div>
+
+    <div class="bg-gray-900 rounded-xl shadow-lg overflow-hidden border border-gray-800 transition-all duration-300 hover:shadow-xl hover:border-blue-900/50 lg:col-span-2">
+      <div class="p-5">
+        <h2 class="text-xl font-semibold text-white mb-4">Ajout d'un contrat de maintenance</h2>
+      </div>
+    </div>
+
+    <!-- Troisième boîte en haut -->
+    <div class="bg-gray-900 rounded-xl shadow-lg overflow-hidden border border-gray-800 transition-all duration-300 hover:shadow-xl hover:border-blue-900/50 lg:col-span-2">
+      <div class="p-5">
+        <h2 class="text-xl font-semibold text-white mb-4">Ajout d'une configuration</h2>
+        <app-admin-dashboard-website-add-configuration></app-admin-dashboard-website-add-configuration>
+      </div>
+    </div>
+
+    <!-- Grande boîte en dessous (span sur toutes les colonnes) -->
+    <div class="lg:col-span-4 bg-gray-900 rounded-xl shadow-lg overflow-hidden border border-gray-800 transition-all duration-300 hover:shadow-xl hover:border-blue-900/50">
+      <div class="p-5">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-xl font-semibold text-white">Liste des sites web</h2>
+          <div class="flex space-x-2">
+            <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg text-sm flex items-center">
+              <span class="pi pi-filter mr-1"></span>
+              Filtrer
+            </button>
+            <button class="bg-purple-600 hover:bg-purple-700 text-white px-3 py-1 rounded-lg text-sm flex items-center">
+              <span class="pi pi-download mr-1"></span>
+              Exporter
+            </button>
+          </div>
+        </div>
+
+        <!-- Tableau des sites web -->
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-gray-800 rounded-lg overflow-hidden">
+            <thead>
+            <tr class="border-b border-gray-700">
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Site</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">URL</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Type</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Actions</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-700">
+            <tr class="hover:bg-gray-700 transition-colors">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-white">MyRocket Site Vitrine</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-400">myrocket.fr</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">WordPress</td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs rounded-full bg-green-900 text-green-300">Actif</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                <div class="flex space-x-2">
+                  <button class="text-blue-400 hover:text-blue-300"><span class="pi pi-pencil"></span></button>
+                  <button class="text-red-400 hover:text-red-300"><span class="pi pi-trash"></span></button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-700 transition-colors">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-white">E-commerce Client XYZ</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-400">xyz-shop.com</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">WooCommerce</td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs rounded-full bg-yellow-900 text-yellow-300">Maintenance</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                <div class="flex space-x-2">
+                  <button class="text-blue-400 hover:text-blue-300"><span class="pi pi-pencil"></span></button>
+                  <button class="text-red-400 hover:text-red-300"><span class="pi pi-trash"></span></button>
+                </div>
+              </td>
+            </tr>
+            <tr class="hover:bg-gray-700 transition-colors">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-white">Application SaaS</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-400">app.example.io</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">Angular</td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 py-1 text-xs rounded-full bg-green-900 text-green-300">Actif</span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
+                <div class="flex space-x-2">
+                  <button class="text-blue-400 hover:text-blue-300"><span class="pi pi-pencil"></span></button>
+                  <button class="text-red-400 hover:text-red-300"><span class="pi pi-trash"></span></button>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
