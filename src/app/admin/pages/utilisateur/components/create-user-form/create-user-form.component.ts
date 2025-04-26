@@ -1,33 +1,26 @@
-import {Component, inject, OnDestroy, OnInit} from '@angular/core';
-import {Button} from "primeng/button";
-import {IftaLabel} from "primeng/iftalabel";
-import {InputText} from "primeng/inputtext";
-import {Password} from "primeng/password";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {SelectButton} from "primeng/selectbutton";
-import {Subscription} from 'rxjs';
-import {MessageService} from 'primeng/api';
-import {HttpClient} from '@angular/common/http';
-import {AdminUsersService} from '../../../../../services/admin/admin-users.service';
-import {environment} from '../../../../../../../environment';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Button } from 'primeng/button';
+import { IftaLabel } from 'primeng/iftalabel';
+import { InputText } from 'primeng/inputtext';
+import { Password } from 'primeng/password';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SelectButton } from 'primeng/selectbutton';
+import { Subscription } from 'rxjs';
+import { MessageService } from 'primeng/api';
+import { HttpClient } from '@angular/common/http';
+import { AdminUsersService } from '../../../../../services/admin/admin-users.service';
+import { environment } from '../../../../../../../environment';
 
 @Component({
   selector: 'app-create-user-form',
-    imports: [
-        Button,
-        IftaLabel,
-        InputText,
-        Password,
-        ReactiveFormsModule,
-        SelectButton
-    ],
+  imports: [Button, IftaLabel, InputText, Password, ReactiveFormsModule, SelectButton],
   templateUrl: './create-user-form.component.html',
 })
 export class CreateUserFormComponent implements OnInit, OnDestroy {
   adminUsersService = inject(AdminUsersService);
-  formGroup!:FormGroup;
+  formGroup!: FormGroup;
   isLoading = false;
-  formSending! : Subscription;
+  formSending!: Subscription;
   userOptions = [
     {
       label: 'Particulier',
@@ -36,27 +29,26 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
     {
       label: 'Professionnel',
       value: true,
-    }
+    },
   ];
 
-
-  constructor(private messageService:MessageService,
-              private http : HttpClient
-  ) {
-  }
+  constructor(
+    private messageService: MessageService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({
       firstname: new FormControl(''),
       lastname: new FormControl(''),
       companyName: new FormControl(''),
-      email: new FormControl('',[Validators.required]),
-      phone: new FormControl('',[Validators.required]),
-      address: new FormControl('',[Validators.required]),
-      postCode: new FormControl('',[Validators.required]),
-      city: new FormControl('',[Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required]),
+      address: new FormControl('', [Validators.required]),
+      postCode: new FormControl('', [Validators.required]),
+      city: new FormControl('', [Validators.required]),
       country: new FormControl('', [Validators.required]),
-      password: new FormControl('',[Validators.required]),
+      password: new FormControl('', [Validators.required]),
       isCompany: new FormControl(false, [Validators.required]),
     });
 
@@ -68,7 +60,6 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
         this.formGroup.get('firstname')?.reset();
         this.formGroup.get('lastname')?.clearValidators();
         this.formGroup.get('lastname')?.reset();
-
       } else {
         this.formGroup.get('firstname')?.setValidators([Validators.required]);
         this.formGroup.get('lastname')?.setValidators([Validators.required]);
@@ -76,7 +67,7 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
         this.formGroup.get('companyName')?.clearValidators();
         this.formGroup.get('companyName')?.reset();
       }
-    })
+    });
   }
 
   onSubmite() {
@@ -85,10 +76,10 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
       this.messageService.add({
         severity: 'warn',
         summary: 'Erreur dans le formulair',
-        detail: 'Impossible d\'envoyer le formulaire imcomplet ou incorrect',
+        detail: "Impossible d'envoyer le formulaire imcomplet ou incorrect",
       });
       this.isLoading = false;
-      return
+      return;
     }
 
     const payload = {
@@ -102,10 +93,10 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
       city: this.formGroup.get('city')?.value,
       country: this.formGroup.get('country')?.value,
       password: this.formGroup.get('password')?.value,
-    }
+    };
 
     this.http.post(`${environment.SERVER_URL}/api/user/register`, payload).subscribe({
-      next: (resp)=>{
+      next: resp => {
         this.messageService.add({
           severity: 'success',
           summary: 'Utilisateur créer',
@@ -113,15 +104,15 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.adminUsersService.refreshUsers().subscribe();
       },
-      error: (err)=>{
+      error: err => {
         this.messageService.add({
           severity: 'error',
           summary: 'Erreur utilisateur non créer',
         });
         this.isLoading = false;
-        console.log(err)
-      }
-    })
+        console.log(err);
+      },
+    });
   }
 
   ngOnDestroy(): void {

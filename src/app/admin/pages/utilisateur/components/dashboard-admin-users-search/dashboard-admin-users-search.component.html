@@ -2,10 +2,14 @@
   <!-- Barre de recherche améliorée -->
   <div class="flex gap-2">
     <span class="p-input-icon-left w-full">
-      <input type="text" pInputText placeholder="Rechercher un utilisateur"
-             [(ngModel)]="searchInput"
-             (ngModelChange)="filterUsers()"
-             class="w-full bg-slate-800 border-slate-700 text-white rounded-lg p-3" />
+      <input
+        type="text"
+        pInputText
+        placeholder="Rechercher un utilisateur"
+        [(ngModel)]="searchInput"
+        (ngModelChange)="filterUsers()"
+        class="w-full bg-slate-800 border-slate-700 text-white rounded-lg p-3"
+      />
     </span>
   </div>
 
@@ -15,16 +19,20 @@
       Aucun utilisateur trouvé
     </p>
 
-    <div *ngFor="let user of filteredUsers"
-         class="p-3 mb-3 border border-slate-700 rounded-lg hover:bg-slate-700 transition-colors">
+    <div
+      *ngFor="let user of filteredUsers"
+      class="p-3 mb-3 border border-slate-700 rounded-lg hover:bg-slate-700 transition-colors"
+    >
       <div class="flex justify-between items-center cursor-pointer" (click)="openUserDetails(user)">
         <div>
           <div class="flex items-center gap-2">
-            <span class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-sm font-medium">
+            <span
+              class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-sm font-medium"
+            >
               @if (user.firstname) {
-              {{ user.firstname?.charAt(0) }}{{ user.lastname?.charAt(0) }}
+                {{ user.firstname?.charAt(0) }}{{ user.lastname?.charAt(0) }}
               } @else {
-                {{user.companyName?.charAt(0)}}{{user.companyName?.charAt(1)}}
+                {{ user.companyName?.charAt(0) }}{{ user.companyName?.charAt(1) }}
               }
             </span>
             <span class="font-bold text-white">{{ user.firstname }} {{ user.lastname }}</span>
@@ -33,34 +41,43 @@
         </div>
         <div class="flex items-center gap-2">
           <p-tag *ngIf="user.companyName" [value]="user.companyName" severity="info"></p-tag>
-          <p-button icon="pi pi-eye"
-                    severity="secondary"
-                    styleClass="p-button-rounded p-button-text"
-                    pTooltip="Voir les détails"
-                    (click)="openUserDetails(user)"></p-button>
+          <p-button
+            icon="pi pi-eye"
+            severity="secondary"
+            styleClass="p-button-rounded p-button-text"
+            pTooltip="Voir les détails"
+            (click)="openUserDetails(user)"
+          ></p-button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Drawer amélioré et élargi -->
-  <p-drawer [(visible)]="visible"
-            [showCloseIcon]="true"
-            header="Détails de l'utilisateur"
-            [style]="{width: '40em'}"
-            [baseZIndex]="10000">
+  <p-drawer
+    [(visible)]="visible"
+    [showCloseIcon]="true"
+    header="Détails de l'utilisateur"
+    [style]="{ width: '40em' }"
+    [baseZIndex]="10000"
+  >
     <form (ngSubmit)="onSubmit()" [formGroup]="formGroup" class="p-4 space-y-5">
       <!-- En-tête du formulaire -->
       <div class="flex flex-col items-center pb-4 mb-4 border-b border-slate-200">
-        <div class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl font-bold mb-2">
+        <div
+          class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl font-bold mb-2"
+        >
           @if (formGroup.get('firstname')?.value) {
-          {{ formGroup.get('firstname')?.value?.charAt(0) || '' }}{{ formGroup.get('lastname')?.value?.charAt(0) || '' }}
+            {{ formGroup.get('firstname')?.value?.charAt(0) || ''
+            }}{{ formGroup.get('lastname')?.value?.charAt(0) || '' }}
           } @else {
-            {{ formGroup.get('companyName')?.value?.charAt(0) || '' }}{{ formGroup.get('companyName')?.value?.charAt(1) || '' }}
-
+            {{ formGroup.get('companyName')?.value?.charAt(0) || ''
+            }}{{ formGroup.get('companyName')?.value?.charAt(1) || '' }}
           }
         </div>
-        <h3 class="text-lg font-bold">{{ formGroup.get('firstname')?.value }} {{ formGroup.get('lastname')?.value }}</h3>
+        <h3 class="text-lg font-bold">
+          {{ formGroup.get('firstname')?.value }} {{ formGroup.get('lastname')?.value }}
+        </h3>
         <p class="text-sm text-slate-500">{{ formGroup.get('email')?.value }}</p>
       </div>
 

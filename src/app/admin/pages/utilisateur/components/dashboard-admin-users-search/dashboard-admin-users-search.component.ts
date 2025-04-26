@@ -1,18 +1,24 @@
-import {Component, inject, Input, OnDestroy, OnInit} from '@angular/core';
-import {Button} from 'primeng/button';
-import {InputText} from 'primeng/inputtext';
-import {User} from '../../../../../types/User';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Tag} from 'primeng/tag';
-import {CommonModule} from '@angular/common';
-import {Tooltip} from 'primeng/tooltip';
-import {Drawer} from 'primeng/drawer';
-import {FloatLabel} from 'primeng/floatlabel';
-import {MessageService} from 'primeng/api';
-import {HttpClient} from '@angular/common/http';
-import {Subscription} from 'rxjs';
-import {AdminUsersService} from '../../../../../services/admin/admin-users.service';
-import {environment} from '../../../../../../../environment';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Button } from 'primeng/button';
+import { InputText } from 'primeng/inputtext';
+import { User } from '../../../../../types/User';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Tag } from 'primeng/tag';
+import { CommonModule } from '@angular/common';
+import { Tooltip } from 'primeng/tooltip';
+import { Drawer } from 'primeng/drawer';
+import { FloatLabel } from 'primeng/floatlabel';
+import { MessageService } from 'primeng/api';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
+import { AdminUsersService } from '../../../../../services/admin/admin-users.service';
+import { environment } from '../../../../../../../environment';
 
 @Component({
   selector: 'app-dashboard-admin-users-search',
@@ -25,33 +31,36 @@ import {environment} from '../../../../../../../environment';
     Tooltip,
     Drawer,
     FloatLabel,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './dashboard-admin-users-search.component.html',
 })
 export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
   adminUsersService = inject(AdminUsersService);
-  searchInput = "";
+  searchInput = '';
   filteredUsers: User[] = [];
-  visible :boolean = false;
+  visible: boolean = false;
   selectedUser!: User;
   formGroup!: FormGroup;
-  isLoading:boolean = false;
+  isLoading: boolean = false;
   formSending!: Subscription;
 
-  constructor(private messageService: MessageService, private http: HttpClient, private dashboardService : AdminUsersService) {
-  }
+  constructor(
+    private messageService: MessageService,
+    private http: HttpClient,
+    private dashboardService: AdminUsersService
+  ) {}
 
   ngOnInit() {
     this.formGroup = new FormGroup({
       firstname: new FormControl(''),
       lastname: new FormControl(''),
       companyName: new FormControl(''),
-      email: new FormControl('',[Validators.required]),
-      phone: new FormControl('',[Validators.required]),
-      address: new FormControl('',[Validators.required]),
-      postCode: new FormControl('',[Validators.required]),
-      city: new FormControl('',[Validators.required]),
+      email: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required]),
+      address: new FormControl('', [Validators.required]),
+      postCode: new FormControl('', [Validators.required]),
+      city: new FormControl('', [Validators.required]),
       country: new FormControl('', [Validators.required]),
     });
   }
@@ -62,10 +71,10 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
       this.messageService.add({
         severity: 'warn',
         summary: 'Erreur dans le formulair',
-        detail: 'Impossible d\'envoyer le formulaire imcomplet ou incorrect',
+        detail: "Impossible d'envoyer le formulaire imcomplet ou incorrect",
       });
       this.isLoading = false;
-      return
+      return;
     }
 
     const payload = {
@@ -79,10 +88,10 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
       postCode: this.formGroup.get('postCode')?.value,
       city: this.formGroup.get('city')?.value,
       country: this.formGroup.get('country')?.value,
-    }
+    };
 
-   this.formSending = this.http.put(`${environment.SERVER_URL}/api/user`, payload).subscribe({
-      next: (resp)=>{
+    this.formSending = this.http.put(`${environment.SERVER_URL}/api/user`, payload).subscribe({
+      next: resp => {
         this.messageService.add({
           severity: 'success',
           summary: 'Utilisateur modifier',
@@ -90,15 +99,15 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.adminUsersService.refreshUsers().subscribe();
       },
-      error: (err)=>{
+      error: err => {
         this.messageService.add({
           severity: 'error',
           summary: 'Erreur utilisateur non créer',
         });
         this.isLoading = false;
-        console.log(err)
-      }
-    })
+        console.log(err);
+      },
+    });
   }
 
   ngOnDestroy(): void {
@@ -123,21 +132,23 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
   }
 
   filterUsers() {
-    if (this.searchInput != "") {
-      this.filteredUsers = this.adminUsersService.users().filter(user =>
-        user.email.toLowerCase().includes(this.searchInput.toLowerCase()) ||
-        (user.firstname?.toLowerCase().includes(this.searchInput.toLowerCase())) ||
-        (user.lastname?.toLowerCase().includes(this.searchInput.toLowerCase()))
-      );
-    } else if (this.searchInput == "") {
+    if (this.searchInput != '') {
+      this.filteredUsers = this.adminUsersService
+        .users()
+        .filter(
+          user =>
+            user.email.toLowerCase().includes(this.searchInput.toLowerCase()) ||
+            user.firstname?.toLowerCase().includes(this.searchInput.toLowerCase()) ||
+            user.lastname?.toLowerCase().includes(this.searchInput.toLowerCase())
+        );
+    } else if (this.searchInput == '') {
       this.filteredUsers = [];
     }
   }
 
   deleteCurrentUser() {
-
     this.http.delete(`http://localhost:8000/api/user/${this.selectedUser.uuid}`).subscribe({
-      next: (resp)=>{
+      next: resp => {
         this.messageService.add({
           severity: 'success',
           summary: 'Utilisateur supprimer',
@@ -145,15 +156,14 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.adminUsersService.refreshUsers().subscribe();
       },
-      error: (err)=>{
+      error: err => {
         this.messageService.add({
           severity: 'error',
           summary: 'Erreur utilisateur non supprimer',
         });
         this.isLoading = false;
-        console.log(err)
-      }
-    })
+        console.log(err);
+      },
+    });
   }
-
 }

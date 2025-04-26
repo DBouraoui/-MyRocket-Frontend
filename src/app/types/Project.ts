@@ -1,12 +1,12 @@
 type Pictures = {
   filename: string;
-  url:string;
-}
+  url: string;
+};
 
 type Link = {
   url: string;
   type: string;
-}
+};
 
 export type Project = {
   uuid: string;
@@ -17,4 +17,4 @@ export type Project = {
   createdAt: string;
   updatedAt: string;
   pictures: Pictures[];
-}
+};

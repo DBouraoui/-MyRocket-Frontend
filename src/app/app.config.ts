@@ -5,9 +5,9 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 
 import { routes } from './app.routes';
-import {MessageService} from 'primeng/api';
-import {provideHttpClient, withInterceptors, withInterceptorsFromDi} from '@angular/common/http';
-import {tokenInterceptor} from './interceptors/token.interceptor';
+import { MessageService } from 'primeng/api';
+import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
+import { tokenInterceptor } from './interceptors/token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [

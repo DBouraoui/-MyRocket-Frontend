@@ -1,0 +1,170 @@
+<section class="min-h-dvh bg-gray-900">
+  <div class="bg-gray-800 p-6 rounded-xl mt-2">
+    <!-- En-tête avec statistiques générales -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <!-- Carte 1: Nombre de paiements -->
+      <div
+        class="bg-gray-800 p-5 rounded-xl shadow-sm flex items-center space-x-4 border-l-4 border-blue-600"
+      >
+        <div class="w-12 h-12 bg-blue-900/40 rounded-full flex items-center justify-center">
+          <i class="pi pi-wallet text-blue-400 text-xl"></i>
+        </div>
+        <div>
+          <p class="text-gray-400 text-sm">Nombre de paiements</p>
+          <p class="text-2xl font-bold text-white">{{ countTransactions() }}</p>
+        </div>
+      </div>
+
+      <!-- Carte 2: Montant du dernier paiement -->
+      <div
+        class="bg-gray-800 p-5 rounded-xl shadow-sm flex items-center space-x-4 border-l-4 border-green-600"
+      >
+        <div class="w-12 h-12 bg-green-900/40 rounded-full flex items-center justify-center">
+          <i class="pi pi-euro text-green-400 text-xl"></i>
+        </div>
+        <div>
+          <p class="text-gray-400 text-sm">Dernier paiement</p>
+          <p class="text-2xl font-bold text-white">
+            {{ parseInt(getLastTransaction().amount).toFixed(2) }} €
+          </p>
+        </div>
+      </div>
+
+      <!-- Carte 3: Date du dernier paiement -->
+      <div
+        class="bg-gray-800 p-5 rounded-xl shadow-sm flex items-center space-x-4 border-l-4 border-purple-600"
+      >
+        <div class="w-12 h-12 bg-purple-900/40 rounded-full flex items-center justify-center">
+          <i class="pi pi-calendar text-purple-400 text-xl"></i>
+        </div>
+        <div>
+          <p class="text-gray-400 text-sm">Date dernier paiement</p>
+          <p class="text-xl font-semibold text-white">{{ getLastTransaction().createdAt }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Titre de la section des transactions -->
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-bold text-white">Historique des paiements</h2>
+    </div>
+
+    <!-- Liste des transactions en style Bento -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      @for (transaction of transactionService.transactions(); track transaction.uuid) {
+        <div
+          class="bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all duration-200 hover:shadow-lg hover:bg-gray-750 border border-gray-700"
+        >
+          <!-- En-tête de la transaction -->
+          <div class="border-b border-gray-700 p-4 flex justify-between">
+            <div class="flex items-center">
+              <div
+                class="w-10 h-10 rounded-full bg-indigo-900/40 flex items-center justify-center mr-3"
+              >
+                <i class="pi pi-receipt"></i>
+              </div>
+              <div>
+                <h3 class="font-medium text-white line-clamp-1">
+                  {{ transaction.websiteContract }}
+                </h3>
+                <p class="text-gray-400 text-xs">{{ transaction.createdAt }}</p>
+              </div>
+            </div>
+            <div class="flex flex-col items-end">
+              <span class="font-semibold text-white"
+                >{{ parseInt(transaction.amount).toFixed(2) }} €</span
+              >
+              <span class="text-xs text-gray-400">TVA: {{ transaction.tva }}%</span>
+            </div>
+          </div>
+
+          <!-- Contenu de la transaction -->
+          <div class="p-4 bg-gray-850">
+            <div class="grid grid-cols-2 gap-2 text-sm">
+              <div class="flex items-center">
+                <i class="pi pi-user text-gray-500 mr-2"></i>
+                <span class="text-gray-300 line-clamp-1" [pTooltip]="transaction.user">{{
+                  transaction.user
+                }}</span>
+              </div>
+
+              <div class="flex items-center">
+                <i class="pi pi-id-card text-gray-500 mr-2"></i>
+                <span class="text-gray-300 truncate"
+                  >ID: {{ transaction.uuid.substring(0, 8) }}...</span
+                >
+              </div>
+            </div>
+
+            <!-- Bouton détails -->
+            <div class="mt-3 flex justify-end">
+              <button
+                pButton
+                icon="pi pi-eye"
+                label="Détails"
+                class="p-button-text p-button-sm p-button-secondary"
+                (click)="showTransactionDetails(transaction)"
+              ></button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+<!-- Dialogue de détails (optionnel) -->
+<p-dialog
+  header="Détails de la transaction"
+  [(visible)]="transactionDetailsVisible"
+  [style]="{ width: '30rem' }"
+  [modal]="true"
+  styleClass="p-dialog-dark"
+>
+  <div *ngIf="selectedTransaction" class="p-4 bg-gray-800 text-white">
+    <div class="mb-6 flex justify-center">
+      <div class="w-16 h-16 rounded-full bg-green-900/40 flex items-center justify-center">
+        <i class="pi pi-check-circle text-green-400 text-3xl"></i>
+      </div>
+    </div>
+
+    <div class="text-center mb-6">
+      <h3 class="text-2xl font-bold text-white">{{ selectedTransaction.amount }} €</h3>
+      <p class="text-gray-400">Transaction du {{ selectedTransaction.createdAt }}</p>
+    </div>
+
+    <div class="bg-gray-750 p-4 rounded-lg mb-4 border border-gray-700">
+      <h4 class="font-medium text-gray-300 mb-3">Informations du paiement</h4>
+      <div class="grid grid-cols-2 gap-y-3">
+        <div class="text-sm text-gray-400">Contrat</div>
+        <div class="text-sm text-white font-medium">{{ selectedTransaction.websiteContract }}</div>
+
+        <div class="text-sm text-gray-400">Montant HT</div>
+        <div class="text-sm text-white font-medium">
+          {{ calculateHT(selectedTransaction.amount, selectedTransaction.tva) }} €
+        </div>
+
+        <div class="text-sm text-gray-400">TVA ({{ selectedTransaction.tva }}%)</div>
+        <div class="text-sm text-white font-medium">
+          {{ calculateTVA(selectedTransaction.amount, selectedTransaction.tva) }} €
+        </div>
+
+        <div class="text-sm text-gray-400">Montant TTC</div>
+        <div class="text-sm text-white font-medium">{{ selectedTransaction.amount }} €</div>
+      </div>
+    </div>
+
+    <div class="bg-gray-750 p-4 rounded-lg border border-gray-700">
+      <h4 class="font-medium text-gray-300 mb-3">Informations client</h4>
+      <div class="grid grid-cols-2 gap-y-3">
+        <div class="text-sm text-gray-400">Email</div>
+        <div class="text-sm text-white font-medium">{{ selectedTransaction.user }}</div>
+
+        <div class="text-sm text-gray-400">ID Client</div>
+        <div class="text-sm text-white font-medium">{{ selectedTransaction.userUuid }}</div>
+
+        <div class="text-sm text-gray-400">ID Site web</div>
+        <div class="text-sm text-white font-medium">{{ selectedTransaction.websiteUuid }}</div>
+      </div>
+    </div>
+  </div>
+</p-dialog>

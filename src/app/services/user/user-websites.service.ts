@@ -1,61 +1,63 @@
-import { Injectable, signal, WritableSignal} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Contracts, MaintenanceContract, Website} from '../../types/Website';
-import {Observable, tap} from 'rxjs';
-import {environment} from '../../../../environment';
+import { Injectable, signal, WritableSignal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Contracts, MaintenanceContract, Website } from '../../types/Website';
+import { Observable, tap } from 'rxjs';
+import { environment } from '../../../../environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserWebsitesService {
   website: WritableSignal<Website[]> = signal([]);
-  contract: WritableSignal<Contracts[]>  = signal([]);
-  maintenanceContract :WritableSignal<MaintenanceContract[]> = signal([]);
-  allInformations : WritableSignal<Website[]> = signal([]);
+  contract: WritableSignal<Contracts[]> = signal([]);
+  maintenanceContract: WritableSignal<MaintenanceContract[]> = signal([]);
+  allInformations: WritableSignal<Website[]> = signal([]);
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   fetchWebsites(): Observable<Website[]> {
     return this.http.get<Website[]>(`${environment.SERVER_URL}/api/website`, {
       params: {
-        all: true
-      }
-    })
+        all: true,
+      },
+    });
   }
 
-  fetchWebsitesContract():Observable<Contracts[]> {
+  fetchWebsitesContract(): Observable<Contracts[]> {
     return this.http.get<Contracts[]>(`${environment.SERVER_URL}/api/website/contract/me`);
   }
 
-  fetchWebsitesMaintenanceContract():Observable<MaintenanceContract[]> {
-    return this.http.get<MaintenanceContract[]>(`${environment.SERVER_URL}/api/maintenance/contract/me`);
+  fetchWebsitesMaintenanceContract(): Observable<MaintenanceContract[]> {
+    return this.http.get<MaintenanceContract[]>(
+      `${environment.SERVER_URL}/api/maintenance/contract/me`
+    );
   }
 
   fetchAllInformations() {
     return this.http.get<Website[]>(`${environment.SERVER_URL}/api/website/contract/get/all`);
   }
 
-  refreshWebsites():Observable<Website[]> {
+  refreshWebsites(): Observable<Website[]> {
     return this.fetchWebsites().pipe(
       tap(websites => {
         this.website.set(websites);
       })
-    )
+    );
   }
 
-  refreshContract():Observable<Contracts[]> {
+  refreshContract(): Observable<Contracts[]> {
     return this.fetchWebsitesContract().pipe(
       tap(contract => {
         this.contract.set(contract);
       })
-    )
+    );
   }
-  refreshMaintenanceContract():Observable<MaintenanceContract[]> {
+  refreshMaintenanceContract(): Observable<MaintenanceContract[]> {
     return this.fetchWebsitesMaintenanceContract().pipe(
       tap(contract => {
         this.maintenanceContract.set(contract);
       })
-    )
+    );
   }
 
   refreshWebsiteAllInformations(): Observable<Website[]> {
@@ -63,8 +65,6 @@ export class UserWebsitesService {
       tap(informations => {
         this.allInformations.set(informations);
       })
-    )
+    );
   }
-
-
 }

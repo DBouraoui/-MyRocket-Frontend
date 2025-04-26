@@ -2,9 +2,15 @@
 <div class="h-full flex flex-col">
   <div class="flex items-center justify-between mb-4">
     <h3 class="text-xl font-semibold text-gray-100">Récapitulatif</h3>
-    <span class="px-3 py-1 text-sm rounded-full"
-          [ngClass]="userSettingsService.user()?.companyName ? 'bg-blue-900 text-blue-100' : 'bg-green-900 text-green-100'">
-      {{ userSettingsService.user()?.companyName ? "Professionnel" : "Particulier" }}
+    <span
+      class="px-3 py-1 text-sm rounded-full"
+      [ngClass]="
+        userSettingsService.user()?.companyName
+          ? 'bg-blue-900 text-blue-100'
+          : 'bg-green-900 text-green-100'
+      "
+    >
+      {{ userSettingsService.user()?.companyName ? 'Professionnel' : 'Particulier' }}
     </span>
   </div>
 
@@ -16,7 +22,16 @@
       </div>
       <div>
         <p class="text-gray-400 text-sm mb-1">Type de compte</p>
-        <p>{{ userSettingsService.user()?.companyName ? "Société: " + userSettingsService.user()?.companyName : "Particulier: " + userSettingsService.user()?.firstname + " " + userSettingsService.user()?.lastname }}</p>
+        <p>
+          {{
+            userSettingsService.user()?.companyName
+              ? 'Société: ' + userSettingsService.user()?.companyName
+              : 'Particulier: ' +
+                userSettingsService.user()?.firstname +
+                ' ' +
+                userSettingsService.user()?.lastname
+          }}
+        </p>
       </div>
     </div>
 
@@ -27,7 +42,7 @@
       </div>
       <div>
         <p class="text-gray-400 text-sm mb-1">Adresse de facturation</p>
-        <div *ngIf="userSettingsService.user()?.address; else noAddress" >
+        <div *ngIf="userSettingsService.user()?.address; else noAddress">
           <p>{{ userSettingsService.user()?.address }}</p>
           <p>{{ userSettingsService.user()?.postCode }} {{ userSettingsService.user()?.city }}</p>
           <p>{{ userSettingsService.user()?.country }}</p>
@@ -45,7 +60,7 @@
       </div>
       <div>
         <p class="text-gray-400 text-sm mb-1">Contact</p>
-        <p>{{ userSettingsService.user()?.email}}</p>
+        <p>{{ userSettingsService.user()?.email }}</p>
         <p *ngIf="userSettingsService.user()?.phone; else noPhone">
           {{ userSettingsService.user()?.phone }}
         </p>
@@ -62,8 +77,14 @@
       </div>
       <div class="gap-2 flex flex-col">
         <p class="text-gray-400 text-sm mb-1">Informations supplémentaires</p>
-        <p>Client depuis: <span class="text-signacore">{{ userSettingsService.user()?.createdAt}}</span></p>
-        <p>Dernière modification: <span class="text-signacore">{{ userSettingsService.user()?.updatedAt}}</span></p>
+        <p>
+          Client depuis:
+          <span class="text-signacore">{{ userSettingsService.user()?.createdAt }}</span>
+        </p>
+        <p>
+          Dernière modification:
+          <span class="text-signacore">{{ userSettingsService.user()?.updatedAt }}</span>
+        </p>
         <p>Statut du compte: <span class="text-green-400">Actif</span></p>
       </div>
     </div>

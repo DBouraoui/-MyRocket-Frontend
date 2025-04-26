@@ -1,21 +1,16 @@
 import { Component } from '@angular/core';
-import {Drawer} from 'primeng/drawer';
-import {Button} from 'primeng/button';
-import {NavbarItems} from '../../../types/Navbar';
-import {RouterLink, RouterLinkActive} from '@angular/router';
+import { Drawer } from 'primeng/drawer';
+import { Button } from 'primeng/button';
+import { NavbarItems } from '../../../types/Navbar';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar-admin',
-  imports: [
-    Drawer,
-    Button,
-    RouterLink,
-    RouterLinkActive
-  ],
+  imports: [Drawer, Button, RouterLink, RouterLinkActive],
   templateUrl: './sidebar.component.html',
 })
 export class SidebarAdminComponent {
-visible: boolean = false;
+  visible: boolean = false;
 
   navbarItem: NavbarItems[] = [
     {

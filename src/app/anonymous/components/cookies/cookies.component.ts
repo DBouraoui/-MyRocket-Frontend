@@ -1,23 +1,19 @@
 import { Component } from '@angular/core';
-import {Button} from 'primeng/button';
-import {PrimeTemplate} from 'primeng/api';
-import {Dialog} from 'primeng/dialog';
-import {CommonModule} from '@angular/common';
+import { Button } from 'primeng/button';
+import { PrimeTemplate } from 'primeng/api';
+import { Dialog } from 'primeng/dialog';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cookies',
-  imports: [
-    Button,
-    Dialog,
-    CommonModule
-  ],
+  imports: [Button, Dialog, CommonModule],
   templateUrl: './cookies.component.html',
 })
 export class CookiesComponent {
   showBanner: boolean = true;
   showInfo: boolean = false;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     // Vérifier si l'utilisateur a déjà fait un choix

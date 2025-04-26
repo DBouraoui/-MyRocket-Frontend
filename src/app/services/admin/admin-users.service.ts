@@ -1,32 +1,26 @@
-import {Injectable, signal, WritableSignal} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable, tap} from 'rxjs';
-import {User} from '../../types/User';
-import {environment} from '../../../../environment';
+import { Injectable, signal, WritableSignal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+import { User } from '../../types/User';
+import { environment } from '../../../../environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminUsersService {
+  users: WritableSignal<User[]> = signal([]);
 
-  users :WritableSignal<User[]> = signal([]);
-
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${environment.SERVER_URL}/api/user`, {
       params: {
-        all: true
-      }
+        all: true,
+      },
     });
   }
 
   refreshUsers() {
-   return this.getUsers().pipe(
-      tap(data => this.users.set(data)),
-    )
+    return this.getUsers().pipe(tap(data => this.users.set(data)));
   }
-
 }

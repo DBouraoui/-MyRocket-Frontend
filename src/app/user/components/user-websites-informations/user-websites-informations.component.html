@@ -1,45 +1,47 @@
- <div class="grid grid-cols-2 gap-4">
-    <!-- Total des sites -->
-    <div class=" rounded-lg p-4 flex items-center transition-transform duration-200">
-      <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
-        <i class="pi pi-globe text-gray-700"></i>
-      </div>
-      <div class="flex flex-col">
-        <span class="text-sm text-gray-100">Total</span>
-        <span class="text-xl font-semibold text-signacore">{{countWebsites()}}</span>
-      </div>
+<div class="grid grid-cols-2 gap-4">
+  <!-- Total des sites -->
+  <div class="rounded-lg p-4 flex items-center transition-transform duration-200">
+    <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-3">
+      <i class="pi pi-globe text-gray-700"></i>
     </div>
-
-    <!-- Sites actifs -->
-    <div class=" rounded-lg p-4 flex items-center transition-transform duration-200">
-      <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
-        <i class="pi pi-check-circle text-green-700"></i>
-      </div>
-      <div class="flex flex-col">
-        <span class="text-sm text-gray-100">Actifs</span>
-        <span class="text-xl font-semibold text-signacore">{{countWebsitesActif()}}</span>
-      </div>
-    </div>
-
-    <!-- Sites mutualisés -->
-    <div class=" rounded-lg p-4 flex items-center transition-transform duration-200 hover:-translate-y-1">
-      <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
-        <i class="pi pi-users text-blue-700"></i>
-      </div>
-      <div class="flex flex-col">
-        <span class="text-sm text-gray-100">Mutualisés</span>
-        <span class="text-xl font-semibold text-signacore">{{countWebsiteMutualised()}}</span>
-      </div>
-    </div>
-
-    <!-- Sites VPS -->
-    <div class=" rounded-lg p-4 flex items-center transition-transform duration-200">
-      <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
-        <i class="pi pi-server text-purple-700"></i>
-      </div>
-      <div class="flex flex-col">
-        <span class="text-sm text-gray-100">VPS</span>
-        <span class="text-xl font-semibold text-signacore">{{countWebsiteVps()}}</span>
-      </div>
+    <div class="flex flex-col">
+      <span class="text-sm text-gray-100">Total</span>
+      <span class="text-xl font-semibold text-signacore">{{ countWebsites() }}</span>
     </div>
   </div>
+
+  <!-- Sites actifs -->
+  <div class="rounded-lg p-4 flex items-center transition-transform duration-200">
+    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3">
+      <i class="pi pi-check-circle text-green-700"></i>
+    </div>
+    <div class="flex flex-col">
+      <span class="text-sm text-gray-100">Actifs</span>
+      <span class="text-xl font-semibold text-signacore">{{ countWebsitesActif() }}</span>
+    </div>
+  </div>
+
+  <!-- Sites mutualisés -->
+  <div
+    class="rounded-lg p-4 flex items-center transition-transform duration-200 hover:-translate-y-1"
+  >
+    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+      <i class="pi pi-users text-blue-700"></i>
+    </div>
+    <div class="flex flex-col">
+      <span class="text-sm text-gray-100">Mutualisés</span>
+      <span class="text-xl font-semibold text-signacore">{{ countWebsiteMutualised() }}</span>
+    </div>
+  </div>
+
+  <!-- Sites VPS -->
+  <div class="rounded-lg p-4 flex items-center transition-transform duration-200">
+    <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+      <i class="pi pi-server text-purple-700"></i>
+    </div>
+    <div class="flex flex-col">
+      <span class="text-sm text-gray-100">VPS</span>
+      <span class="text-xl font-semibold text-signacore">{{ countWebsiteVps() }}</span>
+    </div>
+  </div>
+</div>

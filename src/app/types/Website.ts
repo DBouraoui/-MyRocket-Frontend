@@ -3,13 +3,13 @@ export type Website = {
   title: string;
   description: string;
   url: string;
-  status:string;
+  status: string;
   type: string;
   createdAt: string;
   updatedAt: string;
   contract?: Contracts;
   maintenanceContract?: MaintenanceContract;
-}
+};
 
 export type Contracts = {
   uuid: string;
@@ -22,16 +22,16 @@ export type Contracts = {
   firstPaymentAt: string;
   lastPaymentAt: string;
   nextPaymentAt: string;
-}
+};
 
 export type MaintenanceContract = {
   uuid: string;
-  startAt:  string;
-  endAt:  string;
+  startAt: string;
+  endAt: string;
   firstPaymentAt: string;
-  nextPaymentAt:  string;
-  lastPaymentAt:  string;
-  monthlyCost:  number;
-  reccurence:  string;
-  createdAt:  string;
-}
+  nextPaymentAt: string;
+  lastPaymentAt: string;
+  monthlyCost: number;
+  reccurence: string;
+  createdAt: string;
+};

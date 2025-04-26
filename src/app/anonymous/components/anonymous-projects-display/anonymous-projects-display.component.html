@@ -2,26 +2,51 @@
   <div class="container mx-auto px-4">
     <!-- Titre de section avec style sombre -->
     <div class="text-center mb-16 max-w-2xl mx-auto">
-      <div class="inline-block mb-3 px-4 py-1 bg-indigo-900/60 text-indigo-300 rounded-full text-sm font-medium">Nos créations</div>
-      <h2 class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-blue-400 to-purple-400 mb-4">Derniers Projets</h2>
-      <p class="text-slate-400 text-lg">Découvrez notre savoir-faire à travers une sélection de nos réalisations les plus innovantes.</p>
+      <div
+        class="inline-block mb-3 px-4 py-1 bg-indigo-900/60 text-indigo-300 rounded-full text-sm font-medium"
+      >
+        Nos créations
+      </div>
+      <h2
+        class="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-blue-400 to-purple-400 mb-4"
+      >
+        Derniers Projets
+      </h2>
+      <p class="text-slate-400 text-lg">
+        Découvrez notre savoir-faire à travers une sélection de nos réalisations les plus
+        innovantes.
+      </p>
     </div>
 
     <!-- Grille de projets avec design sombre -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-      @for (project of projectsService.projects().slice(0,3); track project.uuid) {
-        <div class="bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl border border-slate-700">
+      @for (project of projectsService.projects().slice(0, 3); track project.uuid) {
+        <div
+          class="bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl border border-slate-700"
+        >
           <!-- Carousel simplifié -->
           @if (project.pictures && project.pictures.length > 0) {
             <div class="relative">
-              <p-carousel [value]="project.pictures" [numVisible]="1" [numScroll]="1" [circular]="true"
-                          [showIndicators]="true" [showNavigators]="true">
+              <p-carousel
+                [value]="project.pictures"
+                [numVisible]="1"
+                [numScroll]="1"
+                [circular]="true"
+                [showIndicators]="true"
+                [showNavigators]="true"
+              >
                 <ng-template let-picture pTemplate="item">
                   <div class="relative h-60 overflow-hidden">
-                    <img [src]="picture.url" [alt]="project.title" class="w-full h-full object-cover">
+                    <img
+                      [src]="picture.url"
+                      [alt]="project.title"
+                      class="w-full h-full object-cover"
+                    />
 
                     <!-- Overlay subtil -->
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"
+                    ></div>
                   </div>
                 </ng-template>
               </p-carousel>
@@ -30,15 +55,19 @@
               @if (project.tags && project.tags.length) {
                 <div class="absolute bottom-4 left-4 z-10 flex flex-wrap gap-2 max-w-[85%]">
                   @for (tag of project.tags; track $index) {
-                    <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-slate-800/90 backdrop-blur-sm text-indigo-300 shadow-sm border border-indigo-800/30">
-                      {{tag}}
+                    <span
+                      class="text-xs font-medium px-3 py-1.5 rounded-full bg-slate-800/90 backdrop-blur-sm text-indigo-300 shadow-sm border border-indigo-800/30"
+                    >
+                      {{ tag }}
                     </span>
                   }
                 </div>
               }
             </div>
           } @else {
-            <div class="w-full h-60 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
+            <div
+              class="w-full h-60 bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center"
+            >
               <i class="pi pi-folder-open text-slate-500 text-5xl"></i>
             </div>
           }
@@ -47,10 +76,10 @@
           <div class="p-7">
             <!-- En-tête avec date -->
             <div class="flex justify-between items-start mb-3">
-              <h3 class="text-xl font-bold text-slate-200 leading-tight">{{project.title}}</h3>
+              <h3 class="text-xl font-bold text-slate-200 leading-tight">{{ project.title }}</h3>
               @if (project.createdAt) {
                 <span class="text-xs font-medium text-slate-400 whitespace-nowrap">
-                  {{project.createdAt}}
+                  {{ project.createdAt }}
                 </span>
               }
             </div>
@@ -59,7 +88,7 @@
             @if (project.description) {
               <div class="mb-6">
                 <p class="text-slate-400 text-sm line-clamp-2">
-                  {{project.description}}
+                  {{ project.description }}
                 </p>
               </div>
             }
@@ -68,9 +97,11 @@
             @if (project.link && project.link.length) {
               <div class="flex flex-wrap gap-2 mb-6">
                 @for (link of project.link; track $index) {
-                  <a [href]="link.url" target="_blank"
-                     class="inline-flex items-center gap-1.5 text-xs font-medium py-1.5 px-3 rounded-lg
-                           text-slate-300 border border-slate-600 hover:bg-slate-700">
+                  <a
+                    [href]="link.url"
+                    target="_blank"
+                    class="inline-flex items-center gap-1.5 text-xs font-medium py-1.5 px-3 rounded-lg text-slate-300 border border-slate-600 hover:bg-slate-700"
+                  >
                     @if (link.type === 'Github') {
                       <i class="pi pi-github text-gray-300"></i>
                     } @else if (link.type === 'Gitlab') {
@@ -82,7 +113,7 @@
                     } @else {
                       <i class="pi pi-link text-indigo-400"></i>
                     }
-                    {{link.type}}
+                    {{ link.type }}
                   </a>
                 }
               </div>
@@ -95,14 +126,15 @@
                 icon="pi pi-arrow-right"
                 iconPos="right"
                 (click)="openProjectDetails(project)"
-                styleClass="p-button-text p-button-sm text-indigo-300">
+                styleClass="p-button-text p-button-sm text-indigo-300"
+              >
               </p-button>
 
               <!-- Date de mise à jour avec icône -->
               @if (project.updatedAt) {
                 <div class="flex items-center gap-1 text-xs text-slate-400">
                   <i class="pi pi-calendar-plus text-slate-500"></i>
-                  {{project.updatedAt}}
+                  {{ project.updatedAt }}
                 </div>
               }
             </div>
@@ -113,19 +145,27 @@
   </div>
 
   <!-- Project Details Drawer -->
-  <p-drawer [(visible)]="projectDrawerVisible" [position]="'right'" [modal]="true" [closeOnEscape]="true"
-           [style]="{width: '95%', maxWidth: '650px'}"
-            styleClass="project-drawer">
-
+  <p-drawer
+    [(visible)]="projectDrawerVisible"
+    [position]="'right'"
+    [modal]="true"
+    [closeOnEscape]="true"
+    [style]="{ width: '95%', maxWidth: '650px' }"
+    styleClass="project-drawer"
+  >
     @if (selectedProject) {
       <ng-template pTemplate="header">
-        <div class="flex justify-between items-center w-full px-6 py-4 bg-slate-800 border-b border-slate-700">
-          <h2 class="text-2xl font-bold text-indigo-300">{{selectedProject.title}}</h2>
-          <p-button icon="pi pi-times"
-                    [rounded]="true"
-                    [text]="true"
-                    severity="secondary"
-                    (click)="projectDrawerVisible = false">
+        <div
+          class="flex justify-between items-center w-full px-6 py-4 bg-slate-800 border-b border-slate-700"
+        >
+          <h2 class="text-2xl font-bold text-indigo-300">{{ selectedProject.title }}</h2>
+          <p-button
+            icon="pi pi-times"
+            [rounded]="true"
+            [text]="true"
+            severity="secondary"
+            (click)="projectDrawerVisible = false"
+          >
           </p-button>
         </div>
       </ng-template>
@@ -134,11 +174,22 @@
         <!-- Image Gallery -->
         @if (selectedProject.pictures && selectedProject.pictures.length > 0) {
           <div class="mb-6">
-            <p-carousel [value]="selectedProject.pictures" [numVisible]="1" [numScroll]="1" [circular]="true"
-                        [showIndicators]="true" [showNavigators]="true" [autoplayInterval]="4000">
+            <p-carousel
+              [value]="selectedProject.pictures"
+              [numVisible]="1"
+              [numScroll]="1"
+              [circular]="true"
+              [showIndicators]="true"
+              [showNavigators]="true"
+              [autoplayInterval]="4000"
+            >
               <ng-template let-picture pTemplate="item">
                 <div class="relative aspect-video overflow-hidden">
-                  <img [src]="picture.url" [alt]="selectedProject.title" class="w-full object-cover">
+                  <img
+                    [src]="picture.url"
+                    [alt]="selectedProject.title"
+                    class="w-full object-cover"
+                  />
                 </div>
               </ng-template>
             </p-carousel>
@@ -147,30 +198,31 @@
 
         <!-- Project Content -->
         <div class="p-6 space-y-8">
-
           <!-- Project Overview -->
           <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700/50">
             <div class="flex flex-wrap gap-2 mb-4">
               @for (tag of selectedProject.tags; track $index) {
-                <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-indigo-900/30 text-indigo-300">
-                  {{tag}}
+                <span
+                  class="text-xs font-medium px-3 py-1.5 rounded-full bg-indigo-900/30 text-indigo-300"
+                >
+                  {{ tag }}
                 </span>
               }
             </div>
 
             <h3 class="text-lg font-semibold text-slate-200 mb-3">À propos de ce projet</h3>
             <p class="text-slate-400 leading-relaxed">
-              {{selectedProject.description}}
+              {{ selectedProject.description }}
             </p>
 
             <div class="mt-4 grid grid-cols-2 gap-4 text-sm text-slate-400">
               <div>
                 <span class="block text-indigo-300 font-medium mb-1">Date de création</span>
-                <span>{{selectedProject.createdAt}}</span>
+                <span>{{ selectedProject.createdAt }}</span>
               </div>
               <div>
                 <span class="block text-indigo-300 font-medium mb-1">Dernière mise à jour</span>
-                <span>{{selectedProject.updatedAt}}</span>
+                <span>{{ selectedProject.updatedAt }}</span>
               </div>
             </div>
           </div>
@@ -181,8 +233,11 @@
               <h3 class="text-lg font-semibold text-slate-200 mb-4">Liens externes</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 @for (link of selectedProject.link; track $index) {
-                  <a [href]="link.url" target="_blank"
-                     class="flex items-center gap-3 p-3 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 transition-colors">
+                  <a
+                    [href]="link.url"
+                    target="_blank"
+                    class="flex items-center gap-3 p-3 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-600 transition-colors"
+                  >
                     @if (link.type === 'Github') {
                       <i class="pi pi-github text-2xl text-gray-300"></i>
                     } @else if (link.type === 'Gitlab') {
@@ -195,8 +250,10 @@
                       <i class="pi pi-link text-2xl text-indigo-400"></i>
                     }
                     <div>
-                      <div class="font-medium text-slate-200">{{link.type}}</div>
-                      <div class="text-xs text-slate-400 truncate max-w-[180px]">{{link.url}}</div>
+                      <div class="font-medium text-slate-200">{{ link.type }}</div>
+                      <div class="text-xs text-slate-400 truncate max-w-[180px]">
+                        {{ link.url }}
+                      </div>
                     </div>
                   </a>
                 }
@@ -210,15 +267,20 @@
               <h3 class="text-lg font-semibold text-slate-200 mb-4">Gallerie d'images</h3>
               <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                 @for (picture of selectedProject.pictures; track $index) {
-                  <div class="aspect-square rounded-lg overflow-hidden border border-slate-700 cursor-pointer hover:opacity-90 transition-opacity">
-                    <img [src]="picture.url" [alt]="selectedProject.title + ' image ' + $index" class="w-full h-full object-cover">
+                  <div
+                    class="aspect-square rounded-lg overflow-hidden border border-slate-700 cursor-pointer hover:opacity-90 transition-opacity"
+                  >
+                    <img
+                      [src]="picture.url"
+                      [alt]="selectedProject.title + ' image ' + $index"
+                      class="w-full h-full object-cover"
+                    />
                   </div>
                 }
               </div>
             </div>
           }
         </div>
-
       </div>
     }
   </p-drawer>

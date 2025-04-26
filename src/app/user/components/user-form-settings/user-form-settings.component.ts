@@ -1,16 +1,16 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {InputText} from 'primeng/inputtext';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {UserSettingsService} from '../../../services/user/user-settings.service';
-import {DropdownModule} from 'primeng/dropdown';
-import {ButtonDirective} from 'primeng/button';
-import {Ripple} from 'primeng/ripple';
-import {IftaLabel} from 'primeng/iftalabel';
-import {IconField} from 'primeng/iconfield';
-import {InputIcon} from 'primeng/inputicon';
-import {Select} from 'primeng/select';
-import {SelectButton} from 'primeng/selectbutton';
-import {MessageService} from 'primeng/api';
+import { Component, inject, OnInit } from '@angular/core';
+import { InputText } from 'primeng/inputtext';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UserSettingsService } from '../../../services/user/user-settings.service';
+import { DropdownModule } from 'primeng/dropdown';
+import { ButtonDirective } from 'primeng/button';
+import { Ripple } from 'primeng/ripple';
+import { IftaLabel } from 'primeng/iftalabel';
+import { IconField } from 'primeng/iconfield';
+import { InputIcon } from 'primeng/inputicon';
+import { Select } from 'primeng/select';
+import { SelectButton } from 'primeng/selectbutton';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-user-form-settings',
@@ -30,7 +30,7 @@ import {MessageService} from 'primeng/api';
 })
 export class UserFormSettingsComponent implements OnInit {
   messageService = inject(MessageService);
-  isLoading:boolean = false;
+  isLoading: boolean = false;
   countries = [
     {
       name: 'USA',
@@ -43,18 +43,18 @@ export class UserFormSettingsComponent implements OnInit {
     },
     {
       name: 'Suisse',
-    }
-  ]
-  TypeOption =[
+    },
+  ];
+  TypeOption = [
     {
-      name: "Sociétée",
+      name: 'Sociétée',
       value: true,
     },
     {
-      name: "Particulier",
-      value: false
-    }
-  ]
+      name: 'Particulier',
+      value: false,
+    },
+  ];
   userSettingsService = inject(UserSettingsService);
   formGroup!: FormGroup;
 
@@ -62,15 +62,19 @@ export class UserFormSettingsComponent implements OnInit {
     this.formGroup = new FormGroup({
       firstname: new FormControl(this.userSettingsService.user()?.firstname),
       lastname: new FormControl(this.userSettingsService.user()?.lastname),
-      companyName: new FormControl(this.userSettingsService.user()?.companyName ),
-      address: new FormControl(this.userSettingsService.user()?.address,[ Validators.required]),
-      postCode: new FormControl(this.userSettingsService.user()?.postCode,[ Validators.required]),
-      city: new FormControl(this.userSettingsService.user()?.city,[ Validators.required]),
-      country: new FormControl({name: this.userSettingsService.user()?.country},[ Validators.required]),
-      phone: new FormControl(this.userSettingsService.user()?.phone,[ Validators.required]),
-      email: new FormControl(this.userSettingsService.user()?.email,[ Validators.required]),
-      isCompany: new FormControl(!!this.userSettingsService.user()?.companyName,[Validators.required]),
-    })
+      companyName: new FormControl(this.userSettingsService.user()?.companyName),
+      address: new FormControl(this.userSettingsService.user()?.address, [Validators.required]),
+      postCode: new FormControl(this.userSettingsService.user()?.postCode, [Validators.required]),
+      city: new FormControl(this.userSettingsService.user()?.city, [Validators.required]),
+      country: new FormControl({ name: this.userSettingsService.user()?.country }, [
+        Validators.required,
+      ]),
+      phone: new FormControl(this.userSettingsService.user()?.phone, [Validators.required]),
+      email: new FormControl(this.userSettingsService.user()?.email, [Validators.required]),
+      isCompany: new FormControl(!!this.userSettingsService.user()?.companyName, [
+        Validators.required,
+      ]),
+    });
   }
 
   onSubmit() {
@@ -96,8 +100,7 @@ export class UserFormSettingsComponent implements OnInit {
       postCode: this.formGroup.get('postCode')?.value,
       city: this.formGroup.get('city')?.value,
       country: country.name,
-    }
-
+    };
 
     this.userSettingsService.updateProfile(payload).subscribe({
       next: (data) => {
@@ -113,11 +116,11 @@ export class UserFormSettingsComponent implements OnInit {
         this.messageService.clear();
         this.messageService.add({
           severity: 'error',
-          summary: 'Erreur d\'envoie des données',
+          summary: "Erreur d'envoie des données",
         });
         this.isLoading = false;
-      }
-    })
+      },
+    });
   }
 
   rollback() {
@@ -128,13 +131,12 @@ export class UserFormSettingsComponent implements OnInit {
     this.formGroup.get('address')?.setValue(this.userSettingsService.user()?.address);
     this.formGroup.get('postCode')?.setValue(this.userSettingsService.user()?.postCode);
     this.formGroup.get('city')?.setValue(this.userSettingsService.user()?.city);
-    this.formGroup.get('country')?.setValue({name: this.userSettingsService.user()?.country});
+    this.formGroup.get('country')?.setValue({ name: this.userSettingsService.user()?.country });
 
     this.messageService.clear();
     this.messageService.add({
       severity: 'info',
-      summary: 'Les données on été remise comme a l\'origine',
+      summary: "Les données on été remise comme a l'origine",
     });
   }
-
 }

@@ -1,23 +1,22 @@
 import { Component } from '@angular/core';
-import {Button} from 'primeng/button';
-import {Checkbox} from 'primeng/checkbox';
-import {FileUpload, FileUploadHandlerEvent} from 'primeng/fileupload';
-import {IftaLabel} from 'primeng/iftalabel';
-import {InputText} from 'primeng/inputtext';
-import {MultiSelect} from 'primeng/multiselect';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {SelectButton} from 'primeng/selectbutton';
-import {Textarea} from 'primeng/textarea';
-import {MessageService, PrimeTemplate} from 'primeng/api';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../../environment';
-import {Drawer} from 'primeng/drawer';
-import {Tooltip} from 'primeng/tooltip';
+import { Button } from 'primeng/button';
+import { Checkbox } from 'primeng/checkbox';
+import { FileUpload, FileUploadHandlerEvent } from 'primeng/fileupload';
+import { IftaLabel } from 'primeng/iftalabel';
+import { InputText } from 'primeng/inputtext';
+import { MultiSelect } from 'primeng/multiselect';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SelectButton } from 'primeng/selectbutton';
+import { Textarea } from 'primeng/textarea';
+import { MessageService, PrimeTemplate } from 'primeng/api';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../../environment';
+import { Drawer } from 'primeng/drawer';
+import { Tooltip } from 'primeng/tooltip';
 
 interface Tag {
   name: string;
 }
-
 
 @Component({
   selector: 'app-anonymous-contact-form',
@@ -33,23 +32,22 @@ interface Tag {
     Textarea,
     Drawer,
     Tooltip,
-    PrimeTemplate
+    PrimeTemplate,
   ],
   templateUrl: './anonymous-contact-form.component.html',
 })
 export class AnonymousContactFormComponent {
-
   constructor(
     private messageService: MessageService,
     private http: HttpClient
   ) {}
-  visible :boolean = false;
+  visible: boolean = false;
   imagePreviewUrl: string | null = null;
   formGroup!: FormGroup;
   isLoading: boolean = false;
   stateOptions: any[] = [
     { label: 'Particulier', value: false },
-    { label: 'Entreprise', value: true }
+    { label: 'Entreprise', value: true },
   ];
   tags: Tag[] = [
     { name: 'Site vitrine' },
@@ -58,8 +56,8 @@ export class AnonymousContactFormComponent {
     { name: 'Back office' },
     { name: 'SEO' },
     { name: 'Déploiement' },
-    { name: 'Hébergement'},
-    { name: 'Conseil'},
+    { name: 'Hébergement' },
+    { name: 'Conseil' },
     { name: 'Développement mobile' },
     { name: 'Maintenance' },
     { name: 'Optimisation de performance' },
@@ -71,20 +69,26 @@ export class AnonymousContactFormComponent {
   ngOnInit() {
     this.formGroup = new FormGroup({
       isCompany: new FormControl(false),
-      firstname: new FormControl("", [Validators.required]),
-      lastname: new FormControl("", [Validators.required]),
-      companyName: new FormControl(""),
-      email: new FormControl("", [Validators.required, Validators.email, Validators.maxLength(200)]),
-      title: new FormControl("",[Validators.required, Validators.maxLength(200)]),
-      description: new FormControl("",[Validators.required, Validators.maxLength(255)]),
-      tags: new FormControl("", [Validators.required]),
+      firstname: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required]),
+      companyName: new FormControl(''),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email,
+        Validators.maxLength(200),
+      ]),
+      title: new FormControl('', [Validators.required, Validators.maxLength(200)]),
+      description: new FormControl('', [Validators.required, Validators.maxLength(255)]),
+      tags: new FormControl('', [Validators.required]),
       cgv: new FormControl(false, [Validators.required]),
       pictures: new FormControl(File),
     });
 
     this.formGroup.get('isCompany')?.valueChanges.subscribe(isCompany => {
       if (isCompany) {
-        this.formGroup.get('companyName')?.setValidators([Validators.required,Validators.maxLength(200)]);
+        this.formGroup
+          .get('companyName')
+          ?.setValidators([Validators.required, Validators.maxLength(200)]);
         this.formGroup.get('firstname')?.clearValidators();
         this.formGroup.get('firstname')?.reset();
         this.formGroup.get('lastname')?.clearValidators();
@@ -92,15 +96,18 @@ export class AnonymousContactFormComponent {
       } else {
         this.formGroup.get('companyName')?.clearValidators();
         this.formGroup.get('companyName')?.reset();
-        this.formGroup.get('firstname')?.setValidators([Validators.required,Validators.maxLength(200)]);
-        this.formGroup.get('lastname')?.setValidators([Validators.required,Validators.maxLength(200)]);
+        this.formGroup
+          .get('firstname')
+          ?.setValidators([Validators.required, Validators.maxLength(200)]);
+        this.formGroup
+          .get('lastname')
+          ?.setValidators([Validators.required, Validators.maxLength(200)]);
       }
 
       this.formGroup.get('companyName')?.updateValueAndValidity();
       this.formGroup.get('firstname')?.updateValueAndValidity();
       this.formGroup.get('lastname')?.updateValueAndValidity();
     });
-
   }
 
   customUpload($event: FileUploadHandlerEvent) {
@@ -149,7 +156,7 @@ export class AnonymousContactFormComponent {
     }
 
     this.http.post(`${environment.SERVER_URL}/api/contact`, formData).subscribe({
-      next: (res)=>{
+      next: res => {
         this.messageService.add({
           severity: 'success',
           summary: 'Le formulaire a été soumis',
@@ -159,16 +166,15 @@ export class AnonymousContactFormComponent {
         this.formGroup.get('isCompany')?.setValue(false);
         this.imagePreviewUrl = null;
       },
-      error: (err)=>{
+      error: err => {
         console.log(err);
         this.messageService.add({
           severity: 'error',
           summary: 'Erreur de soumission',
-          detail: 'Le formulaire n\'a pas été soumis une erreur est survenu',
+          detail: "Le formulaire n'a pas été soumis une erreur est survenu",
         });
-      }
-    })
-
+      },
+    });
   }
 
   normalizeTags(tags: Tag[]): string[] {

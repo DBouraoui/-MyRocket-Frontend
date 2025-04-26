@@ -1,21 +1,21 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {IftaLabel} from 'primeng/iftalabel';
-import {InputText} from 'primeng/inputtext';
-import {MultiSelect} from 'primeng/multiselect';
-import {Button} from 'primeng/button';
-import {HttpClient} from '@angular/common/http';
-import {NgForOf, NgIf} from '@angular/common';
-import {FloatLabel} from 'primeng/floatlabel';
-import {FileSelectEvent, FileUpload} from 'primeng/fileupload';
-import {Textarea} from 'primeng/textarea';
-import {MessageService} from 'primeng/api';
-import {AdminProjectsService} from '../../../../../services/admin/admin-projects.service';
-import {environment} from '../../../../../../../environment';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { IftaLabel } from 'primeng/iftalabel';
+import { InputText } from 'primeng/inputtext';
+import { MultiSelect } from 'primeng/multiselect';
+import { Button } from 'primeng/button';
+import { HttpClient } from '@angular/common/http';
+import { NgForOf, NgIf } from '@angular/common';
+import { FloatLabel } from 'primeng/floatlabel';
+import { FileSelectEvent, FileUpload } from 'primeng/fileupload';
+import { Textarea } from 'primeng/textarea';
+import { MessageService } from 'primeng/api';
+import { AdminProjectsService } from '../../../../../services/admin/admin-projects.service';
+import { environment } from '../../../../../../../environment';
 
-type tags ={
-  name: string,
-}
+type tags = {
+  name: string;
+};
 
 interface UrlItem {
   type: string;
@@ -34,36 +34,36 @@ interface UrlItem {
     FloatLabel,
     FileUpload,
     Textarea,
-    NgIf
+    NgIf,
   ],
   templateUrl: './dashboard-admin-projects-form-create.component.html',
 })
 export class DashboardAdminProjectsFormCreateComponent implements OnInit {
-  isLoading :boolean = false;
+  isLoading: boolean = false;
   adminProjectsService = inject(AdminProjectsService);
   formGroup!: FormGroup;
   messageService: MessageService = inject(MessageService);
   http = inject(HttpClient);
   allUrlValidate: UrlItem[] = [];
-  allPictures : File[] = [];
+  allPictures: File[] = [];
   previewUrls: string[] = [];
 
   tags: tags[] = [
-    {name: 'E-commerce'},
-    {name: 'Site vitrine'},
-    {name: 'Application web'},
-    {name: 'back Office'},
-    {name: 'Wordpress'},
-  ]
+    { name: 'E-commerce' },
+    { name: 'Site vitrine' },
+    { name: 'Application web' },
+    { name: 'back Office' },
+    { name: 'Wordpress' },
+  ];
 
   typeURl: tags[] = [
-    {name: 'Linkdin'},
-    {name: 'Github'},
-    {name: 'Gitlab'},
-    {name: 'Google'},
-    {name: 'Youtube'},
-    {name: 'BitBucket'},
-  ]
+    { name: 'Linkdin' },
+    { name: 'Github' },
+    { name: 'Gitlab' },
+    { name: 'Google' },
+    { name: 'Youtube' },
+    { name: 'BitBucket' },
+  ];
 
   ngOnInit() {
     this.formGroup = new FormGroup({
@@ -71,8 +71,8 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
       description: new FormControl('', [Validators.required]),
       link: new FormControl('', [Validators.required]),
       tags: new FormControl('', [Validators.required]),
-      typeUrl : new FormControl([], [Validators.required]),
-    })
+      typeUrl: new FormControl([], [Validators.required]),
+    });
   }
 
   onSubmit() {
@@ -92,22 +92,22 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
     }
 
     this.http.post<any>(`${environment.SERVER_URL}/api/project`, formData).subscribe({
-      next:(resp) => {
+      next: resp => {
         this.messageService.add({
           severity: 'success',
           summary: 'Project créer avec succes',
-        })
+        });
         this.formGroup.reset();
         this.adminProjectsService.refreshProjects().subscribe();
         this.isLoading = false;
       },
-      error:(err)  => {
+      error: err => {
         this.messageService.add({
           severity: 'error',
-          summary: 'Erreur d\'envoi du formulaire'
-        })
+          summary: "Erreur d'envoi du formulaire",
+        });
         this.isLoading = false;
-      }
+      },
     });
   }
 
@@ -119,14 +119,13 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
       if (selectedTag.name) {
         this.allUrlValidate.push({
           type: selectedTag.name,
-          link: link
+          link: link,
         });
-      }
-      else if (Array.isArray(selectedTag)) {
+      } else if (Array.isArray(selectedTag)) {
         selectedTag.forEach(tag => {
           this.allUrlValidate.push({
             type: tag.name,
-            link: link
+            link: link,
           });
         });
       }
@@ -137,7 +136,7 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
 
   normalizeTags(tags: tags[]): string[] {
     return tags.map(item => {
-      return item.name
+      return item.name;
     });
   }
 
@@ -155,5 +154,4 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
     };
     reader.readAsDataURL(file);
   }
-
 }

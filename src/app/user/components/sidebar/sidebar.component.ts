@@ -1,22 +1,16 @@
 import { Component } from '@angular/core';
-import {Button, ButtonDirective} from "primeng/button";
-import {Drawer} from "primeng/drawer";
-import {RouterLink, RouterLinkActive} from "@angular/router";
-import {NavbarItems} from '../../../types/Navbar';
+import { Button, ButtonDirective } from 'primeng/button';
+import { Drawer } from 'primeng/drawer';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { NavbarItems } from '../../../types/Navbar';
 
 @Component({
   selector: 'app-user-sidebar',
-  imports: [
-    Button,
-    Drawer,
-    RouterLinkActive,
-    RouterLink,
-    ButtonDirective
-  ],
+  imports: [Button, Drawer, RouterLinkActive, RouterLink, ButtonDirective],
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent {
-  visible : boolean = false
+  visible: boolean = false;
   navbarItem: NavbarItems[] = [
     {
       title: 'Mon tableau de bord',
@@ -30,7 +24,7 @@ export class SidebarComponent {
     },
     {
       title: 'Mes paiements',
-      link: '/utilisateur/projects',
+      link: '/utilisateur/paiments',
       icon: 'pi-credit-card',
     },
     // {

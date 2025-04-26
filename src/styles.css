@@ -1,8 +1,12 @@
-@import "tailwindcss";
-@import "primeicons/primeicons.css";
+@import 'tailwindcss';
+@import 'primeicons/primeicons.css';
+
+html {
+  scroll-behavior: smooth;
+}
 
 @theme {
-  --color-signacore: #00A877;
+  --color-signacore: #00a877;
 }
 
 body {

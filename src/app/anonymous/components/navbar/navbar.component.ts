@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive} from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NavbarItems } from '../../../types/Navbar';
-import {Button} from 'primeng/button';
-import {OverlayPanelModule} from 'primeng/overlaypanel';
-
+import { Button } from 'primeng/button';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @Component({
   selector: 'app-navbar',
@@ -70,7 +69,7 @@ export class NavbarComponent {
   toggleMobileMenu(): void {
     this.mobileMenuOpen = !this.mobileMenuOpen;
     if (!this.mobileMenuOpen) {
-      this.navbarItem.forEach((item) => {
+      this.navbarItem.forEach(item => {
         if (item.subContent) {
           item.isOpen = false;
         }

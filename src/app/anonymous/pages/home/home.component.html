@@ -1,4 +1,6 @@
-<section class="relative overflow-hidden bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 min-h-[100vh]">
+<section
+  class="relative overflow-hidden bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 min-h-[100vh]"
+>
   <!-- Overlay pattern -->
   <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:30px_30px]"></div>
 
@@ -11,24 +13,36 @@
     <div class="flex flex-col lg:flex-row items-center gap-12">
       <!-- Text content -->
       <div class="lg:w-1/2 space-y-6">
-        <div class="inline-flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-2">
+        <div
+          class="inline-flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full mb-2"
+        >
           <div class="w-2 h-2 rounded-full bg-blue-500 animate-pulse mr-2"></div>
           <span class="text-blue-200 text-sm font-medium">Propulsez votre business en ligne</span>
         </div>
 
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-          Votre succès numérique avec <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">MyRocket</span>
+          Votre succès numérique avec
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500"
+            >MyRocket</span
+          >
         </h1>
 
         <p class="text-gray-300 text-lg max-w-xl">
-          Nous concevons des sites web et applications sur mesure pour votre entreprise, complétés par des outils SaaS performants pour optimiser votre productivité.
+          Nous concevons des sites web et applications sur mesure pour votre entreprise, complétés
+          par des outils SaaS performants pour optimiser votre productivité.
         </p>
 
         <div class="flex flex-wrap gap-4 pt-4">
-          <button class="cursor-pointer px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-300 shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 font-medium">
+          <button
+            (click)="scrollToSection('service')"
+            class="cursor-pointer px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-300 shadow-lg shadow-blue-600/25 hover:shadow-blue-600/40 font-medium"
+          >
             Nos services
           </button>
-          <button routerLink="../contact" class="cursor-pointer px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/20 rounded-lg transition-all duration-300">
+          <button
+            routerLink="../contact"
+            class="cursor-pointer px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/20 rounded-lg transition-all duration-300"
+          >
             Contactez-nous
           </button>
         </div>
@@ -64,7 +78,9 @@
 
       <!-- Hero image/illustration -->
       <div class="lg:w-1/2 relative">
-        <div class="relative z-10 bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 shadow-xl">
+        <div
+          class="relative z-10 bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 shadow-xl"
+        >
           <div class="relative aspect-[4/3] overflow-hidden rounded-lg">
             <!-- Dashboard mockup image -->
             <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-4">
@@ -98,7 +114,9 @@
             </div>
 
             <!-- Code fragment overlay -->
-            <div class="absolute -bottom-6 -right-6 w-40 h-40 bg-gray-800/80 backdrop-blur-sm rounded-lg p-3 shadow-lg transform rotate-6 border border-gray-700">
+            <div
+              class="absolute -bottom-6 -right-6 w-40 h-40 bg-gray-800/80 backdrop-blur-sm rounded-lg p-3 shadow-lg transform rotate-6 border border-gray-700"
+            >
               <div class="text-blue-400 text-xs font-mono">
                 <div>&lt;<span class="text-purple-400">div</span>&gt;</div>
                 <div>&nbsp;&nbsp;<span class="text-green-400">MyRocket</span></div>
@@ -126,10 +144,14 @@
         </div>
 
         <!-- Floating elements -->
-        <div class="absolute -top-6 -left-6 w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-600/30">
+        <div
+          class="absolute -top-6 -left-6 w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-600/30"
+        >
           <i class="pi pi-rocket text-white text-xl"></i>
         </div>
-        <div class="absolute -bottom-4 -right-4 w-20 h-20 rounded-full bg-purple-600/20 backdrop-blur-sm flex items-center justify-center border border-purple-500/30">
+        <div
+          class="absolute -bottom-4 -right-4 w-20 h-20 rounded-full bg-purple-600/20 backdrop-blur-sm flex items-center justify-center border border-purple-500/30"
+        >
           <i class="pi pi-bolt text-purple-300 text-2xl"></i>
         </div>
       </div>
@@ -140,41 +162,67 @@
 <section class="py-24 bg-gradient-to-b from-white to-gray-100 relative">
   <!-- Vague de transition du haut (connecte avec la hero section) -->
   <div class="absolute top-0 left-0 right-0 -mt-1">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none" class="w-full h-24">
-      <path fill="#ffffff" fill-opacity="1" d="M0,32L48,74.7C96,117,192,203,288,224C384,245,480,203,576,160C672,117,768,75,864,80C960,85,1056,139,1152,160C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1440 320"
+      preserveAspectRatio="none"
+      class="w-full h-24"
+    >
+      <path
+        fill="#ffffff"
+        fill-opacity="1"
+        d="M0,32L48,74.7C96,117,192,203,288,224C384,245,480,203,576,160C672,117,768,75,864,80C960,85,1056,139,1152,160C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+      ></path>
     </svg>
   </div>
 
   <div class="container mx-auto px-4 relative z-10">
     <!-- En-tête de section -->
     <div class="text-center max-w-3xl mx-auto mb-16">
-      <div class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4">
-        Nos Services
+      <div
+        class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4"
+      >
+        <a href="#service">Nos Services</a>
       </div>
       <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-        Des solutions digitales <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">pensées pour votre succès</span>
+        Des solutions digitales
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600"
+          >pensées pour votre succès</span
+        >
       </h2>
       <p class="text-gray-600">
-        MyRocket vous accompagne dans votre transformation numérique avec des services sur mesure adaptés à vos besoins spécifiques.
+        MyRocket vous accompagne dans votre transformation numérique avec des services sur mesure
+        adaptés à vos besoins spécifiques.
       </p>
     </div>
 
     <!-- Cartes de services -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       <!-- Carte 1: Création d'application web -->
-      <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200 relative flex flex-col h-full">
+      <div
+        class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200 relative flex flex-col h-full"
+      >
         <!-- En-tête de carte avec icône -->
         <div class="relative p-6 pb-4">
-          <div class="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors duration-300"></div>
+          <div
+            class="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors duration-300"
+          ></div>
           <div class="relative z-10">
             <div class="flex items-center gap-4 mb-4">
-              <div class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-200">
+              <div
+                class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-200"
+              >
                 <i class="pi pi-desktop text-white text-xl"></i>
               </div>
-              <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">Applications Web</h3>
+              <h3
+                class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300"
+              >
+                Applications Web
+              </h3>
             </div>
             <p class="text-gray-600 mb-4">
-              Solutions digitales sur mesure pour les entreprises nécessitant des applications web complexes et personnalisées.
+              Solutions digitales sur mesure pour les entreprises nécessitant des applications web
+              complexes et personnalisées.
             </p>
           </div>
         </div>
@@ -202,30 +250,33 @@
             </li>
           </ul>
         </div>
-
-        <!-- Pied de carte -->
-        <div class="px-6 pb-6 pt-2 mt-auto">
-          <a href="#" class="inline-flex items-center text-blue-600 font-medium text-sm group-hover:text-blue-700 transition-colors">
-            En savoir plus
-            <i class="pi pi-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-          </a>
-        </div>
       </div>
 
       <!-- Carte 2: Création de site web -->
-      <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200 relative flex flex-col h-full">
+      <div
+        class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200 relative flex flex-col h-full"
+      >
         <!-- En-tête de carte avec icône -->
         <div class="relative p-6 pb-4">
-          <div class="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors duration-300"></div>
+          <div
+            class="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors duration-300"
+          ></div>
           <div class="relative z-10">
             <div class="flex items-center gap-4 mb-4">
-              <div class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-200">
+              <div
+                class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-200"
+              >
                 <i class="pi pi-globe text-white text-xl"></i>
               </div>
-              <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">Sites Web</h3>
+              <h3
+                class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300"
+              >
+                Sites Web
+              </h3>
             </div>
             <p class="text-gray-600 mb-4">
-              Sites web professionnels avec back-office intégré permettant aux entreprises de gérer leur contenu en toute autonomie.
+              Sites web professionnels avec back-office intégré permettant aux entreprises de gérer
+              leur contenu en toute autonomie.
             </p>
           </div>
         </div>
@@ -253,30 +304,33 @@
             </li>
           </ul>
         </div>
-
-        <!-- Pied de carte -->
-        <div class="px-6 pb-6 pt-2 mt-auto">
-          <a href="#" class="inline-flex items-center text-blue-600 font-medium text-sm group-hover:text-blue-700 transition-colors">
-            En savoir plus
-            <i class="pi pi-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-          </a>
-        </div>
       </div>
 
       <!-- Carte 3: Site Web Vitrine -->
-      <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200 relative flex flex-col h-full">
+      <div
+        class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200 relative flex flex-col h-full"
+      >
         <!-- En-tête de carte avec icône -->
         <div class="relative p-6 pb-4">
-          <div class="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors duration-300"></div>
+          <div
+            class="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-blue-50 group-hover:bg-blue-100 transition-colors duration-300"
+          ></div>
           <div class="relative z-10">
             <div class="flex items-center gap-4 mb-4">
-              <div class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-200">
+              <div
+                class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-200"
+              >
                 <i class="pi pi-window-maximize text-white text-xl"></i>
               </div>
-              <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">Sites Vitrines</h3>
+              <h3
+                class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300"
+              >
+                Sites Vitrines
+              </h3>
             </div>
             <p class="text-gray-600 mb-4">
-              Sites web élégants et performants pour valoriser votre image de marque et votre activité de façon efficace.
+              Sites web élégants et performants pour valoriser votre image de marque et votre
+              activité de façon efficace.
             </p>
           </div>
         </div>
@@ -304,46 +358,54 @@
             </li>
           </ul>
         </div>
-
-        <!-- Pied de carte -->
-        <div class="px-6 pb-6 pt-2 mt-auto">
-          <a href="#" class="inline-flex items-center text-blue-600 font-medium text-sm group-hover:text-blue-700 transition-colors">
-            En savoir plus
-            <i class="pi pi-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-          </a>
-        </div>
       </div>
     </div>
 
     <!-- Section des outils SaaS -->
-    <div class="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 relative overflow-hidden shadow-lg">
-      <div class="absolute top-0 right-0 w-64 h-64 bg-blue-100 rounded-full opacity-70 -mr-32 -mt-32 blur-3xl"></div>
-      <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-100 rounded-full opacity-70 -ml-32 -mb-32 blur-3xl"></div>
+    <div
+      class="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 relative overflow-hidden shadow-lg"
+    >
+      <div
+        class="absolute top-0 right-0 w-64 h-64 bg-blue-100 rounded-full opacity-70 -mr-32 -mt-32 blur-3xl"
+      ></div>
+      <div
+        class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-100 rounded-full opacity-70 -ml-32 -mb-32 blur-3xl"
+      ></div>
 
       <div class="relative z-10">
         <div class="text-center mb-12">
-          <div class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-4">
+          <div
+            class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-4"
+          >
             Nos Outils SaaS <span class="text-signacore">bientôt disponible</span>
           </div>
           <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
             Des solutions clé en main pour optimiser votre productivité
           </h3>
           <p class="text-gray-600 max-w-2xl mx-auto">
-            Intégrez facilement nos outils SaaS français dans votre flux de travail pour automatiser vos processus et gagner du temps.
+            Intégrez facilement nos outils SaaS français dans votre flux de travail pour automatiser
+            vos processus et gagner du temps.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <!-- Outil SaaS 1: Factureo -->
-          <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 flex flex-col h-full border border-gray-100 group blur-[3px]">
+          <div
+            class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 flex flex-col h-full border border-gray-100 group blur-[3px]"
+          >
             <div class="flex items-center gap-4 mb-4">
               <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center">
                 <i class="pi pi-file-pdf text-white text-lg"></i>
               </div>
-              <h4 class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">Factureo</h4>
+              <h4
+                class="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300"
+              >
+                Factureo
+              </h4>
             </div>
             <p class="text-gray-600 mb-6">
-              Service de facturation en ligne français conçu spécifiquement pour les auto-entrepreneurs, TPE et PME.
+              Service de facturation en ligne français conçu spécifiquement pour les
+              auto-entrepreneurs, TPE et PME.
             </p>
             <div class="grid grid-cols-2 gap-4 mb-6 flex-1">
               <div class="flex items-start gap-2">
@@ -364,24 +426,36 @@
               </div>
             </div>
             <div class="mt-auto pt-4 flex items-center justify-between">
-              <a href="#" class="inline-flex items-center text-blue-600 font-medium text-sm group-hover:text-blue-700 transition-colors">
+              <a
+                href="#"
+                class="inline-flex items-center text-blue-600 font-medium text-sm group-hover:text-blue-700 transition-colors"
+              >
                 Découvrir Factureo
-                <i class="pi pi-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                <i
+                  class="pi pi-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"
+                ></i>
               </a>
               <span class="text-gray-500 text-sm">À partir de 19€/mois</span>
             </div>
           </div>
 
           <!-- Outil SaaS 2: Signacore -->
-          <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 flex flex-col h-full border border-gray-100 group blur-[3px]">
+          <div
+            class="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 flex flex-col h-full border border-gray-100 group blur-[3px]"
+          >
             <div class="flex items-center gap-4 mb-4">
               <div class="w-10 h-10 rounded-lg bg-indigo-600 flex items-center justify-center">
                 <i class="pi pi-check-square text-white text-lg"></i>
               </div>
-              <h4 class="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors duration-300">Signacore</h4>
+              <h4
+                class="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors duration-300"
+              >
+                Signacore
+              </h4>
             </div>
             <p class="text-gray-600 mb-6">
-              Solution de signature électronique sécurisée et conforme à la réglementation française.
+              Solution de signature électronique sécurisée et conforme à la réglementation
+              française.
             </p>
             <div class="grid grid-cols-2 gap-4 mb-6 flex-1">
               <div class="flex items-start gap-2">
@@ -402,9 +476,14 @@
               </div>
             </div>
             <div class="mt-auto pt-4 flex items-center justify-between">
-              <a href="#" class="inline-flex items-center text-indigo-600 font-medium text-sm group-hover:text-indigo-700 transition-colors">
+              <a
+                href="#"
+                class="inline-flex items-center text-indigo-600 font-medium text-sm group-hover:text-indigo-700 transition-colors"
+              >
                 Découvrir Signacore
-                <i class="pi pi-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                <i
+                  class="pi pi-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"
+                ></i>
               </a>
               <span class="text-gray-500 text-sm">À partir de 15€/mois</span>
             </div>
@@ -415,15 +494,20 @@
 
     <!-- CTA -->
     <div class="mt-16 text-center">
-      <a href="#" class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-300 shadow-lg shadow-blue-600/20 hover:shadow-blue-600/30 text-sm font-medium">
+      <button
+        disabled
+        class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-300 shadow-lg shadow-blue-600/20 hover:shadow-blue-600/30 text-sm font-medium"
+      >
         Découvrir tous nos services
         <i class="pi pi-arrow-right ml-2"></i>
-      </a>
+      </button>
     </div>
   </div>
 </section>
 
-<section class="py-16 bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 relative text-white overflow-hidden">
+<section
+  class="py-16 bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 relative text-white overflow-hidden"
+>
   <!-- Éléments décoratifs simplifiés -->
   <div class="absolute inset-0 bg-grid-white/[0.03] bg-[size:30px_30px]"></div>
   <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 rounded-full blur-[80px]"></div>
@@ -431,92 +515,139 @@
   <div class="container mx-auto px-4 relative z-10">
     <!-- En-tête de section -->
     <div class="text-center max-w-3xl mx-auto mb-12">
-      <div class="inline-block px-3 py-1 bg-blue-900/50 text-blue-300 rounded-full text-sm font-medium mb-4 backdrop-blur-sm">
+      <div
+        class="inline-block px-3 py-1 bg-blue-900/50 text-blue-300 rounded-full text-sm font-medium mb-4 backdrop-blur-sm"
+      >
         Notre Méthode
       </div>
       <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-        Un processus <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">clair et efficace</span>
+        Un processus
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400"
+          >clair et efficace</span
+        >
       </h2>
       <p class="text-gray-300">
-        De la première rencontre jusqu'à la livraison, nous vous accompagnons avec transparence et rigueur.
+        De la première rencontre jusqu'à la livraison, nous vous accompagnons avec transparence et
+        rigueur.
       </p>
     </div>
 
     <!-- Process simplifié en cartes horizontales -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
       <!-- Étape 1: Consultation -->
-      <div class="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:bg-white/10 transition-all duration-300 flex items-start gap-4">
-        <div class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/20">
+      <div
+        class="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:bg-white/10 transition-all duration-300 flex items-start gap-4"
+      >
+        <div
+          class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/20"
+        >
           <i class="pi pi-comments text-white text-xl"></i>
         </div>
         <div>
           <h3 class="text-xl font-bold text-white mb-2">1. Échange initial</h3>
-          <p class="text-gray-300 text-sm">Nous comprenons vos besoins et objectifs pour définir ensemble les contours du projet.</p>
+          <p class="text-gray-300 text-sm">
+            Nous comprenons vos besoins et objectifs pour définir ensemble les contours du projet.
+          </p>
         </div>
       </div>
 
       <!-- Étape 2: Proposition -->
-      <div class="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:bg-white/10 transition-all duration-300 flex items-start gap-4">
-        <div class="w-12 h-12 rounded-lg bg-indigo-600 flex items-center justify-center shrink-0 shadow-lg shadow-indigo-600/20">
+      <div
+        class="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:bg-white/10 transition-all duration-300 flex items-start gap-4"
+      >
+        <div
+          class="w-12 h-12 rounded-lg bg-indigo-600 flex items-center justify-center shrink-0 shadow-lg shadow-indigo-600/20"
+        >
           <i class="pi pi-file-edit text-white text-xl"></i>
         </div>
         <div>
           <h3 class="text-xl font-bold text-white mb-2">2. Proposition & Devis</h3>
-          <p class="text-gray-300 text-sm">Nous élaborons une proposition détaillée incluant les fonctionnalités, délais et budget.</p>
+          <p class="text-gray-300 text-sm">
+            Nous élaborons une proposition détaillée incluant les fonctionnalités, délais et budget.
+          </p>
         </div>
       </div>
 
       <!-- Étape 3: Design -->
-      <div class="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:bg-white/10 transition-all duration-300 flex items-start gap-4">
-        <div class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/20">
+      <div
+        class="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:bg-white/10 transition-all duration-300 flex items-start gap-4"
+      >
+        <div
+          class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/20"
+        >
           <i class="pi pi-palette text-white text-xl"></i>
         </div>
         <div>
           <h3 class="text-xl font-bold text-white mb-2">3. Design & Maquettes</h3>
-          <p class="text-gray-300 text-sm">Nous créons l'identité visuelle et les maquettes interactives pour validation.</p>
+          <p class="text-gray-300 text-sm">
+            Nous créons l'identité visuelle et les maquettes interactives pour validation.
+          </p>
         </div>
       </div>
 
       <!-- Étape 4: Développement -->
-      <div class="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:bg-white/10 transition-all duration-300 flex items-start gap-4">
-        <div class="w-12 h-12 rounded-lg bg-indigo-600 flex items-center justify-center shrink-0 shadow-lg shadow-indigo-600/20">
+      <div
+        class="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:bg-white/10 transition-all duration-300 flex items-start gap-4"
+      >
+        <div
+          class="w-12 h-12 rounded-lg bg-indigo-600 flex items-center justify-center shrink-0 shadow-lg shadow-indigo-600/20"
+        >
           <i class="pi pi-code text-white text-xl"></i>
         </div>
         <div>
           <h3 class="text-xl font-bold text-white mb-2">4. Développement</h3>
-          <p class="text-gray-300 text-sm">Construction technique de votre solution avec possibilité de MVP/POC pour les projets complexes.</p>
+          <p class="text-gray-300 text-sm">
+            Construction technique de votre solution avec possibilité de MVP/POC pour les projets
+            complexes.
+          </p>
         </div>
       </div>
 
       <!-- Étape 5: Tests -->
-      <div class="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:bg-white/10 transition-all duration-300 flex items-start gap-4">
-        <div class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/20">
+      <div
+        class="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:bg-white/10 transition-all duration-300 flex items-start gap-4"
+      >
+        <div
+          class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/20"
+        >
           <i class="pi pi-check-square text-white text-xl"></i>
         </div>
         <div>
           <h3 class="text-xl font-bold text-white mb-2">5. Tests & Validation</h3>
-          <p class="text-gray-300 text-sm">Phase de tests rigoureux et ajustements avant la mise en production finale.</p>
+          <p class="text-gray-300 text-sm">
+            Phase de tests rigoureux et ajustements avant la mise en production finale.
+          </p>
         </div>
       </div>
 
       <!-- Étape 6: Livraison -->
-      <div class="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:bg-white/10 transition-all duration-300 flex items-start gap-4">
-        <div class="w-12 h-12 rounded-lg bg-indigo-600 flex items-center justify-center shrink-0 shadow-lg shadow-indigo-600/20">
+      <div
+        class="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-5 hover:bg-white/10 transition-all duration-300 flex items-start gap-4"
+      >
+        <div
+          class="w-12 h-12 rounded-lg bg-indigo-600 flex items-center justify-center shrink-0 shadow-lg shadow-indigo-600/20"
+        >
           <i class="pi pi-send text-white text-xl"></i>
         </div>
         <div>
           <h3 class="text-xl font-bold text-white mb-2">6. Déploiement & Suivi</h3>
-          <p class="text-gray-300 text-sm">Mise en ligne et accompagnement post-lancement pour garantir votre succès.</p>
+          <p class="text-gray-300 text-sm">
+            Mise en ligne et accompagnement post-lancement pour garantir votre succès.
+          </p>
         </div>
       </div>
     </div>
 
     <!-- Espace client mis en avant -->
-    <div class="bg-gradient-to-r from-blue-900/50 to-indigo-900/50 rounded-xl p-6 backdrop-blur-sm border border-blue-500/20 mb-12">
+    <div
+      class="bg-gradient-to-r from-blue-900/50 to-indigo-900/50 rounded-xl p-6 backdrop-blur-sm border border-blue-500/20 mb-12"
+    >
       <div class="flex flex-col md:flex-row items-center gap-6">
         <div class="md:w-1/3 flex justify-center mb-6 md:mb-0">
           <div class="relative">
-            <div class="w-64 h-64 bg-gradient-to-br from-blue-600/20 to-indigo-600/20 rounded-xl border border-white/10 p-4 shadow-lg backdrop-blur-sm">
+            <div
+              class="w-64 h-64 bg-gradient-to-br from-blue-600/20 to-indigo-600/20 rounded-xl border border-white/10 p-4 shadow-lg backdrop-blur-sm"
+            >
               <div class="h-8 bg-white/10 rounded mb-4 flex items-center px-3">
                 <div class="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
                 <div class="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
@@ -537,7 +668,9 @@
                 </div>
               </div>
             </div>
-            <div class="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center shadow-lg">
+            <div
+              class="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center shadow-lg"
+            >
               <i class="pi pi-lock text-white"></i>
             </div>
           </div>
@@ -546,7 +679,8 @@
         <div class="md:w-2/3">
           <h3 class="text-2xl font-bold text-white mb-3">Votre espace client personnel</h3>
           <p class="text-gray-300 mb-4">
-            Dès le démarrage de votre projet, vous aurez accès à un espace client dédié sur notre plateforme, vous permettant de :
+            Dès le démarrage de votre projet, vous aurez accès à un espace client dédié sur notre
+            plateforme, vous permettant de :
           </p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="flex items-start gap-2">
@@ -569,27 +703,19 @@
         </div>
       </div>
     </div>
-
-    <!-- CTA -->
-    <div class="mt-12 text-center">
-      <a href="#" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-300 shadow-lg shadow-blue-600/20 text-sm font-medium">
-        Démarrer votre projet
-        <i class="pi pi-arrow-right ml-2"></i>
-      </a>
-    </div>
   </div>
 </section>
 
-<section class="py-16 bg-white">
+<section class="py-16 bg-white" id="service">
   <div class="container mx-auto px-4">
     <!-- En-tête de section -->
     <div class="text-center max-w-3xl mx-auto mb-12">
-      <div class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4">
+      <div
+        class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4"
+      >
         Nos Solutions
       </div>
-      <h2 class="text-3xl font-bold text-gray-900 mb-4">
-        Des services adaptés à vos besoins
-      </h2>
+      <h2 class="text-3xl font-bold text-gray-900 mb-4">Des services adaptés à vos besoins</h2>
       <p class="text-gray-600">
         Choisissez la solution qui correspond à votre projet. Tous nos tarifs sont sur devis.
       </p>
@@ -598,7 +724,9 @@
     <!-- Cartes des services -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
       <!-- Site Vitrine -->
-      <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100">
+      <div
+        class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100"
+      >
         <div class="p-6 border-b border-gray-100">
           <div class="flex items-center mb-4">
             <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
@@ -625,14 +753,19 @@
               <span class="text-gray-700 text-sm">Hébergement inclus</span>
             </li>
           </ul>
-          <button class="cursor-pointer w-full mt-6 py-2 px-4 bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-colors duration-300 text-sm font-medium">
+          <button
+            (click)="scrollToSection('contact')"
+            class="cursor-pointer w-full mt-6 py-2 px-4 bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-colors duration-300 text-sm font-medium"
+          >
             Demander un devis
           </button>
         </div>
       </div>
 
       <!-- Application Web -->
-      <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 transform md:scale-105">
+      <div
+        class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 transform md:scale-105"
+      >
         <div class="p-6 border-b border-gray-100 bg-blue-50">
           <div class="flex items-center mb-4">
             <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
@@ -659,14 +792,20 @@
               <span class="text-gray-700 text-sm">Serveur VPS ou Cloud</span>
             </li>
           </ul>
-          <button class="cursor-pointer w-full mt-6 py-2 px-4 bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-colors duration-300 text-sm font-medium">
+          <button
+            (click)="scrollToSection('contact')"
+            class="cursor-pointer w-full mt-6 py-2 px-4 bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-colors duration-300 text-sm font-medium"
+          >
             Demander un devis
+
           </button>
         </div>
       </div>
 
       <!-- Maintenance -->
-      <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100">
+      <div
+        class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100"
+      >
         <div class="p-6 border-b border-gray-100">
           <div class="flex items-center mb-4">
             <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mr-3">
@@ -693,7 +832,10 @@
               <span class="text-gray-700 text-sm">Support technique</span>
             </li>
           </ul>
-          <button class="cursor-pointer w-full mt-6 py-2 px-4 bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-colors duration-300 text-sm font-medium">
+          <button
+            (click)="scrollToSection('contact')"
+            class="cursor-pointer w-full mt-6 py-2 px-4 bg-blue-600 text-white hover:bg-blue-700 rounded-lg transition-colors duration-300 text-sm font-medium"
+          >
             Demander un devis
           </button>
         </div>
@@ -710,39 +852,49 @@
         </h3>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
           <div class="bg-white p-3 rounded shadow-sm flex items-center">
-      <span class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-2 overflow-hidden p-2">
-        <img src="wordpress-logo.png" alt="WordPress" class="w-full h-full object-contain">
-      </span>
+            <span
+              class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-2 overflow-hidden p-2"
+            >
+              <img src="wordpress-logo.png" alt="WordPress" class="w-full h-full object-contain" />
+            </span>
             <span class="text-gray-700 text-sm">WordPress</span>
           </div>
           <div class="bg-white p-3 rounded shadow-sm flex items-center">
-      <span class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-2 overflow-hidden p-2">
-        <img src="angular-logo.png" alt="Angular" class="w-full h-full object-contain">
-      </span>
+            <span
+              class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-2 overflow-hidden p-2"
+            >
+              <img src="angular-logo.png" alt="Angular" class="w-full h-full object-contain" />
+            </span>
             <span class="text-gray-700 text-sm">Angular</span>
           </div>
           <div class="bg-white p-3 rounded shadow-sm flex items-center">
-      <span class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-2 overflow-hidden p-2">
-        <img src="react-logo.png" alt="React" class="w-full h-full object-contain">
-      </span>
+            <span
+              class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-2 overflow-hidden p-2"
+            >
+              <img src="react-logo.png" alt="React" class="w-full h-full object-contain" />
+            </span>
             <span class="text-gray-700 text-sm">React</span>
           </div>
           <div class="bg-white p-3 rounded shadow-sm flex items-center">
-      <span class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-2 overflow-hidden p-2">
-        <img src="symfony-logo.png" alt="Symfony" class="w-full h-full object-contain">
-      </span>
+            <span
+              class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-2 overflow-hidden p-2"
+            >
+              <img src="symfony-logo.png" alt="Symfony" class="w-full h-full object-contain" />
+            </span>
             <span class="text-gray-700 text-sm">Symfony</span>
           </div>
           <div class="bg-white p-3 rounded shadow-sm flex items-center">
-      <span class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-2 overflow-hidden p-2">
-        <img src="nuxtjs-logo.png" alt="Nuxt.js" class="w-full h-full object-contain">
-      </span>
+            <span
+              class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-2 overflow-hidden p-2"
+            >
+              <img src="nuxtjs-logo.png" alt="Nuxt.js" class="w-full h-full object-contain" />
+            </span>
             <span class="text-gray-700 text-sm">Nuxt.js</span>
           </div>
           <div class="bg-white p-3 rounded shadow-sm flex items-center">
-      <span class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-2">
-        <i class="pi pi-code text-blue-600 text-sm"></i>
-      </span>
+            <span class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-2">
+              <i class="pi pi-code text-blue-600 text-sm"></i>
+            </span>
             <span class="text-gray-700 text-sm">Et plus...</span>
           </div>
         </div>
@@ -781,4 +933,4 @@
 
 <app-anonymous-projects-display></app-anonymous-projects-display>
 
-<app-anonymous-contact-form></app-anonymous-contact-form>
+<app-anonymous-contact-form id="contact"></app-anonymous-contact-form>

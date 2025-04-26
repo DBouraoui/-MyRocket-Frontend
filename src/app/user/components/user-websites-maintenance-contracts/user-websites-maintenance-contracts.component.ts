@@ -1,5 +1,5 @@
-import {Component, inject} from '@angular/core';
-import {UserWebsitesService} from '../../../services/user/user-websites.service';
+import { Component, inject } from '@angular/core';
+import { UserWebsitesService } from '../../../services/user/user-websites.service';
 
 @Component({
   selector: 'app-user-websites-maintenance-contracts',
@@ -7,15 +7,18 @@ import {UserWebsitesService} from '../../../services/user/user-websites.service'
   templateUrl: './user-websites-maintenance-contracts.component.html',
 })
 export class UserWebsitesMaintenanceContractsComponent {
-websiteService = inject(UserWebsitesService);
+  websiteService = inject(UserWebsitesService);
 
-  countMaintenanceContracts():number {
+  countMaintenanceContracts(): number {
     return this.websiteService.maintenanceContract().length;
   }
 
   middleCostmaintenanceContract() {
-    if (!this.websiteService.maintenanceContract() || this.websiteService.maintenanceContract().length === 0) {
-      return "0";
+    if (
+      !this.websiteService.maintenanceContract() ||
+      this.websiteService.maintenanceContract().length === 0
+    ) {
+      return '0';
     }
 
     const total = this.websiteService.maintenanceContract().reduce((sum, maintenanceContract) => {
@@ -23,11 +26,12 @@ websiteService = inject(UserWebsitesService);
       return sum + (isNaN(cost) ? 0 : cost);
     }, 0);
 
-    return (((Math.round(total * 100) / 100) / this.countMaintenanceContracts())).toFixed(2);
+    return (Math.round(total * 100) / 100 / this.countMaintenanceContracts()).toFixed(2);
   }
 
   getLastContracts() {
-   return this.websiteService.maintenanceContract()[this.websiteService.maintenanceContract().length - 1].createdAt;
+    return this.websiteService.maintenanceContract()[
+      this.websiteService.maintenanceContract().length - 1
+    ].createdAt;
   }
-
 }

@@ -1,12 +1,8 @@
-import {Component} from '@angular/core';
-import {AdminContactComponent} from '../contact/contact.component';
-import {
-  DashboardAdminUsersMetricsComponent
-} from '../utilisateur/components/dashboard-admin-users-metrics/dashboard-admin-users-metrics.component';
-import {
-  DashboardAdminUsersSearchComponent
-} from '../utilisateur/components/dashboard-admin-users-search/dashboard-admin-users-search.component';
-import {CreateUserFormComponent} from '../utilisateur/components/create-user-form/create-user-form.component';
+import { Component } from '@angular/core';
+import { AdminContactComponent } from '../contact/contact.component';
+import { DashboardAdminUsersMetricsComponent } from '../utilisateur/components/dashboard-admin-users-metrics/dashboard-admin-users-metrics.component';
+import { DashboardAdminUsersSearchComponent } from '../utilisateur/components/dashboard-admin-users-search/dashboard-admin-users-search.component';
+import { CreateUserFormComponent } from '../utilisateur/components/create-user-form/create-user-form.component';
 
 @Component({
   selector: 'app-dashboard-admin',
@@ -14,9 +10,8 @@ import {CreateUserFormComponent} from '../utilisateur/components/create-user-for
     DashboardAdminUsersMetricsComponent,
     DashboardAdminUsersSearchComponent,
     CreateUserFormComponent,
-    AdminContactComponent
+    AdminContactComponent,
   ],
   templateUrl: './dashboard.component.html',
 })
-export class DashboardAdminComponent {
-}
+export class DashboardAdminComponent {}

@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import {AnonymousContactFormComponent} from '../../components/anonymous-contact-form/anonymous-contact-form.component';
+import { AnonymousContactFormComponent } from '../../components/anonymous-contact-form/anonymous-contact-form.component';
 
 @Component({
   selector: 'app-contact',
-  imports: [
-    AnonymousContactFormComponent
-  ],
+  imports: [AnonymousContactFormComponent],
   templateUrl: './contact.component.html',
 })
-export class ContactComponent {
-
-}
+export class ContactComponent {}

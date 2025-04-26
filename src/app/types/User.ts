@@ -1,8 +1,8 @@
 export type User = {
-  uuid:string;
+  uuid: string;
   firstname?: string;
-  lastname?:string;
-  companyName?:string;
+  lastname?: string;
+  companyName?: string;
   email: string;
   password: string;
   phone: string;
@@ -13,11 +13,11 @@ export type User = {
   createdAt: string;
   updatedAt: string;
   role: string;
-}
+};
 
 export type Token = string;
 
-export type getUsersAdminResponse ={
-  success: boolean,
-  data:User[]
-}
+export type getUsersAdminResponse = {
+  success: boolean;
+  data: User[];
+};

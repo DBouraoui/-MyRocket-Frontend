@@ -1,11 +1,11 @@
-import {Injectable, signal, WritableSignal} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable, tap} from 'rxjs';
-import {Project} from '../../types/Project';
-import {environment} from '../../../../environment';
+import { Injectable, signal, WritableSignal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+import { Project } from '../../types/Project';
+import { environment } from '../../../../environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AnonymousProjectsService {
   projects: WritableSignal<Project[]> = signal([]);
@@ -17,16 +17,15 @@ export class AnonymousProjectsService {
     return this.http.get<Project[]>(`${environment.SERVER_URL}/api/project`, {
       params: {
         all: true,
-      }
+      },
     });
   }
 
   refreshProjects(): Observable<Project[]> {
     return this.fetchProjects().pipe(
-      tap((response) => {
+      tap(response => {
         this.projects.set(response);
       })
     );
   }
-
 }

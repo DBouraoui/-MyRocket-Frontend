@@ -1,7 +1,7 @@
 export type ContactImage = {
   filename: string;
   url: string;
-}
+};
 
 export type Contact = {
   uuid: string;
@@ -14,9 +14,9 @@ export type Contact = {
   createdAt: string;
   tags: string[];
   pictures: ContactImage[];
-}
+};
 
 export type ContactsResponse = {
   success: boolean;
   data: Contact[];
-}
+};

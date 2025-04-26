@@ -1,25 +1,18 @@
-import {Component, inject} from '@angular/core';
-import {AnonymousProjectsService} from '../../../services/anonymous/anonymous-projects.service';
-import {Button} from 'primeng/button';
-import {RouterLink} from '@angular/router';
-import {Carousel} from 'primeng/carousel';
-import {PrimeTemplate} from 'primeng/api';
-import {Drawer} from 'primeng/drawer';
-import {Project} from '../../../types/Project';
-import {Tooltip} from 'primeng/tooltip';
+import { Component, inject } from '@angular/core';
+import { AnonymousProjectsService } from '../../../services/anonymous/anonymous-projects.service';
+import { Button } from 'primeng/button';
+import { Carousel } from 'primeng/carousel';
+import { PrimeTemplate } from 'primeng/api';
+import { Drawer } from 'primeng/drawer';
+import { Project } from '../../../types/Project';
 
 @Component({
   selector: 'app-anonymous-projects-display',
-  imports: [
-    Button,
-    Carousel,
-    PrimeTemplate,
-    Drawer,
-  ],
+  imports: [Button, Carousel, PrimeTemplate, Drawer],
   templateUrl: './anonymous-projects-display.component.html',
 })
 export class AnonymousProjectsDisplayComponent {
-projectsService = inject(AnonymousProjectsService);
+  projectsService = inject(AnonymousProjectsService);
   projectDrawerVisible: boolean = false;
   selectedProject: Project | null = null;
 

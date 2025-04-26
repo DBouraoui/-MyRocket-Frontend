@@ -3,10 +3,14 @@
   <div class="mb-6">
     <label class="block text-sm font-medium text-indigo-300 mb-2">Type de compte</label>
     <div class="flex justify-center">
-      <p-selectbutton [options]="userOptions" formControlName="isCompany"
-                      optionLabel="label" optionValue="value"
-                      styleClass="shadow-md"
-                      aria-labelledby="basic"></p-selectbutton>
+      <p-selectbutton
+        [options]="userOptions"
+        formControlName="isCompany"
+        optionLabel="label"
+        optionValue="value"
+        styleClass="shadow-md"
+        aria-labelledby="basic"
+      ></p-selectbutton>
     </div>
   </div>
 
@@ -21,7 +25,12 @@
       <div class="space-y-4">
         <div class="flex flex-col">
           <p-iftalabel class="w-full">
-            <input pInputText id="companyName" formControlName="companyName" class="w-full bg-slate-700 text-white border-slate-600" />
+            <input
+              pInputText
+              id="companyName"
+              formControlName="companyName"
+              class="w-full bg-slate-700 text-white border-slate-600"
+            />
             <label for="companyName">Nom de la société</label>
           </p-iftalabel>
         </div>
@@ -35,14 +44,24 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="flex flex-col">
           <p-iftalabel class="w-full">
-            <input pInputText id="firstname" formControlName="firstname" class="w-full bg-slate-700 text-white border-slate-600" />
+            <input
+              pInputText
+              id="firstname"
+              formControlName="firstname"
+              class="w-full bg-slate-700 text-white border-slate-600"
+            />
             <label for="firstname">Prénom</label>
           </p-iftalabel>
         </div>
 
         <div class="flex flex-col">
           <p-iftalabel class="w-full">
-            <input pInputText id="lastname" formControlName="lastname" class="w-full bg-slate-700 text-white border-slate-600" />
+            <input
+              pInputText
+              id="lastname"
+              formControlName="lastname"
+              class="w-full bg-slate-700 text-white border-slate-600"
+            />
             <label for="lastname">Nom</label>
           </p-iftalabel>
         </div>
@@ -62,14 +81,24 @@
       <div class="space-y-4">
         <div class="flex flex-col">
           <p-iftalabel class="w-full">
-            <input pInputText id="email" formControlName="email" class="w-full bg-slate-700 text-white border-slate-600" />
+            <input
+              pInputText
+              id="email"
+              formControlName="email"
+              class="w-full bg-slate-700 text-white border-slate-600"
+            />
             <label for="email">Email</label>
           </p-iftalabel>
         </div>
 
         <div class="flex flex-col">
           <p-iftalabel class="w-full">
-            <input pInputText id="phone" formControlName="phone" class="w-full bg-slate-700 text-white border-slate-600" />
+            <input
+              pInputText
+              id="phone"
+              formControlName="phone"
+              class="w-full bg-slate-700 text-white border-slate-600"
+            />
             <label for="phone">Numéro de téléphone</label>
           </p-iftalabel>
         </div>
@@ -86,15 +115,22 @@
       <div class="space-y-4">
         <div class="flex flex-col">
           <p-iftalabel class="w-full">
-            <p-password inputId="password"
-                        promptLabel="Force du mot de passe"
-                        toggleMask="true"
-                        strongLabel="Fort"
-                        weakLabel="Faible"
-                        mediumLabel="Moyen"
-                        formControlName="password"
-                        [style]="{'width':'100%'}"
-                        [inputStyle]="{'width':'100%', 'background-color':'rgb(51, 65, 85)', 'color':'white', 'border-color':'rgb(71, 85, 105)'}" />
+            <p-password
+              inputId="password"
+              promptLabel="Force du mot de passe"
+              toggleMask="true"
+              strongLabel="Fort"
+              weakLabel="Faible"
+              mediumLabel="Moyen"
+              formControlName="password"
+              [style]="{ width: '100%' }"
+              [inputStyle]="{
+                width: '100%',
+                'background-color': 'rgb(51, 65, 85)',
+                color: 'white',
+                'border-color': 'rgb(71, 85, 105)',
+              }"
+            />
             <label for="password">Mot de passe</label>
           </p-iftalabel>
         </div>
@@ -112,28 +148,48 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="flex flex-col">
         <p-iftalabel class="w-full">
-          <input pInputText id="address" formControlName="address" class="w-full bg-slate-700 text-white border-slate-600" />
+          <input
+            pInputText
+            id="address"
+            formControlName="address"
+            class="w-full bg-slate-700 text-white border-slate-600"
+          />
           <label for="address">Adresse</label>
         </p-iftalabel>
       </div>
 
       <div class="flex flex-col">
         <p-iftalabel class="w-full">
-          <input pInputText id="city" formControlName="city" class="w-full bg-slate-700 text-white border-slate-600" />
+          <input
+            pInputText
+            id="city"
+            formControlName="city"
+            class="w-full bg-slate-700 text-white border-slate-600"
+          />
           <label for="city">Ville</label>
         </p-iftalabel>
       </div>
 
       <div class="flex flex-col">
         <p-iftalabel class="w-full">
-          <input pInputText id="postCode" formControlName="postCode" class="w-full bg-slate-700 text-white border-slate-600" />
+          <input
+            pInputText
+            id="postCode"
+            formControlName="postCode"
+            class="w-full bg-slate-700 text-white border-slate-600"
+          />
           <label for="postCode">Code Postal</label>
         </p-iftalabel>
       </div>
 
       <div class="flex flex-col">
         <p-iftalabel class="w-full">
-          <input pInputText id="country" formControlName="country" class="w-full bg-slate-700 text-white border-slate-600" />
+          <input
+            pInputText
+            id="country"
+            formControlName="country"
+            class="w-full bg-slate-700 text-white border-slate-600"
+          />
           <label for="country">Pays</label>
         </p-iftalabel>
       </div>

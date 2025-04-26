@@ -9,17 +9,30 @@
     <!-- Grille Bento -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <!-- Carte principale (grande) - Formulaire de création -->
-      <div class="lg:col-span-2 bg-gray-800 rounded-xl shadow-xl overflow-hidden border border-gray-700">
+      <div
+        class="lg:col-span-2 bg-gray-800 rounded-xl shadow-xl overflow-hidden border border-gray-700"
+      >
         <div class="p-6">
           <div class="flex items-center mb-4">
             <div class="h-10 w-10 rounded-lg bg-blue-600 flex items-center justify-center mr-3">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                />
               </svg>
             </div>
             <h2 class="text-xl font-bold text-slate-200">Nouveau projet</h2>
           </div>
-          <app-dashboard-admin-projects-form-create ></app-dashboard-admin-projects-form-create>
+          <app-dashboard-admin-projects-form-create></app-dashboard-admin-projects-form-create>
         </div>
       </div>
 
@@ -31,7 +44,9 @@
           <div class="space-y-4">
             <div class="flex justify-between items-center">
               <span class="text-slate-400">Projets totaux</span>
-              <span class="text-slate-200 font-medium">{{ adminProjectsService.projects().length }}</span>
+              <span class="text-slate-200 font-medium">{{
+                adminProjectsService.projects().length
+              }}</span>
             </div>
             <div class="flex justify-between items-center">
               <span class="text-slate-400">Projets actifs</span>
@@ -48,33 +63,59 @@
         <div class="bg-gray-800 rounded-xl shadow-xl p-6 border border-gray-700">
           <h3 class="text-lg font-semibold text-slate-200 mb-4">Activité récente</h3>
           <div class="space-y-4">
-            @for (project of adminProjectsService.projects().slice(0, 5).reverse(); track project.uuid) {
-              <div class="border-l-4 border-blue-500 pl-4 py-3 mb-3 bg-slate-800 rounded-r-lg hover:bg-slate-700 transition-all duration-300 shadow-md hover:shadow-lg hover:translate-x-1">
+            @for (
+              project of adminProjectsService.projects().slice(0, 5).reverse();
+              track project.uuid
+            ) {
+              <div
+                class="border-l-4 border-blue-500 pl-4 py-3 mb-3 bg-slate-800 rounded-r-lg hover:bg-slate-700 transition-all duration-300 shadow-md hover:shadow-lg hover:translate-x-1"
+              >
                 <div class="flex justify-between items-start">
-                  <p class="text-slate-100 font-medium text-base">{{project.title}}</p>
+                  <p class="text-slate-100 font-medium text-base">{{ project.title }}</p>
                   <span class="bg-blue-500 text-xs text-white px-2 py-1 rounded-full">Projet</span>
                 </div>
 
                 <div class="mt-2 flex items-center gap-4 text-xs">
                   <div class="flex items-center text-slate-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 mr-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
                     </svg>
-                    <span>Créé le {{project.createdAt | date:'dd/MM/yyyy'}}</span>
+                    <span>Créé le {{ project.createdAt | date: 'dd/MM/yyyy' }}</span>
                   </div>
 
                   <div class="flex items-center text-slate-400">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 mr-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
                     </svg>
-                    <span>Modifié le {{project.updatedAt | date:'dd/MM/yyyy'}}</span>
+                    <span>Modifié le {{ project.updatedAt | date: 'dd/MM/yyyy' }}</span>
                   </div>
                 </div>
               </div>
             }
           </div>
         </div>
-
       </div>
     </div>
   </div>

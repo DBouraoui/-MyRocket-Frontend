@@ -1,12 +1,26 @@
-<section class="min-h-screen bg-gradient-to-br from-gray-900 to-slate-800 flex items-center justify-center p-4 md:p-6">
-
+<section
+  class="min-h-screen bg-gradient-to-br from-gray-900 to-slate-800 flex items-center justify-center p-4 md:p-6"
+>
   <!-- Conteneur principal -->
   <div class="w-full max-w-md relative z-10">
     <!-- Logo/Titre -->
     <div class="text-center mb-8">
-      <div class="inline-block bg-slate-700 p-4 rounded-full mb-4 shadow-md border border-slate-600">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+      <div
+        class="inline-block bg-slate-700 p-4 rounded-full mb-4 shadow-md border border-slate-600"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-10 w-10 text-blue-400"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+          />
         </svg>
       </div>
       <h1 class="text-3xl font-bold text-white">Connexion</h1>
@@ -21,10 +35,19 @@
         <div class="space-y-2">
           <div class="card w-full">
             <p-iftalabel class="w-full">
-              <input pInputText id="email" autocomplete="off" formControlName="email" class="w-full bg-gray-700 border-gray-600 text-white focus:border-blue-500 focus:ring focus:ring-blue-500/30" />
+              <input
+                pInputText
+                id="email"
+                autocomplete="off"
+                formControlName="email"
+                class="w-full bg-gray-700 border-gray-600 text-white focus:border-blue-500 focus:ring focus:ring-blue-500/30"
+              />
               <label for="email" class="text-gray-300">Adresse email</label>
             </p-iftalabel>
-            <small *ngIf="formData.get('email')?.touched && !formData.get('email')?.valid" class="text-red-400 mt-1 block text-sm">
+            <small
+              *ngIf="formData.get('email')?.touched && !formData.get('email')?.valid"
+              class="text-red-400 mt-1 block text-sm"
+            >
               L'email est incorrect
             </small>
           </div>
@@ -34,13 +57,20 @@
         <div class="space-y-2">
           <div class="card w-full">
             <p-iftalabel class="w-full">
-              <p-password id="password" formControlName="password" [toggleMask]="true"
-                          feedback="false"
-                          styleClass="w-full"
-                          inputStyleClass="w-full bg-gray-700 border-gray-600 text-white focus:border-blue-500 focus:ring focus:ring-blue-500/30" />
+              <p-password
+                id="password"
+                formControlName="password"
+                [toggleMask]="true"
+                feedback="false"
+                styleClass="w-full"
+                inputStyleClass="w-full bg-gray-700 border-gray-600 text-white focus:border-blue-500 focus:ring focus:ring-blue-500/30"
+              />
               <label for="password" class="text-gray-300">Mot de passe</label>
             </p-iftalabel>
-            <small *ngIf="formData.get('password')?.touched && !formData.get('password')?.valid" class="text-red-400 mt-1 block text-sm">
+            <small
+              *ngIf="formData.get('password')?.touched && !formData.get('password')?.valid"
+              class="text-red-400 mt-1 block text-sm"
+            >
               Le mot de passe est requis pour pouvoir se connecter
             </small>
           </div>
@@ -48,14 +78,23 @@
 
         <!-- Bouton de connexion -->
         <div class="pt-2">
-          <button pButton [disabled]="formData.invalid" type="submit" [loading]="isLoading" class="cursor-pointer w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-sm">
+          <button
+            pButton
+            [disabled]="formData.invalid"
+            type="submit"
+            [loading]="isLoading"
+            class="cursor-pointer w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-sm"
+          >
             Se connecter
           </button>
         </div>
 
         <!-- Mot de passe oublié -->
         <div class="text-right">
-          <a href="#" class="text-blue-400 hover:text-blue-300 text-sm transition-colors duration-200">
+          <a
+            href="#"
+            class="text-blue-400 hover:text-blue-300 text-sm transition-colors duration-200"
+          >
             Mot de passe oublié ?
           </a>
         </div>
