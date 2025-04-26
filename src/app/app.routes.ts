@@ -23,6 +23,8 @@ import { dashboardUserWebsitesMaintenanceContractsResolver } from './resolvers/u
 import { dashboardUserWebsiteAllInformationsResolver } from './resolvers/user/dashboard-user-website-all-informations.resolver';
 import { UserTransactionComponent } from './user/pages/user-transaction/user-transaction.component';
 import { dashboardUserTransactionResolver } from './resolvers/user/dashboard-user-transaction.resolver';
+import { authGuard } from './guards/auth.guard';
+import { adminGuard } from './guards/admin.guard';
 export const routes: Routes = [
   {
     path: '',
@@ -54,6 +56,8 @@ export const routes: Routes = [
   {
     path: 'utilisateur',
     component: UserComponent,
+    canActivate: [authGuard],
+    canActivateChild: [authGuard],
     children: [
       {
         path: 'dashboard',
@@ -95,6 +99,8 @@ export const routes: Routes = [
   {
     path: 'administration',
     component: AdminComponent,
+    canActivate: [adminGuard],
+    canActivateChild: [adminGuard],
     children: [
       {
         path: 'dashboard',
