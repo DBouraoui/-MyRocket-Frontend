@@ -4,8 +4,7 @@ import { Website } from '../../types/Website';
 import { inject } from '@angular/core';
 import { UserWebsitesService } from '../../services/user/user-websites.service';
 
-export const dashboardUserWebsitesInformationsResolver: ResolveFn<Observable<Website[]>> = (
-) => {
+export const dashboardUserWebsitesInformationsResolver: ResolveFn<Observable<Website[]>> = () => {
   const websitesInformations = inject(UserWebsitesService);
 
   return websitesInformations.refreshWebsites();

@@ -35,4 +35,4 @@ export type UserAdmin = {
   postCode: string;
   createdAt: string;
   updatedAt: string;
-}
+};

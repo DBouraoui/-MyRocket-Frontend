@@ -28,6 +28,11 @@ import { adminGuard } from './guards/admin.guard';
 import { WebsiteComponent } from './admin/pages/website/website.component';
 import { dashboardAdminWebsiteResolver } from './resolvers/admin/dashboard-admin-website.resolver';
 import { dashboardAdminAllInformationResolver } from './resolvers/admin/dashboard-admin-all-information.resolver';
+import { TransactionComponent } from './admin/pages/transaction/transaction.component';
+import { dashboardAdminTransactionResolver } from './resolvers/admin/dashboard-admin-transaction.resolver';
+import {
+  dashboardAdminTransactionDisplayResolver
+} from './resolvers/admin/dashboard-admin-transaction-display.resolver';
 export const routes: Routes = [
   {
     path: '',
@@ -136,8 +141,18 @@ export const routes: Routes = [
       {
         path: 'website',
         component: WebsiteComponent,
-        resolve: { users: dashboardAdminUsersResolver, website: dashboardAdminWebsiteResolver,allInformations: dashboardAdminAllInformationResolver },
+        resolve: {
+          users: dashboardAdminUsersResolver,
+          website: dashboardAdminWebsiteResolver,
+          allInformations: dashboardAdminAllInformationResolver,
+        },
         title: 'Gestion des sites web',
+      },
+      {
+        path: 'paiments',
+        component: TransactionComponent,
+        resolve: { transactions: dashboardAdminTransactionResolver, displaytransaction: dashboardAdminTransactionDisplayResolver },
+        title: 'Gestion des transactions',
       },
     ],
   },

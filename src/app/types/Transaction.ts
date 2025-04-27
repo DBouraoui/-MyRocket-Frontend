@@ -8,3 +8,14 @@ export type Transaction = {
   websiteContract: string;
   websiteUuid: string;
 };
+
+export type TransactionUser = {
+  uuid: string;
+  email: string;
+  websiteContracts? : TransactionContract
+}
+
+export type TransactionContract = {
+  uuid: string;
+  name: string;
+}

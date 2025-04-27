@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-  constructor() { }
+  constructor() {}
 
   getToken(): string | null {
     return localStorage.getItem('statement');
@@ -38,6 +37,6 @@ export class AuthService {
     if (decodedToken && decodedToken.exp) {
       return Date.now() >= decodedToken.exp * 1000;
     }
-    return true;  // Si pas de token ou pas d'exp, on considère qu'il est expiré
+    return true; // Si pas de token ou pas d'exp, on considère qu'il est expiré
   }
 }

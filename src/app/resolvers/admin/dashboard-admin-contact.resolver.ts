@@ -4,9 +4,7 @@ import { AdminContactsService } from '../../services/admin/admin-contacts.servic
 import { Observable, tap } from 'rxjs';
 import { ContactsResponse } from '../../types/Contact';
 
-export const dashboardAdminContactResolver: ResolveFn<Observable<ContactsResponse>> = (
-
-) => {
+export const dashboardAdminContactResolver: ResolveFn<Observable<ContactsResponse>> = () => {
   const contactService = inject(AdminContactsService);
 
   return contactService.fetchContacts().pipe(

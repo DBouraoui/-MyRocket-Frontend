@@ -1,6 +1,8 @@
 <div class="bg-gray-900 p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
   <form [formGroup]="formGroupe" (ngSubmit)="onSubmit()" class="space-y-6">
-    <h2 class="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-2">Nouveau site web</h2>
+    <h2 class="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-2">
+      Nouveau site web
+    </h2>
 
     <div class="mb-4">
       <label class="block text-gray-400 mb-2 text-sm font-medium">Utilisateur</label>
@@ -47,13 +49,7 @@
     <div class="mb-4">
       <div class="w-full">
         <p-iftalabel class="w-full block">
-          <input
-            pInputText
-            id="title"
-            formControlName="title"
-            autocomplete="off"
-            class="w-full"
-          />
+          <input pInputText id="title" formControlName="title" autocomplete="off" class="w-full" />
           <label for="title">Titre</label>
         </p-iftalabel>
       </div>
@@ -77,13 +73,7 @@
     <div class="mb-6">
       <div class="w-full">
         <p-iftalabel class="w-full block">
-          <input
-            pInputText
-            id="url"
-            formControlName="url"
-            autocomplete="off"
-            class="w-full"
-          />
+          <input pInputText id="url" formControlName="url" autocomplete="off" class="w-full" />
           <label for="url">URL du site web</label>
         </p-iftalabel>
       </div>

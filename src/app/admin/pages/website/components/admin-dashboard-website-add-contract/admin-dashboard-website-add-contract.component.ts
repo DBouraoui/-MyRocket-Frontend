@@ -10,58 +10,51 @@ import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-admin-dashboard-website-add-contract',
-  imports: [
-    Select,
-    DatePicker,
-    IftaLabel,
-    InputText,
-    ReactiveFormsModule,
-    Button,
-  ],
+  imports: [Select, DatePicker, IftaLabel, InputText, ReactiveFormsModule, Button],
   templateUrl: './admin-dashboard-website-add-contract.component.html',
 })
 export class AdminDashboardWebsiteAddContractComponent {
-   websiteService = inject(AdminWebsiteService);
-   formGroup! : FormGroup;
-   reccurence = [
-     {
-       'name': 'Mensuel',
-       'value': 'monthly'
-     },
-     {
-       'name': 'Annuel',
-       'value': 'annual'
-     }
-   ]
+  websiteService = inject(AdminWebsiteService);
+  formGroup!: FormGroup;
+  reccurence = [
+    {
+      name: 'Mensuel',
+      value: 'monthly',
+    },
+    {
+      name: 'Annuel',
+      value: 'annual',
+    },
+  ];
   tva = [
     {
-      'name': '5.5%',
-      'value': '5.5'
+      name: '5.5%',
+      value: '5.5',
     },
     {
-      'name': '10%',
-      'value': '10'
+      name: '10%',
+      value: '10',
     },
     {
-      'name': '20%',
-      'value': '20'
+      name: '20%',
+      value: '20',
     },
-  ]
+  ];
 
-  constructor(private messageService:MessageService) {
-     this.formGroup = new FormGroup({
-       uuidWebsite: new FormControl('', [Validators.required]),
-       prestation: new FormControl('', [Validators.required]),
-       reccurence: new FormControl('', [Validators.required]),
-       tva: new FormControl('', [Validators.required]),
-       annualCost: new FormControl('', [Validators.required]),
-       firstPaymentAt: new FormControl(Date, [Validators.required]),
-     })
+  constructor(private messageService: MessageService) {
+    this.formGroup = new FormGroup({
+      uuidWebsite: new FormControl('', [Validators.required]),
+      prestation: new FormControl('', [Validators.required]),
+      reccurence: new FormControl('', [Validators.required]),
+      tva: new FormControl('', [Validators.required]),
+      annualCost: new FormControl('', [Validators.required]),
+      firstPaymentAt: new FormControl(Date, [Validators.required]),
+    });
   }
 
   getWebsite() {
-    return this.websiteService.website().map((web)=>{
-      return {name:web.title, value:web.uuid};
+    return this.websiteService.website().map(web => {
+      return { name: web.title, value: web.uuid };
     });
   }
 
@@ -70,7 +63,7 @@ export class AdminDashboardWebsiteAddContractComponent {
       this.messageService.add({
         severity: 'error',
         summary: 'Formulaire invalid',
-      })
+      });
       return;
     }
 
@@ -85,23 +78,23 @@ export class AdminDashboardWebsiteAddContractComponent {
       firstPaymentAt: this.formatDate(firstPaymentDate),
       lastPaymentAt: this.formatDate(firstPaymentDate),
       nextPaymentAt: this.getNextPaymentDate(),
-    }
+    };
 
     this.websiteService.createWebsiteContract(payload).subscribe({
-      next: (data) => {
+      next: data => {
         this.messageService.add({
           severity: 'success',
           summary: 'Contrat créer avec succes',
         });
         this.formGroup.reset();
       },
-      error: (error) => {
+      error: error => {
         this.messageService.add({
           severity: 'error',
           summary: 'Erreur de création du contrat',
-        })
-      }
-    })
+        });
+      },
+    });
   }
 
   formatDate(date: Date): string {
@@ -131,5 +124,4 @@ export class AdminDashboardWebsiteAddContractComponent {
     }
     return ''; // ou une valeur par défaut
   }
-
 }

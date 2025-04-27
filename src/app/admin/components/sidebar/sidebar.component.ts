@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Drawer } from 'primeng/drawer';
 import { Button } from 'primeng/button';
 import { NavbarItems } from '../../../types/Navbar';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar-admin',
@@ -11,6 +11,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class SidebarAdminComponent {
   visible: boolean = false;
+  router = inject(Router);
 
   navbarItem: NavbarItems[] = [
     {
@@ -38,5 +39,15 @@ export class SidebarAdminComponent {
       link: '/administration/website',
       icon: 'pi-globe',
     },
+    {
+      title: 'Transaction',
+      link: '/administration/paiments',
+      icon: 'pi-euro',
+    },
   ];
+
+  deconnexion() {
+    localStorage.removeItem('statement');
+    this.router.navigateByUrl('/login');
+  }
 }

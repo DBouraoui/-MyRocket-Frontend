@@ -10,47 +10,45 @@ import { AdminWebsiteService } from '../../../../../services/admin/admin-website
 
 @Component({
   selector: 'app-admin-dashboard-website-create',
-  imports: [
-    Select,
-    IftaLabel,
-    InputText,
-    Button,
-    ReactiveFormsModule,
-  ],
+  imports: [Select, IftaLabel, InputText, Button, ReactiveFormsModule],
   templateUrl: './admin-dashboard-website-create.component.html',
 })
 export class AdminDashboardWebsiteCreateComponent {
-  formGroupe! : FormGroup;
+  formGroupe!: FormGroup;
   websiteType = [
     {
-      'name': 'Mutualisé',
-      'value':'mutualised'
+      name: 'Mutualisé',
+      value: 'mutualised',
     },
     {
-      'name': 'VPS',
-      'value':'vps'
-    }
+      name: 'VPS',
+      value: 'vps',
+    },
   ];
   websiteStatus = [
     {
-      'name': 'Actif',
-      'value':"active"
+      name: 'Actif',
+      value: 'active',
     },
     {
-      'name': 'Inacatif',
-      'value':"inactive"
+      name: 'Inacatif',
+      value: 'inactive',
     },
     {
-      'name': 'En creation',
-      'value':"pending"
+      name: 'En creation',
+      value: 'pending',
     },
     {
-      'name': 'En maintenance',
-      'value':"maintenance"
-    }
-  ]
+      name: 'En maintenance',
+      value: 'maintenance',
+    },
+  ];
 
-  constructor( private userService : AdminUsersService, private messageService: MessageService, private adminService : AdminWebsiteService ) {
+  constructor(
+    private userService: AdminUsersService,
+    private messageService: MessageService,
+    private adminService: AdminWebsiteService
+  ) {
     this.formGroupe = new FormGroup({
       uuidUser: new FormControl('', [Validators.required]),
       title: new FormControl('', [Validators.required]),
@@ -58,22 +56,21 @@ export class AdminDashboardWebsiteCreateComponent {
       url: new FormControl('', [Validators.required]),
       status: new FormControl('', [Validators.required]),
       type: new FormControl('', [Validators.required]),
-    })
+    });
   }
 
   getUsers() {
     return this.userService.users().map(user => {
-      return {name:user.email, value: user.uuid}
-    })
+      return { name: user.email, value: user.uuid };
+    });
   }
-
 
   onSubmit() {
     if (this.formGroupe.invalid) {
       this.messageService.add({
         severity: 'error',
         summary: 'Formulaire invalid',
-      })
+      });
       return;
     }
 
@@ -81,27 +78,26 @@ export class AdminDashboardWebsiteCreateComponent {
       uuidUser: this.formGroupe.get('uuidUser')?.value,
       title: this.formGroupe.get('title')?.value,
       description: this.formGroupe.get('description')?.value,
-      url: 'http://www.'+ this.formGroupe.get('url')?.value,
+      url: 'http://www.' + this.formGroupe.get('url')?.value,
       status: this.formGroupe.get('status')?.value,
       type: this.formGroupe.get('type')?.value,
-    }
+    };
 
     this.adminService.createWebsite(payload).subscribe({
-      next: (result)=>{
+      next: result => {
         this.messageService.add({
           severity: 'success',
           summary: 'Site web créer',
         });
         this.formGroupe.reset();
       },
-      error: (error)=>{
+      error: error => {
         console.log(error);
         this.messageService.add({
           severity: 'error',
-          summary: 'Erreur de création du site web'
-        })
-      }
-    })
-
+          summary: 'Erreur de création du site web',
+        });
+      },
+    });
   }
 }

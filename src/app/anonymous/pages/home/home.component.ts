@@ -19,9 +19,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-
-  constructor(private viewportScroller: ViewportScroller) {
-  }
+  constructor(private viewportScroller: ViewportScroller) {}
 
   scrollToSection(elementId: string): void {
     this.viewportScroller.scrollToAnchor(elementId);

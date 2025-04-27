@@ -8,4 +8,3 @@ export const dashboardAdminWebsiteResolver: ResolveFn<Observable<Website[]>> = (
   const websiteService = inject(AdminWebsiteService);
   return websiteService.refreshWebsite();
 };
-

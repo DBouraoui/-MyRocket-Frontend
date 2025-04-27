@@ -1,5 +1,7 @@
 <div class="bg-gray-900 p-6 rounded-lg shadow-lg max-w-3xl mx-auto">
-  <h2 class="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-2">Création de contrat</h2>
+  <h2 class="text-2xl font-bold text-white mb-6 border-b border-gray-700 pb-2">
+    Création de contrat
+  </h2>
 
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="space-y-6">
     <div class="mb-4">
@@ -41,24 +43,14 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="w-full">
         <p-iftalabel class="w-full block">
-          <input
-            pInputText
-            id="prestation"
-            formControlName="prestation"
-            class="w-full"
-          />
+          <input pInputText id="prestation" formControlName="prestation" class="w-full" />
           <label for="prestation">Prestation</label>
         </p-iftalabel>
       </div>
 
       <div class="w-full">
         <p-iftalabel class="w-full block">
-          <input
-            pInputText
-            id="annual"
-            formControlName="annualCost"
-            class="w-full"
-          />
+          <input pInputText id="annual" formControlName="annualCost" class="w-full" />
           <label for="annual">Prix annuel</label>
         </p-iftalabel>
       </div>

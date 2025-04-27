@@ -5,57 +5,57 @@ import { Observable, tap } from 'rxjs';
 import { Website } from '../../types/Website';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AdminWebsiteService {
-  website: WritableSignal<Website[]> = signal([])
-  allInformations : WritableSignal<Website[]> = signal([])
+  website: WritableSignal<Website[]> = signal([]);
+  allInformations: WritableSignal<Website[]> = signal([]);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  fetchWebsite():Observable<Website[]> {
+  fetchWebsite(): Observable<Website[]> {
     return this.http.get<Website[]>(`${environment.SERVER_URL}/api/website/all`);
   }
 
-
-  refreshWebsite():Observable<Website[]> {
+  refreshWebsite(): Observable<Website[]> {
     return this.fetchWebsite().pipe(
-      tap(res=>{
+      tap(res => {
         this.website.set(res);
       })
-    )
+    );
   }
 
-  fetchAllInformation() : Observable<Website[]> {
-      return this.http.get<Website[]>(`${environment.SERVER_URL}/api/website/contract/get/all/informations`);
+  fetchAllInformation(): Observable<Website[]> {
+    return this.http.get<Website[]>(
+      `${environment.SERVER_URL}/api/website/contract/get/all/informations`
+    );
   }
 
-  refreshAllInformation() : Observable<Website[]> {
+  refreshAllInformation(): Observable<Website[]> {
     return this.fetchAllInformation().pipe(
-      tap(res=>{
+      tap(res => {
         this.allInformations.set(res);
       })
-    )
+    );
   }
 
-  createWebsite(payload : Object){
-    return this.http.post(`${environment.SERVER_URL}/api/website`,payload);
+  createWebsite(payload: object) {
+    return this.http.post(`${environment.SERVER_URL}/api/website`, payload);
   }
 
-  createWebsiteContract(payload:Object) {
+  createWebsiteContract(payload: object) {
     return this.http.post(`${environment.SERVER_URL}/api/website/contract`, payload);
   }
 
-  createWebsiteVps(payload : Object) {
-    return this.http.post(`${environment.SERVER_URL}/api/website/vps`,payload);
+  createWebsiteVps(payload: object) {
+    return this.http.post(`${environment.SERVER_URL}/api/website/vps`, payload);
   }
 
-  createWebsiteMutualised(payload : Object){
-    return this.http.post(`${environment.SERVER_URL}/api/website/mutualised`,payload);
+  createWebsiteMutualised(payload: object) {
+    return this.http.post(`${environment.SERVER_URL}/api/website/mutualised`, payload);
   }
 
-  createMaintenanceContract(payload : Object){
-    return this.http.post(`${environment.SERVER_URL}/api/maintenance/contract`,payload);
+  createMaintenanceContract(payload: object) {
+    return this.http.post(`${environment.SERVER_URL}/api/maintenance/contract`, payload);
   }
-
 }

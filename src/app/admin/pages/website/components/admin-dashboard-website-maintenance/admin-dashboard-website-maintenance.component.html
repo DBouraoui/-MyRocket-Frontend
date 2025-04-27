@@ -1,7 +1,13 @@
-<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="bg-gray-900 text-gray-100 p-8 rounded-xl shadow-2xl  max-w-4xl mx-auto">
-  <h2 class="text-2xl font-bold text-indigo-400 mb-6 text-center">Nouveau Contrat de Maintenance</h2>
+<form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+  class="bg-gray-900 text-gray-100 p-8 rounded-xl shadow-2xl max-w-4xl mx-auto"
+>
+  <h2 class="text-2xl font-bold text-indigo-400 mb-6 text-center">
+    Nouveau Contrat de Maintenance
+  </h2>
 
-  <div class="grid grid-cols-1  gap-8 mb-8">
+  <div class="grid grid-cols-1 gap-8 mb-8">
     <div class="space-y-2">
       <label class="block text-sm font-medium text-indigo-300 mb-1 ml-1">Site Web</label>
       <p-select
@@ -17,13 +23,18 @@
 
     <div class="space-y-2">
       <p-iftalabel class="relative">
-        <input pInputText id="monthlyCost" formControlName="monthlyCost" class="w-full bg-gray-800 border border-gray-700 text-gray-100 rounded-lg py-2 px-3 focus:ring-2 focus:ring-indigo-500 focus:border-transparent shadow-md" />
+        <input
+          pInputText
+          id="monthlyCost"
+          formControlName="monthlyCost"
+          class="w-full bg-gray-800 border border-gray-700 text-gray-100 rounded-lg py-2 px-3 focus:ring-2 focus:ring-indigo-500 focus:border-transparent shadow-md"
+        />
         <label for="monthlyCost" class="text-indigo-300 font-medium">Cout mensuel</label>
       </p-iftalabel>
     </div>
   </div>
 
-  <div class="grid grid-cols-1  gap-8 mb-8">
+  <div class="grid grid-cols-1 gap-8 mb-8">
     <div class="space-y-2">
       <label class="block text-sm font-medium text-indigo-300 mb-1 ml-1">Récurrence</label>
       <p-select
@@ -38,9 +49,11 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-1  gap-8 mb-8">
+  <div class="grid grid-cols-1 gap-8 mb-8">
     <div class="space-y-2">
-      <label class="block text-sm font-medium text-indigo-300 mb-1 ml-1">Date de commencement</label>
+      <label class="block text-sm font-medium text-indigo-300 mb-1 ml-1"
+        >Date de commencement</label
+      >
       <p-datePicker
         formControlName="startAt"
         styleClass="bg-gray-800 border-gray-700 text-gray-100 rounded-lg shadow-md w-full"
@@ -50,7 +63,9 @@
     </div>
 
     <div class="space-y-2">
-      <label class="block text-sm font-medium text-indigo-300 mb-1 ml-1">Date de fin du contrat</label>
+      <label class="block text-sm font-medium text-indigo-300 mb-1 ml-1"
+        >Date de fin du contrat</label
+      >
       <p-datePicker
         formControlName="endAt"
         styleClass="bg-gray-800 border-gray-700 text-gray-100 rounded-lg shadow-md w-full"

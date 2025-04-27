@@ -1,0 +1,50 @@
+<div class="bg-gray-900 p-6 rounded-xl shadow-lg">
+  <h2 class="text-2xl font-semibold text-white mb-6">Liste des transactions</h2>
+
+  <div class="overflow-x-auto">
+    <p-table
+      [value]="transactionService.TransactionToDisplay()"
+      [tableStyle]="{'min-width': '960px'}"
+      styleClass="bg-gray-800"
+      [paginator]="true"
+      paginatorDropdownAppendTo="body"
+      [rows]="10"
+      [rowHover]="true"
+      responsiveLayout="scroll"
+      [rowsPerPageOptions]="[5,10,25,50]"
+    >
+      <ng-template pTemplate="header">
+        <tr class="border-b border-gray-700">
+          <th class="text-left px-4 py-3 text-gray-300">ID</th>
+          <th class="text-left px-4 py-3 text-gray-300">Utilisateur</th>
+          <th class="text-left px-4 py-3 text-gray-300">Date</th>
+          <th class="text-right px-4 py-3 text-gray-300">TVA</th>
+          <th class="text-right px-4 py-3 text-gray-300">Montant</th>
+          <th class="text-left px-4 py-3 text-gray-300">Contrat</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-transaction>
+        <tr class="border-b border-gray-700 hover:bg-gray-700 transition-colors duration-150">
+          <td class="px-4 py-3 text-gray-300 truncate max-w-xs">
+            <span class="text-sm font-mono">{{transaction.uuid | slice:0:8}}...</span>
+          </td>
+          <td class="px-4 py-3 text-gray-300">{{transaction.user}}</td>
+          <td class="px-4 py-3 text-gray-300">{{transaction.createdAt }}</td>
+          <td class="px-4 py-3 text-gray-300 text-right">{{transaction.tva}}%</td>
+          <td class="px-4 py-3 text-gray-300 text-right font-medium">{{transaction.amount | currency:'EUR'}}</td>
+          <td class="px-4 py-3 text-gray-300">{{transaction.websiteContract}}</td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7" class="text-center py-6 text-gray-400">
+            <i class="pi pi-inbox text-5xl mb-3 block"></i>
+            <span>Aucune transaction trouvée</span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

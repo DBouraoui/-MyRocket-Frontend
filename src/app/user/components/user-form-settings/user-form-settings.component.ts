@@ -103,7 +103,7 @@ export class UserFormSettingsComponent implements OnInit {
     };
 
     this.userSettingsService.updateProfile(payload).subscribe({
-      next: (data) => {
+      next: data => {
         this.messageService.clear();
         this.messageService.add({
           severity: 'success',
@@ -112,7 +112,7 @@ export class UserFormSettingsComponent implements OnInit {
         this.userSettingsService.refreshInformations().subscribe();
         this.isLoading = false;
       },
-      error: (error) => {
+      error: error => {
         this.messageService.clear();
         this.messageService.add({
           severity: 'error',

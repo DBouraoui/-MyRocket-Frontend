@@ -8,23 +8,13 @@ import { TabPanel, TabView } from 'primeng/tabview';
 
 @Component({
   selector: 'app-admin-dashboard-website-display',
-  imports: [
-    FormsModule,
-    DropdownModule,
-    TableModule,
-    NgClass,
-    TabView,
-    TabPanel,
-    NgIf,
-  ],
+  imports: [FormsModule, DropdownModule, TableModule, NgClass, TabView, TabPanel, NgIf],
   templateUrl: './admin-dashboard-website-display.component.html',
 })
 export class AdminDashboardWebsiteDisplayComponent {
-  expanded: {[key: string]: boolean} = {};
+  expanded: { [key: string]: boolean } = {};
 
-  constructor(public adminWebsiteService: AdminWebsiteService) {
-
-  }
+  constructor(public adminWebsiteService: AdminWebsiteService) {}
 
   toggleExpand(uuid: string): void {
     this.expanded[uuid] = !this.expanded[uuid];

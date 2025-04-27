@@ -1,4 +1,4 @@
-import {  UserAdmin } from './User';
+import { UserAdmin } from './User';
 
 export type Website = {
   uuid: string;
@@ -50,7 +50,7 @@ export type VPS = {
   publicKey: string;
   updatedAt: string;
   createdAt: string;
-}
+};
 
 export type mutualised = {
   uuid: string;
@@ -60,4 +60,4 @@ export type mutualised = {
   port: string;
   createdAt: string;
   updatedAt: string;
-}
+};

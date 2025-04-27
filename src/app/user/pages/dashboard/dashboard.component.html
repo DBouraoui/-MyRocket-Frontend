@@ -1,74 +1,51 @@
-<!-- Dashboard principal en style Bento -->
+<!-- Dashboard simplifié avec 3 boîtes en ligne -->
 <div class="p-6 bg-gray-900 min-h-screen">
   <div class="max-w-7xl mx-auto">
     <!-- En-tête du tableau de bord -->
     <div class="mb-8">
       <h1 class="text-2xl font-bold text-white mb-2">Tableau de bord</h1>
-      <p class="text-gray-400">Gérez vos sites web, contrats et paramètres en un seul endroit</p>
     </div>
 
-    <!-- Conteneur principal Bento -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <!-- Colonne 1: Informations du site web (grande carte) -->
-      <div
-        class="lg:col-span-2 bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700"
-      >
-        <div class="bg-gray-750 p-4 border-b border-gray-700 flex items-center justify-between">
-          <div class="flex items-center">
-            <div
-              class="w-10 h-10 rounded-full bg-blue-900/40 flex items-center justify-center mr-3"
-            >
-              <i class="pi pi-globe text-blue-400"></i>
-            </div>
-            <h2 class="text-lg font-medium text-white">Sites Web</h2>
+    <!-- Conteneur principal avec 3 boîtes en ligne -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Boîte 1: Sites Web -->
+      <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 h-full">
+        <div class="bg-gray-750 p-4 border-b border-gray-700 flex items-center">
+          <div class="w-10 h-10 rounded-full bg-blue-900/40 flex items-center justify-center mr-3">
+            <i class="pi pi-globe text-blue-400"></i>
           </div>
+          <h2 class="text-lg font-medium text-white">Sites Web</h2>
         </div>
         <div class="p-5">
           <app-user-websites-informations></app-user-websites-informations>
         </div>
       </div>
 
-      <!-- Colonne 2: Profil utilisateur (petite carte en haut) -->
-      <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700">
-        <div class="bg-gray-750 p-4 border-b border-gray-700 flex items-center justify-between">
-          <div class="flex items-center">
-            <div
-              class="w-10 h-10 rounded-full bg-purple-900/40 flex items-center justify-center mr-3"
-            >
-              <i class="pi pi-user text-purple-400"></i>
-            </div>
-            <h2 class="text-lg font-medium text-white">Profil</h2>
+      <!-- Boîte 2: Profil utilisateur -->
+      <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 h-full">
+        <div class="bg-gray-750 p-4 border-b border-gray-700 flex items-center">
+          <div class="w-10 h-10 rounded-full bg-purple-900/40 flex items-center justify-center mr-3">
+            <i class="pi pi-user text-purple-400"></i>
           </div>
+          <h2 class="text-lg font-medium text-white">Profil</h2>
         </div>
         <div class="p-5">
           <app-user-informations-settings></app-user-informations-settings>
         </div>
       </div>
 
-      <!-- Contrats de maintenance (grande carte qui s'étend sur toute la largeur) -->
-      <div
-        class="lg:col-span-3 bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700"
-      >
-        <div class="bg-gray-750 p-4 border-b border-gray-700 flex items-center justify-between">
-          <div class="flex items-center">
-            <div
-              class="w-10 h-10 rounded-full bg-green-900/40 flex items-center justify-center mr-3"
-            >
-              <i class="pi pi-wrench text-green-400"></i>
-            </div>
-            <h2 class="text-lg font-medium text-white">Contrats de Maintenance</h2>
+      <!-- Boîte 3: Contrats de maintenance -->
+      <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 h-full">
+        <div class="bg-gray-750 p-4 border-b border-gray-700 flex items-center">
+          <div class="w-10 h-10 rounded-full bg-green-900/40 flex items-center justify-center mr-3">
+            <i class="pi pi-wrench text-green-400"></i>
           </div>
-          <div></div>
+          <h2 class="text-lg font-medium text-white">Contrats de Maintenance</h2>
         </div>
         <div class="p-5">
           <app-user-websites-maintenance-contracts></app-user-websites-maintenance-contracts>
         </div>
       </div>
-    </div>
-
-    <!-- Pied de page -->
-    <div class="mt-8 text-center text-gray-500 text-sm">
-      <p>© 2025 Votre Entreprise. Tous droits réservés.</p>
     </div>
   </div>
 </div>
