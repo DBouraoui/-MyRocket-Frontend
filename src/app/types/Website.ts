@@ -1,3 +1,5 @@
+import {  UserAdmin } from './User';
+
 export type Website = {
   uuid: string;
   title: string;
@@ -9,6 +11,9 @@ export type Website = {
   updatedAt: string;
   contract?: Contracts;
   maintenanceContract?: MaintenanceContract;
+  user?: UserAdmin;
+  websiteMutualised?: mutualised;
+  websiteVps?: VPS;
 };
 
 export type Contracts = {
@@ -35,3 +40,24 @@ export type MaintenanceContract = {
   reccurence: string;
   createdAt: string;
 };
+
+export type VPS = {
+  uuid: string;
+  address: string;
+  username: string;
+  password: string;
+  port: string;
+  publicKey: string;
+  updatedAt: string;
+  createdAt: string;
+}
+
+export type mutualised = {
+  uuid: string;
+  address: string;
+  username: string;
+  password: string;
+  port: string;
+  createdAt: string;
+  updatedAt: string;
+}

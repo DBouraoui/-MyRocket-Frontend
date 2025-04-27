@@ -1,0 +1,480 @@
+<div class="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100 p-6">
+  <!-- En-tête plus moderne -->
+  <div class="flex justify-between items-center mb-8">
+    <div>
+      <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">
+        Dashboard Administration
+      </h1>
+      <p class="text-gray-400 mt-1">Gestion de vos sites web et contrats</p>
+    </div>
+
+    <!-- Stats simplifiées -->
+    <div class="flex gap-4">
+      <div class="bg-gray-800/60 p-3 rounded-lg shadow-lg backdrop-blur-sm border border-gray-700/50">
+        <div class="flex items-center gap-2">
+          <div class="bg-indigo-500/20 p-2 rounded-md">
+            <i class="pi pi-globe text-indigo-400"></i>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400">Sites Web</p>
+            <p class="text-lg font-semibold">{{adminWebsiteService.allInformations().length}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-800/60 p-3 rounded-lg shadow-lg backdrop-blur-sm border border-gray-700/50">
+        <div class="flex items-center gap-2">
+          <div class="bg-green-500/20 p-2 rounded-md">
+            <i class="pi pi-cog text-green-400"></i>
+          </div>
+          <div>
+            <p class="text-xs text-gray-400">Contrats</p>
+            <p class="text-lg font-semibold">{{getContractsCount()}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Liste modernisée des sites web -->
+  <div class="space-y-5">
+    @for (information of adminWebsiteService.allInformations(); track information.uuid) {
+      <div class="bg-gray-800/80 rounded-xl shadow-xl overflow-hidden border border-gray-700/50 transition-all duration-200 hover:shadow-indigo-900/20">
+        <!-- En-tête du site web (toujours visible) -->
+        <div class="p-5 cursor-pointer hover:bg-gray-700/50 transition-colors duration-200" (click)="toggleExpand(information.uuid)">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+              <div class="bg-indigo-500/20 p-2 rounded-md text-indigo-400 transition-transform duration-300"
+                   [ngClass]="{'rotate-90': !expanded[information.uuid]}">
+                <i class="pi" [ngClass]="expanded[information.uuid] ? 'pi-chevron-down' : 'pi-chevron-right'"></i>
+              </div>
+              <div>
+                <h2 class="text-xl font-medium text-indigo-300">{{information.title}}</h2>
+                <a [href]="information.url" target="_blank" class="text-sm text-gray-400 hover:text-indigo-400 transition-colors mt-1 flex items-center">
+                  <i class="pi pi-external-link mr-1 text-xs"></i>
+                  {{information.url}}
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <!-- Badges pour indiquer les services disponibles -->
+              <div class="flex gap-1.5">
+                <span *ngIf="information.contract" class="w-2 h-2 rounded-full bg-indigo-400"
+                      pTooltip="Contrat site"></span>
+                <span *ngIf="information.maintenanceContract" class="w-2 h-2 rounded-full bg-green-400"
+                      pTooltip="Maintenance"></span>
+                <span *ngIf="information.websiteVps" class="w-2 h-2 rounded-full bg-yellow-400"
+                      pTooltip="VPS"></span>
+                <span *ngIf="information.websiteMutualised" class="w-2 h-2 rounded-full bg-purple-400"
+                      pTooltip="Hébergement mutualisé"></span>
+              </div>
+
+              <!-- Statut -->
+              <span class="px-3 py-1 rounded-full text-xs font-medium"
+                    [ngClass]="{
+                'bg-green-500/30 text-green-300 border border-green-500/30': information.status === 'active',
+                'bg-yellow-500/30 text-yellow-300 border border-yellow-500/30': information.status === 'pending',
+                'bg-red-500/30 text-red-300 border border-red-500/30': information.status === 'inactive',
+                'bg-blue-500/30 text-blue-300 border border-blue-500/30': information.status === 'development',
+                'bg-gray-500/30 text-gray-300 border border-gray-500/30': !['active', 'pending', 'inactive', 'development'].includes(information.status)
+              }">
+                {{information.status}}
+              </span>
+
+              <!-- Type -->
+              <span class="px-3 py-1 rounded-md text-xs bg-gray-700/70 text-gray-300 border border-gray-600/50">
+                {{information.type}}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contenu détaillé (visible uniquement si expanded) -->
+        <div *ngIf="expanded[information.uuid]" class="border-t border-gray-700/70">
+          <div class="p-5">
+            <p-tabView styleClass="modern-tabs">
+              <!-- Onglet Infos Site -->
+              <p-tabPanel header="Site Web" leftIcon="pi pi-info-circle">
+                <div class="bg-gray-900/70 p-5 rounded-xl backdrop-blur-sm border border-gray-700/50">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h3 class="text-lg font-medium text-indigo-400 mb-4 flex items-center">
+                        <i class="pi pi-desktop mr-2"></i>Détails du site
+                      </h3>
+                      <div class="space-y-3 bg-gray-800/50 p-4 rounded-lg">
+                        <div><span class="text-gray-400 font-medium">Description:</span>
+                          <p class="mt-1 text-sm">{{information.description || 'Aucune description'}}</p>
+                        </div>
+                        <div class="flex gap-4">
+                          <div><span class="text-gray-400 font-medium">Créé le:</span>
+                            <p class="text-sm">{{information.createdAt}}</p>
+                          </div>
+                          <div><span class="text-gray-400 font-medium">Mise à jour:</span>
+                            <p class="text-sm">{{information.updatedAt}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Client -->
+                    <div *ngIf="information.user">
+                      <h3 class="text-lg font-medium text-indigo-400 mb-4 flex items-center">
+                        <i class="pi pi-user mr-2"></i>Client
+                      </h3>
+                      <div class="bg-gray-800/50 p-4 rounded-lg">
+                        <div class="flex items-center mb-3">
+                          <div class="bg-indigo-500/30 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold mr-3">
+                            {{information.user.firstname?.charAt(0) || ''}}{{information.user.lastname?.charAt(0) || ''}}
+                          </div>
+                          <div>
+                            <div class="font-medium">{{information.user.companyName || ''}}</div>
+                            <div class="text-sm text-gray-400">{{information.user.firstname}} {{information.user.lastname}}</div>
+                          </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                          <div class="flex items-center">
+                            <i class="pi pi-envelope text-gray-500 mr-2"></i>
+                            <span class="text-sm">{{information.user.email}}</span>
+                          </div>
+                          <div class="flex items-center">
+                            <i class="pi pi-phone text-gray-500 mr-2"></i>
+                            <span class="text-sm">{{information.user.phone}}</span>
+                          </div>
+                          <div class="flex items-center sm:col-span-2">
+                            <i class="pi pi-map-marker text-gray-500 mr-2"></i>
+                            <span class="text-sm">{{information.user.address}}, {{information.user.postCode}} {{information.user.city}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </p-tabPanel>
+
+              <!-- Onglet Contrat de maintenance -->
+              <p-tabPanel header="Maintenance" leftIcon="pi pi-cog" *ngIf="information.maintenanceContract">
+                <div class="bg-gray-900/70 p-5 rounded-xl backdrop-blur-sm border border-gray-700/50">
+                  <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-medium text-green-400 flex items-center">
+                      <i class="pi pi-cog mr-2"></i>Contrat de maintenance
+                    </h3>
+                    <span class="px-3 py-1 rounded-full text-xs bg-green-500/20 text-green-300 border border-green-500/30">
+                      ID: {{information.maintenanceContract.uuid.substring(0, 8)}}...
+                    </span>
+                  </div>
+
+                  <!-- Stats du contrat de maintenance -->
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700/50 text-center">
+                      <div class="text-xs text-gray-400 mb-1">Coût mensuel</div>
+                      <div class="text-xl font-bold text-green-400">{{information.maintenanceContract.monthlyCost}} €</div>
+                    </div>
+
+                    <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700/50 text-center">
+                      <div class="text-xs text-gray-400 mb-1">Récurrence</div>
+                      <div class="text-lg font-medium">{{information.maintenanceContract.reccurence}}</div>
+                    </div>
+
+                    <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700/50 text-center">
+                      <div class="text-xs text-gray-400 mb-1">Prochain paiement</div>
+                      <div class="text-lg font-medium">{{information.maintenanceContract.nextPaymentAt}}</div>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 class="text-sm font-medium text-gray-300 mb-3 flex items-center">
+                        <i class="pi pi-calendar mr-2"></i>Dates importantes
+                      </h4>
+                      <div class="space-y-3 bg-gray-800/50 p-4 rounded-lg">
+                        <div class="grid grid-cols-2 gap-2">
+                          <div><span class="text-gray-400 text-sm">Début:</span>
+                            <p>{{information.maintenanceContract.startAt}}</p>
+                          </div>
+                          <div><span class="text-gray-400 text-sm">Fin:</span>
+                            <p>{{information.maintenanceContract.endAt}}</p>
+                          </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                          <div><span class="text-gray-400 text-sm">Premier paiement:</span>
+                            <p>{{information.maintenanceContract.firstPaymentAt}}</p>
+                          </div>
+                          <div><span class="text-gray-400 text-sm">Dernier paiement:</span>
+                            <p>{{information.maintenanceContract.lastPaymentAt}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 class="text-sm font-medium text-gray-300 mb-3 flex items-center">
+                        <i class="pi pi-chart-line mr-2"></i>Progression
+                      </h4>
+                      <!-- Progress bar illustratif -->
+                      <div class="bg-gray-800/50 p-4 rounded-lg">
+                        <div class="flex justify-between text-xs text-gray-400 mb-1">
+                          <span>{{information.maintenanceContract.startAt}}</span>
+                          <span>{{information.maintenanceContract.endAt}}</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-2.5 mb-1 overflow-hidden">
+                          <div class="bg-gradient-to-r from-green-500 to-green-400 h-2.5 rounded-full" style="width: 45%;"></div>
+                        </div>
+                        <div class="text-xs text-center mt-1 text-gray-400">Contrat en cours</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </p-tabPanel>
+
+              <!-- Onglet Contrat site web -->
+              <p-tabPanel header="Contrat Site" leftIcon="pi pi-file" *ngIf="information.contract">
+                <div class="bg-gray-900/70 p-5 rounded-xl backdrop-blur-sm border border-gray-700/50">
+                  <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-medium text-indigo-400 flex items-center">
+                      <i class="pi pi-file mr-2"></i>Contrat du site web
+                    </h3>
+                    <span class="px-3 py-1 rounded-full text-xs bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                      ID: {{information.contract.uuid.substring(0, 8)}}...
+                    </span>
+                  </div>
+
+                  <!-- Stats du contrat -->
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700/50 text-center">
+                      <div class="text-xs text-gray-400 mb-1">Coût annuel</div>
+                      <div class="text-xl font-bold text-indigo-400">{{information.contract.annualCost}} €</div>
+                      <div class="text-xs text-gray-400 mt-1">TVA: {{information.contract.tva}}%</div>
+                    </div>
+
+                    <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700/50 text-center">
+                      <div class="text-xs text-gray-400 mb-1">Récurrence</div>
+                      <div class="text-lg font-medium">{{information.contract.reccurence}}</div>
+                    </div>
+
+                    <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700/50 text-center">
+                      <div class="text-xs text-gray-400 mb-1">Prochain paiement</div>
+                      <div class="text-lg font-medium">{{information.contract.nextPaymentAt}}</div>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 class="text-sm font-medium text-gray-300 mb-3 flex items-center">
+                        <i class="pi pi-list mr-2"></i>Prestation
+                      </h4>
+                      <div class="bg-gray-800/50 p-4 rounded-lg max-h-40 overflow-auto">
+                        <p class="text-sm whitespace-pre-line">{{information.contract.prestation || 'Aucune prestation spécifiée.'}}</p>
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 class="text-sm font-medium text-gray-300 mb-3 flex items-center">
+                        <i class="pi pi-calendar mr-2"></i>Dates importantes
+                      </h4>
+                      <div class="bg-gray-800/50 p-4 rounded-lg">
+                        <div class="grid grid-cols-2 gap-2">
+                          <div><span class="text-gray-400 text-sm">Premier paiement:</span>
+                            <p>{{information.contract.firstPaymentAt}}</p>
+                          </div>
+                          <div><span class="text-gray-400 text-sm">Dernier paiement:</span>
+                            <p>{{information.contract.lastPaymentAt}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </p-tabPanel>
+
+              <!-- Onglet Hébergement -->
+              <p-tabPanel header="Hébergement" leftIcon="pi pi-server" *ngIf="information.websiteVps || information.websiteMutualised">
+                <div class="space-y-6">
+                  <!-- VPS -->
+                  <div *ngIf="information.websiteVps" class="bg-gray-900/70 p-5 rounded-xl backdrop-blur-sm border border-gray-700/50">
+                    <div class="flex justify-between items-center mb-4">
+                      <h3 class="text-lg font-medium text-yellow-400 flex items-center">
+                        <i class="pi pi-server mr-2"></i>VPS
+                      </h3>
+                      <span class="px-3 py-1 rounded-full text-xs bg-yellow-500/20 text-yellow-300 border border-yellow-500/30">
+                        ID: {{information.websiteVps.uuid.substring(0, 8)}}...
+                      </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <div class="bg-gray-800/50 p-4 rounded-lg">
+                          <div class="space-y-3">
+                            <div class="flex flex-col">
+                              <span class="text-gray-400 text-sm mb-1">Adresse:</span>
+                              <code class="bg-gray-900/70 px-3 py-1 rounded text-yellow-300 inline-block">
+                                {{information.websiteVps.address}}
+                              </code>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                              <div class="flex flex-col">
+                                <span class="text-gray-400 text-sm mb-1">Port:</span>
+                                <code class="bg-gray-900/70 px-3 py-1 rounded text-yellow-300 inline-block">
+                                  {{information.websiteVps.port}}
+                                </code>
+                              </div>
+
+                              <div class="flex flex-col">
+                                <span class="text-gray-400 text-sm mb-1">Utilisateur:</span>
+                                <code class="bg-gray-900/70 px-3 py-1 rounded text-yellow-300 inline-block">
+                                  {{information.websiteVps.username}}
+                                </code>
+                              </div>
+                            </div>
+
+                            <div class="flex flex-col">
+                              <span class="text-gray-400 text-sm mb-1">Mot de passe:</span>
+                              <div class="flex items-center">
+                                <code class="bg-gray-900/70 px-3 py-1 rounded text-yellow-300 inline-block flex-1">
+                                  {{information.websiteVps.password}}
+                                </code>
+                                <button class="ml-2 bg-gray-700/50 hover:bg-gray-700 p-1.5 rounded text-gray-300 transition-colors">
+                                  <i class="pi pi-copy"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="information.websiteVps.publicKey">
+                        <div class="flex justify-between items-center mb-2">
+                          <span class="text-gray-400 text-sm">Clé publique:</span>
+                          <button class="bg-gray-700/50 hover:bg-gray-700 px-2 py-1 rounded text-xs text-gray-300 transition-colors flex items-center">
+                            <i class="pi pi-copy mr-1"></i> Copier
+                          </button>
+                        </div>
+                        <div class="bg-gray-800/50 p-3 rounded-lg h-32 overflow-auto">
+                          <pre class="text-yellow-200 text-xs">{{information.websiteVps.publicKey}}</pre>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Mutualisé -->
+                  <div *ngIf="information.websiteMutualised" class="bg-gray-900/70 p-5 rounded-xl backdrop-blur-sm border border-gray-700/50">
+                    <div class="flex justify-between items-center mb-4">
+                      <h3 class="text-lg font-medium text-purple-400 flex items-center">
+                        <i class="pi pi-cloud mr-2"></i>Hébergement Mutualisé
+                      </h3>
+                      <span class="px-3 py-1 rounded-full text-xs bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                        ID: {{information.websiteMutualised.uuid.substring(0, 8)}}...
+                      </span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <div class="bg-gray-800/50 p-4 rounded-lg">
+                          <div class="space-y-3">
+                            <div class="flex flex-col">
+                              <span class="text-gray-400 text-sm mb-1">Adresse:</span>
+                              <code class="bg-gray-900/70 px-3 py-1 rounded text-purple-300 inline-block">
+                                {{information.websiteMutualised.address}}
+                              </code>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                              <div class="flex flex-col">
+                                <span class="text-gray-400 text-sm mb-1">Port:</span>
+                                <code class="bg-gray-900/70 px-3 py-1 rounded text-purple-300 inline-block">
+                                  {{information.websiteMutualised.port}}
+                                </code>
+                              </div>
+
+                              <div class="flex flex-col">
+                                <span class="text-gray-400 text-sm mb-1">Utilisateur:</span>
+                                <code class="bg-gray-900/70 px-3 py-1 rounded text-purple-300 inline-block">
+                                  {{information.websiteMutualised.username}}
+                                </code>
+                              </div>
+                            </div>
+
+                            <div class="flex flex-col">
+                              <span class="text-gray-400 text-sm mb-1">Mot de passe:</span>
+                              <div class="flex items-center">
+                                <code class="bg-gray-900/70 px-3 py-1 rounded text-purple-300 inline-block flex-1">
+                                  {{information.websiteMutualised.password}}
+                                </code>
+                                <button class="ml-2 bg-gray-700/50 hover:bg-gray-700 p-1.5 rounded text-gray-300 transition-colors">
+                                  <i class="pi pi-copy"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <div class="bg-gray-800/50 p-4 rounded-lg flex flex-col justify-center h-full">
+                          <div class="space-y-3">
+                            <div class="flex items-center">
+                              <i class="pi pi-calendar text-gray-500 mr-2"></i>
+                              <span class="text-sm text-gray-400">Créé le:</span>
+                              <span class="ml-2">{{information.websiteMutualised.createdAt}}</span>
+                            </div>
+                            <div class="flex items-center">
+                              <i class="pi pi-calendar text-gray-500 mr-2"></i>
+                              <span class="text-sm text-gray-400">Mise à jour:</span>
+                              <span class="ml-2">{{information.websiteMutualised.updatedAt}}</span>
+                            </div>
+                            <div class="flex justify-center mt-2">
+                              <button class="bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 border border-purple-500/30">
+                                <i class="pi pi-desktop"></i>
+                                <span>Accéder au cPanel</span>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </p-tabPanel>
+            </p-tabView>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+
+<!-- Style pour les onglets PrimeNG -->
+<style>
+  :host ::ng-deep .modern-tabs .p-tabview-nav {
+    background: transparent;
+    border-color: rgba(55, 65, 81, 0.5);
+    padding: 0 0.5rem;
+  }
+
+  :host ::ng-deep .modern-tabs .p-tabview-nav li .p-tabview-nav-link {
+    background: rgba(31, 41, 55, 0.5);
+    color: #9ca3af;
+    border-color: rgba(55, 65, 81, 0.5);
+    border-radius: 0.5rem 0.5rem 0 0;
+    transition: all 0.2s;
+  }
+
+  :host ::ng-deep .modern-tabs .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    background: rgba(17, 24, 39, 0.7);
+    color: #818cf8;
+    border-color: rgba(99, 102, 241, 0.3);
+    border-bottom-color: transparent;
+  }
+
+  :host ::ng-deep .modern-tabs .p-tabview-panels {
+    background: transparent;
+    border: none;
+    padding: 1rem 0 0 0;
+  }
+
+  :host ::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+    box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.2);
+  }
+</style>

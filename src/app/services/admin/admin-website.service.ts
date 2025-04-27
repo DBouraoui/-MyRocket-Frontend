@@ -9,6 +9,7 @@ import { Website } from '../../types/Website';
 })
 export class AdminWebsiteService {
   website: WritableSignal<Website[]> = signal([])
+  allInformations : WritableSignal<Website[]> = signal([])
 
   constructor(private http: HttpClient) { }
 
@@ -16,10 +17,23 @@ export class AdminWebsiteService {
     return this.http.get<Website[]>(`${environment.SERVER_URL}/api/website/all`);
   }
 
+
   refreshWebsite():Observable<Website[]> {
     return this.fetchWebsite().pipe(
       tap(res=>{
         this.website.set(res);
+      })
+    )
+  }
+
+  fetchAllInformation() : Observable<Website[]> {
+      return this.http.get<Website[]>(`${environment.SERVER_URL}/api/website/contract/get/all/informations`);
+  }
+
+  refreshAllInformation() : Observable<Website[]> {
+    return this.fetchAllInformation().pipe(
+      tap(res=>{
+        this.allInformations.set(res);
       })
     )
   }
@@ -38,6 +52,10 @@ export class AdminWebsiteService {
 
   createWebsiteMutualised(payload : Object){
     return this.http.post(`${environment.SERVER_URL}/api/website/mutualised`,payload);
+  }
+
+  createMaintenanceContract(payload : Object){
+    return this.http.post(`${environment.SERVER_URL}/api/maintenance/contract`,payload);
   }
 
 }

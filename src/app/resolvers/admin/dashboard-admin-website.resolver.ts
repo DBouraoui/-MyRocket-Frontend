@@ -6,7 +6,6 @@ import { AdminWebsiteService } from '../../services/admin/admin-website.service'
 
 export const dashboardAdminWebsiteResolver: ResolveFn<Observable<Website[]>> = (route, state) => {
   const websiteService = inject(AdminWebsiteService);
-
   return websiteService.refreshWebsite();
 };
 

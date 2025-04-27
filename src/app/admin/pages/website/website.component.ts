@@ -9,6 +9,12 @@ import {
 import {
   AdminDashboardWebsiteAddConfigurationComponent
 } from './components/admin-dashboard-website-add-configuration/admin-dashboard-website-add-configuration.component';
+import {
+  AdminDashboardWebsiteMaintenanceComponent
+} from './components/admin-dashboard-website-maintenance/admin-dashboard-website-maintenance.component';
+import {
+  AdminDashboardWebsiteDisplayComponent
+} from './components/admin-dashboard-website-display/admin-dashboard-website-display.component';
 
 @Component({
   selector: 'app-website',
@@ -17,6 +23,8 @@ import {
     AdminDashboardWebsiteCreateComponent,
     AdminDashboardWebsiteAddContractComponent,
     AdminDashboardWebsiteAddConfigurationComponent,
+    AdminDashboardWebsiteMaintenanceComponent,
+    AdminDashboardWebsiteDisplayComponent,
   ],
   templateUrl: './website.component.html',
 })
