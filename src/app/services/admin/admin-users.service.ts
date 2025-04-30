@@ -13,7 +13,7 @@ export class AdminUsersService {
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.SERVER_URL}/api/user`, {
+    return this.http.get<User[]>(`${environment.SERVER_URL}/api/administrateur/user`, {
       params: {
         all: true,
       },

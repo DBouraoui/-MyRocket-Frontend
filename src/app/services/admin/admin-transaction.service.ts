@@ -14,7 +14,7 @@ export class AdminTransactionService {
   constructor(private http: HttpClient) { }
 
   fetchTransactions(): Observable<TransactionUser[]> {
-    return this.http.get<TransactionUser[]>(`${environment.SERVER_URL}/api/transaction/user`);
+    return this.http.get<TransactionUser[]>(`${environment.SERVER_URL}/api/administrateur/transaction/user`);
   }
 
   refreshTransactions(): Observable<TransactionUser[]> {
@@ -26,7 +26,7 @@ export class AdminTransactionService {
   }
 
   fetchTransactionTodisplay():Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`${environment.SERVER_URL}/api/transaction`,{
+    return this.http.get<Transaction[]>(`${environment.SERVER_URL}/api/administrateur/transaction`,{
       params: {
         fromAllUser:true
       }
@@ -42,7 +42,7 @@ export class AdminTransactionService {
   }
 
   createtransaction(payload : Object) {
-    return this.http.post<Object>(`${environment.SERVER_URL}/api/transaction`, payload);
+    return this.http.post<Object>(`${environment.SERVER_URL}/api/administrateur/transaction`, payload);
   }
 
 

@@ -15,26 +15,25 @@ export class UserWebsitesService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Récupère tout les sites webs de l'utilisateur courrant
+   */
   fetchWebsites(): Observable<Website[]> {
-    return this.http.get<Website[]>(`${environment.SERVER_URL}/api/website`, {
-      params: {
-        all: true,
-      },
-    });
+    return this.http.get<Website[]>(`${environment.SERVER_URL}/api/user/website`);
   }
 
   fetchWebsitesContract(): Observable<Contracts[]> {
-    return this.http.get<Contracts[]>(`${environment.SERVER_URL}/api/website/contract/me`);
+    return this.http.get<Contracts[]>(`${environment.SERVER_URL}/api/user/website/contract/me`);
   }
 
   fetchWebsitesMaintenanceContract(): Observable<MaintenanceContract[]> {
     return this.http.get<MaintenanceContract[]>(
-      `${environment.SERVER_URL}/api/maintenance/contract/me`
+      `${environment.SERVER_URL}/api/user/maintenance/contract/me`
     );
   }
 
   fetchAllInformations() {
-    return this.http.get<Website[]>(`${environment.SERVER_URL}/api/website/contract/get/all`);
+    return this.http.get<Website[]>(`${environment.SERVER_URL}/api/user/website/contract/get/all`);
   }
 
   refreshWebsites(): Observable<Website[]> {

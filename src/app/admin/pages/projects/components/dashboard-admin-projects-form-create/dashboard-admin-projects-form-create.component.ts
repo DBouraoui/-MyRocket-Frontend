@@ -91,7 +91,7 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
       }
     }
 
-    this.http.post<any>(`${environment.SERVER_URL}/api/project`, formData).subscribe({
+    this.http.post<any>(`${environment.SERVER_URL}/api/administrateur/projects-display`, formData).subscribe({
       next: resp => {
         this.messageService.add({
           severity: 'success',
