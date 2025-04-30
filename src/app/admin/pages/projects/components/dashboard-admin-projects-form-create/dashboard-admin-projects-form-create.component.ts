@@ -11,7 +11,7 @@ import { FileSelectEvent, FileUpload } from 'primeng/fileupload';
 import { Textarea } from 'primeng/textarea';
 import { MessageService } from 'primeng/api';
 import { AdminProjectsService } from '../../../../../services/admin/admin-projects.service';
-import { environment } from '../../../../../../../environment';
+import { environment, wording } from '../../../../../../../environment';
 
 type tags = {
   name: string;
@@ -95,7 +95,7 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
       next: resp => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Project créer avec succes',
+          summary: wording.PROJECT_SUCCESS_CREATE,
         });
         this.formGroup.reset();
         this.adminProjectsService.refreshProjects().subscribe();
@@ -104,7 +104,7 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
       error: err => {
         this.messageService.add({
           severity: 'error',
-          summary: "Erreur d'envoi du formulaire",
+          summary: wording.ERROR,
         });
         this.isLoading = false;
       },

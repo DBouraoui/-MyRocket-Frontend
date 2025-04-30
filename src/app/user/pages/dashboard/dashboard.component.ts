@@ -8,11 +8,9 @@ import { ButtonDirective } from 'primeng/button';
 @Component({
   selector: 'app-dashboard',
   imports: [
-    UserWebsitesDisplayComponent,
     UserWebsitesInformationsComponent,
     UserWebsitesMaintenanceContractsComponent,
     UserInformationsSettingsComponent,
-    ButtonDirective,
   ],
   templateUrl: './dashboard.component.html',
 })

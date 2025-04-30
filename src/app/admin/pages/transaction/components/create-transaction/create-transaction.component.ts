@@ -4,6 +4,7 @@ import { AdminTransactionService } from '../../../../../services/admin/admin-tra
 import { MessageService } from 'primeng/api';
 import { Button } from 'primeng/button';
 import { Select } from 'primeng/select';
+import { wording } from '../../../../../../../environment';
 
 @Component({
   selector: 'app-create-transaction',
@@ -55,7 +56,7 @@ export class CreateTransactionComponent {
     if (this.formGroup.invalid) {
       this.messageService.add({
         severity: 'error',
-        summary: 'Formulaire invalide',
+        summary: wording.INVALID_FORM,
       })
       return;
     }
@@ -69,13 +70,13 @@ export class CreateTransactionComponent {
       next: (result) => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Success',
+          summary: wording.SUCCESS,
         });
       },
       error: (error) => {
         this.messageService.add({
           severity: 'error',
-          summary: 'Error de création de la transaction',
+          summary: wording.ERROR,
         })
       }
     })
