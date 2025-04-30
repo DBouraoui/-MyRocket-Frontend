@@ -30,9 +30,7 @@ import { dashboardAdminWebsiteResolver } from './resolvers/admin/dashboard-admin
 import { dashboardAdminAllInformationResolver } from './resolvers/admin/dashboard-admin-all-information.resolver';
 import { TransactionComponent } from './admin/pages/transaction/transaction.component';
 import { dashboardAdminTransactionResolver } from './resolvers/admin/dashboard-admin-transaction.resolver';
-import {
-  dashboardAdminTransactionDisplayResolver
-} from './resolvers/admin/dashboard-admin-transaction-display.resolver';
+import { dashboardAdminTransactionDisplayResolver } from './resolvers/admin/dashboard-admin-transaction-display.resolver';
 export const routes: Routes = [
   {
     path: '',
@@ -151,7 +149,10 @@ export const routes: Routes = [
       {
         path: 'paiments',
         component: TransactionComponent,
-        resolve: { transactions: dashboardAdminTransactionResolver, displaytransaction: dashboardAdminTransactionDisplayResolver },
+        resolve: {
+          transactions: dashboardAdminTransactionResolver,
+          displaytransaction: dashboardAdminTransactionDisplayResolver,
+        },
         title: 'Gestion des transactions',
       },
     ],

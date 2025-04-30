@@ -6,18 +6,9 @@ import { CurrencyPipe, SlicePipe } from '@angular/common';
 
 @Component({
   selector: 'app-display-transaction',
-  imports: [
-    PrimeTemplate,
-    TableModule,
-    SlicePipe,
-    CurrencyPipe,
-  ],
+  imports: [PrimeTemplate, TableModule, SlicePipe, CurrencyPipe],
   templateUrl: './display-transaction.component.html',
 })
 export class DisplayTransactionComponent {
-
-  constructor(public transactionService: AdminTransactionService) {
-  }
-
-
+  constructor(public transactionService: AdminTransactionService) {}
 }

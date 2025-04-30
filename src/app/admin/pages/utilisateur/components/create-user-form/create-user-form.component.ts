@@ -34,7 +34,6 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private messageService: MessageService,
-    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -94,7 +93,7 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
       password: this.formGroup.get('password')?.value,
     };
 
-    this.http.post(`${environment.SERVER_URL}/api/user/register`, payload).subscribe({
+    this.adminUsersService.createUser(payload).subscribe({
       next: resp => {
         this.messageService.add({
           severity: 'success',

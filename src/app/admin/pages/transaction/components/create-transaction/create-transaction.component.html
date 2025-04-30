@@ -1,4 +1,7 @@
-<form [formGroup]="formGroup" class="flex flex-col md:flex-row gap-6 p-6 mt-2 bg-gray-900 rounded-xl shadow-lg border border-gray-800">
+<form
+  [formGroup]="formGroup"
+  class="flex flex-col md:flex-row gap-6 p-6 mt-2 bg-gray-900 rounded-xl shadow-lg border border-gray-800"
+>
   <div class="flex flex-col gap-2">
     <label class="text-sm font-medium text-gray-300">Utilisateur</label>
     <p-select
@@ -24,10 +27,6 @@
   </div>
 
   <div class="flex items-end">
-    <p-button
-      label="Créer la transaction"
-      variant="outlined"
-      (click)="onSubmit()"
-    />
+    <p-button label="Créer la transaction" variant="outlined" (click)="onSubmit()" />
   </div>
 </form>

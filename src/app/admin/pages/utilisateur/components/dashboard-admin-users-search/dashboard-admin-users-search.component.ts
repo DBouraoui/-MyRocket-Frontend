@@ -47,8 +47,7 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
 
   constructor(
     private messageService: MessageService,
-    private http: HttpClient,
-    private dashboardService: AdminUsersService
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -158,7 +157,7 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
       error: err => {
         this.messageService.add({
           severity: 'error',
-          summary:  wording.ERROR,
+          summary: wording.ERROR,
         });
         this.isLoading = false;
         console.log(err);

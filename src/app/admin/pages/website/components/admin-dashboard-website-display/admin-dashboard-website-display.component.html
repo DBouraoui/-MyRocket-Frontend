@@ -166,6 +166,13 @@
                             <p class="text-sm">{{ information.updatedAt }}</p>
                           </div>
                         </div>
+                        <p-button
+                          variant="outlined"
+                          severity="danger"
+                          label="Supprimer le site web"
+                          (onClick)="deleteWebsite(information.uuid)"
+                        >
+                        </p-button>
                       </div>
                     </div>
 
@@ -474,6 +481,7 @@
                         <div class="flex justify-between items-center mb-2">
                           <span class="text-gray-400 text-sm">Clé publique:</span>
                           <button
+                            [cdkCopyToClipboard]="information.websiteVps.publicKey"
                             class="bg-gray-700/50 hover:bg-gray-700 px-2 py-1 rounded text-xs text-gray-300 transition-colors flex items-center"
                           >
                             <i class="pi pi-copy mr-1"></i> Copier

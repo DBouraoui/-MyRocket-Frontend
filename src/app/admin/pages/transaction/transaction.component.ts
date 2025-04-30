@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
 import { AdminTransactionService } from '../../../services/admin/admin-transaction.service';
 import { DropdownModule } from 'primeng/dropdown';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Select } from 'primeng/select';
 import { MessageService } from 'primeng/api';
 import { Button } from 'primeng/button';
@@ -14,14 +20,10 @@ import { DisplayTransactionComponent } from './components/display-transaction/di
   imports: [
     DropdownModule,
     FormsModule,
-    Select,
     ReactiveFormsModule,
-    Button,
     CreateTransactionComponent,
     DisplayTransactionComponent,
   ],
   templateUrl: './transaction.component.html',
 })
-export class TransactionComponent  {
-
-}
+export class TransactionComponent {}

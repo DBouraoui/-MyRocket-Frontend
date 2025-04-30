@@ -12,10 +12,10 @@ export type Transaction = {
 export type TransactionUser = {
   uuid: string;
   email: string;
-  websiteContracts? : TransactionContract
-}
+  websiteContracts?: TransactionContract;
+};
 
 export type TransactionContract = {
   uuid: string;
   name: string;
-}
+};

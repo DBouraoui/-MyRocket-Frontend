@@ -16,4 +16,5 @@ export const wording = {
   USER_CREATE: "Utilisateur créé avec succès.",
   USER_MODIFIED: "Utilisateur modifié avec succès.",
   USER_DELETED: "Utilisateur supprimé avec succès.",
+  WEBSITE_DELETED: "Site web supprimer avec succès"
 }

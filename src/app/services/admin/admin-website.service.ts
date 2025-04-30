@@ -56,6 +56,13 @@ export class AdminWebsiteService {
   }
 
   createMaintenanceContract(payload: object) {
-    return this.http.post(`${environment.SERVER_URL}/api/administrateur/maintenance-contract`, payload);
+    return this.http.post(
+      `${environment.SERVER_URL}/api/administrateur/maintenance-contract`,
+      payload
+    );
+  }
+
+  deleteWebsite(uuid: string):Observable<string> {
+    return this.http.delete<string>(`${environment.SERVER_URL}/api/administrateur/website/${uuid}`);
   }
 }

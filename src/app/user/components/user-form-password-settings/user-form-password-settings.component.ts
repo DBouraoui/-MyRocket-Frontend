@@ -71,7 +71,7 @@ export class UserFormPasswordSettingsComponent implements OnInit {
       error: err => {
         this.messageService.add({
           severity: 'error',
-          summary: wording.PASSWORD_NOT_VALIDE,
+          summary: wording.PASSWORD_NOT_VALID,
         });
         this.isLoading = false;
         console.log(err);

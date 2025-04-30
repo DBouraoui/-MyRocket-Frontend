@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { AdminTransactionService } from '../../../../../services/admin/admin-transaction.service';
 import { MessageService } from 'primeng/api';
 import { Button } from 'primeng/button';
@@ -8,12 +14,7 @@ import { wording } from '../../../../../../../environment';
 
 @Component({
   selector: 'app-create-transaction',
-  imports: [
-    Button,
-    FormsModule,
-    ReactiveFormsModule,
-    Select,
-  ],
+  imports: [Button, FormsModule, ReactiveFormsModule, Select],
   templateUrl: './create-transaction.component.html',
 })
 export class CreateTransactionComponent {
@@ -21,21 +22,21 @@ export class CreateTransactionComponent {
 
   constructor(
     private adminTransactionService: AdminTransactionService,
-    private messageService :MessageService
+    private messageService: MessageService
   ) {
     this.formGroup = new FormGroup({
       uuidUser: new FormControl('', [Validators.required]),
       uuidWebsiteContract: new FormControl('', [Validators.required]),
-    })
+    });
   }
 
   getUsers() {
-    return this.adminTransactionService.TransactionUsers().map((transaction)=>{
-      return {name:transaction.email, value: transaction.uuid};
-    })
+    return this.adminTransactionService.TransactionUsers().map(transaction => {
+      return { name: transaction.email, value: transaction.uuid };
+    });
   }
   getContract() {
-    const contract = this.adminTransactionService.TransactionUsers().filter((transaction) => {
+    const contract = this.adminTransactionService.TransactionUsers().filter(transaction => {
       return transaction.uuid === this.formGroup.get('uuidUser')?.value;
     });
 
@@ -57,28 +58,28 @@ export class CreateTransactionComponent {
       this.messageService.add({
         severity: 'error',
         summary: wording.INVALID_FORM,
-      })
+      });
       return;
     }
 
     const payload = {
       uuidUser: this.formGroup.get('uuidUser')?.value,
       uuidWebsiteContract: this.formGroup.get('uuidWebsiteContract')?.value,
-    }
+    };
 
     this.adminTransactionService.createtransaction(payload).subscribe({
-      next: (result) => {
+      next: result => {
         this.messageService.add({
           severity: 'success',
           summary: wording.SUCCESS,
         });
       },
-      error: (error) => {
+      error: error => {
         this.messageService.add({
           severity: 'error',
           summary: wording.ERROR,
-        })
-      }
-    })
+        });
+      },
+    });
   }
 }
