@@ -67,13 +67,6 @@
         <div
           class="w-16 h-16 rounded-full bg-blue-600 flex items-center justify-center text-white text-xl font-bold mb-2"
         >
-          @if (formGroup.get('firstname')?.value) {
-            {{ formGroup.get('firstname')?.value?.charAt(0) || ''
-            }}{{ formGroup.get('lastname')?.value?.charAt(0) || '' }}
-          } @else {
-            {{ formGroup.get('companyName')?.value?.charAt(0) || ''
-            }}{{ formGroup.get('companyName')?.value?.charAt(1) || '' }}
-          }
         </div>
         <h3 class="text-lg font-bold">
           {{ formGroup.get('firstname')?.value }} {{ formGroup.get('lastname')?.value }}

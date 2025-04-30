@@ -4,8 +4,10 @@ import { AdminTransactionService } from '../../services/admin/admin-transaction.
 import { Observable } from 'rxjs';
 import { Transaction } from '../../types/Transaction';
 
-export const dashboardAdminTransactionDisplayResolver: ResolveFn<Observable<Transaction[]>> = () => {
-const transactionService = inject(AdminTransactionService);
+export const dashboardAdminTransactionDisplayResolver: ResolveFn<
+  Observable<Transaction[]>
+> = () => {
+  const transactionService = inject(AdminTransactionService);
 
-return transactionService.refreshTransactionForDisplay();
+  return transactionService.refreshTransactionForDisplay();
 };

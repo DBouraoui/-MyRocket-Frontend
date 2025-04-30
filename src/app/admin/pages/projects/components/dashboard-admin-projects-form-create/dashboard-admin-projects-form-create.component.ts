@@ -11,7 +11,7 @@ import { FileSelectEvent, FileUpload } from 'primeng/fileupload';
 import { Textarea } from 'primeng/textarea';
 import { MessageService } from 'primeng/api';
 import { AdminProjectsService } from '../../../../../services/admin/admin-projects.service';
-import { environment } from '../../../../../../../environment';
+import { environment, wording } from '../../../../../../../environment';
 
 type tags = {
   name: string;
@@ -91,24 +91,25 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
       }
     }
 
-    this.http.post<any>(`${environment.SERVER_URL}/api/project`, formData).subscribe({
-      next: resp => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Project créer avec succes',
-        });
-        this.formGroup.reset();
-        this.adminProjectsService.refreshProjects().subscribe();
-        this.isLoading = false;
-      },
-      error: err => {
-        this.messageService.add({
-          severity: 'error',
-          summary: "Erreur d'envoi du formulaire",
-        });
-        this.isLoading = false;
-      },
-    });
+
+      this.adminProjectsService.createProjects(formData).subscribe({
+        next: resp => {
+          this.messageService.add({
+            severity: 'success',
+            summary: wording.PROJECT_SUCCESS_CREATE,
+          });
+          this.formGroup.reset();
+          this.adminProjectsService.refreshProjects().subscribe();
+          this.isLoading = false;
+        },
+        error: err => {
+          this.messageService.add({
+            severity: 'error',
+            summary: wording.ERROR,
+          });
+          this.isLoading = false;
+        },
+      });
   }
 
   addUrl() {

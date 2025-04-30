@@ -13,7 +13,7 @@ export class UserTransactionsService {
   constructor(private http: HttpClient) {}
 
   fetchTransaction(): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>(`${environment.SERVER_URL}/api/transaction/me`);
+    return this.http.get<Transaction[]>(`${environment.SERVER_URL}/api/user/transaction/me`);
   }
 
   refreshTransaction(): Observable<Transaction[]> {

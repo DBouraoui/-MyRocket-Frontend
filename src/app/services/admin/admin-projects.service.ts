@@ -13,7 +13,7 @@ export class AdminProjectsService {
   constructor(private http: HttpClient) {}
 
   fetchProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(`${environment.SERVER_URL}/api/project`, {
+    return this.http.get<Project[]>(`${environment.SERVER_URL}/api/user/project`, {
       params: {
         all: true,
       },
@@ -26,5 +26,9 @@ export class AdminProjectsService {
         this.projects.set(response);
       })
     );
+  }
+
+  createProjects(payload: Object): Observable<Object> {
+   return this.http.post<any>(`${environment.SERVER_URL}/api/administrateur/projects-display`, payload);
   }
 }

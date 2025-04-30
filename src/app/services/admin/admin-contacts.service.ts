@@ -13,7 +13,7 @@ export class AdminContactsService {
   constructor(private http: HttpClient) {}
 
   fetchContacts(): Observable<ContactsResponse> {
-    return this.http.get<ContactsResponse>(`${environment.SERVER_URL}/api/contact`, {
+    return this.http.get<ContactsResponse>(`${environment.SERVER_URL}/api/administrateur/contact`, {
       params: {
         all: true,
         withImageUrls: true,
@@ -22,7 +22,7 @@ export class AdminContactsService {
   }
 
   deleteContact(contact: Contact): Observable<Contact> {
-    return this.http.delete<Contact>(`${environment.SERVER_URL}/api/contact`, {
+    return this.http.delete<Contact>(`${environment.SERVER_URL}/api/administrateur/contact`, {
       params: {
         uuid: contact.uuid,
       },

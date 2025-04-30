@@ -12,7 +12,6 @@ import { MessageService, PrimeTemplate } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environment';
 import { Drawer } from 'primeng/drawer';
-import { Tooltip } from 'primeng/tooltip';
 
 interface Tag {
   name: string;
@@ -31,7 +30,6 @@ interface Tag {
     SelectButton,
     Textarea,
     Drawer,
-    Tooltip,
     PrimeTemplate,
   ],
   templateUrl: './anonymous-contact-form.component.html',

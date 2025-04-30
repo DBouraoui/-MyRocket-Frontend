@@ -1,5 +1,4 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmite()" class="space-y-6">
-  <!-- Type d'utilisateur -->
   <div class="mb-6">
     <label class="block text-sm font-medium text-indigo-300 mb-2">Type de compte</label>
     <div class="flex justify-center">
@@ -9,7 +8,6 @@
         optionLabel="label"
         optionValue="value"
         styleClass="shadow-md"
-        aria-labelledby="basic"
       ></p-selectbutton>
     </div>
   </div>
@@ -131,7 +129,7 @@
                 'border-color': 'rgb(71, 85, 105)',
               }"
             />
-            <label for="password">Mot de passe</label>
+            <label >Mot de passe</label>
           </p-iftalabel>
         </div>
       </div>

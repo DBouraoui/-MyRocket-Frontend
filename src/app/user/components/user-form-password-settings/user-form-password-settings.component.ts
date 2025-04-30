@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api';
 import { UserSettingsService } from '../../../services/user/user-settings.service';
 import { NgIf } from '@angular/common';
 import { tap } from 'rxjs';
+import { wording } from '../../../../../environment';
 
 @Component({
   selector: 'app-user-form-password-settings',
@@ -47,7 +48,7 @@ export class UserFormPasswordSettingsComponent implements OnInit {
       this;
       this.messageService.add({
         severity: 'warn',
-        summary: "Erreur l'or de la soumission du formulaire",
+        summary: wording.INVALID_FORM,
       });
       this.isLoading = false;
       return;
@@ -63,14 +64,14 @@ export class UserFormPasswordSettingsComponent implements OnInit {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Le mot de passe a été modifier',
+          summary: wording.PASSWORD_MODIFIED,
         });
         this.isLoading = false;
       },
       error: err => {
         this.messageService.add({
           severity: 'error',
-          summary: 'Le mot de passe est incorrect',
+          summary: wording.PASSWORD_NOT_VALID,
         });
         this.isLoading = false;
         console.log(err);

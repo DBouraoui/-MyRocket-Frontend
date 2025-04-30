@@ -11,6 +11,7 @@ import { InputIcon } from 'primeng/inputicon';
 import { Select } from 'primeng/select';
 import { SelectButton } from 'primeng/selectbutton';
 import { MessageService } from 'primeng/api';
+import { wording } from '../../../../../environment';
 
 @Component({
   selector: 'app-user-form-settings',
@@ -82,7 +83,7 @@ export class UserFormSettingsComponent implements OnInit {
     if (this.formGroup.invalid) {
       this.messageService.add({
         severity: 'warn',
-        summary: 'Les données sont invalides',
+        summary: wording.INVALID_FORM,
       });
       return;
     }
@@ -107,7 +108,7 @@ export class UserFormSettingsComponent implements OnInit {
         this.messageService.clear();
         this.messageService.add({
           severity: 'success',
-          summary: 'Les données on étais modifiées',
+          summary: wording.DATA_MODIFIED,
         });
         this.userSettingsService.refreshInformations().subscribe();
         this.isLoading = false;
@@ -116,7 +117,7 @@ export class UserFormSettingsComponent implements OnInit {
         this.messageService.clear();
         this.messageService.add({
           severity: 'error',
-          summary: "Erreur d'envoie des données",
+          summary: wording.INVALID_FORM,
         });
         this.isLoading = false;
       },
@@ -136,7 +137,7 @@ export class UserFormSettingsComponent implements OnInit {
     this.messageService.clear();
     this.messageService.add({
       severity: 'info',
-      summary: "Les données on été remise comme a l'origine",
+      summary: wording.DATA_RESET,
     });
   }
 }

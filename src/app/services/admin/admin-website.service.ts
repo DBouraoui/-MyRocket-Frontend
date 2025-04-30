@@ -14,7 +14,7 @@ export class AdminWebsiteService {
   constructor(private http: HttpClient) {}
 
   fetchWebsite(): Observable<Website[]> {
-    return this.http.get<Website[]>(`${environment.SERVER_URL}/api/website/all`);
+    return this.http.get<Website[]>(`${environment.SERVER_URL}/api/administrateur/website`);
   }
 
   refreshWebsite(): Observable<Website[]> {
@@ -27,7 +27,7 @@ export class AdminWebsiteService {
 
   fetchAllInformation(): Observable<Website[]> {
     return this.http.get<Website[]>(
-      `${environment.SERVER_URL}/api/website/contract/get/all/informations`
+      `${environment.SERVER_URL}/api/administrateur/website/all-informations`
     );
   }
 
@@ -40,11 +40,11 @@ export class AdminWebsiteService {
   }
 
   createWebsite(payload: object) {
-    return this.http.post(`${environment.SERVER_URL}/api/website`, payload);
+    return this.http.post(`${environment.SERVER_URL}/api/administrateur/website`, payload);
   }
 
   createWebsiteContract(payload: object) {
-    return this.http.post(`${environment.SERVER_URL}/api/website/contract`, payload);
+    return this.http.post(`${environment.SERVER_URL}/api/administrateur/website-contract`, payload);
   }
 
   createWebsiteVps(payload: object) {
@@ -56,6 +56,13 @@ export class AdminWebsiteService {
   }
 
   createMaintenanceContract(payload: object) {
-    return this.http.post(`${environment.SERVER_URL}/api/maintenance/contract`, payload);
+    return this.http.post(
+      `${environment.SERVER_URL}/api/administrateur/maintenance-contract`,
+      payload
+    );
+  }
+
+  deleteWebsite(uuid: string):Observable<string> {
+    return this.http.delete<string>(`${environment.SERVER_URL}/api/administrateur/website/${uuid}`);
   }
 }

@@ -14,7 +14,7 @@ export class AnonymousProjectsService {
 
   fetchProjects(): Observable<Project[]> {
     localStorage.removeItem('statement');
-    return this.http.get<Project[]>(`${environment.SERVER_URL}/api/project`, {
+    return this.http.get<Project[]>(`${environment.SERVER_URL}/api/user/project`, {
       params: {
         all: true,
       },

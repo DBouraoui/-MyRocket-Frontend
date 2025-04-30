@@ -18,7 +18,7 @@ import { MessageService } from 'primeng/api';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { AdminUsersService } from '../../../../../services/admin/admin-users.service';
-import { environment } from '../../../../../../../environment';
+import { environment, wording } from '../../../../../../../environment';
 
 @Component({
   selector: 'app-dashboard-admin-users-search',
@@ -47,8 +47,7 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
 
   constructor(
     private messageService: MessageService,
-    private http: HttpClient,
-    private dashboardService: AdminUsersService
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -70,8 +69,7 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
     if (this.formGroup.invalid) {
       this.messageService.add({
         severity: 'warn',
-        summary: 'Erreur dans le formulair',
-        detail: "Impossible d'envoyer le formulaire imcomplet ou incorrect",
+        detail: wording.INVALID_FORM,
       });
       this.isLoading = false;
       return;
@@ -94,7 +92,7 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
       next: resp => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Utilisateur modifier',
+          summary: wording.USER_MODIFIED,
         });
         this.isLoading = false;
         this.adminUsersService.refreshUsers().subscribe();
@@ -102,7 +100,7 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
       error: err => {
         this.messageService.add({
           severity: 'error',
-          summary: 'Erreur utilisateur non créer',
+          summary: wording.ERROR,
         });
         this.isLoading = false;
         console.log(err);
@@ -151,7 +149,7 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
       next: resp => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Utilisateur supprimer',
+          summary: wording.USER_DELETED,
         });
         this.isLoading = false;
         this.adminUsersService.refreshUsers().subscribe();
@@ -159,7 +157,7 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
       error: err => {
         this.messageService.add({
           severity: 'error',
-          summary: 'Erreur utilisateur non supprimer',
+          summary: wording.ERROR,
         });
         this.isLoading = false;
         console.log(err);

@@ -11,6 +11,7 @@ import { Panel } from 'primeng/panel';
 import { MessagesModule } from 'primeng/messages';
 import { Inplace } from 'primeng/inplace';
 import { MessageService } from 'primeng/api';
+import { wording } from '../../../../../../environment';
 
 @Component({
   selector: 'app-display',
@@ -44,7 +45,7 @@ export class DisplayComponent {
       next: () => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Contact supprimer avec succes',
+          summary: wording.CONTACT_SUCCESS_DELETE,
         });
         this.visibility = false;
         this.adminContactService.refreshContacts().subscribe();
@@ -53,7 +54,7 @@ export class DisplayComponent {
         console.log(err);
         this.messageService.add({
           severity: 'error',
-          summary: 'Contact supprimer avec succes',
+          summary: wording.ERROR,
         });
       },
     });

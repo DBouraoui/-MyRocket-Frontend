@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { User } from '../../types/User';
 import { environment } from '../../../../environment';
+import { Project } from '../../types/Project';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class AdminUsersService {
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${environment.SERVER_URL}/api/user`, {
+    return this.http.get<User[]>(`${environment.SERVER_URL}/api/administrateur/user`, {
       params: {
         all: true,
       },
@@ -22,5 +23,9 @@ export class AdminUsersService {
 
   refreshUsers() {
     return this.getUsers().pipe(tap(data => this.users.set(data)));
+  }
+
+  createUser(payload: Object): Observable<Object> {
+    return this.http.post(`${environment.SERVER_URL}/api/administrateur/user`, payload);
   }
 }
