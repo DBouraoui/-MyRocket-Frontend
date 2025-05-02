@@ -9,6 +9,7 @@ export type Website = {
   type: string;
   createdAt: string;
   updatedAt: string;
+  hasConfig: string;
   contract?: Contracts;
   maintenanceContract?: MaintenanceContract;
   user?: UserAdmin;

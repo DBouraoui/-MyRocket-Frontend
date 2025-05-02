@@ -29,11 +29,6 @@
             <span
               class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-sm font-medium"
             >
-              @if (user.firstname) {
-                {{ user.firstname?.charAt(0) }}{{ user.lastname?.charAt(0) }}
-              } @else {
-                {{ user.companyName?.charAt(0) }}{{ user.companyName?.charAt(1) }}
-              }
             </span>
             <span class="font-bold text-white">{{ user.firstname }} {{ user.lastname }}</span>
           </div>

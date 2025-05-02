@@ -19,9 +19,4 @@ import { Router } from '@angular/router';
 export class UserSettingsComponent {
   user = inject(UserSettingsService);
   router = inject(Router);
-
-  deconnexion() {
-    localStorage.removeItem('statement');
-    this.router.navigateByUrl('/home');
-  }
 }

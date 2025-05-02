@@ -14,16 +14,25 @@ export class UserWebsitesInformationsComponent {
   }
 
   countWebsitesActif(): number {
+    if (this.countWebsites() >= 0) {
+      return 0;
+    }
     return this.websiteService.website().filter(website => {
       return website.status === 'active';
     }).length;
   }
 
   countWebsiteMutualised(): number {
+    if (this.countWebsites() >= 0) {
+      return 0;
+    }
     return this.websiteService.website().filter(website => website.type == 'mutualised').length;
   }
 
   countWebsiteVps(): number {
+    if (this.countWebsites() >= 0) {
+      return 0;
+    }
     return this.websiteService.website().filter(website => website.type == 'vps').length;
   }
 }

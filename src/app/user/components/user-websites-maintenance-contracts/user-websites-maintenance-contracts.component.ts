@@ -30,6 +30,9 @@ export class UserWebsitesMaintenanceContractsComponent {
   }
 
   getLastContracts() {
+    if (this.websiteService.maintenanceContract().length === 0) {
+      return 'Aucun contrat';
+    }
     return this.websiteService.maintenanceContract()[
       this.websiteService.maintenanceContract().length - 1
     ].createdAt;

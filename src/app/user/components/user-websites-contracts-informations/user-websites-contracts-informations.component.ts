@@ -27,6 +27,9 @@ export class UserWebsitesContractsInformationsComponent {
   }
 
   getLastContract() {
+    if (this.websites.contract().length === 0) {
+      return 'Aucun contrat';
+    }
     return this.websites.contract()[this.websites.contract().length - 1].createdAt;
   }
 }

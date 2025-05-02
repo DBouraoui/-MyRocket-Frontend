@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Button, ButtonDirective } from 'primeng/button';
 import { Drawer } from 'primeng/drawer';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NavbarItems } from '../../../types/Navbar';
+import { AuthService } from '../../../services/user/auth.service';
 
 @Component({
   selector: 'app-user-sidebar',
@@ -10,6 +11,10 @@ import { NavbarItems } from '../../../types/Navbar';
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent {
+
+  constructor(private router : Router, public authService : AuthService) {
+  }
+
   visible: boolean = false;
   navbarItem: NavbarItems[] = [
     {
@@ -38,4 +43,9 @@ export class SidebarComponent {
     //   icon: 'pi-ticket',
     // },
   ];
+
+  deconnexion():void {
+    localStorage.removeItem('statement');
+    this.router.navigateByUrl('/home');
+  }
 }

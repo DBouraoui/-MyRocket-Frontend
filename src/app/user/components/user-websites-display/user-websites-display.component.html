@@ -137,23 +137,43 @@
             </div>
 
             <div class="grid grid-cols-2 gap-4">
-              <div class="flex flex-col">
-                <span class="text-sm text-gray-200 underline">Type:</span>
-                <span class="text-slate-100">{{
-                  selectedWebsite.type == 'mutualised' ? 'Mutualisée' : 'VPS'
-                }}</span>
-              </div>
+              <div class="flex flex-col gap-4">
+                <div class="flex flex-col">
+                  <span class="text-sm text-gray-200 underline">Type :</span>
+                  <span class="text-slate-100">
+      {{ selectedWebsite.type == 'mutualised' ? 'Mutualisée' : 'VPS' }}
+    </span>
+                </div>
 
-              <div class="flex flex-col">
-                <span class="text-sm text-gray-200 underline">Créé le:</span>
-                <span class="text-slate-100">{{ selectedWebsite.createdAt }}</span>
-              </div>
+                <div class="flex flex-col">
+                  <span class="text-sm text-gray-200 underline">Créé le :</span>
+                  <span class="text-slate-100">
+      {{ selectedWebsite.createdAt }}
+    </span>
+                </div>
 
-              <div class="flex flex-col">
-                <span class="text-sm text-gray-200 underline">Mis à jour le:</span>
-                <span class="text-slate-100">{{ selectedWebsite.updatedAt }}</span>
+                <div class="flex flex-col">
+                  <span class="text-sm text-gray-200 underline">Mis à jour le :</span>
+                  <span class="text-slate-100">
+      {{ selectedWebsite.updatedAt  }}
+    </span>
+                </div>
+
+                @if (selectedWebsite.hasConfig) {
+                  <div class="flex flex-col">
+                    <span class="text-sm text-gray-200 underline">Informations de connexion :</span>
+                    <p-button
+                      label="Demander les informations de mon hébergeur"
+                      severity="contrast"
+                      variant="outlined"
+                      size="small"
+                      class="mt-2 max-w-fit"
+                      (click)="getInformationConnexionByEmail(selectedWebsite.uuid)"
+                    ></p-button>
+                  </div>
+                }
               </div>
-            </div>
+          </div>
           </div>
         </p-tabPanel>
 

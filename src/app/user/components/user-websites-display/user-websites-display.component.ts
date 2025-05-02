@@ -5,12 +5,14 @@ import { Website } from '../../../types/Website';
 import { NgClass, NgIf } from '@angular/common';
 import { Tag } from 'primeng/tag';
 import { TabPanel, TabView } from 'primeng/tabview';
-import { ButtonDirective } from 'primeng/button';
+import { Button, ButtonDirective } from 'primeng/button';
 import { Drawer } from 'primeng/drawer';
+import { MessageService } from 'primeng/api';
+import { wording } from '../../../../../environment';
 
 @Component({
   selector: 'app-user-websites-display',
-  imports: [NgIf, Tag, TabView, TabPanel, ButtonDirective, Drawer, NgClass],
+  imports: [NgIf, Tag, TabView, TabPanel, ButtonDirective, Drawer, NgClass, Button],
   templateUrl: './user-websites-display.component.html',
 })
 export class UserWebsitesDisplayComponent {
@@ -19,9 +21,9 @@ export class UserWebsitesDisplayComponent {
 
   constructor(
     public websiteService: UserWebsitesService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private messageService: MessageService,
   ) {
-    console.log(websiteService.allInformations());
   }
 
   openWebsiteDetails(website: Website): void {
@@ -75,4 +77,22 @@ export class UserWebsitesDisplayComponent {
         return `${baseClasses}`;
     }
   }
+
+  getInformationConnexionByEmail(uuid:string):void {
+    this.websiteService.getInformationWebsiteByEmail(uuid).subscribe({
+      next: () => {
+          this.messageService.add({
+            severity: 'info',
+            summary: wording.EMAIL_SENDING,
+          })
+      },
+      error: () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: wording.ERROR,
+        })
+      }
+    })
+  }
+
 }
