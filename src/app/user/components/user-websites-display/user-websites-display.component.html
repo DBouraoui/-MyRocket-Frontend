@@ -1,234 +1,304 @@
-<div class="container mx-auto p-4">
-  <h1 class="text-2xl font-bold mb-6 text-gray-800">Mes sites web</h1>
+<div class="bg-gray-900 p-6 min-h-screen">
+  <div class="max-w-7xl mx-auto">
+    <!-- En-tête de section -->
+    <div class="flex items-center mb-8">
+      <div class="w-1 h-8 bg-teal-500 rounded mr-3"></div>
+      <h1 class="text-2xl font-bold text-white">Mes sites web</h1>
+    </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    @for (website of websiteService.allInformations(); track website.uuid) {
-      <div
-        class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
-        (click)="openWebsiteDetails(website)"
-      >
-        <!-- En-tête de la carte avec statut -->
-        <div class="relative">
-          <!-- Iframe ou placeholder -->
-          <div class="w-full h-48 bg-gray-100 flex items-center justify-center">
-            <iframe
-              *ngIf="isValidUrl(website.url)"
-              [src]="getSafeUrl(website.url)"
-              class="w-full h-full border-0"
-              title="Aperçu du site"
-            ></iframe>
-            <div *ngIf="!isValidUrl(website.url)" class="flex flex-col items-center justify-center">
-              <i class="pi pi-globe text-4xl text-gray-300 mb-2"></i>
-              <span class="text-gray-400">Aperçu non disponible</span>
+    <!-- Grille de cartes -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (website of websiteService.allInformations(); track website.uuid) {
+        <div
+          class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden hover:border-teal-500/30 transition-all duration-200 group"
+          (click)="openWebsiteDetails(website)"
+        >
+          <!-- Partie supérieure avec icône et badges de statut -->
+          <div class="p-5 pb-3 flex justify-between items-start">
+            <!-- Icône représentative du type de site -->
+            <div class="w-12 h-12 rounded-lg flex items-center justify-center"
+                 [ngClass]="{
+                'bg-sky-900/30 text-sky-400': website.type === 'mutualised',
+                'bg-indigo-900/30 text-indigo-400': website.type === 'VPS',
+                'bg-gray-700/50 text-gray-400': !['mutualised', 'VPS'].includes(website.type)
+              }">
+              <i class="pi pi-globe text-xl"></i>
+            </div>
+
+            <!-- Badges de statut -->
+            <div class="flex space-x-2">
+              <span
+                class="px-2 py-1 text-xs font-medium rounded-md"
+                [ngClass]="{
+                  'bg-emerald-900/30 text-emerald-400 border border-emerald-700/30': website.status === 'online',
+                  'bg-red-900/30 text-red-400 border border-red-700/30': website.status === 'offline',
+                  'bg-amber-900/30 text-amber-400 border border-amber-700/30': website.status === 'maintenance',
+                  'bg-gray-700/50 text-gray-400 border border-gray-600/30': !['online', 'offline', 'maintenance'].includes(website.status)
+                }"
+              >
+                {{ website.status }}
+              </span>
+
+              <span
+                class="px-2 py-1 text-xs font-medium rounded-md"
+                [ngClass]="{
+                  'bg-sky-900/30 text-sky-400 border border-sky-700/30': website.type === 'mutualised',
+                  'bg-indigo-900/30 text-indigo-400 border border-indigo-700/30': website.type === 'VPS',
+                  'bg-gray-700/50 text-gray-400 border border-gray-600/30': !['mutualised', 'VPS'].includes(website.type)
+                }"
+              >
+                {{ website.type }}
+              </span>
             </div>
           </div>
 
-          <!-- Badge de statut -->
-          <div class="absolute top-3 right-3">
-            <span
-              class="px-3 py-1 text-xs font-medium rounded-full"
-              [ngClass]="getStatusBadgeClass(website.status)"
-            >
-              {{ website.status }}
-            </span>
-          </div>
+          <!-- Contenu principal de la carte -->
+          <div class="px-5 pb-4">
+            <!-- Titre et date -->
+            <div class="mb-3">
+              <h3 class="text-xl font-bold text-white group-hover:text-teal-400 transition-colors mb-1">{{ website.title }}</h3>
+              <div class="flex items-center text-xs text-gray-400">
+                <i class="pi pi-calendar mr-1"></i>
+                <span>Créé le {{ website.createdAt }}</span>
+              </div>
+            </div>
 
-          <!-- Badge de type -->
-          <div class="absolute top-3 left-3">
-            <span
-              class="px-3 py-1 text-xs font-medium rounded-full"
-              [ngClass]="getTypeBadgeClass(website.type)"
-            >
-              {{ website.type }}
-            </span>
-          </div>
-        </div>
+            <!-- Description -->
+            <p class="text-gray-300 text-sm mb-4 line-clamp-2">{{ website.description || "Aucune description disponible" }}</p>
 
-        <!-- Contenu de la carte -->
-        <div class="p-4">
-          <h2 class="text-xl font-semibold text-gray-800 mb-2 truncate">{{ website.title }}</h2>
-
-          <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ website.description }}</p>
-
-          <!-- Informations principales -->
-          <div class="flex flex-col gap-2 text-sm">
-            <div class="flex items-center text-gray-700">
-              <i class="pi pi-link mr-2 text-gray-500"></i>
+            <!-- URL avec style amélioré -->
+            <div class="flex items-center text-sm mb-4 bg-gray-750 p-3 rounded-lg border border-gray-700">
+              <i class="pi pi-link mr-2 text-teal-400"></i>
               <a
                 [href]="website.url"
                 target="_blank"
-                class="text-blue-600 truncate hover:underline"
+                class="text-gray-300 truncate hover:text-teal-400 transition-colors"
                 (click)="$event.stopPropagation()"
               >
                 {{ website.url }}
               </a>
             </div>
 
-            <div class="flex items-center text-gray-700">
-              <i class="pi pi-calendar mr-2 text-gray-500"></i>
-              <span>Créé le {{ website.createdAt }}</span>
+            <!-- Indicateurs visuels pour les contrats -->
+            <div class="grid grid-cols-2 gap-3 mb-4">
+              <div
+                class="p-3 rounded-lg border flex items-center transition-colors"
+                [ngClass]="website.contract ? 'bg-teal-900/20 border-teal-800/40 text-teal-400' : 'bg-gray-750 border-gray-700 text-gray-500'"
+              >
+                <i class="pi pi-file-contract mr-2"></i>
+                <span class="text-xs font-medium">Contrat service</span>
+                <i
+                  *ngIf="website.contract"
+                  class="pi pi-check ml-auto text-teal-400"
+                ></i>
+              </div>
+
+              <div
+                class="p-3 rounded-lg border flex items-center transition-colors"
+                [ngClass]="website.maintenanceContract ? 'bg-cyan-900/20 border-cyan-800/40 text-cyan-400' : 'bg-gray-750 border-gray-700 text-gray-500'"
+              >
+                <i class="pi pi-wrench mr-2"></i>
+                <span class="text-xs font-medium">Support</span>
+                <i
+                  *ngIf="website.maintenanceContract"
+                  class="pi pi-check ml-auto text-cyan-400"
+                ></i>
+              </div>
             </div>
           </div>
 
-          <!-- Indicateurs de contrats -->
-          <div class="flex gap-2 mt-4">
-            <div
-              *ngIf="website.contract"
-              class="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-md"
-            >
-              <i class="pi pi-file mr-1"></i> Contrat service
-            </div>
-            <div
-              *ngIf="website.maintenanceContract"
-              class="inline-flex items-center px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-md"
-            >
-              <i class="pi pi-cog mr-1"></i> Support technique
-            </div>
-          </div>
+          <!-- Pied de carte avec action -->
+          <div class="px-5 py-3 border-t border-gray-700 flex justify-between items-center bg-gray-750">
+            <span class="text-xs text-gray-400 flex items-center">
+              <i class="pi pi-clock mr-1"></i>
+              Mis à jour le {{ website.updatedAt }}
+            </span>
 
-          <!-- Footer avec bouton d'action -->
-          <div class="flex justify-end mt-4">
             <button
               pButton
               icon="pi pi-external-link"
               label="Détails"
-              class="p-button-sm p-button-outlined"
+              class="p-button-rounded p-button-sm p-button-outlined"
               (click)="openWebsiteDetails(website); $event.stopPropagation()"
             ></button>
           </div>
         </div>
+      }
+    </div>
+
+    <!-- Message si aucun site -->
+    <div *ngIf="websiteService.allInformations().length === 0" class="bg-gray-800 rounded-lg border border-gray-700 p-8 text-center">
+      <div class="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="pi pi-globe text-gray-400 text-3xl"></i>
       </div>
-    }
+      <h3 class="text-white text-lg font-bold mb-2">Aucun site web</h3>
+      <p class="text-gray-400 max-w-md mx-auto mb-6">
+        Vous n'avez pas encore de sites web ou d'applications dans votre compte.
+      </p>
+      <button pButton label="Ajouter un site" icon="pi pi-plus" class="p-button-outlined"></button>
+    </div>
   </div>
 </div>
 
-<!-- Sidebar pour afficher les détails du site web sélectionné -->
+<!-- Sidebar détails -->
 <p-drawer
   [(visible)]="sidebarVisible"
   position="right"
   [style]="{ width: '40rem' }"
   [blockScroll]="true"
+  styleClass="bg-gray-850 text-white"
 >
   <ng-container *ngIf="selectedWebsite">
-    <div class="p-4">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-bold">{{ selectedWebsite.title }}</h2>
-        <p-tag [value]="selectedWebsite.status"></p-tag>
+    <div class="p-5">
+      <!-- En-tête avec titre et statut -->
+      <div class="flex justify-between items-start mb-6 pb-4 border-b border-gray-700">
+        <div>
+          <h2 class="text-xl font-bold text-white">{{ selectedWebsite.title }}</h2>
+          <div class="text-sm text-gray-400 mt-1 flex items-center">
+            <i class="pi pi-globe mr-2"></i>
+            <a [href]="selectedWebsite.url" target="_blank" class="text-teal-400 hover:underline">
+              {{ selectedWebsite.url }}
+            </a>
+          </div>
+        </div>
+
+        <p-tag
+          [value]="selectedWebsite.status"
+        ></p-tag>
       </div>
 
       <!-- Onglets pour différentes sections -->
-      <p-tabView>
+      <p-tabView styleClass="dark-tabs">
         <!-- Informations générales -->
         <p-tabPanel header="Informations">
-          <div class="flex flex-col gap-4">
-            <div class="flex flex-col">
-              <span class="text-sm text-gray-200 underline">URL:</span>
-              <a
-                [href]="selectedWebsite.url"
-                target="_blank"
-                class="text-blue-600 hover:underline"
-                >{{ selectedWebsite.url }}</a
-              >
+          <div class="flex flex-col gap-5 p-2">
+            <!-- Description -->
+            <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
+              <h3 class="text-sm font-medium text-gray-300 mb-2">Description</h3>
+              <p class="text-gray-200">{{ selectedWebsite.description }}</p>
             </div>
 
-            <div class="flex flex-col">
-              <span class="text-sm text-gray-200 underline">Description:</span>
-              <p class="text-slate-100">{{ selectedWebsite.description }}</p>
-            </div>
-
+            <!-- Informations techniques -->
             <div class="grid grid-cols-2 gap-4">
-              <div class="flex flex-col gap-4">
-                <div class="flex flex-col">
-                  <span class="text-sm text-gray-200 underline">Type :</span>
-                  <span class="text-slate-100">
-      {{ selectedWebsite.type == 'mutualised' ? 'Mutualisée' : 'VPS' }}
-    </span>
-                </div>
+              <div class="bg-gray-800 rounded-lg border border-gray-700 p-4">
+                <h3 class="text-sm font-medium text-gray-300 mb-3">Détails techniques</h3>
 
-                <div class="flex flex-col">
-                  <span class="text-sm text-gray-200 underline">Créé le :</span>
-                  <span class="text-slate-100">
-      {{ selectedWebsite.createdAt }}
-    </span>
-                </div>
-
-                <div class="flex flex-col">
-                  <span class="text-sm text-gray-200 underline">Mis à jour le :</span>
-                  <span class="text-slate-100">
-      {{ selectedWebsite.updatedAt  }}
-    </span>
-                </div>
-
-                @if (selectedWebsite.hasConfig) {
+                <div class="space-y-3">
                   <div class="flex flex-col">
-                    <span class="text-sm text-gray-200 underline">Informations de connexion :</span>
-                    <p-button
-                      label="Demander les informations de mon hébergeur"
-                      severity="contrast"
-                      variant="outlined"
-                      size="small"
-                      class="mt-2 max-w-fit"
-                      (click)="getInformationConnexionByEmail(selectedWebsite.uuid)"
-                    ></p-button>
+                    <span class="text-xs text-gray-400">Type d'hébergement</span>
+                    <span class="text-white font-medium">
+                      {{ selectedWebsite.type == 'mutualised' ? 'Mutualisé' : 'VPS' }}
+                    </span>
                   </div>
-                }
+
+                  <div class="flex flex-col">
+                    <span class="text-xs text-gray-400">Statut actuel</span>
+                    <span
+                      [ngClass]="{
+                        'text-emerald-400': selectedWebsite.status === 'online',
+                        'text-red-400': selectedWebsite.status === 'offline',
+                        'text-amber-400': selectedWebsite.status === 'maintenance',
+                        'text-white': !['online', 'offline', 'maintenance'].includes(selectedWebsite.status)
+                      }"
+                      class="font-medium"
+                    >
+                      {{ selectedWebsite.status }}
+                    </span>
+                  </div>
+                </div>
               </div>
-          </div>
+
+              <div class="bg-gray-800 rounded-lg border border-gray-700 p-4">
+                <h3 class="text-sm font-medium text-gray-300 mb-3">Dates importantes</h3>
+
+                <div class="space-y-3">
+                  <div class="flex flex-col">
+                    <span class="text-xs text-gray-400">Créé le</span>
+                    <span class="text-white font-medium">{{ selectedWebsite.createdAt }}</span>
+                  </div>
+
+                  <div class="flex flex-col">
+                    <span class="text-xs text-gray-400">Dernière mise à jour</span>
+                    <span class="text-white font-medium">{{ selectedWebsite.updatedAt }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Informations de connexion -->
+            @if (selectedWebsite.hasConfig) {
+              <div class="bg-gray-800 p-4 rounded-lg border border-teal-800/30">
+                <h3 class="text-sm font-medium text-teal-400 mb-3 flex items-center">
+                  <i class="pi pi-lock mr-2"></i>
+                  Informations de connexion
+                </h3>
+
+                <p-button
+                  label="Demander les informations de connexion"
+                  icon="pi pi-envelope"
+                  styleClass="p-button-outlined p-button-info"
+                  size="small"
+                  (click)="getInformationConnexionByEmail(selectedWebsite.uuid)"
+                ></p-button>
+              </div>
+            }
           </div>
         </p-tabPanel>
 
         <!-- Contrat du site web -->
         <p-tabPanel header="Contrat" [disabled]="!selectedWebsite.contract">
-          <div *ngIf="selectedWebsite.contract" class="flex flex-col gap-4">
-            <div class="bg-blue-50 p-4 rounded-lg">
-              <div class="flex items-center mb-2">
-                <i class="pi pi-file-contract text-blue-600 mr-2"></i>
-                <h3 class="text-lg font-semibold text-blue-800">
+          <div *ngIf="selectedWebsite.contract" class="flex flex-col gap-4 p-2">
+            <div class="bg-gray-800 p-4 rounded-lg border border-teal-800/40">
+              <div class="flex items-center mb-3">
+                <div class="w-10 h-10 rounded-lg bg-teal-900/30 flex items-center justify-center mr-3">
+                  <i class="pi pi-file-contract text-teal-400"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-white">
                   {{ selectedWebsite.contract.prestation }}
                 </h3>
               </div>
 
-              <div class="flex justify-between mt-4">
-                <div
-                  class="bg-white rounded-lg p-3 shadow-sm flex flex-col items-center flex-1 mr-2"
-                >
-                  <span class="text-sm text-gray-500">Coût annuel</span>
-                  <span class="text-xl font-bold text-gray-800"
-                    >{{ selectedWebsite.contract.annualCost }} €</span
-                  >
-                  <span class="text-xs text-gray-500">TVA {{ selectedWebsite.contract.tva }}%</span>
+              <div class="grid grid-cols-2 gap-3 mt-4">
+                <div class="bg-gray-750 rounded-lg p-4 border border-gray-700">
+                  <span class="text-xs text-gray-400 mb-1">Coût annuel</span>
+                  <div class="flex items-baseline">
+                    <span class="text-xl font-bold text-white">
+                      {{ selectedWebsite.contract.annualCost }} €
+                    </span>
+                    <span class="text-xs text-gray-400 ml-2">TVA {{ selectedWebsite.contract.tva }}%</span>
+                  </div>
                 </div>
 
-                <div class="bg-white rounded-lg p-3 shadow-sm flex flex-col items-center flex-1">
-                  <span class="text-sm text-gray-500">Récurrence</span>
-                  <span class="text-lg font-semibold text-gray-800">{{
-                    selectedWebsite.contract.reccurence == 'monthly' ? 'Mensuel' : 'Annuel'
-                  }}</span>
+                <div class="bg-gray-750 rounded-lg p-4 border border-gray-700">
+                  <span class="text-xs text-gray-400 mb-1">Récurrence</span>
+                  <span class="text-lg font-medium text-white">
+                    {{ selectedWebsite.contract.reccurence == 'monthly' ? 'Mensuelle' : 'Annuelle' }}
+                  </span>
                 </div>
               </div>
             </div>
 
-            <h4 class="font-medium text-gray-300 mt-2">Échéancier</h4>
+            <h4 class="font-medium text-gray-300 mt-2 mb-2">Échéancier de paiement</h4>
             <div class="grid grid-cols-3 gap-3">
-              <div class="p-3 bg-blue-50 rounded-lg">
-                <span class="text-xs text-blue-700 block">Premier paiement</span>
-                <span class="font-medium text-blue-800">{{
-                  selectedWebsite.contract.firstPaymentAt
-                }}</span>
+              <div class="p-3 bg-gray-800 rounded-lg border border-gray-700">
+                <span class="text-xs text-gray-400 block mb-1">Premier paiement</span>
+                <span class="font-medium text-white">
+                  {{ selectedWebsite.contract.firstPaymentAt }}
+                </span>
               </div>
 
-              <div class="p-3 bg-gray-50 rounded-lg">
-                <span class="text-xs text-gray-500 block">Dernier paiement</span>
-                <span class="font-medium text-black">{{
-                  selectedWebsite.contract.lastPaymentAt
-                }}</span>
+              <div class="p-3 bg-gray-800 rounded-lg border border-gray-700">
+                <span class="text-xs text-gray-400 block mb-1">Dernier paiement</span>
+                <span class="font-medium text-white">
+                  {{ selectedWebsite.contract.lastPaymentAt }}
+                </span>
               </div>
 
-              <div class="p-3 bg-green-50 rounded-lg">
-                <span class="text-xs text-green-700 block">Prochain paiement</span>
-                <span class="font-medium text-green-800">{{
-                  selectedWebsite.contract.nextPaymentAt
-                }}</span>
+              <div class="p-3 bg-gray-800 rounded-lg border border-teal-800/30">
+                <span class="text-xs text-teal-400 block mb-1">Prochain paiement</span>
+                <span class="font-medium text-white">
+                  {{ selectedWebsite.contract.nextPaymentAt }}
+                </span>
               </div>
             </div>
           </div>
@@ -236,64 +306,62 @@
 
         <!-- Contrat de maintenance -->
         <p-tabPanel header="Maintenance" [disabled]="!selectedWebsite.maintenanceContract">
-          <div *ngIf="selectedWebsite.maintenanceContract" class="flex flex-col gap-4">
-            <div class="bg-purple-50 p-4 rounded-lg">
+          <div *ngIf="selectedWebsite.maintenanceContract" class="flex flex-col gap-4 p-2">
+            <div class="bg-gray-800 p-4 rounded-lg border border-cyan-800/40">
               <div class="flex items-center mb-3">
-                <i class="pi pi-wrench text-purple-600 mr-2"></i>
-                <h3 class="text-lg font-semibold text-purple-800">Contrat de maintenance</h3>
+                <div class="w-10 h-10 rounded-lg bg-cyan-900/30 flex items-center justify-center mr-3">
+                  <i class="pi pi-wrench text-cyan-400"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-white">Contrat de maintenance</h3>
               </div>
 
-              <div class="flex justify-between mt-4">
-                <div
-                  class="bg-white rounded-lg p-3 shadow-sm flex flex-col items-center flex-1 mr-2"
-                >
-                  <span class="text-sm text-gray-500">Coût mensuel</span>
-                  <span class="text-xl font-bold text-gray-800"
-                    >{{ selectedWebsite.maintenanceContract.monthlyCost }} €</span
-                  >
+              <div class="grid grid-cols-2 gap-3 mt-4">
+                <div class="bg-gray-750 rounded-lg p-4 border border-gray-700">
+                  <span class="text-xs text-gray-400 mb-1">Coût mensuel</span>
+                  <span class="text-xl font-bold text-white">
+                    {{ selectedWebsite.maintenanceContract.monthlyCost }} €
+                  </span>
                 </div>
 
-                <div class="bg-white rounded-lg p-3 shadow-sm flex flex-col items-center flex-1">
-                  <span class="text-sm text-gray-500">Récurrence</span>
-                  <span class="text-lg font-semibold text-gray-800">{{
-                    selectedWebsite.maintenanceContract.reccurence == 'monthly'
-                      ? 'Mensuel'
-                      : 'Annuel'
-                  }}</span>
+                <div class="bg-gray-750 rounded-lg p-4 border border-gray-700">
+                  <span class="text-xs text-gray-400 mb-1">Récurrence</span>
+                  <span class="text-lg font-medium text-white">
+                    {{ selectedWebsite.maintenanceContract.reccurence == 'monthly' ? 'Mensuelle' : 'Annuelle' }}
+                  </span>
                 </div>
               </div>
             </div>
 
-            <h4 class="font-medium text-gray-300 mt-2">Échéances</h4>
-            <div class="grid grid-cols-2 gap-3 mb-2">
-              <div class="p-3 bg-gray-50 rounded-lg">
-                <span class="text-xs text-gray-600 block">Fin de contrat</span>
-                <span class="font-medium text-black">{{
-                  selectedWebsite.maintenanceContract.endAt
-                }}</span>
+            <h4 class="font-medium text-gray-300 mt-2 mb-2">Échéances importantes</h4>
+            <div class="grid grid-cols-2 gap-3 mb-3">
+              <div class="p-3 bg-gray-800 rounded-lg border border-gray-700">
+                <span class="text-xs text-gray-400 block mb-1">Fin du contrat</span>
+                <span class="font-medium text-white">
+                  {{ selectedWebsite.maintenanceContract.endAt }}
+                </span>
               </div>
 
-              <div class="p-3 bg-green-50 rounded-lg">
-                <span class="text-xs text-green-700 block">Prochain paiement</span>
-                <span class="font-medium text-green-800">{{
-                  selectedWebsite.maintenanceContract.nextPaymentAt
-                }}</span>
+              <div class="p-3 bg-gray-800 rounded-lg border border-cyan-800/30">
+                <span class="text-xs text-cyan-400 block mb-1">Prochain paiement</span>
+                <span class="font-medium text-white">
+                  {{ selectedWebsite.maintenanceContract.nextPaymentAt }}
+                </span>
               </div>
             </div>
 
             <div class="grid grid-cols-2 gap-3">
-              <div class="p-3 bg-gray-50 rounded-lg">
-                <span class="text-xs text-gray-600 block">Premier paiement</span>
-                <span class="font-medium text-black">{{
-                  selectedWebsite.maintenanceContract.firstPaymentAt
-                }}</span>
+              <div class="p-3 bg-gray-800 rounded-lg border border-gray-700">
+                <span class="text-xs text-gray-400 block mb-1">Premier paiement</span>
+                <span class="font-medium text-white">
+                  {{ selectedWebsite.maintenanceContract.firstPaymentAt }}
+                </span>
               </div>
 
-              <div class="p-3 bg-gray-50 rounded-lg">
-                <span class="text-xs text-gray-600 block">Dernier paiement</span>
-                <span class="font-medium text-black">{{
-                  selectedWebsite.maintenanceContract.lastPaymentAt
-                }}</span>
+              <div class="p-3 bg-gray-800 rounded-lg border border-gray-700">
+                <span class="text-xs text-gray-400 block mb-1">Dernier paiement</span>
+                <span class="font-medium text-white">
+                  {{ selectedWebsite.maintenanceContract.lastPaymentAt }}
+                </span>
               </div>
             </div>
           </div>
@@ -302,3 +370,4 @@
     </div>
   </ng-container>
 </p-drawer>
+

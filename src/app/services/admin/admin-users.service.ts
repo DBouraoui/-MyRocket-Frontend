@@ -28,4 +28,8 @@ export class AdminUsersService {
   createUser(payload: Object): Observable<Object> {
     return this.http.post(`${environment.SERVER_URL}/api/administrateur/user`, payload);
   }
+
+  deleteUser(uuid: string): Observable<Object> {
+    return this.http.delete(`http://localhost:8000/api/administrateur/user/${uuid}`);
+  }
 }

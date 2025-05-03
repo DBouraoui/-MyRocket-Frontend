@@ -145,7 +145,7 @@ export class DashboardAdminUsersSearchComponent implements OnInit, OnDestroy {
   }
 
   deleteCurrentUser() {
-    this.http.delete(`http://localhost:8000/api/user/${this.selectedUser.uuid}`).subscribe({
+    this.adminUsersService.deleteUser(this.selectedUser.uuid).subscribe({
       next: resp => {
         this.messageService.add({
           severity: 'success',

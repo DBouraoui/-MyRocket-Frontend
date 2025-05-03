@@ -12,3 +12,36 @@ html {
 body {
   background: #d6dce5;
 }
+
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+:host ::ng-deep .transaction-details-dialog .p-dialog-header {
+  background: #1f2937;
+  color: white;
+  border-bottom: 1px solid #374151;
+}
+
+:host ::ng-deep .transaction-details-dialog .p-dialog-content {
+  padding: 0;
+  background: #1f2937;
+  overflow: visible;
+}
+
+:host ::ng-deep .transaction-details-dialog .p-dialog-footer {
+  background: #1f2937;
+  border-top: 1px solid #374151;
+  padding: 1rem;
+}
+
+:host ::ng-deep .transaction-details-dialog .p-button.p-button-icon-only {
+  color: #9ca3af;
+}
+
+:host ::ng-deep .p-dialog-mask.p-component-overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+}

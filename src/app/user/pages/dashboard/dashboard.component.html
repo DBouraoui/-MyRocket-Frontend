@@ -1,52 +1,116 @@
-<!-- Dashboard simplifié avec 3 boîtes en ligne -->
-<div class="p-6 bg-gray-900 min-h-screen">
+<!-- Dashboard amélioré avec 3 boîtes en ligne -->
+<div class="bg-gradient-to-b from-gray-900 to-gray-950 p-6 min-h-screen">
   <div class="max-w-7xl mx-auto">
     <!-- En-tête du tableau de bord -->
     <div class="mb-8">
-      <h1 class="text-2xl font-bold text-white mb-2">Tableau de bord</h1>
+      <div class="flex items-center mb-4">
+        <div class="w-1.5 h-8 bg-gradient-to-b from-blue-500 to-indigo-600 rounded mr-3"></div>
+        <h1 class="text-2xl font-bold text-white">Tableau de bord</h1>
+      </div>
     </div>
 
     <!-- Conteneur principal avec 3 boîtes en ligne -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <!-- Boîte 1: Sites Web -->
-      <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 h-full">
-        <div class="bg-gray-750 p-4 border-b border-gray-700 flex items-center">
-          <div class="w-10 h-10 rounded-full bg-blue-900/40 flex items-center justify-center mr-3">
-            <i class="pi pi-globe text-blue-400"></i>
+      <div class="group bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 h-full hover:border-blue-500/30 transition-all duration-300">
+        <div class="bg-gray-750 p-4 border-b border-gray-700 flex justify-between items-center">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-lg bg-blue-900/40 flex items-center justify-center mr-3">
+              <i class="pi pi-globe text-blue-400"></i>
+            </div>
+            <h2 class="text-lg font-medium text-white">Sites Web</h2>
           </div>
-          <h2 class="text-lg font-medium text-white">Sites Web</h2>
+
+          <!-- Actions rapides -->
+          <div>
+            <button class="p-2 rounded-full hover:bg-blue-900/30 text-gray-400 hover:text-blue-400 transition-colors">
+              <i class="pi pi-plus"></i>
+            </button>
+          </div>
         </div>
-        <div class="p-5">
+
+        <div class="p-5 relative">
           <app-user-websites-informations></app-user-websites-informations>
+
+          <!-- Bouton voir plus -->
+          <div class="mt-4 flex justify-end">
+            <a [routerLink]="['/sites']" class="text-sm text-blue-400 hover:text-blue-300 flex items-center">
+              Voir tous mes sites
+              <i class="pi pi-arrow-right ml-1"></i>
+            </a>
+          </div>
         </div>
+
+        <!-- Barre de progression au survol -->
+        <div class="h-1 w-full bg-gradient-to-r from-blue-500 to-indigo-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
       </div>
 
       <!-- Boîte 2: Profil utilisateur -->
-      <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 h-full">
-        <div class="bg-gray-750 p-4 border-b border-gray-700 flex items-center">
-          <div
-            class="w-10 h-10 rounded-full bg-purple-900/40 flex items-center justify-center mr-3"
-          >
-            <i class="pi pi-user text-purple-400"></i>
+      <div class="group bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 h-full hover:border-purple-500/30 transition-all duration-300">
+        <div class="bg-gray-750 p-4 border-b border-gray-700 flex justify-between items-center">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-lg bg-purple-900/40 flex items-center justify-center mr-3">
+              <i class="pi pi-user text-purple-400"></i>
+            </div>
+            <h2 class="text-lg font-medium text-white">Profil</h2>
           </div>
-          <h2 class="text-lg font-medium text-white">Profil</h2>
+
+          <!-- Actions rapides -->
+          <div>
+            <button class="p-2 rounded-full hover:bg-purple-900/30 text-gray-400 hover:text-purple-400 transition-colors">
+              <i class="pi pi-pencil"></i>
+            </button>
+          </div>
         </div>
-        <div class="p-5">
+
+        <div class="p-5 relative">
           <app-user-informations-settings></app-user-informations-settings>
+
+          <!-- Bouton voir plus -->
+          <div class="mt-4 flex justify-end">
+            <a [routerLink]="['/profile']" class="text-sm text-purple-400 hover:text-purple-300 flex items-center">
+              Modifier mon profil
+              <i class="pi pi-arrow-right ml-1"></i>
+            </a>
+          </div>
         </div>
+
+        <!-- Barre de progression au survol -->
+        <div class="h-1 w-full bg-gradient-to-r from-purple-500 to-pink-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
       </div>
 
       <!-- Boîte 3: Contrats de maintenance -->
-      <div class="bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 h-full">
-        <div class="bg-gray-750 p-4 border-b border-gray-700 flex items-center">
-          <div class="w-10 h-10 rounded-full bg-green-900/40 flex items-center justify-center mr-3">
-            <i class="pi pi-wrench text-green-400"></i>
+      <div class="group bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 h-full hover:border-emerald-500/30 transition-all duration-300">
+        <div class="bg-gray-750 p-4 border-b border-gray-700 flex justify-between items-center">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-lg bg-emerald-900/40 flex items-center justify-center mr-3">
+              <i class="pi pi-wrench text-emerald-400"></i>
+            </div>
+            <h2 class="text-lg font-medium text-white">Contrats de Maintenance</h2>
           </div>
-          <h2 class="text-lg font-medium text-white">Contrats de Maintenance</h2>
+
+          <!-- Actions rapides -->
+          <div>
+            <button class="p-2 rounded-full hover:bg-emerald-900/30 text-gray-400 hover:text-emerald-400 transition-colors">
+              <i class="pi pi-filter"></i>
+            </button>
+          </div>
         </div>
-        <div class="p-5">
+
+        <div class="p-5 relative">
           <app-user-websites-maintenance-contracts></app-user-websites-maintenance-contracts>
+
+          <!-- Bouton voir plus -->
+          <div class="mt-4 flex justify-end">
+            <a [routerLink]="['/maintenance']" class="text-sm text-emerald-400 hover:text-emerald-300 flex items-center">
+              Voir tous mes contrats
+              <i class="pi pi-arrow-right ml-1"></i>
+            </a>
+          </div>
         </div>
+
+        <!-- Barre de progression au survol -->
+        <div class="h-1 w-full bg-gradient-to-r from-emerald-500 to-teal-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
       </div>
     </div>
   </div>

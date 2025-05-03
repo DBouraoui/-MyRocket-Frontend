@@ -1,58 +1,113 @@
-<section class="min-h-dvh bg-gray-900">
-  <div class="bg-gray-800 p-6 rounded-xl mt-2">
-    <!-- En-tête avec statistiques générales -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+<section class="min-h-dvh bg-gradient-to-b from-gray-900 to-gray-950 p-4 md:p-6">
+  <div class="max-w-7xl mx-auto">
+    <!-- En-tête avec titre principal -->
+    <div class="mb-6">
+      <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Tableau de bord financier</h1>
+      <p class="text-gray-400">Suivez vos transactions et l'historique de vos paiements</p>
+    </div>
+
+    <!-- Statistiques générales - Design amélioré -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
       <!-- Carte 1: Nombre de paiements -->
-      <div
-        class="bg-gray-800 p-5 rounded-xl shadow-sm flex items-center space-x-4 border-l-4 border-blue-600"
-      >
-        <div class="w-12 h-12 bg-blue-900/40 rounded-full flex items-center justify-center">
-          <i class="pi pi-wallet text-blue-400 text-xl"></i>
+      <div class="bg-gray-800/80 rounded-xl shadow-lg overflow-hidden backdrop-blur-sm transition-all duration-200 hover:shadow-indigo-900/20 hover:bg-gray-800">
+        <div class="p-5 flex items-center space-x-4">
+          <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-800 rounded-full flex items-center justify-center shadow-md">
+            <i class="pi pi-wallet text-white text-xl"></i>
+          </div>
+          <div>
+            <p class="text-gray-400 text-sm font-medium uppercase tracking-wider">Paiements</p>
+            <div class="flex items-baseline">
+              <p class="text-3xl font-bold text-white">{{ countTransactions() }}</p>
+              <p class="text-gray-400 text-xs ml-2">total</p>
+            </div>
+          </div>
         </div>
-        <div>
-          <p class="text-gray-400 text-sm">Nombre de paiements</p>
-          <p class="text-2xl font-bold text-white">{{ countTransactions() }}</p>
-        </div>
+        <div class="h-1 bg-gradient-to-r from-blue-600 to-indigo-800"></div>
       </div>
 
       <!-- Carte 2: Montant du dernier paiement -->
-      <div
-        class="bg-gray-800 p-5 rounded-xl shadow-sm flex items-center space-x-4 border-l-4 border-green-600"
-      >
-        <div class="w-12 h-12 bg-green-900/40 rounded-full flex items-center justify-center">
-          <i class="pi pi-euro text-green-400 text-xl"></i>
+      <div class="bg-gray-800/80 rounded-xl shadow-lg overflow-hidden backdrop-blur-sm transition-all duration-200 hover:shadow-emerald-900/20 hover:bg-gray-800">
+        <div class="p-5 flex items-center space-x-4">
+          <div class="w-14 h-14 bg-gradient-to-br from-emerald-600 to-green-800 rounded-full flex items-center justify-center shadow-md">
+            <i class="pi pi-euro text-white text-xl"></i>
+          </div>
+          <div>
+            <p class="text-gray-400 text-sm font-medium uppercase tracking-wider">Dernier montant</p>
+            <div class="flex items-baseline">
+              <p class="text-3xl font-bold text-white">
+                {{ getLastTransaction() ? parseInt(getLastTransaction().amount).toFixed(2) + " €" : "—" }}
+              </p>
+              <p class="text-gray-400 text-xs ml-2">TTC</p>
+            </div>
+          </div>
         </div>
-        <div>
-          <p class="text-gray-400 text-sm">Dernier paiement</p>
-          <p class="text-2xl font-bold text-white">
-            {{getLastTransaction() ?  parseInt(getLastTransaction().amount).toFixed(2) + "€" : "Aucun" }}
-          </p>
-        </div>
+        <div class="h-1 bg-gradient-to-r from-emerald-600 to-green-800"></div>
       </div>
 
       <!-- Carte 3: Date du dernier paiement -->
-      <div
-        class="bg-gray-800 p-5 rounded-xl shadow-sm flex items-center space-x-4 border-l-4 border-purple-600"
-      >
-        <div class="w-12 h-12 bg-purple-900/40 rounded-full flex items-center justify-center">
-          <i class="pi pi-calendar text-purple-400 text-xl"></i>
+      <div class="bg-gray-800/80 rounded-xl shadow-lg overflow-hidden backdrop-blur-sm transition-all duration-200 hover:shadow-purple-900/20 hover:bg-gray-800">
+        <div class="p-5 flex items-center space-x-4">
+          <div class="w-14 h-14 bg-gradient-to-br from-purple-600 to-indigo-800 rounded-full flex items-center justify-center shadow-md">
+            <i class="pi pi-calendar text-white text-xl"></i>
+          </div>
+          <div>
+            <p class="text-gray-400 text-sm font-medium uppercase tracking-wider">Dernière date</p>
+            <div class="flex items-baseline">
+              <p class="text-2xl font-bold text-white line-clamp-1">
+                {{ getLastTransaction()?.createdAt ? getLastTransaction()?.createdAt : "—" }}
+              </p>
+            </div>
+          </div>
         </div>
-        <div>
-          <p class="text-gray-400 text-sm">Date dernier paiement</p>
-          <p class="text-xl font-semibold text-white">{{ getLastTransaction()?.createdAt ? getLastTransaction()?.createdAt : "Non établie" }}</p>
+        <div class="h-1 bg-gradient-to-r from-purple-600 to-indigo-800"></div>
+      </div>
+    </div>
+
+    <!-- Section principale avec filtre et historique -->
+    <div class="bg-gray-800/90 rounded-xl shadow-lg overflow-hidden backdrop-blur-sm border border-gray-700/50">
+      <!-- En-tête de la section des transactions -->
+      <div class="p-6 border-b border-gray-700/50">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <h2 class="text-xl font-bold text-white flex items-center">
+              <i class="pi pi-history text-indigo-400 mr-2"></i>
+              Historique des paiements
+            </h2>
+            <p class="text-gray-400 text-sm mt-1">
+              Consultez l'ensemble de vos transactions financières
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Liste des transactions -->
+      <div class="p-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <app-user-transaction-display></app-user-transaction-display>
+        </div>
+
+        <!-- Message affiché s'il n'y a pas de transactions -->
+        <div *ngIf="countTransactions() === 0" class="text-center py-12">
+          <div class="mb-4 inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-700">
+            <i class="pi pi-inbox text-gray-400 text-xl"></i>
+          </div>
+          <h3 class="text-lg font-medium text-white mb-2">Aucune transaction</h3>
+          <p class="text-gray-400 max-w-md mx-auto">
+            Vous n'avez effectué aucun paiement jusqu'à présent. Les transactions apparaîtront ici dès que vous effectuerez un paiement.
+          </p>
         </div>
       </div>
     </div>
 
-    <!-- Titre de la section des transactions -->
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-bold text-white">Historique des paiements</h2>
-    </div>
-
-    <!-- Liste des transactions en style Bento -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      <app-user-transaction-display></app-user-transaction-display>
+    <!-- Message ou bannière d'information en bas (optionnel) -->
+    <div class="mt-8 bg-indigo-900/30 border border-indigo-800/40 rounded-lg p-4 flex items-start">
+      <i class="pi pi-info-circle text-indigo-400 mr-3 text-lg mt-0.5"></i>
+      <div>
+        <h4 class="text-indigo-300 font-medium">Informations sur vos paiements</h4>
+        <p class="text-indigo-200/70 text-sm mt-1">
+          Les factures peuvent être téléchargées au format PDF pour chaque transaction. Pour toute question concernant vos paiements, veuillez contacter notre service client.
+        </p>
+      </div>
     </div>
   </div>
 </section>
-

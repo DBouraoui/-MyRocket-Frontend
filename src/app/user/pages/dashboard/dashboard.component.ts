@@ -4,6 +4,7 @@ import { UserWebsitesInformationsComponent } from '../../components/user-website
 import { UserWebsitesMaintenanceContractsComponent } from '../../components/user-websites-maintenance-contracts/user-websites-maintenance-contracts.component';
 import { UserInformationsSettingsComponent } from '../../components/user-informations-settings/user-informations-settings.component';
 import { ButtonDirective } from 'primeng/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,7 @@ import { ButtonDirective } from 'primeng/button';
     UserWebsitesInformationsComponent,
     UserWebsitesMaintenanceContractsComponent,
     UserInformationsSettingsComponent,
+    RouterLink,
   ],
   templateUrl: './dashboard.component.html',
 })
