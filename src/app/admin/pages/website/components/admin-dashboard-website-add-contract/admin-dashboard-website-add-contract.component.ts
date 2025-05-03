@@ -21,10 +21,6 @@ export class AdminDashboardWebsiteAddContractComponent {
       name: 'Mensuel',
       value: 'monthly',
     },
-    {
-      name: 'Annuel',
-      value: 'annual',
-    },
   ];
   tva = [
     {

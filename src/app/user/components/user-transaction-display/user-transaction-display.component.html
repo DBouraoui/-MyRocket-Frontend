@@ -1,3 +1,4 @@
+<div class="grid grid-cols-1 md:grid-cols-2 gap-2">
 @for (transaction of transactionService.transactions(); track transaction.uuid) {
   <div
     class="bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all duration-200 hover:shadow-lg hover:bg-gray-750 border border-gray-700"
@@ -204,4 +205,4 @@
     </div>
   </ng-template>
 </p-dialog>
-
+</div>

@@ -20,10 +20,6 @@ export class AdminDashboardWebsiteMaintenanceComponent {
       name: 'Mensuel',
       value: 'monthly',
     },
-    {
-      name: 'Annual',
-      value: 'yearly',
-    },
   ];
 
   constructor(

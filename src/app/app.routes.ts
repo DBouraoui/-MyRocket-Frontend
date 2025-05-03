@@ -31,6 +31,7 @@ import { dashboardAdminAllInformationResolver } from './resolvers/admin/dashboar
 import { TransactionComponent } from './admin/pages/transaction/transaction.component';
 import { dashboardAdminTransactionResolver } from './resolvers/admin/dashboard-admin-transaction.resolver';
 import { dashboardAdminTransactionDisplayResolver } from './resolvers/admin/dashboard-admin-transaction-display.resolver';
+import { CgvCguComponent } from './anonymous/pages/cgv-cgu/cgv-cgu.component';
 export const routes: Routes = [
   {
     path: '',
@@ -56,6 +57,11 @@ export const routes: Routes = [
         path: 'contact',
         component: ContactComponent,
         title: 'Nous contactés',
+      },
+      {
+        path: 'cgv-cgu',
+        component: CgvCguComponent,
+        title: 'CGV et CGU',
       },
     ],
   },
