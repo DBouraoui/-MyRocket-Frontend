@@ -1,11 +1,14 @@
-<div class="bg-gray-900 p-6 rounded-xl shadow-lg">
-  <h2 class="text-2xl font-semibold text-white mb-6">Liste des transactions</h2>
+<div class="bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-700">
+  <h2 class="text-2xl font-semibold text-white mb-6 flex items-center">
+    <i class="pi pi-list text-indigo-400 mr-3"></i>
+    Liste des transactions
+  </h2>
 
   <div class="overflow-x-auto">
     <p-table
       [value]="transactionService.TransactionToDisplay()"
       [tableStyle]="{ 'min-width': '960px' }"
-      styleClass="bg-gray-800"
+      styleClass="bg-gray-750"
       [paginator]="true"
       paginatorDropdownAppendTo="body"
       [rows]="10"
@@ -15,25 +18,32 @@
     >
       <ng-template pTemplate="header">
         <tr class="border-b border-gray-700">
-          <th class="text-left px-4 py-3 text-gray-300">ID</th>
-          <th class="text-left px-4 py-3 text-gray-300">Utilisateur</th>
-          <th class="text-left px-4 py-3 text-gray-300">Date</th>
-          <th class="text-right px-4 py-3 text-gray-300">TVA</th>
-          <th class="text-right px-4 py-3 text-gray-300">Montant</th>
-          <th class="text-left px-4 py-3 text-gray-300">Contrat</th>
+          <th class="text-left px-4 py-3 text-gray-300 font-medium">ID</th>
+          <th class="text-left px-4 py-3 text-gray-300 font-medium">Utilisateur</th>
+          <th class="text-left px-4 py-3 text-gray-300 font-medium">Date</th>
+          <th class="text-right px-4 py-3 text-gray-300 font-medium">TVA</th>
+          <th class="text-right px-4 py-3 text-gray-300 font-medium">Montant</th>
+          <th class="text-left px-4 py-3 text-gray-300 font-medium">Contrat</th>
         </tr>
       </ng-template>
 
       <ng-template pTemplate="body" let-transaction>
         <tr class="border-b border-gray-700 hover:bg-gray-700 transition-colors duration-150">
           <td class="px-4 py-3 text-gray-300 truncate max-w-xs">
-            <span class="text-sm font-mono">{{ transaction.uuid | slice: 0 : 8 }}...</span>
+            <span class="text-sm font-mono bg-gray-700 px-2 py-1 rounded">{{ transaction.uuid.substring(0, 8) }}...</span>
           </td>
-          <td class="px-4 py-3 text-gray-300">{{ transaction.user }}</td>
+          <td class="px-4 py-3 text-gray-300">
+            <div class="flex items-center">
+              <i class="pi pi-user text-indigo-400 mr-2"></i>
+              {{ transaction.user }}
+            </div>
+          </td>
           <td class="px-4 py-3 text-gray-300">{{ transaction.createdAt }}</td>
-          <td class="px-4 py-3 text-gray-300 text-right">{{ transaction.tva }}%</td>
+          <td class="px-4 py-3 text-gray-300 text-right">
+            <span class="bg-purple-900/20 text-purple-400 px-2 py-1 rounded">{{ transaction.tva }}%</span>
+          </td>
           <td class="px-4 py-3 text-gray-300 text-right font-medium">
-            {{ transaction.amount | currency: 'EUR' }}
+            <span class="bg-green-900/20 text-green-400 px-2 py-1 rounded">{{ transaction.amount | currency: 'EUR' }}</span>
           </td>
           <td class="px-4 py-3 text-gray-300">{{ transaction.websiteContract }}</td>
         </tr>
@@ -50,3 +60,5 @@
     </p-table>
   </div>
 </div>
+
+

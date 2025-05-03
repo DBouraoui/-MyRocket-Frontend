@@ -1,9 +1,12 @@
 <form
   [formGroup]="formGroup"
-  class="flex flex-col md:flex-row gap-6 p-6 mt-2 bg-gray-900 rounded-xl shadow-lg border border-gray-800"
+  class="flex flex-col md:flex-row gap-6 p-6 mt-2 bg-gray-800 rounded-xl shadow-lg border border-gray-700"
 >
   <div class="flex flex-col gap-2">
-    <label class="text-sm font-medium text-gray-300">Utilisateur</label>
+    <label class="text-sm font-medium text-gray-300 flex items-center">
+      <i class="pi pi-user text-indigo-400 mr-2"></i>
+      Utilisateur
+    </label>
     <p-select
       [options]="getUsers()"
       formControlName="uuidUser"
@@ -15,7 +18,10 @@
   </div>
 
   <div class="flex flex-col gap-2">
-    <label class="text-sm font-medium text-gray-300">Contrat</label>
+    <label class="text-sm font-medium text-gray-300 flex items-center">
+      <i class="pi pi-file-contract text-indigo-400 mr-2"></i>
+      Contrat
+    </label>
     <p-select
       [options]="getContract()"
       formControlName="uuidWebsiteContract"
@@ -27,6 +33,11 @@
   </div>
 
   <div class="flex items-end">
-    <p-button label="Créer la transaction" variant="outlined" (click)="onSubmit()" />
+    <p-button
+      label="Créer la transaction"
+      icon="pi pi-plus"
+      styleClass="p-button-info p-button-rounded"
+      (click)="onSubmit()"
+    />
   </div>
 </form>

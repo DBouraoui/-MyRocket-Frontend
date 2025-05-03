@@ -28,6 +28,10 @@ export class AdminDashboardWebsiteAddContractComponent {
   ];
   tva = [
     {
+      name: '0%',
+      value: '0',
+    },
+    {
       name: '5.5%',
       value: '5.5',
     },
