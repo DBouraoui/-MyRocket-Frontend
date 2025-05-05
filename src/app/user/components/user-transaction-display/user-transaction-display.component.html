@@ -54,11 +54,26 @@
           <i class="pi pi-id-card text-indigo-400 mr-2 text-sm"></i>
           <div class="flex flex-col overflow-hidden">
             <span class="text-xs text-gray-400">Statut du paiment</span>
-            <span class="text-gray-200 truncate">
-              {{transaction.isPaid ? 'Payer' : 'En attente de paiment'}}
+            <span class="text-gray-200">
+              @if (transaction.isPaid) {
+                <span class="text-green-500"> Payer </span>
+              } @else {
+                <span class="text-orange-400"> En attente de paiment </span>
+
+              }
             </span>
           </div>
         </div>
+        @if (transaction.reminderAt) {
+          <div class="flex items-center bg-gray-800/50 p-2 rounded">
+            <i class="pi pi-exclamation-triangle text-indigo-400 mr-2 text-sm"></i>
+            <div class="flex flex-col overflow-hidden">
+              <span class="text-xs text-gray-400">Rappel de paiement effectué le</span>
+                  <span class="text-orange-400">{{transaction.reminderAt}}</span>
+
+            </div>
+          </div>
+        }
       </div>
 
       <!-- Actions - Redesign -->

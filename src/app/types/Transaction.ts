@@ -8,6 +8,7 @@ export type Transaction = {
   websiteContract: string;
   websiteUuid: string;
   isPaid: boolean;
+  reminderAt?: string;
 };
 
 export type TransactionUser = {
