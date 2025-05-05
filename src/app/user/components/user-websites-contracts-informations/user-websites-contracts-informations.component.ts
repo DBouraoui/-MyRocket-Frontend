@@ -19,7 +19,7 @@ export class UserWebsitesContractsInformationsComponent {
     }
 
     const total = this.websites.contract().reduce((sum, contract) => {
-      const cost = parseFloat(contract.annualCost);
+      const cost = parseFloat(contract.monthlyCost);
       return sum + (isNaN(cost) ? 0 : cost);
     }, 0);
 

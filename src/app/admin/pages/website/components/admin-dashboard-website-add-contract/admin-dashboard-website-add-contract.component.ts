@@ -47,7 +47,7 @@ export class AdminDashboardWebsiteAddContractComponent {
       prestation: new FormControl('', [Validators.required]),
       reccurence: new FormControl('', [Validators.required]),
       tva: new FormControl('', [Validators.required]),
-      annualCost: new FormControl('', [Validators.required]),
+      monthlyCost: new FormControl('', [Validators.required]),
       firstPaymentAt: new FormControl(Date, [Validators.required]),
     });
   }
@@ -74,7 +74,7 @@ export class AdminDashboardWebsiteAddContractComponent {
       prestation: this.formGroup.get('prestation')?.value,
       reccurence: this.formGroup.get('reccurence')?.value,
       tva: this.formGroup.get('tva')?.value,
-      annualCost: this.formGroup.get('annualCost')?.value,
+      monthlyCost: this.formGroup.get('monthlyCost')?.value,
       firstPaymentAt: this.formatDate(firstPaymentDate),
       lastPaymentAt: this.formatDate(firstPaymentDate),
       nextPaymentAt: this.getNextPaymentDate(),
@@ -122,6 +122,6 @@ export class AdminDashboardWebsiteAddContractComponent {
 
       return `${yyyy}/${mm}/${dd}`;
     }
-    return ''; // ou une valeur par défaut
+    return '';
   }
 }

@@ -19,7 +19,7 @@ export type Website = {
 
 export type Contracts = {
   uuid: string;
-  annualCost: string;
+  monthlyCost: string;
   tva: string;
   reccurence: string;
   createdAt: string;

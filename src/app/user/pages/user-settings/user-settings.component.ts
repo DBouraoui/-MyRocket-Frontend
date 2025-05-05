@@ -3,7 +3,6 @@ import { UserSettingsService } from '../../../services/user/user-settings.servic
 import { UserFormSettingsComponent } from '../../components/user-form-settings/user-form-settings.component';
 import { UserInformationsSettingsComponent } from '../../components/user-informations-settings/user-informations-settings.component';
 import { UserFormPasswordSettingsComponent } from '../../components/user-form-password-settings/user-form-password-settings.component';
-import { Button } from 'primeng/button';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +11,6 @@ import { Router } from '@angular/router';
     UserFormSettingsComponent,
     UserInformationsSettingsComponent,
     UserFormPasswordSettingsComponent,
-    Button,
   ],
   templateUrl: './user-settings.component.html',
 })
