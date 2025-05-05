@@ -24,6 +24,7 @@
           <th class="text-right px-4 py-3 text-gray-300 font-medium">TVA</th>
           <th class="text-right px-4 py-3 text-gray-300 font-medium">Montant</th>
           <th class="text-left px-4 py-3 text-gray-300 font-medium">Contrat</th>
+          <th class="text-left px-4 py-3 text-gray-300 font-medium">Statut</th>
         </tr>
       </ng-template>
 
@@ -46,6 +47,7 @@
             <span class="bg-green-900/20 text-green-400 px-2 py-1 rounded">{{ transaction.amount | currency: 'EUR' }}</span>
           </td>
           <td class="px-4 py-3 text-gray-300">{{ transaction.websiteContract }}</td>
+          <td class="px-4 py-3 text-gray-300">{{ transaction.isPaid ? 'Payer' : 'En attente de paiment' }}</td>
         </tr>
       </ng-template>
 

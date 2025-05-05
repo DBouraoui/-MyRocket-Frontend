@@ -31,5 +31,11 @@ export class UserTransactionComponent {
     return this.transactionService.transactions()[this.countTransactions() - 1];
   }
 
+  getTransactioninStagin():number {
+    return this.transactionService.transactions().filter((transaction)=>{
+      return !transaction.isPaid
+    }).length;
+  }
+
 
 }

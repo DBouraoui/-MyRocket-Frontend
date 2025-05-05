@@ -7,6 +7,7 @@ export type Transaction = {
   userUuid: string;
   websiteContract: string;
   websiteUuid: string;
+  isPaid: boolean;
 };
 
 export type TransactionUser = {

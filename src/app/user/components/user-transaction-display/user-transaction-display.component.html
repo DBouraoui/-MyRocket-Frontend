@@ -49,6 +49,16 @@
             </span>
           </div>
         </div>
+
+        <div class="flex items-center bg-gray-800/50 p-2 rounded">
+          <i class="pi pi-id-card text-indigo-400 mr-2 text-sm"></i>
+          <div class="flex flex-col overflow-hidden">
+            <span class="text-xs text-gray-400">Statut du paiment</span>
+            <span class="text-gray-200 truncate">
+              {{transaction.isPaid ? 'Payer' : 'En attente de paiment'}}
+            </span>
+          </div>
+        </div>
       </div>
 
       <!-- Actions - Redesign -->
