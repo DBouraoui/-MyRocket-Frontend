@@ -12,7 +12,6 @@ import { ProjectsComponent } from './admin/pages/projects/projects.component';
 import { dashboardAdminProjectResolver } from './resolvers/admin/dashboard-admin-project.resolver';
 import { ContactComponent } from './anonymous/pages/contact/contact.component';
 import { dashboardAdminContactResolver } from './resolvers/admin/dashboard-admin-contact.resolver';
-import { anonymousProjectsResolver } from './resolvers/anonymous/anonymous-projects.resolver';
 import { AdminContactComponent } from './admin/pages/contact/contact.component';
 import { UserSettingsComponent } from './user/pages/user-settings/user-settings.component';
 import { dashboardUserSettingsResolver } from './resolvers/user/dashboard-user-settings.resolver';
@@ -45,7 +44,6 @@ export const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
-        resolve: { projects: anonymousProjectsResolver },
         title: 'MyRocket',
       },
       {

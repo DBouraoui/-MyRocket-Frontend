@@ -20,12 +20,4 @@ export class AnonymousProjectsService {
       },
     });
   }
-
-  refreshProjects(): Observable<Project[]> {
-    return this.fetchProjects().pipe(
-      tap(response => {
-        this.projects.set(response);
-      })
-    );
-  }
 }

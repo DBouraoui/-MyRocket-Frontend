@@ -16,6 +16,14 @@ export class AnonymousProjectsDisplayComponent {
   projectDrawerVisible: boolean = false;
   selectedProject: Project | null = null;
 
+  constructor() {
+    this.projectsService.fetchProjects().subscribe({
+      next: data => {
+        this.projectsService.projects.set(data)
+      }
+    })
+  }
+
   openProjectDetails(project: Project): void {
     this.selectedProject = project;
     this.projectDrawerVisible = true;
