@@ -4,10 +4,11 @@ import { Drawer } from 'primeng/drawer';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { NavbarItems } from '../../../types/Navbar';
 import { AuthService } from '../../../services/user/auth.service';
+import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   selector: 'app-user-sidebar',
-  imports: [Button, Drawer, RouterLinkActive, RouterLink, ButtonDirective],
+  imports: [Button, Drawer, RouterLinkActive, RouterLink, ButtonDirective, NotificationComponent],
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent {

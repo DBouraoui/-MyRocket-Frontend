@@ -1,4 +1,13 @@
-<div class="card flex justify-start p-2 bg-gray-900">
+<div class="card flex justify-between items-center p-2 bg-gray-900 ">
+  <!-- Bouton du tiroir à gauche -->
+  <p-button (click)="visible = true" icon="pi pi-align-justify" severity="secondary" />
+
+  <!-- Notifications à droite -->
+  <app-notification></app-notification>
+</div>
+
+
+  <!-- Tiroir de navigation -->
   <p-drawer [(visible)]="visible" [style]="{ width: '280px' }" position="left" [blockScroll]="true">
     <!-- En-tête sympa -->
     <div class="p-4 text-white border-b-white border-b">
@@ -11,12 +20,12 @@
         @for (item of navbarItem; track item) {
           <li>
             <a
-              [routerLink]="[item.link]"
-              routerLinkActive="bg-indigo-50 text-indigo-600"
-              class="flex items-center gap-3 p-2 rounded-md text-gray-200 hover:bg-gray-800 transition-colors"
+            [routerLink]="[item.link]"
+            routerLinkActive="bg-indigo-50 text-indigo-600"
+            class="flex items-center gap-3 p-2 rounded-md text-gray-200 hover:bg-gray-800 transition-colors"
             >
-              <i class="pi {{ item.icon }} text-signacore"></i>
-              <span>{{ item.title }}</span>
+            <i class="pi {{ item.icon }} text-signacore"></i>
+            <span>{{ item.title }}</span>
             </a>
           </li>
         }
@@ -55,6 +64,3 @@
       </button>
     </div>
   </p-drawer>
-
-  <p-button (click)="visible = true" icon="pi pi-align-justify" severity="secondary" />
-</div>
