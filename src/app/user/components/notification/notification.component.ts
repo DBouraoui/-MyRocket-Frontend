@@ -19,7 +19,6 @@ import { Tooltip } from 'primeng/tooltip';
     PrimeTemplate,
     Button,
     Drawer,
-    ButtonIcon,
     Tooltip,
   ],
   templateUrl: './notification.component.html',

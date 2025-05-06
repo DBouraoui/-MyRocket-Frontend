@@ -12,7 +12,6 @@ import { RouterLink } from '@angular/router';
     UserWebsitesInformationsComponent,
     UserWebsitesMaintenanceContractsComponent,
     UserInformationsSettingsComponent,
-    RouterLink,
     Button,
   ],
   templateUrl: './dashboard.component.html',
