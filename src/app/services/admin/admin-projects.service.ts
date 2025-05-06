@@ -28,7 +28,10 @@ export class AdminProjectsService {
     );
   }
 
-  createProjects(payload: Object): Observable<Object> {
-   return this.http.post<any>(`${environment.SERVER_URL}/api/administrateur/projects-display`, payload);
+  createProjects(payload: object): Observable<object> {
+    return this.http.post<any>(
+      `${environment.SERVER_URL}/api/administrateur/projects-display`,
+      payload
+    );
   }
 }

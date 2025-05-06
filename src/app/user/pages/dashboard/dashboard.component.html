@@ -12,10 +12,14 @@
     <!-- Conteneur principal avec disposition en grille -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
       <!-- Boîte centrale principale (span 2 colonnes) -->
-      <div class="md:col-span-2 md:row-span-2 group bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 hover:border-purple-500/30 transition-all duration-300 max-h-[37rem]">
+      <div
+        class="md:col-span-2 md:row-span-2 group bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 hover:border-purple-500/30 transition-all duration-300 max-h-[37rem]"
+      >
         <div class="bg-gray-750 p-4 border-b border-gray-700 flex justify-between items-center">
           <div class="flex items-center">
-            <div class="w-10 h-10 rounded-lg bg-purple-900/40 flex items-center justify-center mr-3">
+            <div
+              class="w-10 h-10 rounded-lg bg-purple-900/40 flex items-center justify-center mr-3"
+            >
               <i class="pi pi-user text-purple-400"></i>
             </div>
             <h2 class="text-lg font-medium text-white">Profil</h2>
@@ -29,7 +33,9 @@
 
       <!-- Les trois autres boîtes plus petites -->
       <!-- Boîte 1: Sites Web -->
-      <div class="group bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 hover:border-blue-500/30 transition-all duration-300 max-h-72">
+      <div
+        class="group bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 hover:border-blue-500/30 transition-all duration-300 max-h-72"
+      >
         <div class="bg-gray-750 p-4 border-b border-gray-700 flex justify-between items-center">
           <div class="flex items-center">
             <div class="w-10 h-10 rounded-lg bg-blue-900/40 flex items-center justify-center mr-3">
@@ -39,28 +45,34 @@
           </div>
         </div>
 
-        <div class="p-5 relative overflow-y-auto" style="max-height: 200px;">
+        <div class="p-5 relative overflow-y-auto" style="max-height: 200px">
           <app-user-websites-informations></app-user-websites-informations>
         </div>
       </div>
 
       <!-- Boîte 2: Contrats de maintenance -->
-      <div class="group bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 hover:border-emerald-500/30 transition-all duration-300 max-h-72">
+      <div
+        class="group bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 hover:border-emerald-500/30 transition-all duration-300 max-h-72"
+      >
         <div class="bg-gray-750 p-4 border-b border-gray-700 flex justify-between items-center">
           <div class="flex items-center">
-            <div class="w-10 h-10 rounded-lg bg-emerald-900/40 flex items-center justify-center mr-3">
+            <div
+              class="w-10 h-10 rounded-lg bg-emerald-900/40 flex items-center justify-center mr-3"
+            >
               <i class="pi pi-euro text-emerald-400"></i>
             </div>
             <h2 class="text-lg font-medium text-white">Factures et paiements</h2>
           </div>
         </div>
-        <div class="p-5 relative overflow-y-auto" style="max-height: 200px;">
+        <div class="p-5 relative overflow-y-auto" style="max-height: 200px">
           <app-user-websites-maintenance-contracts></app-user-websites-maintenance-contracts>
         </div>
       </div>
 
       <!-- Boîte 3: Documents importants (mise en forme améliorée et plus grande) -->
-      <div class="md:col-span-2 group bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 hover:border-amber-500/30 transition-all duration-300 min-h-[40rem]">
+      <div
+        class="md:col-span-2 group bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700 hover:border-amber-500/30 transition-all duration-300 min-h-[40rem]"
+      >
         <div class="bg-gray-750 p-4 border-b border-gray-700 flex justify-between items-center">
           <div class="flex items-center">
             <div class="w-10 h-10 rounded-lg bg-amber-900/40 flex items-center justify-center mr-3">
@@ -71,31 +83,66 @@
         </div>
         <div class="p-5 relative overflow-y-auto h-auto">
           <div class="space-y-6">
-            <div class="bg-gray-850/40 p-5 rounded-lg border border-gray-700 hover:border-amber-600/30 transition-all">
+            <div
+              class="bg-gray-850/40 p-5 rounded-lg border border-gray-700 hover:border-amber-600/30 transition-all"
+            >
               <h3 class="text-white font-medium mb-3 flex items-center text-lg">
                 <i class="pi pi-file-pdf text-amber-400 mr-2"></i>
                 Conditions Générales de Vente et d'Utilisation
               </h3>
-              <p class="text-gray-300 text-sm mb-4 leading-relaxed">Consultez nos CGV et CGU pour comprendre nos engagements et vos droits en tant que client. Ces documents détaillent les modalités de nos services et les responsabilités de chaque partie.</p>
-              <p-button label="Télécharger" icon="pi pi-download" severity="info" class="!p-1" />
+              <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+                Consultez nos CGV et CGU pour comprendre nos engagements et vos droits en tant que
+                client. Ces documents détaillent les modalités de nos services et les
+                responsabilités de chaque partie.
+              </p>
+              <p-button
+                label="Télécharger"
+                icon="pi pi-download"
+                severity="info"
+                class="!p-1"
+                (click)="downloadCGVCGU()"
+              />
             </div>
 
-            <div class="bg-gray-850/40 p-5 rounded-lg border border-gray-700 hover:border-amber-600/30 transition-all">
+            <div
+              class="bg-gray-850/40 p-5 rounded-lg border border-gray-700 hover:border-amber-600/30 transition-all"
+            >
               <h3 class="text-white font-medium mb-3 flex items-center text-lg">
                 <i class="pi pi-file-pdf text-amber-400 mr-2"></i>
                 Catalogue des prestations
               </h3>
-              <p class="text-gray-300 text-sm mb-4 leading-relaxed">Découvrez l'ensemble de nos services. Ce document vous présente notre gamme complète de prestations web et les options disponibles pour votre projet.</p>
-              <p-button label="Télécharger" icon="pi pi-download" severity="info" class="!p-1" (click)="downloadWebsiteContract()" />
+              <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+                Découvrez l'ensemble de nos services. Ce document vous présente notre gamme complète
+                de prestations web et les options disponibles pour votre projet.
+              </p>
+              <p-button
+                label="Télécharger"
+                icon="pi pi-download"
+                severity="info"
+                class="!p-1"
+                (click)="downloadWebsiteContract()"
+              />
             </div>
 
-            <div class="bg-gray-850/40 p-5 rounded-lg border border-gray-700 hover:border-amber-600/30 transition-all">
+            <div
+              class="bg-gray-850/40 p-5 rounded-lg border border-gray-700 hover:border-amber-600/30 transition-all"
+            >
               <h3 class="text-white font-medium mb-3 flex items-center text-lg">
                 <i class="pi pi-file-pdf text-amber-400 mr-2"></i>
                 Contrats de maintenance
               </h3>
-              <p class="text-gray-300 text-sm mb-4 leading-relaxed">Informations détaillées sur nos formules de maintenance et d'entretien. Ce document explique les différents niveaux de service, les garanties et les délais d'intervention pour chaque offre.</p>
-              <p-button label="Télécharger" icon="pi pi-download" severity="info" class="!p-1" (click)="downloadMaintenanceContract()"/>
+              <p class="text-gray-300 text-sm mb-4 leading-relaxed">
+                Informations détaillées sur nos formules de maintenance et d'entretien. Ce document
+                explique les différents niveaux de service, les garanties et les délais
+                d'intervention pour chaque offre.
+              </p>
+              <p-button
+                label="Télécharger"
+                icon="pi pi-download"
+                severity="info"
+                class="!p-1"
+                (click)="downloadMaintenanceContract()"
+              />
             </div>
           </div>
         </div>

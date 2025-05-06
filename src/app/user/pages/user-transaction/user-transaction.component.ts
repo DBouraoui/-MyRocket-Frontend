@@ -3,9 +3,7 @@ import { UserTransactionsService } from '../../../services/user/user-transaction
 import { Transaction } from '../../../types/Transaction';
 import { DropdownModule } from 'primeng/dropdown';
 import { CommonModule } from '@angular/common';
-import {
-  UserTransactionDisplayComponent
-} from '../../components/user-transaction-display/user-transaction-display.component';
+import { UserTransactionDisplayComponent } from '../../components/user-transaction-display/user-transaction-display.component';
 
 @Component({
   selector: 'app-user-transaction',
@@ -15,7 +13,6 @@ import {
 export class UserTransactionComponent {
   transactionService = inject(UserTransactionsService);
   protected readonly parseInt = parseInt;
-
 
   /**
    * Retourne le nombre total de transactions
@@ -31,11 +28,9 @@ export class UserTransactionComponent {
     return this.transactionService.transactions()[this.countTransactions() - 1];
   }
 
-  getTransactioninStagin():number {
-    return this.transactionService.transactions().filter((transaction)=>{
-      return !transaction.isPaid
+  getTransactioninStagin(): number {
+    return this.transactionService.transactions().filter(transaction => {
+      return !transaction.isPaid;
     }).length;
   }
-
-
 }

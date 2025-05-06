@@ -12,13 +12,7 @@ import { PrimeTemplate } from 'primeng/api';
 
 @Component({
   selector: 'app-user-transaction-display',
-  imports: [
-    Dialog,
-    NgIf,
-    ButtonDirective,
-    Tooltip,
-    PrimeTemplate,
-  ],
+  imports: [Dialog, NgIf, ButtonDirective, Tooltip, PrimeTemplate],
   templateUrl: './user-transaction-display.component.html',
 })
 export class UserTransactionDisplayComponent {
@@ -26,9 +20,8 @@ export class UserTransactionDisplayComponent {
 
   protected readonly parseInt = parseInt;
   transactionDetailsVisible: boolean = false;
-  selectedTransaction!: Transaction ;
+  selectedTransaction!: Transaction;
   totalTransactions: number = 0;
-
 
   /**
    * Calcule le montant HT à partir du montant TTC et du taux de TVA
@@ -80,12 +73,12 @@ export class UserTransactionDisplayComponent {
       if (diffDays === 0) {
         return "Aujourd'hui";
       } else if (diffDays === 1) {
-        return "Hier";
+        return 'Hier';
       } else {
         return `Il y a ${diffDays} jours`;
       }
     }
-    return "Date inconnue";
+    return 'Date inconnue';
   }
 
   downloadPDF(transaction: Transaction): void {
@@ -113,7 +106,7 @@ export class UserTransactionDisplayComponent {
     const options: Intl.DateTimeFormatOptions = {
       year: 'numeric',
       month: 'long',
-      day: 'numeric'
+      day: 'numeric',
     };
     const dateFormatted = date.toLocaleDateString('fr-FR', options);
     doc.text(`Date: ${dateFormatted}`, 150, 45);
@@ -151,30 +144,34 @@ export class UserTransactionDisplayComponent {
           typeof transaction.tva === 'string'
             ? `${parseFloat(transaction.tva).toFixed(2)} %`
             : `${transaction.tva.toFixed(2)} %`,
-          `${(parseFloat(transaction.amount) * (1 + (typeof transaction.tva === 'string'
-            ? parseFloat(transaction.tva)
-            : transaction.tva) / 100)).toFixed(2)} €`
-        ]
+          `${(
+            parseFloat(transaction.amount) *
+            (1 +
+              (typeof transaction.tva === 'string'
+                ? parseFloat(transaction.tva)
+                : transaction.tva) /
+                100)
+          ).toFixed(2)} €`,
+        ],
       ],
       theme: 'grid',
       headStyles: {
         fillColor: primaryColor,
         textColor: '#ffffff',
-        fontStyle: 'bold'
+        fontStyle: 'bold',
       },
       styles: {
-        halign: 'center'
+        halign: 'center',
       },
       columnStyles: {
-        0: { halign: 'left' }
-      }
+        0: { halign: 'left' },
+      },
     });
 
     // Calcul du montant total
     const montantHT = parseFloat(transaction.amount);
-    const tauxTVA = typeof transaction.tva === 'string'
-      ? parseFloat(transaction.tva)
-      : transaction.tva;
+    const tauxTVA =
+      typeof transaction.tva === 'string' ? parseFloat(transaction.tva) : transaction.tva;
     const montantTVA = montantHT * (tauxTVA / 100);
     const montantTTC = montantHT + montantTVA;
 
@@ -186,17 +183,17 @@ export class UserTransactionDisplayComponent {
       body: [
         ['', 'Montant HT', `${montantHT.toFixed(2)} €`],
         ['', `TVA (${tauxTVA.toFixed(2)} %)`, `${montantTVA.toFixed(2)} €`],
-        ['', 'Montant TTC', `${montantTTC.toFixed(2)} €`]
+        ['', 'Montant TTC', `${montantTTC.toFixed(2)} €`],
       ],
       theme: 'plain',
       styles: {
-        cellPadding: 2
+        cellPadding: 2,
       },
       columnStyles: {
         0: { cellWidth: 100 },
         1: { fontStyle: 'bold', halign: 'right' },
-        2: { fontStyle: 'bold', halign: 'right' }
-      }
+        2: { fontStyle: 'bold', halign: 'right' },
+      },
     });
 
     // Pied de page
@@ -207,15 +204,26 @@ export class UserTransactionDisplayComponent {
       // Ajouter les informations légales
       doc.setFontSize(7);
       doc.setTextColor(100, 100, 100);
-      doc.text('SARL EXEMPLE - Capital social : 10 000€ - SIRET : 123 456 789 00010 - RCS Paris B 123 456 789', 105, 275, { align: 'center' });
-      doc.text('TVA Intracommunautaire : FR 12 123456789 - APE : 6201Z - Développement informatique', 105, 280, { align: 'center' });
-      doc.text('Siège social : 123 Avenue des Champs-Élysées, 75008 Paris, France', 105, 285, { align: 'center' });
+      doc.text(
+        'SARL EXEMPLE - Capital social : 10 000€ - SIRET : 123 456 789 00010 - RCS Paris B 123 456 789',
+        105,
+        275,
+        { align: 'center' }
+      );
+      doc.text(
+        'TVA Intracommunautaire : FR 12 123456789 - APE : 6201Z - Développement informatique',
+        105,
+        280,
+        { align: 'center' }
+      );
+      doc.text('Siège social : 123 Avenue des Champs-Élysées, 75008 Paris, France', 105, 285, {
+        align: 'center',
+      });
 
       // Numérotation des pages
       doc.setFontSize(8);
       doc.text(`Page ${i} sur ${pageCount}`, 105, 292, { align: 'center' });
     }
-
 
     // Télécharger le PDF
     doc.save(`MyRocketFacture_${transaction.uuid.substring(0, 8)}.pdf`);

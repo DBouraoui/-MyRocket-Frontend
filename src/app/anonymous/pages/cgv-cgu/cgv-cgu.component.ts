@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './cgv-cgu.component.html',
 })
-export class CgvCguComponent {
-
-}
+export class CgvCguComponent {}

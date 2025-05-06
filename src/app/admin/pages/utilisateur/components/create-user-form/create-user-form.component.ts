@@ -32,9 +32,7 @@ export class CreateUserFormComponent implements OnInit, OnDestroy {
     },
   ];
 
-  constructor(
-    private messageService: MessageService,
-  ) {}
+  constructor(private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.formGroup = new FormGroup({

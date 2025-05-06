@@ -67,7 +67,9 @@ export class UserWebsitesService {
     );
   }
 
-  getInformationWebsiteByEmail(uuid:string):Observable<Object> {
-    return this.http.get<Object>(`${environment.SERVER_URL}/api/user/website/configuration/${uuid}`);
+  getInformationWebsiteByEmail(uuid: string): Observable<object> {
+    return this.http.get<object>(
+      `${environment.SERVER_URL}/api/user/website/configuration/${uuid}`
+    );
   }
 }

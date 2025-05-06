@@ -25,17 +25,17 @@ import { Tooltip } from 'primeng/tooltip';
   templateUrl: './notification.component.html',
 })
 export class NotificationComponent implements OnInit {
-notificationService = inject(UserNotificationsService);
-messagerieService = inject(MessageService);
-visible: boolean = false;
+  notificationService = inject(UserNotificationsService);
+  messagerieService = inject(MessageService);
+  visible: boolean = false;
 
   ngOnInit() {
     this.notificationService.refreshNotifications().subscribe();
   }
 
-
   getUnreadCount(): number {
-    return this.notificationService.notifications().filter(notification => !notification.readingAt).length;
+    return this.notificationService.notifications().filter(notification => !notification.readingAt)
+      .length;
   }
 
   markAsRead(notification: any) {
@@ -43,16 +43,16 @@ visible: boolean = false;
       next: () => {
         this.messagerieService.add({
           severity: 'success',
-          summary: 'Notification validée'
-        })
+          summary: 'Notification validée',
+        });
       },
       error: () => {
         this.messagerieService.add({
           severity: 'error',
-          summary: 'Notification non validée'
-        })
-      }
-    })
+          summary: 'Notification non validée',
+        });
+      },
+    });
 
     const updatedNotifications = this.notificationService.notifications().map(n => {
       if (n.uuid === notification.uuid) {
@@ -69,16 +69,16 @@ visible: boolean = false;
       next: () => {
         this.messagerieService.add({
           severity: 'success',
-          summary: 'Notification validée'
-        })
+          summary: 'Notification validée',
+        });
       },
       error: () => {
         this.messagerieService.add({
           severity: 'error',
-          summary: 'Notification non validée'
-        })
-      }
-    })
+          summary: 'Notification non validée',
+        });
+      },
+    });
 
     const updatedNotifications = this.notificationService.notifications().map(n => {
       if (!n.readingAt) {

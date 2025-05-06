@@ -12,13 +12,26 @@ import { wording } from '../../../../../../../environment';
 
 @Component({
   selector: 'app-admin-dashboard-website-display',
-  imports: [FormsModule, DropdownModule, TableModule, NgClass, TabView, TabPanel, NgIf, CdkCopyToClipboard, Button],
+  imports: [
+    FormsModule,
+    DropdownModule,
+    TableModule,
+    NgClass,
+    TabView,
+    TabPanel,
+    NgIf,
+    CdkCopyToClipboard,
+    Button,
+  ],
   templateUrl: './admin-dashboard-website-display.component.html',
 })
 export class AdminDashboardWebsiteDisplayComponent {
   expanded: { [key: string]: boolean } = {};
 
-  constructor(public adminWebsiteService: AdminWebsiteService, private messageService: MessageService) {}
+  constructor(
+    public adminWebsiteService: AdminWebsiteService,
+    private messageService: MessageService
+  ) {}
 
   toggleExpand(uuid: string): void {
     this.expanded[uuid] = !this.expanded[uuid];
@@ -39,14 +52,14 @@ export class AdminDashboardWebsiteDisplayComponent {
         this.messageService.add({
           severity: 'success',
           summary: wording.WEBSITE_DELETED,
-        })
+        });
       },
       error: () => {
         this.messageService.add({
           severity: 'error',
-          summary: wording.ERROR
-        })
-      }
-    })
+          summary: wording.ERROR,
+        });
+      },
+    });
   }
 }

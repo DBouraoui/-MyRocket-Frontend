@@ -1,233 +1,249 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-@for (transaction of transactionService.transactions(); track transaction.uuid) {
-  <div
-    class="bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all duration-200 hover:shadow-lg hover:bg-gray-750 border border-gray-700"
-  >
-    <div class="border-b border-gray-700 p-4 flex justify-between items-center">
-      <div class="flex items-center space-x-3 flex-1">
-        <div
-          class="w-12 h-12 rounded-full bg-indigo-900/40 flex items-center justify-center flex-shrink-0"
-        >
-          <i class="pi pi-receipt text-lg text-indigo-400"></i>
+  @for (transaction of transactionService.transactions(); track transaction.uuid) {
+    <div
+      class="bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all duration-200 hover:shadow-lg hover:bg-gray-750 border border-gray-700"
+    >
+      <div class="border-b border-gray-700 p-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3 flex-1">
+          <div
+            class="w-12 h-12 rounded-full bg-indigo-900/40 flex items-center justify-center flex-shrink-0"
+          >
+            <i class="pi pi-receipt text-lg text-indigo-400"></i>
+          </div>
+          <div class="overflow-hidden">
+            <h3 class="font-medium text-white text-lg line-clamp-1">
+              {{ transaction.websiteContract }}
+            </h3>
+            <p class="text-gray-400 text-xs mt-1">
+              {{ transaction.createdAt }}
+            </p>
+          </div>
         </div>
-        <div class="overflow-hidden">
-          <h3 class="font-medium text-white text-lg line-clamp-1">
-            {{ transaction.websiteContract }}
-          </h3>
-          <p class="text-gray-400 text-xs mt-1">
-            {{ transaction.createdAt }}
-          </p>
+        <div class="flex flex-col items-end ml-2">
+          <span class="font-semibold text-white text-lg">
+            {{ parseInt(transaction.amount).toFixed(2) }} €
+          </span>
+          <span class="text-xs text-gray-400 mt-1">TVA: {{ transaction.tva }}%</span>
         </div>
       </div>
-      <div class="flex flex-col items-end ml-2">
-        <span class="font-semibold text-white text-lg">
-          {{ parseInt(transaction.amount).toFixed(2) }} €
-        </span>
-        <span class="text-xs text-gray-400 mt-1">TVA: {{ transaction.tva }}%</span>
-      </div>
-    </div>
 
-    <!-- Contenu de la transaction - Mise en page améliorée -->
-    <div class="p-4 bg-gray-850">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-        <div class="flex items-center bg-gray-800/50 p-2 rounded">
-          <i class="pi pi-user text-indigo-400 mr-2 text-sm"></i>
-          <div class="flex flex-col overflow-hidden">
-            <span class="text-xs text-gray-400">Client</span>
-            <span class="text-gray-200 line-clamp-1" [pTooltip]="transaction.user">
-              {{ transaction.user }}
-            </span>
-          </div>
-        </div>
-
-        <div class="flex items-center bg-gray-800/50 p-2 rounded">
-          <i class="pi pi-id-card text-indigo-400 mr-2 text-sm"></i>
-          <div class="flex flex-col overflow-hidden">
-            <span class="text-xs text-gray-400">ID Transaction</span>
-            <span class="text-gray-200 truncate">
-              {{ transaction.uuid.substring(0, 8) }}...
-            </span>
-          </div>
-        </div>
-
-        <div class="flex items-center bg-gray-800/50 p-2 rounded">
-          <i class="pi pi-id-card text-indigo-400 mr-2 text-sm"></i>
-          <div class="flex flex-col overflow-hidden">
-            <span class="text-xs text-gray-400">Statut du paiment</span>
-            <span class="text-gray-200">
-              @if (transaction.isPaid) {
-                <span class="text-green-500"> Payer </span>
-              } @else {
-                <span class="text-orange-400"> En attente de paiment </span>
-
-              }
-            </span>
-          </div>
-        </div>
-        @if (transaction.reminderAt) {
+      <!-- Contenu de la transaction - Mise en page améliorée -->
+      <div class="p-4 bg-gray-850">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
           <div class="flex items-center bg-gray-800/50 p-2 rounded">
-            <i class="pi pi-exclamation-triangle text-indigo-400 mr-2 text-sm"></i>
+            <i class="pi pi-user text-indigo-400 mr-2 text-sm"></i>
             <div class="flex flex-col overflow-hidden">
-              <span class="text-xs text-gray-400">Rappel de paiement effectué le</span>
-                  <span class="text-orange-400">{{transaction.reminderAt}}</span>
-
+              <span class="text-xs text-gray-400">Client</span>
+              <span class="text-gray-200 line-clamp-1" [pTooltip]="transaction.user">
+                {{ transaction.user }}
+              </span>
             </div>
           </div>
-        }
-      </div>
 
-      <!-- Actions - Redesign -->
-      <div class="mt-4 flex justify-between items-center">
-        <div class="text-xs text-gray-400 flex items-center">
-          <i class="pi pi-calendar-plus mr-1"></i>
-          <span>{{ calculateDaysSince(transaction.createdAt) }}</span>
-        </div>
-
-        <div class="flex space-x-2">
-          <button
-            pButton
-            icon="pi pi-eye"
-            label="Détails"
-            class="p-button-rounded p-button-sm p-button-outlined p-button-secondary"
-            (click)="showTransactionDetails(transaction)"
-          ></button>
-
-          <button
-            pButton
-            icon="pi pi-file-pdf"
-            label="Facture"
-            class="p-button-rounded p-button-sm p-button-outlined p-button-info"
-            (click)="downloadPDF(transaction)"
-          ></button>
-        </div>
-      </div>
-    </div>
-  </div>
-}
-
-<p-dialog
-  header="Détails de la transaction"
-  [(visible)]="transactionDetailsVisible"
-  [style]="{ width: '50rem', maxHeight: '90vh' }"
-  [modal]="true"
-  styleClass="p-dialog-dark transaction-details-dialog"
-  [resizable]="false"
-  [draggable]="false"
-  [baseZIndex]="1000"
-  appendTo="body"
->
-  <ng-template pTemplate="header">
-    <div class="flex items-center space-x-2">
-      <i class="pi pi-receipt text-indigo-400"></i>
-      <span class="text-white font-medium">Détails de la transaction</span>
-    </div>
-  </ng-template>
-
-  <div *ngIf="selectedTransaction" class="p-4 bg-gray-800 text-white">
-    <!-- Contenu du dialog réorganisé pour mieux utiliser l'espace -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <!-- Colonne de gauche avec icône et montant -->
-      <div class="md:col-span-1 flex flex-col items-center justify-start">
-        <div class="w-20 h-20 rounded-full bg-green-900/40 flex items-center justify-center mb-4">
-          <i class="pi pi-check-circle text-green-400 text-4xl"></i>
-        </div>
-
-        <div class="text-center">
-          <h3 class="text-2xl font-bold text-white">{{ parseInt(selectedTransaction.amount).toFixed(2) }} €</h3>
-          <p class="text-gray-400 text-sm mt-1">Transaction du<br>{{ selectedTransaction.createdAt }}</p>
-
-          <!-- Badge de statut -->
-          <div class="mt-3">
-            <span class="px-3 py-1 text-xs rounded-full bg-green-900/40 text-green-400 border border-green-800/40">
-              Complétée
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Colonne centrale et droite pour les informations -->
-      <div class="md:col-span-2 space-y-4">
-        <!-- Panel des informations de paiement -->
-        <div class="bg-gray-750 p-4 rounded-lg border border-gray-700">
-          <h4 class="font-medium text-indigo-400 mb-3 flex items-center">
-            <i class="pi pi-wallet mr-2"></i>
-            Informations du paiement
-          </h4>
-          <div class="space-y-3">
-            <div class="flex justify-between">
-              <div class="text-sm text-gray-400">Contrat</div>
-              <div class="text-sm text-white font-medium">{{ selectedTransaction.websiteContract }}</div>
-            </div>
-
-            <div class="flex justify-between">
-              <div class="text-sm text-gray-400">Montant HT</div>
-              <div class="text-sm text-white font-medium">
-                {{ calculateHT(selectedTransaction.amount, selectedTransaction.tva) }} €
-              </div>
-            </div>
-
-            <div class="flex justify-between">
-              <div class="text-sm text-gray-400">TVA ({{ selectedTransaction.tva }}%)</div>
-              <div class="text-sm text-white font-medium">
-                {{ calculateTVA(selectedTransaction.amount, selectedTransaction.tva) }} €
-              </div>
-            </div>
-
-            <div class="flex justify-between pt-2 border-t border-gray-700">
-              <div class="text-sm text-gray-200 font-medium">Montant TTC</div>
-              <div class="text-sm text-white font-bold">{{ parseInt(selectedTransaction.amount).toFixed(2) }} €</div>
+          <div class="flex items-center bg-gray-800/50 p-2 rounded">
+            <i class="pi pi-id-card text-indigo-400 mr-2 text-sm"></i>
+            <div class="flex flex-col overflow-hidden">
+              <span class="text-xs text-gray-400">ID Transaction</span>
+              <span class="text-gray-200 truncate">
+                {{ transaction.uuid.substring(0, 8) }}...
+              </span>
             </div>
           </div>
+
+          <div class="flex items-center bg-gray-800/50 p-2 rounded">
+            <i class="pi pi-id-card text-indigo-400 mr-2 text-sm"></i>
+            <div class="flex flex-col overflow-hidden">
+              <span class="text-xs text-gray-400">Statut du paiment</span>
+              <span class="text-gray-200">
+                @if (transaction.isPaid) {
+                  <span class="text-green-500"> Payer </span>
+                } @else {
+                  <span class="text-orange-400"> En attente de paiment </span>
+                }
+              </span>
+            </div>
+          </div>
+          @if (transaction.reminderAt) {
+            <div class="flex items-center bg-gray-800/50 p-2 rounded">
+              <i class="pi pi-exclamation-triangle text-indigo-400 mr-2 text-sm"></i>
+              <div class="flex flex-col overflow-hidden">
+                <span class="text-xs text-gray-400">Rappel de paiement effectué le</span>
+                <span class="text-orange-400">{{ transaction.reminderAt }}</span>
+              </div>
+            </div>
+          }
         </div>
 
-        <!-- Panel des informations client -->
-        <div class="bg-gray-750 p-4 rounded-lg border border-gray-700">
-          <h4 class="font-medium text-indigo-400 mb-3 flex items-center">
-            <i class="pi pi-user mr-2"></i>
-            Informations client
-          </h4>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div class="flex flex-col">
-              <div class="text-sm text-gray-400 mb-1">Email</div>
-              <div class="text-sm text-white font-medium break-all">{{ selectedTransaction.user }}</div>
-            </div>
+        <!-- Actions - Redesign -->
+        <div class="mt-4 flex justify-between items-center">
+          <div class="text-xs text-gray-400 flex items-center">
+            <i class="pi pi-calendar-plus mr-1"></i>
+            <span>{{ calculateDaysSince(transaction.createdAt) }}</span>
+          </div>
 
-            <div class="flex flex-col">
-              <div class="text-sm text-gray-400 mb-1">ID Client</div>
-              <div class="text-sm text-white font-medium truncate" [pTooltip]="selectedTransaction.userUuid">
-                {{ selectedTransaction.userUuid }}
-              </div>
-            </div>
+          <div class="flex space-x-2">
+            <button
+              pButton
+              icon="pi pi-eye"
+              label="Détails"
+              class="p-button-rounded p-button-sm p-button-outlined p-button-secondary"
+              (click)="showTransactionDetails(transaction)"
+            ></button>
 
-            <div class="flex flex-col col-span-2">
-              <div class="text-sm text-gray-400 mb-1">ID Site web</div>
-              <div class="text-sm text-white font-medium truncate" [pTooltip]="selectedTransaction.websiteUuid">
-                {{ selectedTransaction.websiteUuid }}
-              </div>
-            </div>
+            <button
+              pButton
+              icon="pi pi-file-pdf"
+              label="Facture"
+              class="p-button-rounded p-button-sm p-button-outlined p-button-info"
+              (click)="downloadPDF(transaction)"
+            ></button>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  }
 
-  <ng-template pTemplate="footer">
-    <div class="flex justify-end">
-      <button
-        pButton
-        icon="pi pi-times"
-        label="Fermer"
-        class="p-button-outlined p-button-secondary mr-2"
-        (click)="transactionDetailsVisible = false"
-      ></button>
-      <button
-        pButton
-        icon="pi pi-file-pdf"
-        label="Télécharger la facture"
-        class="p-button-info"
-        (click)="downloadPDF(selectedTransaction)"
-      ></button>
+  <p-dialog
+    header="Détails de la transaction"
+    [(visible)]="transactionDetailsVisible"
+    [style]="{ width: '50rem', maxHeight: '90vh' }"
+    [modal]="true"
+    styleClass="p-dialog-dark transaction-details-dialog"
+    [resizable]="false"
+    [draggable]="false"
+    [baseZIndex]="1000"
+    appendTo="body"
+  >
+    <ng-template pTemplate="header">
+      <div class="flex items-center space-x-2">
+        <i class="pi pi-receipt text-indigo-400"></i>
+        <span class="text-white font-medium">Détails de la transaction</span>
+      </div>
+    </ng-template>
+
+    <div *ngIf="selectedTransaction" class="p-4 bg-gray-800 text-white">
+      <!-- Contenu du dialog réorganisé pour mieux utiliser l'espace -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Colonne de gauche avec icône et montant -->
+        <div class="md:col-span-1 flex flex-col items-center justify-start">
+          <div class="w-20 h-20 rounded-full bg-green-900/40 flex items-center justify-center mb-4">
+            <i class="pi pi-check-circle text-green-400 text-4xl"></i>
+          </div>
+
+          <div class="text-center">
+            <h3 class="text-2xl font-bold text-white">
+              {{ parseInt(selectedTransaction.amount).toFixed(2) }} €
+            </h3>
+            <p class="text-gray-400 text-sm mt-1">
+              Transaction du<br />{{ selectedTransaction.createdAt }}
+            </p>
+
+            <!-- Badge de statut -->
+            <div class="mt-3">
+              <span
+                class="px-3 py-1 text-xs rounded-full bg-green-900/40 text-green-400 border border-green-800/40"
+              >
+                Complétée
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Colonne centrale et droite pour les informations -->
+        <div class="md:col-span-2 space-y-4">
+          <!-- Panel des informations de paiement -->
+          <div class="bg-gray-750 p-4 rounded-lg border border-gray-700">
+            <h4 class="font-medium text-indigo-400 mb-3 flex items-center">
+              <i class="pi pi-wallet mr-2"></i>
+              Informations du paiement
+            </h4>
+            <div class="space-y-3">
+              <div class="flex justify-between">
+                <div class="text-sm text-gray-400">Contrat</div>
+                <div class="text-sm text-white font-medium">
+                  {{ selectedTransaction.websiteContract }}
+                </div>
+              </div>
+
+              <div class="flex justify-between">
+                <div class="text-sm text-gray-400">Montant HT</div>
+                <div class="text-sm text-white font-medium">
+                  {{ calculateHT(selectedTransaction.amount, selectedTransaction.tva) }} €
+                </div>
+              </div>
+
+              <div class="flex justify-between">
+                <div class="text-sm text-gray-400">TVA ({{ selectedTransaction.tva }}%)</div>
+                <div class="text-sm text-white font-medium">
+                  {{ calculateTVA(selectedTransaction.amount, selectedTransaction.tva) }} €
+                </div>
+              </div>
+
+              <div class="flex justify-between pt-2 border-t border-gray-700">
+                <div class="text-sm text-gray-200 font-medium">Montant TTC</div>
+                <div class="text-sm text-white font-bold">
+                  {{ parseInt(selectedTransaction.amount).toFixed(2) }} €
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel des informations client -->
+          <div class="bg-gray-750 p-4 rounded-lg border border-gray-700">
+            <h4 class="font-medium text-indigo-400 mb-3 flex items-center">
+              <i class="pi pi-user mr-2"></i>
+              Informations client
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div class="flex flex-col">
+                <div class="text-sm text-gray-400 mb-1">Email</div>
+                <div class="text-sm text-white font-medium break-all">
+                  {{ selectedTransaction.user }}
+                </div>
+              </div>
+
+              <div class="flex flex-col">
+                <div class="text-sm text-gray-400 mb-1">ID Client</div>
+                <div
+                  class="text-sm text-white font-medium truncate"
+                  [pTooltip]="selectedTransaction.userUuid"
+                >
+                  {{ selectedTransaction.userUuid }}
+                </div>
+              </div>
+
+              <div class="flex flex-col col-span-2">
+                <div class="text-sm text-gray-400 mb-1">ID Site web</div>
+                <div
+                  class="text-sm text-white font-medium truncate"
+                  [pTooltip]="selectedTransaction.websiteUuid"
+                >
+                  {{ selectedTransaction.websiteUuid }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </ng-template>
-</p-dialog>
+
+    <ng-template pTemplate="footer">
+      <div class="flex justify-end">
+        <button
+          pButton
+          icon="pi pi-times"
+          label="Fermer"
+          class="p-button-outlined p-button-secondary mr-2"
+          (click)="transactionDetailsVisible = false"
+        ></button>
+        <button
+          pButton
+          icon="pi pi-file-pdf"
+          label="Télécharger la facture"
+          class="p-button-info"
+          (click)="downloadPDF(selectedTransaction)"
+        ></button>
+      </div>
+    </ng-template>
+  </p-dialog>
 </div>

@@ -1,6 +1,12 @@
 <!-- Bouton de notifications -->
-<p-button label="{{getUnreadCount().toString()}}" severity="info" icon="pi pi-inbox" (click)="visible = true" badgeSeverity="contrast" outlined/>
-
+<p-button
+  label="{{ getUnreadCount().toString() }}"
+  severity="info"
+  icon="pi pi-inbox"
+  (click)="visible = true"
+  badgeSeverity="contrast"
+  outlined
+/>
 
 <p-drawer
   [(visible)]="visible"
@@ -85,13 +91,13 @@
                   pButton
                   pRipple
                   class="p-button-text p-button-sm p-button-rounded text-gray-200 hover:text-white"
-                  (click)="markAsRead(notification);"
+                  (click)="markAsRead(notification)"
                 >
                   <i class="pi pi-check text-xs"></i>
                   <span class="ml-1 text-xs">Marquer comme lu</span>
                 </button>
               } @else {
-                  <i class="pi pi-check" pTooltip="Lu le {{notification.readingAt}}"></i>
+                <i class="pi pi-check" pTooltip="Lu le {{ notification.readingAt }}"></i>
               }
             </div>
           </div>

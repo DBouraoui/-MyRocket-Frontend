@@ -91,25 +91,24 @@ export class DashboardAdminProjectsFormCreateComponent implements OnInit {
       }
     }
 
-
-      this.adminProjectsService.createProjects(formData).subscribe({
-        next: resp => {
-          this.messageService.add({
-            severity: 'success',
-            summary: wording.PROJECT_SUCCESS_CREATE,
-          });
-          this.formGroup.reset();
-          this.adminProjectsService.refreshProjects().subscribe();
-          this.isLoading = false;
-        },
-        error: err => {
-          this.messageService.add({
-            severity: 'error',
-            summary: wording.ERROR,
-          });
-          this.isLoading = false;
-        },
-      });
+    this.adminProjectsService.createProjects(formData).subscribe({
+      next: resp => {
+        this.messageService.add({
+          severity: 'success',
+          summary: wording.PROJECT_SUCCESS_CREATE,
+        });
+        this.formGroup.reset();
+        this.adminProjectsService.refreshProjects().subscribe();
+        this.isLoading = false;
+      },
+      error: err => {
+        this.messageService.add({
+          severity: 'error',
+          summary: wording.ERROR,
+        });
+        this.isLoading = false;
+      },
+    });
   }
 
   addUrl() {

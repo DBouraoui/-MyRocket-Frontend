@@ -25,11 +25,11 @@ export class AdminUsersService {
     return this.getUsers().pipe(tap(data => this.users.set(data)));
   }
 
-  createUser(payload: Object): Observable<Object> {
+  createUser(payload: object): Observable<object> {
     return this.http.post(`${environment.SERVER_URL}/api/administrateur/user`, payload);
   }
 
-  deleteUser(uuid: string): Observable<Object> {
+  deleteUser(uuid: string): Observable<object> {
     return this.http.delete(`http://localhost:8000/api/administrateur/user/${uuid}`);
   }
 }

@@ -32,7 +32,9 @@
       <ng-template pTemplate="body" let-transaction>
         <tr class="border-b border-gray-700 hover:bg-gray-700 transition-colors duration-150">
           <td class="px-4 py-3 text-gray-300 truncate max-w-xs">
-            <span class="text-sm font-mono bg-gray-700 px-2 py-1 rounded">{{ transaction.uuid.substring(0, 8) }}...</span>
+            <span class="text-sm font-mono bg-gray-700 px-2 py-1 rounded"
+              >{{ transaction.uuid.substring(0, 8) }}...</span
+            >
           </td>
           <td class="px-4 py-3 text-gray-300">
             <div class="flex items-center">
@@ -42,15 +44,21 @@
           </td>
           <td class="px-4 py-3 text-gray-300">{{ transaction.createdAt }}</td>
           <td class="px-4 py-3 text-gray-300 text-right">
-            <span class="bg-purple-900/20 text-purple-400 px-2 py-1 rounded">{{ transaction.tva }}%</span>
+            <span class="bg-purple-900/20 text-purple-400 px-2 py-1 rounded"
+              >{{ transaction.tva }}%</span
+            >
           </td>
           <td class="px-4 py-3 text-gray-300 text-right font-medium">
-            <span class="bg-green-900/20 text-green-400 px-2 py-1 rounded">{{ transaction.amount | currency: 'EUR' }}</span>
+            <span class="bg-green-900/20 text-green-400 px-2 py-1 rounded">{{
+              transaction.amount | currency: 'EUR'
+            }}</span>
           </td>
           <td class="px-4 py-3 text-gray-300">{{ transaction.websiteContract }}</td>
-          <td class="px-4 py-3 text-gray-300">{{ transaction.isPaid ? 'Payer' : 'En attente de paiment' }}</td>
+          <td class="px-4 py-3 text-gray-300">
+            {{ transaction.isPaid ? 'Payer' : 'En attente de paiment' }}
+          </td>
           @if (transaction.reminderAt) {
-            <td class="px-4 py-3 text-orange-400">{{transaction.reminderAt }}</td>
+            <td class="px-4 py-3 text-orange-400">{{ transaction.reminderAt }}</td>
           } @else {
             <td class="px-4 py-3 text-gray-300">Aucune relance</td>
           }
@@ -68,5 +76,3 @@
     </p-table>
   </div>
 </div>
-
-

@@ -46,8 +46,8 @@ export class AdminTransactionService {
     );
   }
 
-  createtransaction(payload: Object) {
-    return this.http.post<Object>(
+  createtransaction(payload: object) {
+    return this.http.post<object>(
       `${environment.SERVER_URL}/api/administrateur/transaction`,
       payload
     );

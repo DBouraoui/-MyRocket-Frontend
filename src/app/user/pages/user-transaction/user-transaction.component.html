@@ -9,9 +9,13 @@
     <!-- Statistiques générales - Design amélioré -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
       <!-- Carte 1: Nombre de paiements -->
-      <div class="bg-gray-800/80 rounded-xl shadow-lg overflow-hidden backdrop-blur-sm transition-all duration-200 hover:shadow-indigo-900/20 hover:bg-gray-800">
+      <div
+        class="bg-gray-800/80 rounded-xl shadow-lg overflow-hidden backdrop-blur-sm transition-all duration-200 hover:shadow-indigo-900/20 hover:bg-gray-800"
+      >
         <div class="p-5 flex items-center space-x-4">
-          <div class="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-800 rounded-full flex items-center justify-center shadow-md">
+          <div
+            class="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-800 rounded-full flex items-center justify-center shadow-md"
+          >
             <i class="pi pi-wallet text-white text-xl"></i>
           </div>
           <div>
@@ -26,16 +30,26 @@
       </div>
 
       <!-- Carte 2: Montant du dernier paiement -->
-      <div class="bg-gray-800/80 rounded-xl shadow-lg overflow-hidden backdrop-blur-sm transition-all duration-200 hover:shadow-emerald-900/20 hover:bg-gray-800">
+      <div
+        class="bg-gray-800/80 rounded-xl shadow-lg overflow-hidden backdrop-blur-sm transition-all duration-200 hover:shadow-emerald-900/20 hover:bg-gray-800"
+      >
         <div class="p-5 flex items-center space-x-4">
-          <div class="w-14 h-14 bg-gradient-to-br from-emerald-600 to-green-800 rounded-full flex items-center justify-center shadow-md">
+          <div
+            class="w-14 h-14 bg-gradient-to-br from-emerald-600 to-green-800 rounded-full flex items-center justify-center shadow-md"
+          >
             <i class="pi pi-euro text-white text-xl"></i>
           </div>
           <div>
-            <p class="text-gray-400 text-sm font-medium uppercase tracking-wider">Dernier montant</p>
+            <p class="text-gray-400 text-sm font-medium uppercase tracking-wider">
+              Dernier montant
+            </p>
             <div class="flex items-baseline">
               <p class="text-3xl font-bold text-white">
-                {{ getLastTransaction() ? parseInt(getLastTransaction().amount).toFixed(2) + " €" : "—" }}
+                {{
+                  getLastTransaction()
+                    ? parseInt(getLastTransaction().amount).toFixed(2) + ' €'
+                    : '—'
+                }}
               </p>
               <p class="text-gray-400 text-xs ml-2">TTC</p>
             </div>
@@ -45,16 +59,22 @@
       </div>
 
       <!-- Carte 3: Date du dernier paiement -->
-      <div class="bg-gray-800/80 rounded-xl shadow-lg overflow-hidden backdrop-blur-sm transition-all duration-200 hover:shadow-purple-900/20 hover:bg-gray-800">
+      <div
+        class="bg-gray-800/80 rounded-xl shadow-lg overflow-hidden backdrop-blur-sm transition-all duration-200 hover:shadow-purple-900/20 hover:bg-gray-800"
+      >
         <div class="p-5 flex items-center space-x-4">
-          <div class="w-14 h-14 bg-gradient-to-br from-purple-600 to-indigo-800 rounded-full flex items-center justify-center shadow-md">
+          <div
+            class="w-14 h-14 bg-gradient-to-br from-purple-600 to-indigo-800 rounded-full flex items-center justify-center shadow-md"
+          >
             <i class="pi pi-calendar text-white text-xl"></i>
           </div>
           <div>
-            <p class="text-gray-400 text-sm font-medium uppercase tracking-wider">Dernière facture</p>
+            <p class="text-gray-400 text-sm font-medium uppercase tracking-wider">
+              Dernière facture
+            </p>
             <div class="flex items-baseline">
               <p class="text-2xl font-bold text-white line-clamp-1">
-                {{ getLastTransaction()?.createdAt ? getLastTransaction()?.createdAt : "—" }}
+                {{ getLastTransaction()?.createdAt ? getLastTransaction()?.createdAt : '—' }}
               </p>
             </div>
           </div>
@@ -64,7 +84,9 @@
     </div>
 
     <!-- Section principale avec filtre et historique -->
-    <div class="bg-gray-800/90 rounded-xl shadow-lg overflow-hidden backdrop-blur-sm border border-gray-700/50">
+    <div
+      class="bg-gray-800/90 rounded-xl shadow-lg overflow-hidden backdrop-blur-sm border border-gray-700/50"
+    >
       <!-- En-tête de la section des transactions -->
       <div class="p-6 border-b border-gray-700/50">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -79,7 +101,12 @@
           </div>
           @if (getTransactioninStagin() >= 1) {
             <p class="flex items-center space-x-2 text-gray-200 my-4">
-              Vous avez <span class="inline-flex items-center justify-center ml-2 mr-2 px-3 py-1 text-sm font-medium rounded-full bg-blue-100 text-blue-800">{{getTransactioninStagin()}}</span> paiement(s) en attente
+              Vous avez
+              <span
+                class="inline-flex items-center justify-center ml-2 mr-2 px-3 py-1 text-sm font-medium rounded-full bg-blue-100 text-blue-800"
+                >{{ getTransactioninStagin() }}</span
+              >
+              paiement(s) en attente
             </p>
           }
         </div>
@@ -87,16 +114,19 @@
 
       <!-- Liste des transactions -->
       <div class="p-6">
-          <app-user-transaction-display></app-user-transaction-display>
+        <app-user-transaction-display></app-user-transaction-display>
 
         <!-- Message affiché s'il n'y a pas de transactions -->
         <div *ngIf="countTransactions() === 0" class="text-center py-12">
-          <div class="mb-4 inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-700">
+          <div
+            class="mb-4 inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-700"
+          >
             <i class="pi pi-inbox text-gray-400 text-xl"></i>
           </div>
           <h3 class="text-lg font-medium text-white mb-2">Aucune transaction</h3>
           <p class="text-gray-400 max-w-md mx-auto">
-            Vous n'avez effectué aucun paiement jusqu'à présent. Les transactions apparaîtront ici dès que vous effectuerez un paiement.
+            Vous n'avez effectué aucun paiement jusqu'à présent. Les transactions apparaîtront ici
+            dès que vous effectuerez un paiement.
           </p>
         </div>
       </div>
@@ -108,7 +138,8 @@
       <div>
         <h4 class="text-indigo-300 font-medium">Informations sur vos paiements</h4>
         <p class="text-indigo-200/70 text-sm mt-1">
-          Les factures peuvent être téléchargées au format PDF pour chaque transaction. Pour toute question concernant vos paiements, veuillez contacter notre service client.
+          Les factures peuvent être téléchargées au format PDF pour chaque transaction. Pour toute
+          question concernant vos paiements, veuillez contacter notre service client.
         </p>
       </div>
     </div>

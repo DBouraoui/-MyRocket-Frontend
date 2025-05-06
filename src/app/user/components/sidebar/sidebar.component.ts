@@ -12,9 +12,10 @@ import { NotificationComponent } from '../notification/notification.component';
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent {
-
-  constructor(private router : Router, public authService : AuthService) {
-  }
+  constructor(
+    private router: Router,
+    public authService: AuthService
+  ) {}
 
   visible: boolean = false;
   navbarItem: NavbarItems[] = [
@@ -45,7 +46,7 @@ export class SidebarComponent {
     // },
   ];
 
-  deconnexion():void {
+  deconnexion(): void {
     localStorage.removeItem('statement');
     this.router.navigateByUrl('/home');
   }

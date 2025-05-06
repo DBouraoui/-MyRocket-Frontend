@@ -40,7 +40,7 @@ export class CreateTransactionComponent {
       return transaction.uuid === this.formGroup.get('uuidUser')?.value;
     });
 
-    let options = [];
+    const options = [];
 
     for (const transaction of contract) {
       if (transaction.websiteContracts && Array.isArray(transaction.websiteContracts)) {

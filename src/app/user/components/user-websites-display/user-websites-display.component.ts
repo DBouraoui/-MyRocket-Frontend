@@ -22,9 +22,8 @@ export class UserWebsitesDisplayComponent {
   constructor(
     public websiteService: UserWebsitesService,
     private sanitizer: DomSanitizer,
-    private messageService: MessageService,
-  ) {
-  }
+    private messageService: MessageService
+  ) {}
 
   openWebsiteDetails(website: Website): void {
     this.selectedWebsite = website;
@@ -78,21 +77,20 @@ export class UserWebsitesDisplayComponent {
     }
   }
 
-  getInformationConnexionByEmail(uuid:string):void {
+  getInformationConnexionByEmail(uuid: string): void {
     this.websiteService.getInformationWebsiteByEmail(uuid).subscribe({
       next: () => {
-          this.messageService.add({
-            severity: 'info',
-            summary: wording.EMAIL_SENDING,
-          })
+        this.messageService.add({
+          severity: 'info',
+          summary: wording.EMAIL_SENDING,
+        });
       },
       error: () => {
         this.messageService.add({
           severity: 'error',
           summary: wording.ERROR,
-        })
-      }
-    })
+        });
+      },
+    });
   }
-
 }

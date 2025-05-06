@@ -18,7 +18,6 @@ import { RouterLink } from '@angular/router';
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {
-
   /**
    * Télécharge le contrat de maintenance
    */
@@ -45,5 +44,16 @@ export class DashboardComponent {
     document.body.removeChild(link);
   }
 
-
+  /**
+   * Télécharge les CGV et CGU
+   */
+  downloadCGVCGU() {
+    const link = document.createElement('a');
+    link.setAttribute('target', '_blank');
+    link.setAttribute('href', 'Conditions-Generales.pdf');
+    link.setAttribute('download', 'Conditions-Generales.pdff');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 }
