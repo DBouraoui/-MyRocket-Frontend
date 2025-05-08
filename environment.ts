@@ -1,5 +1,5 @@
 export const environment = {
-  SERVER_URL: 'https://api.myrocket.fr',
+  SERVER_URL: 'https://signacore.fr',
 }
 
 
