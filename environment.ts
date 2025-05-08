@@ -1,5 +1,5 @@
 export const environment = {
-  SERVER_URL: 'http://localhost:8000',
+  SERVER_URL: 'https://api.myrocket.fr',
 }
 
 
